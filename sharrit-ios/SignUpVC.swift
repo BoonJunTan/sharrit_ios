@@ -32,12 +32,29 @@ class SignUpVC: UIViewController {
         
         verificationView.isHidden = false
         
-        UIView.animate(withDuration: 5, animations: {
-            self.verificationView.alpha = 0
-        }) { (finished) in
-            self.modalTransitionStyle = .crossDissolve
-            self.dismiss(animated: true, completion: nil)
+        let preferences = UserDefaults.standard
+        let signUpData: [String: Any] = ["name": (firstNameTxt.text! + " " + lastNameTxt.text!) ?? "Dyllan Test", "phoneNumber": mobileTxt.text ?? "81332572", "password": passwordTxt.text ?? "HAHAHAHA"]
+        
+        let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/user"
+        
+        Alamofire.request(url, method: .post, parameters: signUpData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+            response in
+            switch response.result {
+            case .success(_):
+                UIView.animate(withDuration: 5, animations: {
+                    self.verificationView.alpha = 0
+                }) { (finished) in
+                    self.modalTransitionStyle = .crossDissolve
+                    self.dismiss(animated: true, completion: nil)
+                }
+                break
+            case .failure(_):
+                print(response.result.error!)
+                break
+            }
         }
+        
+        
         
     }
     

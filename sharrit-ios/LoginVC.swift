@@ -25,29 +25,5 @@ class LoginVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func loginBtnPressed(_ sender: SharritButton) {
-        
-        /*
-        let preferences = UserDefaults.standard
-        let loginData: [String: Any] = ["mobileNo": mobileNoTxt.text ?? nil, "password": passwordTxt.text ?? nil]
-        let url = "http://example.com"
-        
-        Alamofire.request(url, method: .post, parameters: loginData).responseJSON {
-            response in
-            guard response.result.error != nil else {
-                return
-            }
-            if let JSON = (response.result.value as? Dictionary<String, Int>) {
-                
-                //TODO: Depending on what JSON is return.
-                preferences.set(true, forKey: "isUserLoggedIn")
-                self.modalTransitionStyle = .crossDissolve
-                self.dismiss(animated: true, completion: nil)
-            }
-        }
-        */
-        
-        
-    }
     
 }
