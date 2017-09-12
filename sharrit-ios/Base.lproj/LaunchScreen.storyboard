@@ -1,7 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina5_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -14,14 +19,49 @@
                         <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SFo-3G-9EO">
+                                <rect key="frame" x="89.333333333333314" y="250.33333333333331" width="236" height="235.99999999999994"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sharrit_Logo" translatesAutoresizingMaskIntoConstraints="NO" id="f0e-gv-y4q">
+                                        <rect key="frame" x="17.666666666666671" y="0.0" width="200" height="199.99999999999997"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="f0e-gv-y4q" secondAttribute="height" multiplier="1:1" id="ChF-7c-WPZ"/>
+                                            <constraint firstAttribute="width" constant="200" id="jq1-LQ-an0"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sharrit" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EqN-Oe-GKa">
+                                        <rect key="frame" x="74.666666666666671" y="199.99999999999997" width="87.333333333333329" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="f0e-gv-y4q" firstAttribute="centerX" secondItem="SFo-3G-9EO" secondAttribute="centerX" id="2fd-QA-hGF"/>
+                                    <constraint firstItem="f0e-gv-y4q" firstAttribute="top" secondItem="SFo-3G-9EO" secondAttribute="top" id="8Me-yz-0iQ"/>
+                                    <constraint firstAttribute="width" secondItem="SFo-3G-9EO" secondAttribute="height" multiplier="1:1" id="B5h-Mz-OyM"/>
+                                    <constraint firstItem="EqN-Oe-GKa" firstAttribute="top" secondItem="f0e-gv-y4q" secondAttribute="bottom" id="Ene-Nd-bjs"/>
+                                    <constraint firstAttribute="bottom" secondItem="EqN-Oe-GKa" secondAttribute="bottom" id="jH7-5b-rdS"/>
+                                    <constraint firstItem="EqN-Oe-GKa" firstAttribute="centerX" secondItem="SFo-3G-9EO" secondAttribute="centerX" id="pms-ob-QOi"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.92636108399999995" green="0.92633336779999997" blue="0.92634916310000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="SFo-3G-9EO" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="DLy-bh-fiq"/>
+                            <constraint firstItem="SFo-3G-9EO" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="h1s-Vm-yMc"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Sharrit_Logo" width="768" height="768"/>
+    </resources>
 </document>
