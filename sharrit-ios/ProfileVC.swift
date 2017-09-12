@@ -20,4 +20,21 @@ class ProfileVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func logoutBtnPressed(_ sender: SharritButton) {
+        UserDefaults.standard.removeObject(forKey: "isUserLoggedIn")
+        
+        let mainStoryboard = UIStoryboard(name: "LoginAndSignUp" , bundle: nil)
+        let loginVC = mainStoryboard.instantiateViewController(withIdentifier: "Login") as! LoginVC
+        loginVC.modalTransitionStyle = .crossDissolve
+        modalPresentationStyle = .fullScreen
+        present(loginVC, animated: true, completion:{
+            if let subviewsCount = self.tabBarController?.view.subviews.count {
+                if subviewsCount > 2 {
+                    self.tabBarController?.view.subviews[2].removeFromSuperview()
+                }
+            }
+        })
+
+    }
+    
 }
