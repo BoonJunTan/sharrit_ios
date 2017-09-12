@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import BCryptSwift
 
 class SignUpVC: UIViewController {
 
@@ -69,28 +70,36 @@ class SignUpVC: UIViewController {
         passwordEmpty = (passwordTxt.text?.isEmpty)!
         
         if !firstNameEmpty && !lastNameEmpty && !mobileEmpty && !passwordEmpty {
-            verificationView.isHidden = false
-            
-            let signUpData: [String: Any] = ["name": (firstNameTxt.text! + " " + lastNameTxt.text!) ?? "Dyllan Test", "phoneNumber": mobileTxt.text ?? "81332572", "password": passwordTxt.text ?? "HAHAHAHA"]
-            
-            let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/user"
-            
-            Alamofire.request(url, method: .post, parameters: signUpData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
-                response in
-                switch response.result {
-                case .success(_):
-                    UIView.animate(withDuration: 5, animations: {
-                        self.verificationView.alpha = 0
-                    }) { (finished) in
-                        self.modalTransitionStyle = .crossDissolve
-                        self.dismiss(animated: true, completion: nil)
+            if let hashPassword = BCryptSwift.hashPassword(passwordTxt.text!, withSalt: BCryptSwift.generateSaltWithNumberOfRounds(10)) {
+                print(hashPassword)
+                
+                verificationView.isHidden = false
+                
+                let signUpData: [String: Any] = ["name": (firstNameTxt.text! + " " + lastNameTxt.text!), "phoneNumber": mobileTxt.text, "password": hashPassword]
+                
+                let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/user"
+                
+                Alamofire.request(url, method: .post, parameters: signUpData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+                    response in
+                    switch response.result {
+                    case .success(_):
+                        UIView.animate(withDuration: 5, animations: {
+                            self.verificationView.alpha = 0
+                        }) { (finished) in
+                            self.modalTransitionStyle = .crossDissolve
+                            self.dismiss(animated: true, completion: nil)
+                        }
+                        break
+                    case .failure(_):
+                        print(response.result.error!)
+                        break
                     }
-                    break
-                case .failure(_):
-                    print(response.result.error!)
-                    break
                 }
             }
+            else {
+                print("Hash generation failed")
+            }
+            
         }
         
     }
