@@ -71,14 +71,9 @@ class SignUpVC: UIViewController {
         if !firstNameEmpty && !lastNameEmpty && !mobileEmpty && !passwordEmpty {
             verificationView.isHidden = false
             
-            let preferences = UserDefaults.standard
             let signUpData: [String: Any] = ["name": (firstNameTxt.text! + " " + lastNameTxt.text!) ?? "Dyllan Test", "phoneNumber": mobileTxt.text ?? "81332572", "password": passwordTxt.text ?? "HAHAHAHA"]
             
             let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/user"
-            
-            //"https://is41031718it02.southeastasia.cloudapp.azure.com/api/login"
-            // Key: Authorization
-            //Value: "Bearer" + accessToken
             
             Alamofire.request(url, method: .post, parameters: signUpData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
                 response in

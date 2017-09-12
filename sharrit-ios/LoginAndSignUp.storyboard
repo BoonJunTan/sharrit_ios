@@ -71,8 +71,14 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*Mobile and password are required" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M9L-Ue-uKy">
+                                <rect key="frame" x="41" y="457" width="293" height="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ixM-uB-KWH" customClass="SharritButton" customModule="sharrit_ios" customModuleProvider="target">
-                                <rect key="frame" x="41" y="477" width="293" height="38"/>
+                                <rect key="frame" x="41" y="502" width="293" height="38"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <state key="normal" title="Login"/>
                                 <userDefinedRuntimeAttributes>
@@ -82,20 +88,20 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="SXz-DA-802" kind="show" id="flS-Zr-1wi"/>
+                                    <action selector="loginBtnPressed:" destination="c89-ed-Ev1" eventType="touchUpInside" id="o08-Eq-Pon"/>
                                 </connections>
                             </button>
                             <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="Ugd-mh-ZeU">
-                                <rect key="frame" x="56" y="540" width="262" height="47"/>
+                                <rect key="frame" x="56" y="565" width="262" height="22"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Already have an account?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZkE-df-xW3">
-                                        <rect key="frame" x="0.0" y="13" width="196" height="21"/>
+                                        <rect key="frame" x="0.0" y="1" width="196" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.42277592419999999" green="0.4267428815" blue="0.42666360739999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a3W-HB-eqw">
-                                        <rect key="frame" x="201" y="7" width="61" height="33"/>
+                                        <rect key="frame" x="201" y="-5" width="61" height="33"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="Sign Up"/>
                                         <userDefinedRuntimeAttributes>
@@ -120,15 +126,18 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="M9L-Ue-uKy" firstAttribute="leading" secondItem="KHH-Yh-FvD" secondAttribute="leading" id="4nw-7F-er6"/>
                             <constraint firstItem="Klz-lQ-IOK" firstAttribute="leading" secondItem="nJR-2o-HaM" secondAttribute="leadingMargin" constant="25" id="66g-G9-euN"/>
                             <constraint firstItem="Ugd-mh-ZeU" firstAttribute="top" secondItem="ixM-uB-KWH" secondAttribute="bottom" constant="25" id="76x-5e-XL0"/>
+                            <constraint firstItem="M9L-Ue-uKy" firstAttribute="trailing" secondItem="KHH-Yh-FvD" secondAttribute="trailing" id="7fH-dp-lS4"/>
                             <constraint firstAttribute="trailing" secondItem="l13-OL-Vbo" secondAttribute="trailing" constant="10" id="ByK-yw-JfV"/>
                             <constraint firstItem="4f0-OI-RIK" firstAttribute="leading" secondItem="nJR-2o-HaM" secondAttribute="leading" id="C9e-hl-lDD"/>
-                            <constraint firstItem="ixM-uB-KWH" firstAttribute="top" secondItem="KHH-Yh-FvD" secondAttribute="bottom" constant="25" id="EH5-zt-BH4"/>
+                            <constraint firstItem="ixM-uB-KWH" firstAttribute="top" secondItem="KHH-Yh-FvD" secondAttribute="bottom" constant="50" id="EH5-zt-BH4"/>
                             <constraint firstItem="ixM-uB-KWH" firstAttribute="leading" secondItem="KHH-Yh-FvD" secondAttribute="leading" id="GB8-V4-XG0"/>
                             <constraint firstItem="l13-OL-Vbo" firstAttribute="top" secondItem="67W-3i-RUe" secondAttribute="bottom" constant="10" id="JJY-2m-BtT"/>
                             <constraint firstItem="KHH-Yh-FvD" firstAttribute="leading" secondItem="Klz-lQ-IOK" secondAttribute="leading" id="LJR-aD-mBG"/>
                             <constraint firstItem="sjW-Nm-95m" firstAttribute="top" secondItem="4f0-OI-RIK" secondAttribute="bottom" id="REv-hj-HbL"/>
+                            <constraint firstItem="M9L-Ue-uKy" firstAttribute="top" secondItem="KHH-Yh-FvD" secondAttribute="bottom" constant="5" id="RM0-RT-DIe"/>
                             <constraint firstAttribute="trailing" secondItem="4f0-OI-RIK" secondAttribute="trailing" id="bri-dP-EJd"/>
                             <constraint firstItem="Ugd-mh-ZeU" firstAttribute="centerX" secondItem="nJR-2o-HaM" secondAttribute="centerX" id="dTl-xh-5m0"/>
                             <constraint firstItem="4f0-OI-RIK" firstAttribute="top" secondItem="67W-3i-RUe" secondAttribute="bottom" id="equ-Hs-7NB"/>
@@ -147,8 +156,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="Nlx-6O-gNU"/>
                     <connections>
+                        <outlet property="errorLabel" destination="M9L-Ue-uKy" id="uba-ho-nbE"/>
                         <outlet property="mobileNoTxt" destination="Klz-lQ-IOK" id="p6p-uV-Wam"/>
                         <outlet property="passwordTxt" destination="KHH-Yh-FvD" id="TuC-f0-J8D"/>
+                        <segue destination="SXz-DA-802" kind="show" identifier="GoBackMain" id="aCn-Ru-WyN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UOt-SM-M1t" userLabel="First Responder" sceneMemberID="firstResponder"/>
