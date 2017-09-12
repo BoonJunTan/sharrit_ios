@@ -16,10 +16,11 @@
 		27FCB7E11F6776B6008E973C /* WalletVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FCB7E01F6776B6008E973C /* WalletVC.swift */; };
 		27FCB7E31F6776C6008E973C /* Notification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27FCB7E21F6776C6008E973C /* Notification.storyboard */; };
 		27FCB7E51F6776EC008E973C /* Wallet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27FCB7E41F6776EC008E973C /* Wallet.storyboard */; };
-		27FCB7E71F677AB3008E973C /* LoginAndSignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FCB7E61F677AB3008E973C /* LoginAndSignUpVC.swift */; };
+		27FCB7E71F677AB3008E973C /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FCB7E61F677AB3008E973C /* LoginVC.swift */; };
 		27FCB7EA1F678F89008E973C /* SharritButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27FCB7E91F678F89008E973C /* SharritButton.xib */; };
 		27FCB7EC1F678FD1008E973C /* Colours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FCB7EB1F678FD1008E973C /* Colours.swift */; };
 		27FCB7F01F679857008E973C /* SharritButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FCB7EF1F679857008E973C /* SharritButton.swift */; };
+		27FCB7F21F67DB8F008E973C /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FCB7F11F67DB8F008E973C /* SignUpVC.swift */; };
 		872D31621F6705520069381A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872D31611F6705520069381A /* AppDelegate.swift */; };
 		872D31691F6705520069381A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 872D31671F6705520069381A /* Main.storyboard */; };
 		872D316B1F6705520069381A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 872D316A1F6705520069381A /* Assets.xcassets */; };
@@ -39,10 +40,11 @@
 		27FCB7E01F6776B6008E973C /* WalletVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletVC.swift; sourceTree = "<group>"; };
 		27FCB7E21F6776C6008E973C /* Notification.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Notification.storyboard; sourceTree = "<group>"; };
 		27FCB7E41F6776EC008E973C /* Wallet.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Wallet.storyboard; sourceTree = "<group>"; };
-		27FCB7E61F677AB3008E973C /* LoginAndSignUpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginAndSignUpVC.swift; sourceTree = "<group>"; };
+		27FCB7E61F677AB3008E973C /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		27FCB7E91F678F89008E973C /* SharritButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SharritButton.xib; sourceTree = "<group>"; };
 		27FCB7EB1F678FD1008E973C /* Colours.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colours.swift; sourceTree = "<group>"; };
 		27FCB7EF1F679857008E973C /* SharritButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharritButton.swift; sourceTree = "<group>"; };
+		27FCB7F11F67DB8F008E973C /* SignUpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		6BD926E72B3A1549D6A772EC /* Pods-sharrit-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sharrit-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sharrit-ios/Pods-sharrit-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		872D315E1F6705520069381A /* sharrit-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "sharrit-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		872D31611F6705520069381A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -76,7 +78,8 @@
 			isa = PBXGroup;
 			children = (
 				27ABAE801F670D81007F6CDB /* LoginAndSignUp.storyboard */,
-				27FCB7E61F677AB3008E973C /* LoginAndSignUpVC.swift */,
+				27FCB7E61F677AB3008E973C /* LoginVC.swift */,
+				27FCB7F11F67DB8F008E973C /* SignUpVC.swift */,
 			);
 			name = LoginAndSignUp;
 			sourceTree = "<group>";
@@ -309,11 +312,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				27FCB7DD1F67768C008E973C /* ProfileVC.swift in Sources */,
+				27FCB7F21F67DB8F008E973C /* SignUpVC.swift in Sources */,
 				27FCB7EC1F678FD1008E973C /* Colours.swift in Sources */,
 				27FCB7DF1F6776A5008E973C /* NotificationVC.swift in Sources */,
 				27FCB7E11F6776B6008E973C /* WalletVC.swift in Sources */,
 				872D31621F6705520069381A /* AppDelegate.swift in Sources */,
-				27FCB7E71F677AB3008E973C /* LoginAndSignUpVC.swift in Sources */,
+				27FCB7E71F677AB3008E973C /* LoginVC.swift in Sources */,
 				27FCB7D61F67753F008E973C /* HomeVC.swift in Sources */,
 				27FCB7F01F679857008E973C /* SharritButton.swift in Sources */,
 			);

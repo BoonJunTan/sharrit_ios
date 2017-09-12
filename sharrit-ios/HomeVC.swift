@@ -17,11 +17,11 @@ class HomeVC: UIViewController {
         let isUserLoggedIn = UserDefaults.standard.bool(forKey: "isUserLoggedIn")
         if (!isUserLoggedIn) {
             let mainStoryboard = UIStoryboard(name: "LoginAndSignUp" , bundle: nil)
-            let loginVC = mainStoryboard.instantiateViewController(withIdentifier: "LoginAndSignUp") as! LoginAndSignUpVC
+            let loginVC = mainStoryboard.instantiateViewController(withIdentifier: "Login") as! LoginVC
             loginVC.modalTransitionStyle = .crossDissolve
             modalPresentationStyle = .fullScreen
             present(loginVC, animated: true, completion:{
-                if let subviewsCount = self.tabBarController?.view.subviews.count{
+                if let subviewsCount = self.tabBarController?.view.subviews.count {
                     if subviewsCount > 2 {
                         self.tabBarController?.view.subviews[2].removeFromSuperview()
                     }

@@ -1,5 +1,5 @@
 //
-//  LoginAndSignUpVC.swift
+//  SignUpVC.swift
 //  sharrit-ios
 //
 //  Created by Boon Jun on 12/9/17.
@@ -7,15 +7,14 @@
 //
 
 import UIKit
+import Alamofire
 
-class LoginAndSignUpVC: UIViewController {
-    
+class SignUpVC: UIViewController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
-    
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
