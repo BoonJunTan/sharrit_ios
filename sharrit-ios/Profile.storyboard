@@ -61,26 +61,53 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OU9-OZ-IyH">
                                                         <rect key="frame" x="0.0" y="38.5" width="195" height="28"/>
                                                         <subviews>
-                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FGE-sv-B09">
+                                                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eDb-ZK-46f" customClass="CosmosView" customModule="Cosmos">
                                                                 <rect key="frame" x="0.0" y="0.0" width="195" height="28"/>
-                                                            </imageView>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="rating">
+                                                                        <real key="value" value="4"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="totalStars">
+                                                                        <integer key="value" value="5"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="filledColor">
+                                                                        <color key="value" red="1" green="0.97709847790596382" blue="0.013370493445058806" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="filledBorderColor">
+                                                                        <color key="value" red="0.96078431369999995" green="0.70439464906882165" blue="0.028738137607911364" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="emptyBorderColor">
+                                                                        <color key="value" red="0.96078431369999995" green="0.70439464910000005" blue="0.028738137609999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="fillMode">
+                                                                        <integer key="value" value="0"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="textSize">
+                                                                        <real key="value" value="0.0"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="starMargin">
+                                                                        <real key="value" value="6"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
                                                         </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
-                                                            <constraint firstItem="FGE-sv-B09" firstAttribute="leading" secondItem="OU9-OZ-IyH" secondAttribute="leading" id="INc-PT-gNd"/>
-                                                            <constraint firstItem="FGE-sv-B09" firstAttribute="top" secondItem="OU9-OZ-IyH" secondAttribute="top" id="SUL-L0-MUy"/>
-                                                            <constraint firstAttribute="trailing" secondItem="FGE-sv-B09" secondAttribute="trailing" id="Scm-bw-FGi"/>
-                                                            <constraint firstAttribute="bottom" secondItem="FGE-sv-B09" secondAttribute="bottom" id="mTV-Uq-NBq"/>
+                                                            <constraint firstAttribute="bottom" secondItem="eDb-ZK-46f" secondAttribute="bottom" id="ECn-eQ-Ubo"/>
+                                                            <constraint firstItem="eDb-ZK-46f" firstAttribute="top" secondItem="OU9-OZ-IyH" secondAttribute="top" id="gO1-L6-sCz"/>
+                                                            <constraint firstItem="eDb-ZK-46f" firstAttribute="leading" secondItem="OU9-OZ-IyH" secondAttribute="leading" id="gRi-Fb-f5y"/>
+                                                            <constraint firstAttribute="trailing" secondItem="eDb-ZK-46f" secondAttribute="trailing" id="pBj-Dt-eqo"/>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RWM-fd-4QD">
                                                         <rect key="frame" x="0.0" y="76.5" width="195" height="28.5"/>
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timer" translatesAutoresizingMaskIntoConstraints="NO" id="LCk-wt-ydL">
-                                                                <rect key="frame" x="0.0" y="0.0" width="28.5" height="28.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="29" height="29"/>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4 weeks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PzR-Ap-gb7">
-                                                                <rect key="frame" x="48.5" y="4.5" width="146.5" height="20.5"/>
+                                                                <rect key="frame" x="49" y="4" width="146" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -139,8 +166,15 @@
                                     <constraint firstItem="u4V-Xt-dY7" firstAttribute="height" secondItem="Lhv-6V-B31" secondAttribute="height" multiplier="0.7" id="uLA-02-w7d"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Clh-Va-PxS">
+                                <rect key="frame" x="0.0" y="214" width="375" height="1"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="B20-iW-BcP"/>
+                                </constraints>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="40" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ivk-ht-ZvZ">
-                                <rect key="frame" x="0.0" y="214" width="375" height="404"/>
+                                <rect key="frame" x="0.0" y="215" width="375" height="403"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="profileCell" id="N6M-P9-e85" customClass="ProfileTableViewCell" customModule="sharrit_ios" customModuleProvider="target">
@@ -183,17 +217,21 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Clh-Va-PxS" firstAttribute="trailing" secondItem="Lhv-6V-B31" secondAttribute="trailing" id="2Vh-ac-OQ2"/>
+                            <constraint firstItem="Clh-Va-PxS" firstAttribute="top" secondItem="Lhv-6V-B31" secondAttribute="bottom" id="3EM-PH-kfL"/>
                             <constraint firstAttribute="trailing" secondItem="Lhv-6V-B31" secondAttribute="trailing" id="Bb1-Vg-rbi"/>
                             <constraint firstItem="f5w-Fr-c73" firstAttribute="top" secondItem="Ivk-ht-ZvZ" secondAttribute="bottom" id="BuD-hI-uwo"/>
                             <constraint firstItem="Lhv-6V-B31" firstAttribute="leading" secondItem="FNg-Oo-Pm0" secondAttribute="leading" id="Djj-40-Upj"/>
-                            <constraint firstItem="Ivk-ht-ZvZ" firstAttribute="top" secondItem="Lhv-6V-B31" secondAttribute="bottom" id="OyF-PF-0op"/>
+                            <constraint firstItem="Clh-Va-PxS" firstAttribute="leading" secondItem="Lhv-6V-B31" secondAttribute="leading" id="M5e-Lk-Mog"/>
                             <constraint firstItem="Ivk-ht-ZvZ" firstAttribute="leading" secondItem="FNg-Oo-Pm0" secondAttribute="leading" id="SS4-Mk-nb6"/>
                             <constraint firstAttribute="trailing" secondItem="Ivk-ht-ZvZ" secondAttribute="trailing" id="jKj-o8-RVm"/>
+                            <constraint firstItem="Ivk-ht-ZvZ" firstAttribute="top" secondItem="Clh-Va-PxS" secondAttribute="bottom" id="oCO-96-kRc"/>
                             <constraint firstItem="Lhv-6V-B31" firstAttribute="top" secondItem="Y2u-8l-rkc" secondAttribute="bottom" id="tjL-05-ZEa"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="hjk-Gk-hD6"/>
                     <connections>
+                        <outlet property="starRating" destination="eDb-ZK-46f" id="bh9-sL-sOo"/>
                         <outlet property="tableView" destination="Ivk-ht-ZvZ" id="SW1-KE-DAi"/>
                     </connections>
                 </viewController>
