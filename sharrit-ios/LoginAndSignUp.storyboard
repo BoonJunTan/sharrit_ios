@@ -205,6 +205,7 @@
                         <outlet property="errorLabel" destination="M9L-Ue-uKy" id="uba-ho-nbE"/>
                         <outlet property="mobileNoTxt" destination="Klz-lQ-IOK" id="p6p-uV-Wam"/>
                         <outlet property="passwordTxt" destination="KHH-Yh-FvD" id="TuC-f0-J8D"/>
+                        <outlet property="verificationView" destination="F5U-id-gSW" id="dFg-fM-NFs"/>
                         <segue destination="SXz-DA-802" kind="show" identifier="GoBackMain" id="aCn-Ru-WyN"/>
                     </connections>
                 </viewController>

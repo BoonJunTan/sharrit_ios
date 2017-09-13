@@ -15,6 +15,7 @@ class LoginVC: UIViewController {
     @IBOutlet weak var mobileNoTxt: UITextField!
     @IBOutlet weak var passwordTxt: UITextField!
     @IBOutlet weak var errorLabel: UILabel!
+    @IBOutlet weak var verificationView: UIView!
     
     var loginEmpty:Bool = true {
         didSet {
@@ -25,6 +26,7 @@ class LoginVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         errorLabel.isHidden = true
+        verificationView.isHidden = true
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -53,7 +55,7 @@ class LoginVC: UIViewController {
                     Key: Authorization
                     Value: "Bearer" + accessToken
                     */
-                    
+                    print(response.result.value)
                     preferences.set(true, forKey: "isUserLoggedIn")
                     self.performSegue(withIdentifier: "GoBackMain", sender: nil)
                     break

@@ -7,7 +7,6 @@ target 'sharrit-ios' do
 
   # Pods for sharrit-ios
   pod 'Alamofire'
-  pod 'BCryptSwift'
   pod 'IQKeyboardManagerSwift'
 
 end
