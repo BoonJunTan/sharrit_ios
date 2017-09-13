@@ -34,6 +34,7 @@ class LoginVC: UIViewController {
     }
     
     @IBAction func loginBtnPressed(_ sender: SharritButton) {
+        errorLabel.text = "*Mobile and password are required"
         loginEmpty = ((mobileNoTxt.text?.isEmpty)! || (passwordTxt.text?.isEmpty)!)
         
         if !loginEmpty {
@@ -58,6 +59,8 @@ class LoginVC: UIViewController {
                     break
                 case .failure(_):
                     print(response.result.error!)
+                    self.loginEmpty = true
+                    self.errorLabel.text = "*Invalid mobile no. or password"
                     break
                 }
             }
