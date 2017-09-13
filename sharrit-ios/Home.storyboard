@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,7 +12,7 @@
         <scene sceneID="U9K-4x-QA5">
             <objects>
                 <navigationController id="Sto-Qq-UdV" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="first" id="Rrc-Z9-ja4">
+                    <tabBarItem key="tabBarItem" title="" image="home" selectedImage="home" id="Rrc-Z9-ja4">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -50,6 +49,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="first" width="30" height="30"/>
+        <image name="home" width="25" height="25"/>
     </resources>
 </document>

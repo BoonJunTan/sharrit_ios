@@ -8,5 +8,6 @@ target 'sharrit-ios' do
   # Pods for sharrit-ios
   pod 'Alamofire'
   pod 'IQKeyboardManagerSwift'
+  pod 'Cosmos', '~> 11.0'
 
 end
