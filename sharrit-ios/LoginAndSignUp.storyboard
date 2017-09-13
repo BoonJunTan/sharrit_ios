@@ -122,6 +122,49 @@
                                     <constraint firstItem="ZkE-df-xW3" firstAttribute="centerY" secondItem="Ugd-mh-ZeU" secondAttribute="centerY" id="b25-zo-hil"/>
                                 </constraints>
                             </view>
+                            <view alpha="0.85000002384185791" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F5U-id-gSW">
+                                <rect key="frame" x="10" y="74" width="355" height="583"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="anZ-dt-3Q0">
+                                        <rect key="frame" x="44" y="248" width="266" height="87"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" text="Account not verified yet. We have sent you an SMS verification with instructions to join us. Cheers!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GA1-Gj-TJm">
+                                                <rect key="frame" x="0.0" y="0.0" width="266" height="61"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LBo-8X-THr">
+                                                <rect key="frame" x="0.0" y="71" width="266" height="16"/>
+                                                <state key="normal" title="Resend"/>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="LBo-8X-THr" secondAttribute="bottom" id="070-2F-Wle"/>
+                                            <constraint firstItem="LBo-8X-THr" firstAttribute="leading" secondItem="anZ-dt-3Q0" secondAttribute="leading" id="CtH-Cd-hAE"/>
+                                            <constraint firstAttribute="trailing" secondItem="LBo-8X-THr" secondAttribute="trailing" id="HMX-hu-i76"/>
+                                            <constraint firstAttribute="trailing" secondItem="GA1-Gj-TJm" secondAttribute="trailing" id="USb-nw-KfA"/>
+                                            <constraint firstItem="LBo-8X-THr" firstAttribute="top" secondItem="GA1-Gj-TJm" secondAttribute="bottom" constant="10" id="eB3-mi-fnm"/>
+                                            <constraint firstItem="GA1-Gj-TJm" firstAttribute="leading" secondItem="anZ-dt-3Q0" secondAttribute="leading" id="oR9-vh-aft"/>
+                                            <constraint firstItem="GA1-Gj-TJm" firstAttribute="top" secondItem="anZ-dt-3Q0" secondAttribute="top" id="qY2-xn-rgT"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="anZ-dt-3Q0" firstAttribute="height" secondItem="F5U-id-gSW" secondAttribute="height" multiplier="0.15" id="tOa-5Z-q4q"/>
+                                    <constraint firstItem="anZ-dt-3Q0" firstAttribute="centerX" secondItem="F5U-id-gSW" secondAttribute="centerX" id="vRL-N6-o7s"/>
+                                    <constraint firstItem="anZ-dt-3Q0" firstAttribute="width" secondItem="F5U-id-gSW" secondAttribute="width" multiplier="0.75" id="vc4-5r-eIM"/>
+                                    <constraint firstItem="anZ-dt-3Q0" firstAttribute="centerY" secondItem="F5U-id-gSW" secondAttribute="centerY" id="y5Q-34-Yg9"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -131,7 +174,9 @@
                             <constraint firstItem="M9L-Ue-uKy" firstAttribute="trailing" secondItem="KHH-Yh-FvD" secondAttribute="trailing" id="7fH-dp-lS4"/>
                             <constraint firstAttribute="trailing" secondItem="l13-OL-Vbo" secondAttribute="trailing" constant="10" id="ByK-yw-JfV"/>
                             <constraint firstItem="4f0-OI-RIK" firstAttribute="leading" secondItem="nJR-2o-HaM" secondAttribute="leading" id="C9e-hl-lDD"/>
+                            <constraint firstItem="F5U-id-gSW" firstAttribute="bottom" secondItem="l13-OL-Vbo" secondAttribute="bottom" id="E16-L7-d85"/>
                             <constraint firstItem="ixM-uB-KWH" firstAttribute="top" secondItem="KHH-Yh-FvD" secondAttribute="bottom" constant="50" id="EH5-zt-BH4"/>
+                            <constraint firstItem="F5U-id-gSW" firstAttribute="top" secondItem="l13-OL-Vbo" secondAttribute="top" id="FF4-Gf-EIb"/>
                             <constraint firstItem="ixM-uB-KWH" firstAttribute="leading" secondItem="KHH-Yh-FvD" secondAttribute="leading" id="GB8-V4-XG0"/>
                             <constraint firstItem="l13-OL-Vbo" firstAttribute="top" secondItem="67W-3i-RUe" secondAttribute="bottom" constant="10" id="JJY-2m-BtT"/>
                             <constraint firstItem="KHH-Yh-FvD" firstAttribute="leading" secondItem="Klz-lQ-IOK" secondAttribute="leading" id="LJR-aD-mBG"/>
@@ -142,6 +187,7 @@
                             <constraint firstItem="4f0-OI-RIK" firstAttribute="top" secondItem="67W-3i-RUe" secondAttribute="bottom" id="equ-Hs-7NB"/>
                             <constraint firstItem="0EE-yV-wRW" firstAttribute="centerX" secondItem="nJR-2o-HaM" secondAttribute="centerX" id="fvt-vQ-MsV"/>
                             <constraint firstItem="KHH-Yh-FvD" firstAttribute="top" secondItem="Klz-lQ-IOK" secondAttribute="bottom" id="gIr-Pc-dnj"/>
+                            <constraint firstItem="F5U-id-gSW" firstAttribute="trailing" secondItem="l13-OL-Vbo" secondAttribute="trailing" id="gvT-Cv-T5Y"/>
                             <constraint firstItem="l13-OL-Vbo" firstAttribute="leading" secondItem="nJR-2o-HaM" secondAttribute="leading" constant="10" id="i6o-hl-W8d"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Klz-lQ-IOK" secondAttribute="trailing" constant="25" id="ivM-4I-WEn"/>
                             <constraint firstItem="Klz-lQ-IOK" firstAttribute="top" secondItem="0EE-yV-wRW" secondAttribute="bottom" constant="75" id="j52-c4-fzh"/>
@@ -150,6 +196,7 @@
                             <constraint firstItem="sjW-Nm-95m" firstAttribute="top" secondItem="l13-OL-Vbo" secondAttribute="bottom" constant="10" id="scb-Ui-aiy"/>
                             <constraint firstItem="KHH-Yh-FvD" firstAttribute="trailing" secondItem="Klz-lQ-IOK" secondAttribute="trailing" id="vhp-92-oXY"/>
                             <constraint firstItem="ixM-uB-KWH" firstAttribute="trailing" secondItem="KHH-Yh-FvD" secondAttribute="trailing" id="yMA-ll-9eJ"/>
+                            <constraint firstItem="F5U-id-gSW" firstAttribute="leading" secondItem="l13-OL-Vbo" secondAttribute="leading" id="yYf-23-MT6"/>
                             <constraint firstItem="0EE-yV-wRW" firstAttribute="top" secondItem="67W-3i-RUe" secondAttribute="bottom" constant="90" id="yuk-VR-Tbe"/>
                         </constraints>
                     </view>
@@ -324,7 +371,7 @@
                             <view alpha="0.84999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ThZ-du-E7h">
                                 <rect key="frame" x="10" y="74" width="355" height="583"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" text="We have sent you an SMS verification that consist of the necessary instruction to join us. Cheers!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dvQ-ij-PNe">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" text="We have sent you an SMS verification with instructions to join us. Cheers!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dvQ-ij-PNe">
                                         <rect key="frame" x="5" y="0.0" width="345" height="583"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
