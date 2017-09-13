@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -34,7 +33,9 @@
         <scene sceneID="CrK-o6-7Cm">
             <objects>
                 <viewControllerPlaceholder storyboardName="Home" id="i2B-Vm-aTM" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="FrR-gd-LbH"/>
+                    <tabBarItem key="tabBarItem" title="" image="home" selectedImage="home" id="FrR-gd-LbH">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    </tabBarItem>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="84a-M3-Fpy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -44,7 +45,9 @@
         <scene sceneID="JED-Dj-APV">
             <objects>
                 <viewControllerPlaceholder storyboardName="Wallet" id="DIZ-7j-IdM" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="cTc-y0-nx6"/>
+                    <tabBarItem key="tabBarItem" image="wallet" selectedImage="wallet" id="cTc-y0-nx6">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    </tabBarItem>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1if-eo-GGP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -54,7 +57,9 @@
         <scene sceneID="47i-MM-GWn">
             <objects>
                 <viewControllerPlaceholder storyboardName="Notification" id="Sce-aY-69L" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="2xL-3f-Mhy"/>
+                    <tabBarItem key="tabBarItem" title="" image="notification" selectedImage="notification" id="2xL-3f-Mhy">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    </tabBarItem>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RiW-4K-pg4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -64,11 +69,19 @@
         <scene sceneID="YQ9-at-IXS">
             <objects>
                 <viewControllerPlaceholder storyboardName="Profile" id="KpP-dd-lUq" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="y0i-Y7-ZD4"/>
+                    <tabBarItem key="tabBarItem" title="" image="profile" selectedImage="profile" id="y0i-Y7-ZD4">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    </tabBarItem>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jUJ-AJ-sxe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="818" y="219"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="home" width="25" height="25"/>
+        <image name="notification" width="25" height="25"/>
+        <image name="profile" width="25" height="25"/>
+        <image name="wallet" width="25" height="25"/>
+    </resources>
 </document>

@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,7 +12,7 @@
         <scene sceneID="vM2-kv-ZKG">
             <objects>
                 <navigationController id="D7u-dH-MAl" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="first" selectedImage="second" id="YYe-hc-3Ck">
+                    <tabBarItem key="tabBarItem" title="" image="wallet" selectedImage="wallet" id="YYe-hc-3Ck">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -50,7 +49,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="first" width="30" height="30"/>
-        <image name="second" width="30" height="30"/>
+        <image name="wallet" width="20" height="20"/>
     </resources>
 </document>
