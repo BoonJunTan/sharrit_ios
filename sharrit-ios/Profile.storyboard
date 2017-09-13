@@ -59,10 +59,10 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OU9-OZ-IyH">
-                                                        <rect key="frame" x="0.0" y="38.5" width="195" height="28.5"/>
+                                                        <rect key="frame" x="0.0" y="38.5" width="195" height="28"/>
                                                         <subviews>
                                                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eDb-ZK-46f" customClass="CosmosView" customModule="Cosmos">
-                                                                <rect key="frame" x="0.0" y="0.0" width="195" height="28.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="195" height="28"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="rating">
@@ -101,13 +101,13 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RWM-fd-4QD">
-                                                        <rect key="frame" x="0.0" y="77" width="195" height="28"/>
+                                                        <rect key="frame" x="0.0" y="76.5" width="195" height="28.5"/>
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timer" translatesAutoresizingMaskIntoConstraints="NO" id="LCk-wt-ydL">
-                                                                <rect key="frame" x="0.0" y="0.0" width="29" height="29"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="28.5" height="28.5"/>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4 weeks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PzR-Ap-gb7">
-                                                                <rect key="frame" x="49" y="4" width="146" height="20.5"/>
+                                                                <rect key="frame" x="48.5" y="4.5" width="146.5" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -168,7 +168,7 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Clh-Va-PxS">
                                 <rect key="frame" x="0.0" y="214" width="375" height="1"/>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="B20-iW-BcP"/>
                                 </constraints>
@@ -191,7 +191,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QbW-7J-HhQ">
-                                                    <rect key="frame" x="51.5" y="9.5" width="354.5" height="21"/>
+                                                    <rect key="frame" x="51.5" y="9.5" width="315.5" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
