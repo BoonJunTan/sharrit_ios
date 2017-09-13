@@ -39,32 +39,33 @@ class LoginVC: UIViewController {
         loginEmpty = ((mobileNoTxt.text?.isEmpty)! || (passwordTxt.text?.isEmpty)!)
         
         if !loginEmpty {
-            
             let preferences = UserDefaults.standard
             let signUpData: [String: Any] = ["phoneNumber": mobileNoTxt.text, "password": passwordTxt.text]
             
             let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/login"
             
-            Alamofire.request(url, method: .post, parameters: signUpData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
-                response in
-                switch response.result {
-                case .success(_):
-                    /*
-                    from response.result get "accessToken"
-                    Key: Authorization
-                    Value: "Bearer" + accessToken
-                    */
-                    print(response.result.value)
-                    preferences.set(true, forKey: "isUserLoggedIn")
-                    self.performSegue(withIdentifier: "GoBackMain", sender: nil)
-                    break
-                case .failure(_):
-                    print(response.result.error!)
-                    self.loginEmpty = true
-                    self.errorLabel.text = "*Invalid mobile no. or password"
-                    break
-                }
-            }
+//            Alamofire.request(url, method: .post, parameters: signUpData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+//                response in
+//                switch response.result {
+//                case .success(_):
+//                    /*
+//                    from response.result get "accessToken"
+//                    Key: Authorization
+//                    Value: "Bearer" + accessToken
+//                    */
+//                    print(response.result.value)
+//                    preferences.set(true, forKey: "isUserLoggedIn")
+//                    self.performSegue(withIdentifier: "GoBackMain", sender: nil)
+//                    break
+//                case .failure(_):
+//                    print(response.result.error!)
+//                    self.loginEmpty = true
+//                    self.errorLabel.text = "*Invalid mobile no. or password"
+//                    break
+//                }
+//            }
+            preferences.set(true, forKey: "isUserLoggedIn")
+            self.performSegue(withIdentifier: "GoBackMain", sender: nil)
         }
     }
     
