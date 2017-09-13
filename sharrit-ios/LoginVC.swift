@@ -8,7 +8,6 @@
 
 import UIKit
 import Alamofire
-import BCryptSwift
 
 class LoginVC: UIViewController {
     
@@ -42,7 +41,7 @@ class LoginVC: UIViewController {
         if !loginEmpty {
             
             let preferences = UserDefaults.standard
-            let signUpData: [String: Any] = ["phoneNumber": mobileNoTxt.text, "password": BCryptSwift.hashPassword(passwordTxt.text!, withSalt: BCryptSwift.generateSaltWithNumberOfRounds(10)) ]
+            let signUpData: [String: Any] = ["phoneNumber": mobileNoTxt.text, "password": passwordTxt.text]
             
             let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/login"
             
