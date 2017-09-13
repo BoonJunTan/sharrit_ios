@@ -49,12 +49,13 @@ class SignUpVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+        
         verificationView.isHidden = true
         firstNameError.isHidden = true
         lastNameError.isHidden = true
         mobileError.isHidden = true
         passwordError.isHidden = true
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
     override func didReceiveMemoryWarning() {
