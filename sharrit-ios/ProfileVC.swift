@@ -14,7 +14,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
     let tableViewSection = ["", "SETTINGS"]
     let tableViewIcons = [[#imageLiteral(resourceName: "Sharrit_Logo"), #imageLiteral(resourceName: "reputation")], [#imageLiteral(resourceName: "profile2"), #imageLiteral(resourceName: "help"), #imageLiteral(resourceName: "change_role"), #imageLiteral(resourceName: "logout")]]
-    let tableViewItems = [["My Sharres", "Reputation"], ["Profile Settings", "Help Centre", "View as Sharror", "Logout"]]
+    var tableViewItems = [["My Sharres", "Reputation"], ["Profile Settings", "Help Centre", "View as Sharror", "Logout"]]
 
     @IBOutlet weak var starRating: CosmosView!
     let fakeRatingDouble = 4.7
@@ -65,23 +65,22 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-    }
-    
-    @IBAction func logoutBtnPressed(_ sender: SharritButton) {
-        UserDefaults.standard.removeObject(forKey: "isUserLoggedIn")
-        
-        let mainStoryboard = UIStoryboard(name: "LoginAndSignUp" , bundle: nil)
-        let loginVC = mainStoryboard.instantiateViewController(withIdentifier: "Login") as! LoginVC
-        loginVC.modalTransitionStyle = .crossDissolve
-        modalPresentationStyle = .fullScreen
-        present(loginVC, animated: true, completion:{
-            if let subviewsCount = self.tabBarController?.view.subviews.count {
-                if subviewsCount > 2 {
-                    self.tabBarController?.view.subviews[2].removeFromSuperview()
-                }
-            }
-        })
+        switch tableViewItems[indexPath.section][indexPath.row] {
+        case "View as Sharror":
+            tableViewItems[indexPath.section][indexPath.row] = "View as Sharries"
+            switchRole()
+            break
+        case "View as Sharries":
+            tableViewItems[indexPath.section][indexPath.row] = "View as Sharror"
+            switchRole()
+            break
+        case "Logout":
+            logoutPressed()
+            break
+        default:
+            break
+        }
+        tableView.reloadData()
     }
     
     func goToMessages() {
@@ -92,6 +91,26 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         messageWithNavController.modalTransitionStyle = .coverVertical
         modalPresentationStyle = .fullScreen
         present(messageWithNavController, animated: true, completion:{
+            if let subviewsCount = self.tabBarController?.view.subviews.count {
+                if subviewsCount > 2 {
+                    self.tabBarController?.view.subviews[2].removeFromSuperview()
+                }
+            }
+        })
+    }
+    
+    func switchRole() {
+        
+    }
+    
+    func logoutPressed() {
+        UserDefaults.standard.removeObject(forKey: "isUserLoggedIn")
+        
+        let mainStoryboard = UIStoryboard(name: "LoginAndSignUp" , bundle: nil)
+        let loginVC = mainStoryboard.instantiateViewController(withIdentifier: "Login") as! LoginVC
+        loginVC.modalTransitionStyle = .coverVertical
+        modalPresentationStyle = .fullScreen
+        present(loginVC, animated: true, completion:{
             if let subviewsCount = self.tabBarController?.view.subviews.count {
                 if subviewsCount > 2 {
                     self.tabBarController?.view.subviews[2].removeFromSuperview()

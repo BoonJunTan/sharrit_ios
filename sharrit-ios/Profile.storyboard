@@ -59,10 +59,10 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OU9-OZ-IyH">
-                                                        <rect key="frame" x="0.0" y="38.5" width="195" height="28"/>
+                                                        <rect key="frame" x="0.0" y="38.5" width="195" height="28.5"/>
                                                         <subviews>
                                                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eDb-ZK-46f" customClass="CosmosView" customModule="Cosmos">
-                                                                <rect key="frame" x="0.0" y="0.0" width="195" height="28"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="195" height="28.5"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="rating">
@@ -101,7 +101,7 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RWM-fd-4QD">
-                                                        <rect key="frame" x="0.0" y="76.5" width="195" height="28.5"/>
+                                                        <rect key="frame" x="0.0" y="77" width="195" height="28"/>
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timer" translatesAutoresizingMaskIntoConstraints="NO" id="LCk-wt-ydL">
                                                                 <rect key="frame" x="0.0" y="0.0" width="29" height="29"/>
@@ -141,7 +141,7 @@
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sharrit_Logo" translatesAutoresizingMaskIntoConstraints="NO" id="Btj-QG-JMe">
                                                 <rect key="frame" x="5" y="5" width="95" height="95"/>
-                                                <color key="backgroundColor" red="0.99636000394821167" green="0.9802430272102356" blue="0.9882538914680481" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -191,7 +191,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QbW-7J-HhQ">
-                                                    <rect key="frame" x="51.5" y="9.5" width="315.5" height="21"/>
+                                                    <rect key="frame" x="51.5" y="9.5" width="354.5" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
