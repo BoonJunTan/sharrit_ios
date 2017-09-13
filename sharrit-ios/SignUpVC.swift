@@ -100,9 +100,13 @@ class SignUpVC: UIViewController {
             else {
                 print("Hash generation failed")
             }
-            
         }
         
+    }
+    
+    @IBAction func signInBtnPressed(_ sender: UIButton) {
+        self.modalTransitionStyle = .coverVertical
+        self.dismiss(animated: true, completion: nil)
     }
     
 }
