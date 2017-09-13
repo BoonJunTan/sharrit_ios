@@ -44,28 +44,28 @@ class LoginVC: UIViewController {
             
             let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/login"
             
-//            Alamofire.request(url, method: .post, parameters: signUpData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
-//                response in
-//                switch response.result {
-//                case .success(_):
-//                    /*
-//                    from response.result get "accessToken"
-//                    Key: Authorization
-//                    Value: "Bearer" + accessToken
-//                    */
-//                    print(response.result.value)
-//                    preferences.set(true, forKey: "isUserLoggedIn")
-//                    self.performSegue(withIdentifier: "GoBackMain", sender: nil)
-//                    break
-//                case .failure(_):
-//                    print(response.result.error!)
-//                    self.loginEmpty = true
-//                    self.errorLabel.text = "*Invalid mobile no. or password"
-//                    break
-//                }
-//            }
-            preferences.set(true, forKey: "isUserLoggedIn")
-            self.performSegue(withIdentifier: "GoBackMain", sender: nil)
+            Alamofire.request(url, method: .post, parameters: signUpData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+                response in
+                switch response.result {
+                    
+                case .success(_):
+                    if let JSON = (response.result.value as? Dictionary<String, Any>) {
+                        if let statusCode = JSON["status"] as? Int {
+                            if statusCode == 1 {
+                                preferences.set(true, forKey: "isUserLoggedIn")
+                                self.performSegue(withIdentifier: "GoBackMain", sender: nil)
+                            } else {
+                                self.loginEmpty = true
+                                self.errorLabel.text = "*Invalid mobile no. or password"
+                            }
+                        } else {
+                        }
+                    }
+                    break
+                case .failure(_):
+                    break
+                }
+            }
         }
     }
     
