@@ -62,6 +62,7 @@
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" red="0.2666666667" green="0.69572879050000003" blue="0.99636000390000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstItem="WhY-hS-dan" firstAttribute="leading" secondItem="DeZ-mv-EpO" secondAttribute="leading" id="J4M-OL-Mk9"/>
                                             <constraint firstItem="uxz-KE-RGJ" firstAttribute="top" secondItem="DeZ-mv-EpO" secondAttribute="top" id="TWX-rT-mfi"/>
@@ -73,7 +74,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" red="0.2666666667" green="0.69572879050000003" blue="0.99636000390000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.26529417560000002" green="0.69572879050000003" blue="0.99636000390000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="DeZ-mv-EpO" firstAttribute="centerX" secondItem="eCX-sj-TVi" secondAttribute="centerX" id="5bi-Lj-LGt"/>
                                     <constraint firstItem="DeZ-mv-EpO" firstAttribute="centerY" secondItem="eCX-sj-TVi" secondAttribute="centerY" id="m7p-fb-BeR"/>

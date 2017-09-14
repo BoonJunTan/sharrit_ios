@@ -25,6 +25,7 @@ class WalletVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
                                            target: self, action: #selector(goToMessages))
         
         self.navigationItem.rightBarButtonItem = navBarBubble
+        self.navigationController?.navigationBar.isTranslucent = false
     }
     
     override func didReceiveMemoryWarning() {
