@@ -5,6 +5,8 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -28,10 +30,10 @@
             </objects>
             <point key="canvasLocation" x="-758" y="39"/>
         </scene>
-        <!--View Controller-->
+        <!--My Wallet-->
         <scene sceneID="DvP-a3-Z8h">
             <objects>
-                <viewController id="5ke-V9-NYf" sceneMemberID="viewController">
+                <viewController id="5ke-V9-NYf" customClass="WalletVC" customModule="sharrit_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="beI-I7-NfY"/>
                         <viewControllerLayoutGuide type="bottom" id="snx-PN-yuE"/>
@@ -39,16 +41,133 @@
                     <view key="view" contentMode="scaleToFill" id="YXf-fs-3ha">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eCX-sj-TVi">
+                                <rect key="frame" x="0.0" y="64" width="375" height="220.5"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DeZ-mv-EpO">
+                                        <rect key="frame" x="81.5" y="50" width="213" height="122"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="88.88" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uxz-KE-RGJ">
+                                                <rect key="frame" x="0.0" y="0.0" width="213" height="66"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="55"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account Balance (S$)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WhY-hS-dan">
+                                                <rect key="frame" x="0.0" y="96" width="213" height="26"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.2666666667" green="0.69572879050000003" blue="0.99636000390000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="WhY-hS-dan" firstAttribute="leading" secondItem="DeZ-mv-EpO" secondAttribute="leading" id="J4M-OL-Mk9"/>
+                                            <constraint firstItem="uxz-KE-RGJ" firstAttribute="top" secondItem="DeZ-mv-EpO" secondAttribute="top" id="TWX-rT-mfi"/>
+                                            <constraint firstAttribute="trailing" secondItem="WhY-hS-dan" secondAttribute="trailing" id="UFA-Hd-yV3"/>
+                                            <constraint firstAttribute="trailing" secondItem="uxz-KE-RGJ" secondAttribute="trailing" id="V7a-pU-yUY"/>
+                                            <constraint firstItem="WhY-hS-dan" firstAttribute="top" secondItem="uxz-KE-RGJ" secondAttribute="bottom" constant="30" id="cbK-sn-2qd"/>
+                                            <constraint firstAttribute="bottom" secondItem="WhY-hS-dan" secondAttribute="bottom" id="q8q-zl-w8F"/>
+                                            <constraint firstItem="uxz-KE-RGJ" firstAttribute="leading" secondItem="DeZ-mv-EpO" secondAttribute="leading" id="tuQ-t0-0xF"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.2666666667" green="0.69572879050000003" blue="0.99636000390000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="DeZ-mv-EpO" firstAttribute="centerX" secondItem="eCX-sj-TVi" secondAttribute="centerX" id="5bi-Lj-LGt"/>
+                                    <constraint firstItem="DeZ-mv-EpO" firstAttribute="centerY" secondItem="eCX-sj-TVi" secondAttribute="centerY" id="m7p-fb-BeR"/>
+                                </constraints>
+                            </view>
+                            <collectionView clipsSubviews="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="3vA-8e-2Jl">
+                                <rect key="frame" x="0.0" y="284.5" width="375" height="333.5"/>
+                                <color key="backgroundColor" red="0.8351485729" green="0.83512353900000003" blue="0.83513772490000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ruq-II-tYz">
+                                    <size key="itemSize" width="118" height="118"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="walletBtnCell" id="KQC-q3-GDt" customClass="ButtonCollectionViewCell" customModule="sharrit_ios" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="118" height="118"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="118" height="118"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5q7-0T-SPC">
+                                                    <rect key="frame" x="29.5" y="9.5" width="59" height="99.5"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QS2-Pu-Ib0">
+                                                            <rect key="frame" x="0.0" y="0.0" width="59" height="59"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="QS2-Pu-Ib0" secondAttribute="height" multiplier="1:1" id="Sm4-Be-Brh"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Smart Card" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NJ9-Uh-ucQ">
+                                                            <rect key="frame" x="-20.5" y="79" width="100" height="21"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="100" id="Sua-XH-mbD"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" red="0.2666666667" green="0.69572879050000003" blue="0.99636000390000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstItem="NJ9-Uh-ucQ" firstAttribute="centerX" secondItem="5q7-0T-SPC" secondAttribute="centerX" id="0Wt-2H-KOy"/>
+                                                        <constraint firstAttribute="trailing" secondItem="QS2-Pu-Ib0" secondAttribute="trailing" id="6LJ-vj-ZI9"/>
+                                                        <constraint firstItem="QS2-Pu-Ib0" firstAttribute="leading" secondItem="5q7-0T-SPC" secondAttribute="leading" id="8RL-Rk-Mg3"/>
+                                                        <constraint firstAttribute="bottom" secondItem="NJ9-Uh-ucQ" secondAttribute="bottom" id="b9K-MU-w57"/>
+                                                        <constraint firstItem="NJ9-Uh-ucQ" firstAttribute="top" secondItem="QS2-Pu-Ib0" secondAttribute="bottom" constant="20" id="hYD-RN-kz4"/>
+                                                        <constraint firstItem="QS2-Pu-Ib0" firstAttribute="top" secondItem="5q7-0T-SPC" secondAttribute="top" id="sfs-3b-9dz"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="QS2-Pu-Ib0" firstAttribute="height" secondItem="KQC-q3-GDt" secondAttribute="height" multiplier="0.5" id="PgF-ug-Xpr"/>
+                                            <constraint firstItem="5q7-0T-SPC" firstAttribute="centerX" secondItem="KQC-q3-GDt" secondAttribute="centerX" id="S8r-gt-lJT"/>
+                                            <constraint firstItem="5q7-0T-SPC" firstAttribute="centerY" secondItem="KQC-q3-GDt" secondAttribute="centerY" id="d8R-G5-RH4"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="btnIcon" destination="QS2-Pu-Ib0" id="BLs-qF-XjV"/>
+                                            <outlet property="btnLabel" destination="NJ9-Uh-ucQ" id="TaH-hg-0dD"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="5ke-V9-NYf" id="HtK-K3-ghK"/>
+                                    <outlet property="delegate" destination="5ke-V9-NYf" id="z5u-to-955"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="eCX-sj-TVi" secondAttribute="trailing" id="4CO-cF-UPa"/>
+                            <constraint firstItem="3vA-8e-2Jl" firstAttribute="height" secondItem="YXf-fs-3ha" secondAttribute="height" multiplier="0.5" id="AG7-8l-2JS"/>
+                            <constraint firstItem="eCX-sj-TVi" firstAttribute="top" secondItem="beI-I7-NfY" secondAttribute="bottom" id="GdA-qc-XlX"/>
+                            <constraint firstAttribute="trailing" secondItem="3vA-8e-2Jl" secondAttribute="trailing" id="J8p-Ff-vhr"/>
+                            <constraint firstAttribute="leading" secondItem="eCX-sj-TVi" secondAttribute="leading" id="OQI-s7-nh0"/>
+                            <constraint firstItem="snx-PN-yuE" firstAttribute="top" secondItem="3vA-8e-2Jl" secondAttribute="bottom" id="ajz-oG-chS"/>
+                            <constraint firstItem="3vA-8e-2Jl" firstAttribute="leading" secondItem="YXf-fs-3ha" secondAttribute="leading" id="axR-TW-ZvJ"/>
+                            <constraint firstItem="3vA-8e-2Jl" firstAttribute="top" secondItem="eCX-sj-TVi" secondAttribute="bottom" id="xQa-II-Bvd"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="k8G-Q2-bqX"/>
+                    <navigationItem key="navigationItem" title="My Wallet" id="k8G-Q2-bqX"/>
+                    <connections>
+                        <outlet property="btnCollectionView" destination="3vA-8e-2Jl" id="OlN-l0-Bfm"/>
+                        <outlet property="walletAmtLabel" destination="uxz-KE-RGJ" id="88J-LB-grC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UM9-nQ-iFe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-71" y="39"/>
+            <point key="canvasLocation" x="157.59999999999999" y="37.331334332833585"/>
         </scene>
     </scenes>
     <resources>
-        <image name="wallet" width="20" height="20"/>
+        <image name="wallet" width="25" height="25"/>
     </resources>
 </document>
