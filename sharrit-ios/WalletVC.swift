@@ -13,8 +13,8 @@ class WalletVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
     @IBOutlet weak var walletAmtLabel: UILabel!
     
     let reuseIdentifier = "walletBtnCell"
-    var btnIcon = [#imageLiteral(resourceName: "transaction"),#imageLiteral(resourceName: "deposit"),#imageLiteral(resourceName: "withdrawl"),#imageLiteral(resourceName: "smart_card")]
-    var btnLabel = ["History", "Top Up", "Cash Out", "Smart Card"]
+    var btnIcon = [#imageLiteral(resourceName: "transaction"),#imageLiteral(resourceName: "deposit"),#imageLiteral(resourceName: "smart_card"), #imageLiteral(resourceName: "withdrawl")]
+    var btnLabel = ["History", "Top Up", "Smart Card", "Cash Out"]
     @IBOutlet weak var btnCollectionView: UICollectionView!
     
     override func viewDidLoad() {
