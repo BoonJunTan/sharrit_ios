@@ -10,5 +10,6 @@ target 'sharrit-ios' do
   pod 'IQKeyboardManagerSwift'
   pod 'Cosmos', '~> 11.0'
   pod 'JSQMessagesViewController'
+  pod 'ImageSlideshow'
 
 end
