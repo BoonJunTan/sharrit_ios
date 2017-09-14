@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NotificationVC: UIViewController {
+class NotificationVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,12 +18,27 @@ class NotificationVC: UIViewController {
                                            style: .plain ,
                                            target: self, action: #selector(goToMessages))
         
-        self.navigationItem.rightBarButtonItem = navBarBubble
+        navigationItem.rightBarButtonItem = navBarBubble
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "notificationCell") as! NotificationTableViewCell
+//        cell.iconLabel.text = tableViewItems[indexPath.section][indexPath.row]
+//        cell.iconImage.image = tableViewIcons[indexPath.section][indexPath.row]
+        return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
     }
     
     func goToMessages() {
