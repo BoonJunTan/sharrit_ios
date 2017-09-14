@@ -14,43 +14,10 @@ enum MessageType {
     case Sharror
 }
 
-class MessagesVC: UIViewController {
+class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    @IBOutlet weak var allBtn: UIButton!
-    @IBOutlet weak var sharriesBtn: UIButton!
-    @IBOutlet weak var sharrorBtn: UIButton!
-    
-    var currentMessageType = MessageType.All {
-        didSet {
-            switch currentMessageType {
-            case .All:
-                btnPressedDesign(button: allBtn)
-                btnNotPressedDesign(button: sharriesBtn)
-                btnNotPressedDesign(button: sharrorBtn)
-                break
-            case .Sharries:
-                btnPressedDesign(button: sharriesBtn)
-                btnNotPressedDesign(button: allBtn)
-                btnNotPressedDesign(button: sharrorBtn)
-                break
-            case .Sharror:
-                btnPressedDesign(button: sharrorBtn)
-                btnNotPressedDesign(button: allBtn)
-                btnNotPressedDesign(button: sharriesBtn)
-                break
-            }
-        }
-    }
-    
-    func btnPressedDesign(button: UIButton) {
-        button.backgroundColor = Colours.Blue.sharritBlue
-        button.setTitleColor(UIColor.black, for: .normal)
-    }
-    
-    func btnNotPressedDesign(button: UIButton) {
-        button.backgroundColor = UIColor.clear
-        button.setTitleColor(Colours.Blue.sharritBlue, for: .normal)
-    }
+    @IBOutlet weak var tableView: UITableView!
+    private var chats: [Message] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,9 +26,11 @@ class MessagesVC: UIViewController {
         let navBarClose = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(closeMessages))
         self.navigationItem.leftBarButtonItem = navBarClose
         
-        setupBtnBorder(allBtn);
-        setupBtnBorder(sharriesBtn);
-        setupBtnBorder(sharrorBtn);
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.tableFooterView = UIView() // For Hiding away empty cell
+        
+        chats.append(Message(id: "1", name: "Test"))
     }
     
     override func didReceiveMemoryWarning() {
@@ -69,26 +38,59 @@ class MessagesVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func setupBtnBorder(_ button: UIButton) {
-        button.layer.borderWidth = 1
-        button.layer.borderColor = Colours.Blue.sharritBlue.cgColor
-    }
-    
     func closeMessages() {
         self.modalTransitionStyle = .coverVertical
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func allBtnPressed(_ sender: UIButton) {
-        currentMessageType = .All
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 7
     }
     
-    @IBAction func sharriesBtnPressed(_ sender: UIButton) {
-        currentMessageType = .Sharries
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "messageCell") as! MessageTableViewCell
+        /*
+        cell.iconLabel.text = tableViewItems[indexPath.section][indexPath.row]
+        cell.iconImage.image = tableViewIcons[indexPath.section][indexPath.row]
+        */
+        return cell
     }
     
-    @IBAction func sharrorBtnPressed(_ sender: UIButton) {
-        currentMessageType = .Sharror
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        /*
+        switch tableViewItems[indexPath.section][indexPath.row] {
+        case "View as Sharror":
+            tableViewItems[indexPath.section][indexPath.row] = "View as Sharries"
+            switchRole()
+            break
+        case "View as Sharries":
+            tableViewItems[indexPath.section][indexPath.row] = "View as Sharror"
+            switchRole()
+            break
+        case "Logout":
+            logoutPressed()
+            break
+        default:
+            break
+        }
+        tableView.reloadData()
+        */
+        let chat = chats[indexPath.row]
+        performSegue(withIdentifier: "conversationIdentifier", sender: chat)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        if let chat = sender as? Message {
+            let chatVC = segue.destination as! ConversationVC
+            
+            //chatVC.senderDisplayName = senderDisplayName
+            chatVC.chat = chat
+        }
     }
     
 }

@@ -47,7 +47,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="150"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="svE-hh-0Dx">
-                                        <rect key="frame" x="155" y="22.5" width="195" height="105"/>
+                                        <rect key="frame" x="155" y="23" width="195" height="105"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="YiW-W1-0fF">
                                                 <rect key="frame" x="0.0" y="0.0" width="195" height="105"/>
@@ -107,7 +107,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="28.5" height="28.5"/>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4 weeks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PzR-Ap-gb7">
-                                                                <rect key="frame" x="48.5" y="4.5" width="146.5" height="20.5"/>
+                                                                <rect key="frame" x="48.5" y="3.5" width="146.5" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -181,17 +181,17 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="N6M-P9-e85" id="nbW-qP-82L">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="39.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="39"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile" translatesAutoresizingMaskIntoConstraints="NO" id="QzX-gM-9Od">
-                                                    <rect key="frame" x="8" y="8" width="23.5" height="23.5"/>
+                                                    <rect key="frame" x="8" y="8" width="24" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="QzX-gM-9Od" secondAttribute="height" multiplier="1:1" id="F5k-U0-O09"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QbW-7J-HhQ">
-                                                    <rect key="frame" x="51.5" y="9.5" width="315.5" height="21"/>
+                                                    <rect key="frame" x="52" y="10" width="315" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
