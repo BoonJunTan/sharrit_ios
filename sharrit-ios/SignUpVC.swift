@@ -70,7 +70,7 @@ class SignUpVC: UIViewController {
         
         mobileEmpty = true
         if (mobileTxt.text?.isEmpty)! {
-            mobileError.text = "Mobile no. is required"
+            mobileError.text = "*Mobile no. is required"
         } else if !phoneValidate(with: mobileTxt.text!) {
             mobileError.text = "*Please enter valid mobile no."
         } else {
@@ -91,6 +91,8 @@ class SignUpVC: UIViewController {
                     UIView.animate(withDuration: 5, animations: {
                         self.verificationView.alpha = 0
                     }) { (finished) in
+                        self.verificationView.alpha = 1
+                        self.verificationView.isHidden = true
                         self.modalTransitionStyle = .crossDissolve
                         self.dismiss(animated: true, completion: nil)
                     }

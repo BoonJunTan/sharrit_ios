@@ -14,6 +14,7 @@
 		2777645E1F6A594A0023CDCA /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2777645D1F6A594A0023CDCA /* MessageTableViewCell.swift */; };
 		277764601F6A5D2D0023CDCA /* ConversationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2777645F1F6A5D2D0023CDCA /* ConversationVC.swift */; };
 		27ABAE811F670D81007F6CDB /* LoginAndSignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27ABAE801F670D81007F6CDB /* LoginAndSignUp.storyboard */; };
+		27F256421F6AA1C6006B1697 /* ButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F256411F6AA1C6006B1697 /* ButtonCollectionViewCell.swift */; };
 		27FCB7D41F677533008E973C /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27FCB7D31F677533008E973C /* Home.storyboard */; };
 		27FCB7D61F67753F008E973C /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FCB7D51F67753F008E973C /* HomeVC.swift */; };
 		27FCB7DB1F677680008E973C /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27FCB7DA1F677680008E973C /* Profile.storyboard */; };
@@ -44,6 +45,7 @@
 		2777645D1F6A594A0023CDCA /* MessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		2777645F1F6A5D2D0023CDCA /* ConversationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationVC.swift; sourceTree = "<group>"; };
 		27ABAE801F670D81007F6CDB /* LoginAndSignUp.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LoginAndSignUp.storyboard; sourceTree = "<group>"; };
+		27F256411F6AA1C6006B1697 /* ButtonCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCollectionViewCell.swift; sourceTree = "<group>"; };
 		27FCB7D31F677533008E973C /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		27FCB7D51F67753F008E973C /* HomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		27FCB7DA1F677680008E973C /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 			children = (
 				27FCB7E41F6776EC008E973C /* Wallet.storyboard */,
 				27FCB7E01F6776B6008E973C /* WalletVC.swift */,
+				27F256411F6AA1C6006B1697 /* ButtonCollectionViewCell.swift */,
 			);
 			name = Wallet;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 				27FCB7E71F677AB3008E973C /* LoginVC.swift in Sources */,
 				27FCB7D61F67753F008E973C /* HomeVC.swift in Sources */,
 				27FCB7F01F679857008E973C /* SharritButton.swift in Sources */,
+				27F256421F6AA1C6006B1697 /* ButtonCollectionViewCell.swift in Sources */,
 				2764A4BF1F6A73250014CCF3 /* Message.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

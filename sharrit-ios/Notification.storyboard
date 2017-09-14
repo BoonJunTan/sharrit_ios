@@ -28,7 +28,7 @@
             </objects>
             <point key="canvasLocation" x="-527" y="-53"/>
         </scene>
-        <!--View Controller-->
+        <!--Notification-->
         <scene sceneID="5fx-xr-b4h">
             <objects>
                 <viewController id="LSN-Ye-AmG" sceneMemberID="viewController">
@@ -41,7 +41,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="3b7-Ac-lvY"/>
+                    <navigationItem key="navigationItem" title="Notification" id="3b7-Ac-lvY"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fiy-yt-DrS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
