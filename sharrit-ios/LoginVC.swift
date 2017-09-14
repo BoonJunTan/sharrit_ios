@@ -34,7 +34,11 @@ class LoginVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func loginBtnPressed(_ sender: SharritButton) {
+    @IBAction func dismissBtnPressed(_ sender: UIButton) {
+        verificationView.isHidden = true
+    }
+    
+    @IBAction func loginBtnPressed(_ sender: Any) {
         errorLabel.text = "*Mobile and password are required"
         loginEmpty = ((mobileNoTxt.text?.isEmpty)! || (passwordTxt.text?.isEmpty)!)
         
@@ -54,15 +58,18 @@ class LoginVC: UIViewController {
                             if statusCode == 1 {
                                 preferences.set(true, forKey: "isUserLoggedIn")
                                 self.performSegue(withIdentifier: "GoBackMain", sender: nil)
-                            } else {
+                            } else if statusCode == -1 {
                                 self.loginEmpty = true
                                 self.errorLabel.text = "*Invalid mobile no. or password"
+                            } else {
+                                self.verificationView.isHidden = false
                             }
-                        } else {
                         }
                     }
                     break
                 case .failure(_):
+                    self.loginEmpty = true
+                    self.errorLabel.text = "*Invalid mobile no. or password"
                     break
                 }
             }
