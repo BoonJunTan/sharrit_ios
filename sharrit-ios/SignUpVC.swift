@@ -66,8 +66,16 @@ class SignUpVC: UIViewController {
         
         firstNameEmpty = (firstNameTxt.text?.isEmpty)!
         lastNameEmpty = (lastNameTxt.text?.isEmpty)!
-        mobileEmpty = (mobileTxt.text?.isEmpty)!
         passwordEmpty = (passwordTxt.text?.isEmpty)!
+        
+        mobileEmpty = true
+        if (mobileTxt.text?.isEmpty)! {
+            mobileError.text = "Mobile no. is required"
+        } else if !phoneValidate(with: mobileTxt.text!) {
+            mobileError.text = "*Please enter valid mobile no."
+        } else {
+            mobileEmpty = false
+        }
         
         if !firstNameEmpty && !lastNameEmpty && !mobileEmpty && !passwordEmpty {
             verificationView.isHidden = false
@@ -99,6 +107,13 @@ class SignUpVC: UIViewController {
     @IBAction func signInBtnPressed(_ sender: UIButton) {
         self.modalTransitionStyle = .coverVertical
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    func phoneValidate(with value: String) -> Bool {
+        let PHONE_REGEX = "^[8-9]\\d{7}$"
+        let phoneTest = NSPredicate(format: "SELF MATCHES %@", PHONE_REGEX)
+        let result =  phoneTest.evaluate(with: value)
+        return result
     }
     
 }
