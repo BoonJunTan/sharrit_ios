@@ -12,7 +12,6 @@ class WalletVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
     
     @IBOutlet weak var walletAmtLabel: UILabel!
     
-    let reuseIdentifier = "walletBtnCell"
     var btnIcon = [#imageLiteral(resourceName: "transaction"),#imageLiteral(resourceName: "deposit"),#imageLiteral(resourceName: "smart_card"), #imageLiteral(resourceName: "withdrawl")]
     var btnLabel = ["History", "Top Up", "Smart Card", "Cash Out"]
     @IBOutlet weak var btnCollectionView: UICollectionView!
@@ -39,7 +38,7 @@ class WalletVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath as IndexPath) as! ButtonCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "walletBtnCell", for: indexPath as IndexPath) as! ButtonCollectionViewCell
         
         cell.btnIcon.image = btnIcon[indexPath.item]
         cell.btnLabel.text = btnLabel[indexPath.item]

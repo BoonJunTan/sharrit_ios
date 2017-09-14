@@ -19,6 +19,8 @@ class NotificationVC: UITableViewController {
                                            target: self, action: #selector(goToMessages))
         
         navigationItem.rightBarButtonItem = navBarBubble
+        
+        tableView.tableFooterView = UIView() // For Hiding away empty cell
     }
     
     override func didReceiveMemoryWarning() {

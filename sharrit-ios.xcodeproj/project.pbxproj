@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2751E4EF1F6AE3A700E1B1E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2751E4EE1F6AE3A700E1B1E2 /* Assets.xcassets */; };
+		2751E4F11F6AE6D700E1B1E2 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2751E4F01F6AE6D700E1B1E2 /* CategoryCollectionViewCell.swift */; };
 		2764A4BF1F6A73250014CCF3 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2764A4BE1F6A73250014CCF3 /* Message.swift */; };
 		27702CD51F69531900A1C652 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27702CD41F69531900A1C652 /* ProfileTableViewCell.swift */; };
 		27702CD91F69621900A1C652 /* Messages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27702CD81F69621900A1C652 /* Messages.storyboard */; };
@@ -31,7 +33,6 @@
 		27FCB7F21F67DB8F008E973C /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FCB7F11F67DB8F008E973C /* SignUpVC.swift */; };
 		872D31621F6705520069381A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872D31611F6705520069381A /* AppDelegate.swift */; };
 		872D31691F6705520069381A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 872D31671F6705520069381A /* Main.storyboard */; };
-		872D316B1F6705520069381A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 872D316A1F6705520069381A /* Assets.xcassets */; };
 		872D316E1F6705520069381A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 872D316C1F6705520069381A /* LaunchScreen.storyboard */; };
 		C420852CFEA4E73904FF7746 /* Pods_sharrit_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C9F59F22649F3203E5DA86B /* Pods_sharrit_ios.framework */; };
 /* End PBXBuildFile section */
@@ -39,6 +40,8 @@
 /* Begin PBXFileReference section */
 		0C9F59F22649F3203E5DA86B /* Pods_sharrit_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sharrit_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		161ADFA0709DEF88BC30DC81 /* Pods-sharrit-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sharrit-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-sharrit-ios/Pods-sharrit-ios.release.xcconfig"; sourceTree = "<group>"; };
+		2751E4EE1F6AE3A700E1B1E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2751E4F01F6AE6D700E1B1E2 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		2764A4BE1F6A73250014CCF3 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		27702CD41F69531900A1C652 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		27702CD81F69621900A1C652 /* Messages.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Messages.storyboard; sourceTree = "<group>"; };
@@ -65,7 +68,6 @@
 		872D315E1F6705520069381A /* sharrit-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "sharrit-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		872D31611F6705520069381A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		872D31681F6705520069381A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		872D316A1F6705520069381A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		872D316D1F6705520069381A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		872D316F1F6705520069381A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -117,6 +119,7 @@
 			children = (
 				27FCB7D31F677533008E973C /* Home.storyboard */,
 				27FCB7D51F67753F008E973C /* HomeVC.swift */,
+				2751E4F01F6AE6D700E1B1E2 /* CategoryCollectionViewCell.swift */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -191,9 +194,9 @@
 				27ABAE7F1F670D1F007F6CDB /* LoginAndSignUp */,
 				872D31611F6705520069381A /* AppDelegate.swift */,
 				872D31671F6705520069381A /* Main.storyboard */,
-				872D316A1F6705520069381A /* Assets.xcassets */,
 				872D316C1F6705520069381A /* LaunchScreen.storyboard */,
 				872D316F1F6705520069381A /* Info.plist */,
+				2751E4EE1F6AE3A700E1B1E2 /* Assets.xcassets */,
 			);
 			path = "sharrit-ios";
 			sourceTree = "<group>";
@@ -274,8 +277,8 @@
 				27FCB7E51F6776EC008E973C /* Wallet.storyboard in Resources */,
 				872D316E1F6705520069381A /* LaunchScreen.storyboard in Resources */,
 				27FCB7EA1F678F89008E973C /* SharritButton.xib in Resources */,
+				2751E4EF1F6AE3A700E1B1E2 /* Assets.xcassets in Resources */,
 				27FCB7D41F677533008E973C /* Home.storyboard in Resources */,
-				872D316B1F6705520069381A /* Assets.xcassets in Resources */,
 				27ABAE811F670D81007F6CDB /* LoginAndSignUp.storyboard in Resources */,
 				872D31691F6705520069381A /* Main.storyboard in Resources */,
 				27702CD91F69621900A1C652 /* Messages.storyboard in Resources */,
@@ -314,6 +317,7 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Cosmos/Cosmos.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/ImageSlideshow/ImageSlideshow.framework",
 				"${BUILT_PRODUCTS_DIR}/JSQMessagesViewController/JSQMessagesViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/JSQSystemSoundPlayer/JSQSystemSoundPlayer.framework",
 			);
@@ -322,6 +326,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cosmos.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImageSlideshow.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQMessagesViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQSystemSoundPlayer.framework",
 			);
@@ -336,9 +341,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-sharrit-ios/Pods-sharrit-ios-resources.sh",
+				$PODS_CONFIGURATION_BUILD_DIR/ImageSlideshow/ImageSlideshow.bundle,
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -360,6 +368,7 @@
 				27FCB7E11F6776B6008E973C /* WalletVC.swift in Sources */,
 				2777645E1F6A594A0023CDCA /* MessageTableViewCell.swift in Sources */,
 				277764601F6A5D2D0023CDCA /* ConversationVC.swift in Sources */,
+				2751E4F11F6AE6D700E1B1E2 /* CategoryCollectionViewCell.swift in Sources */,
 				872D31621F6705520069381A /* AppDelegate.swift in Sources */,
 				27702CDB1F6962F900A1C652 /* MessagesVC.swift in Sources */,
 				27702CD51F69531900A1C652 /* ProfileTableViewCell.swift in Sources */,
