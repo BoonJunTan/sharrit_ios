@@ -17,7 +17,7 @@ class SharritButton: UIButton {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.backgroundColor = Colours.Blue.skyBlueColor
+        self.backgroundColor = Colours.Blue.sharritBlue
         self.setTitleColor(UIColor.black, for: .normal)
     }
     

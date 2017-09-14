@@ -9,5 +9,6 @@ target 'sharrit-ios' do
   pod 'Alamofire'
   pod 'IQKeyboardManagerSwift'
   pod 'Cosmos', '~> 11.0'
+  pod 'JSQMessagesViewController'
 
 end
