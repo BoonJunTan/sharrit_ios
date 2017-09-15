@@ -11,5 +11,6 @@ target 'sharrit-ios' do
   pod 'Cosmos', '~> 11.0'
   pod 'JSQMessagesViewController'
   pod 'ImageSlideshow'
+  pod 'SwiftyJSON'
 
 end

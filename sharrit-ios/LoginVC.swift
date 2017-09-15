@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import SwiftyJSON
 
 class LoginVC: UIViewController {
     
@@ -68,10 +69,39 @@ class LoginVC: UIViewController {
                 switch response.result {
                     
                 case .success(_):
-                    if let JSON = (response.result.value as? Dictionary<String, Any>) {
-                        if let statusCode = JSON["status"] as? Int {
+                    if let data = (response.result.value as? Dictionary<String, Any>) {
+                        if let statusCode = data["status"] as? Int {
                             if statusCode == 1 {
                                 preferences.set(true, forKey: "isUserLoggedIn")
+                                
+                                if let value = response.result.value {
+                                    var json = JSON(value)
+                                    let userID = json["content"]["userId"].int!
+                                    let firstName = json["content"]["firstName"].string!
+                                    let lastName = json["content"]["lastName"].string!
+                                    let accessToken = json["content"]["accessToken"].string!
+                                    let createDate = json["content"]["createDate"].string!
+                                    
+                                    json["content"]["mobile"].stringValue = self.mobileNoTxt.text!
+                                    json["content"]["password"].stringValue = self.passwordTxt.text!
+                                    
+                                    // This is to save to user preference
+                                    var userInfoDict = [String: Any]()
+                                    
+                                    for (key,subJson):(String, JSON) in json["content"] {
+                                        userInfoDict.updateValue(subJson.stringValue, forKey: key)
+                                    }
+                                    
+                                    UserDefaults.standard.set(userInfoDict, forKey: "userInfo")
+                                    UserDefaults.standard.synchronize()
+                                    
+                                    // For retrieving later on - UserDefaults.standard.object(forKey: "userInfo")
+                                    
+                                    // This is to pass around VC
+                                    let userAccount = User(userID: userID, firstName: firstName, lastName: lastName, password: self.passwordTxt.text!, mobile: Int(self.mobileNoTxt.text!)!, accessToken: accessToken, createDate: createDate)
+                                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                                    appDelegate.user = userAccount
+                                }
                                 self.performSegue(withIdentifier: "GoBackMain", sender: nil)
                             } else if statusCode == -1 {
                                 self.loginEmpty = true
