@@ -80,7 +80,7 @@ class SignUpVC: UIViewController {
         if !firstNameEmpty && !lastNameEmpty && !mobileEmpty && !passwordEmpty {
             verificationView.isHidden = false
             
-            let signUpData: [String: Any] = ["name": (firstNameTxt.text! + " " + lastNameTxt.text!), "phoneNumber": mobileTxt.text, "password": passwordTxt.text]
+            let signUpData: [String: Any] = ["firstName": firstNameTxt.text, "lastName": lastNameTxt.text, "phoneNumber": mobileTxt.text, "password": passwordTxt.text]
             
             let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/user"
             

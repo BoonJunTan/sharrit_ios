@@ -10,6 +10,7 @@ import UIKit
 
 class WalletVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
+    @IBOutlet weak var walletView: UIView!
     @IBOutlet weak var walletAmtLabel: UILabel!
     
     var btnIcon = [#imageLiteral(resourceName: "transaction"),#imageLiteral(resourceName: "deposit"),#imageLiteral(resourceName: "smart_card"), #imageLiteral(resourceName: "withdrawl")]
@@ -26,6 +27,10 @@ class WalletVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
         
         self.navigationItem.rightBarButtonItem = navBarBubble
         self.navigationController?.navigationBar.isTranslucent = false
+        
+        walletView.layer.borderColor = UIColor(colorLiteralRed: 192/255.0, green: 192/255.0, blue: 192/255.0, alpha: 1).cgColor
+        walletView.layer.borderWidth = 3
+        walletView.layer.cornerRadius = 10
     }
     
     override func didReceiveMemoryWarning() {

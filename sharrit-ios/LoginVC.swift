@@ -15,6 +15,7 @@ class LoginVC: UIViewController {
     @IBOutlet weak var passwordTxt: UITextField!
     @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var verificationView: UIView!
+    @IBOutlet weak var resendVerfication: UIButton!
     
     var loginEmpty:Bool = true {
         didSet {
@@ -63,6 +64,7 @@ class LoginVC: UIViewController {
                                 self.errorLabel.text = "*Invalid mobile no. or password"
                             } else {
                                 self.verificationView.isHidden = false
+                                self.resendVerification(mobile: self.mobileNoTxt.text!)
                             }
                         }
                     }
@@ -72,6 +74,25 @@ class LoginVC: UIViewController {
                     self.errorLabel.text = "*Invalid mobile no. or password"
                     break
                 }
+            }
+        }
+    }
+    
+    @IBAction func resendVertificationPressed(_ sender: UIButton) {
+        resendVerification(mobile: mobileNoTxt.text!)
+    }
+    
+    func resendVerification(mobile: String) {
+        let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/user/" + mobile
+        
+        Alamofire.request(url, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+            response in
+            switch response.result {
+            case .failure(_):
+                print("API failure to call")
+                break
+            default:
+                break
             }
         }
     }
