@@ -16,6 +16,7 @@ class SignUpVC: UIViewController {
     @IBOutlet weak var mobileTxt: UITextField!
     @IBOutlet weak var passwordTxt: UITextField!
     @IBOutlet weak var verificationView: UIView!
+    @IBOutlet weak var verificationLabel: UILabel!
     
     @IBOutlet weak var firstNameError: UILabel!
     @IBOutlet weak var lastNameError: UILabel!
@@ -88,6 +89,7 @@ class SignUpVC: UIViewController {
                 response in
                 switch response.result {
                 case .success(_):
+                    self.verificationLabel.text = "We have sent you an SMS verification with instructions to join us. Cheers!"
                     UIView.animate(withDuration: 5, animations: {
                         self.verificationView.alpha = 0
                     }) { (finished) in
@@ -98,11 +100,18 @@ class SignUpVC: UIViewController {
                     }
                     break
                 case .failure(_):
-                    print(response.result.error!)
+                    self.verificationLabel.text = "An account with this mobile number already existed. Try forgetting password, Cheers!"
+                    UIView.animate(withDuration: 5, animations: {
+                        self.verificationView.alpha = 0
+                    }) { (finished) in
+                        self.verificationView.alpha = 1
+                        self.verificationView.isHidden = true
+                        self.modalTransitionStyle = .crossDissolve
+                        self.dismiss(animated: true, completion: nil)
+                    }
                     break
                 }
             }
-        
         }
     }
 

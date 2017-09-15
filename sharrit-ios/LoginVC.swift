@@ -17,6 +17,13 @@ class LoginVC: UIViewController {
     @IBOutlet weak var verificationView: UIView!
     @IBOutlet weak var resendVerfication: UIButton!
     
+    @IBOutlet weak var forgetPasswordView: UIView! // First View
+    
+    @IBOutlet weak var forgetNo: UITextField!
+    @IBOutlet weak var sendNoView: UIView! // Second View
+    
+    @IBOutlet weak var sendPasswordView: UIView! // Third View
+    
     var loginEmpty:Bool = true {
         didSet {
             errorLabel.isHidden = !loginEmpty
@@ -27,6 +34,9 @@ class LoginVC: UIViewController {
         super.viewDidLoad()
         errorLabel.isHidden = true
         verificationView.isHidden = true
+        forgetPasswordView.isHidden = true
+        sendNoView.isHidden = true
+        sendPasswordView.isHidden = true
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -37,6 +47,10 @@ class LoginVC: UIViewController {
     
     @IBAction func dismissBtnPressed(_ sender: UIButton) {
         verificationView.isHidden = true
+    }
+    
+    @IBAction func dismissForgetView(_ sender: Any) {
+        forgetPasswordView.isHidden = true
     }
     
     @IBAction func loginBtnPressed(_ sender: Any) {
@@ -80,6 +94,33 @@ class LoginVC: UIViewController {
     
     @IBAction func resendVertificationPressed(_ sender: UIButton) {
         resendVerification(mobile: mobileNoTxt.text!)
+    }
+    
+    @IBAction func sendPasswordBtnTapped(_ sender: UIButton) {
+        sendNoView.isHidden = true
+        sendPasswordView.isHidden = false
+    }
+    
+    @IBAction func forgetPasswordBtnTapped(_ sender: UIButton) {
+        forgetPasswordView.isHidden = false
+        sendNoView.isHidden = false
+    }
+    
+    @IBAction func dismissForgetPassword(_ sender: UIButton) {
+        let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/user/forget"
+        
+        Alamofire.request(url, method: .post, parameters: ["phoneNumber": forgetNo.text!], encoding: JSONEncoding.default, headers: [:]).responseJSON {
+            response in
+            switch response.result {
+            case .failure(_):
+                print("API failure to call")
+                break
+            default:
+                break
+            }
+        }
+        sendPasswordView.isHidden = true
+        forgetPasswordView.isHidden = true
     }
     
     func resendVerification(mobile: String) {

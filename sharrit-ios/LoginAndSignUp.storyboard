@@ -131,6 +131,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p56-ee-muR">
                                                 <rect key="frame" x="0.0" y="8.3333333333333712" width="289.66666666666669" height="30"/>
                                                 <state key="normal" title="Forgotten Password?"/>
+                                                <connections>
+                                                    <action selector="forgetPasswordBtnTapped:" destination="c89-ed-Ev1" eventType="touchUpInside" id="JGC-0s-fmJ"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -200,11 +203,100 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HPb-p2-a3l" userLabel="Forget Password View">
+                                <rect key="frame" x="10" y="74" width="394" height="652"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="arE-4u-sjl">
+                                        <rect key="frame" x="41.666666666666657" y="289.33333333333331" width="310.66666666666663" height="73.333333333333371"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We have sent you a SMS containing your new password. Cheers!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gst-0Y-rHk">
+                                                <rect key="frame" x="0.0" y="0.0" width="310.66666666666663" height="40.666666666666686"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="TpD-I0-6NN">
+                                                <rect key="frame" x="0.0" y="50.666666666666686" width="310.66666666666663" height="22.666666666666686"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yeP-l4-E8c" userLabel="Dismiss">
+                                                        <rect key="frame" x="0.0" y="0.0" width="310.66666666666663" height="22.666666666666686"/>
+                                                        <state key="normal" title="Dismiss"/>
+                                                        <connections>
+                                                            <action selector="dismissForgetPassword:" destination="c89-ed-Ev1" eventType="touchUpInside" id="Ppc-RR-Jlz"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="Gst-0Y-rHk" firstAttribute="top" secondItem="arE-4u-sjl" secondAttribute="top" id="97b-Js-B9v"/>
+                                            <constraint firstItem="TpD-I0-6NN" firstAttribute="leading" secondItem="arE-4u-sjl" secondAttribute="leading" id="JNQ-y9-E6B"/>
+                                            <constraint firstAttribute="trailing" secondItem="Gst-0Y-rHk" secondAttribute="trailing" id="Q3u-Rt-PC4"/>
+                                            <constraint firstItem="TpD-I0-6NN" firstAttribute="top" secondItem="Gst-0Y-rHk" secondAttribute="bottom" constant="10" id="QND-CA-RCS"/>
+                                            <constraint firstItem="Gst-0Y-rHk" firstAttribute="leading" secondItem="arE-4u-sjl" secondAttribute="leading" id="Vdm-Jg-Oz3"/>
+                                            <constraint firstAttribute="bottom" secondItem="TpD-I0-6NN" secondAttribute="bottom" id="hi1-Mw-xxE"/>
+                                            <constraint firstAttribute="trailing" secondItem="TpD-I0-6NN" secondAttribute="trailing" id="u4V-wz-wGi"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PmY-Rh-ZvM">
+                                        <rect key="frame" x="49" y="293.33333333333331" width="295.33333333333331" height="65.333333333333371"/>
+                                        <subviews>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Mobile No." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EJ8-Ak-a1H">
+                                                <rect key="frame" x="0.0" y="0.0" width="295.33333333333331" height="30"/>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="LpB-E7-oKU">
+                                                <rect key="frame" x="0.0" y="40" width="295.33333333333331" height="25.333333333333371"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tKP-Jz-ran">
+                                                        <rect key="frame" x="0.0" y="0.0" width="147.66666666666666" height="25.333333333333371"/>
+                                                        <state key="normal" title="Send"/>
+                                                        <connections>
+                                                            <action selector="sendPasswordBtnTapped:" destination="c89-ed-Ev1" eventType="touchUpInside" id="gpC-nT-N79"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DK2-uc-fcH">
+                                                        <rect key="frame" x="147.66666666666669" y="0.0" width="147.66666666666669" height="25.333333333333371"/>
+                                                        <state key="normal" title="Dismiss"/>
+                                                        <connections>
+                                                            <action selector="dismissForgetView:" destination="c89-ed-Ev1" eventType="touchUpInside" id="BEc-Sb-2q4"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="LpB-E7-oKU" secondAttribute="trailing" id="0d9-D1-sUQ"/>
+                                            <constraint firstItem="EJ8-Ak-a1H" firstAttribute="top" secondItem="PmY-Rh-ZvM" secondAttribute="top" id="GZU-QK-vWz"/>
+                                            <constraint firstItem="LpB-E7-oKU" firstAttribute="top" secondItem="EJ8-Ak-a1H" secondAttribute="bottom" constant="10" id="Ik9-Hh-cPj"/>
+                                            <constraint firstAttribute="bottom" secondItem="LpB-E7-oKU" secondAttribute="bottom" id="e97-q6-Dda"/>
+                                            <constraint firstItem="EJ8-Ak-a1H" firstAttribute="leading" secondItem="PmY-Rh-ZvM" secondAttribute="leading" id="hLj-n5-KdV"/>
+                                            <constraint firstAttribute="trailing" secondItem="EJ8-Ak-a1H" secondAttribute="trailing" id="l2t-ZA-DKv"/>
+                                            <constraint firstItem="LpB-E7-oKU" firstAttribute="leading" secondItem="PmY-Rh-ZvM" secondAttribute="leading" id="wwG-z9-Ixi"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="PmY-Rh-ZvM" firstAttribute="centerY" secondItem="HPb-p2-a3l" secondAttribute="centerY" id="3eZ-5w-nCO"/>
+                                    <constraint firstItem="PmY-Rh-ZvM" firstAttribute="width" secondItem="HPb-p2-a3l" secondAttribute="width" multiplier="0.75" id="3wG-P7-7Bd"/>
+                                    <constraint firstItem="arE-4u-sjl" firstAttribute="centerX" secondItem="HPb-p2-a3l" secondAttribute="centerX" id="EVF-Nf-Kfn"/>
+                                    <constraint firstItem="arE-4u-sjl" firstAttribute="centerY" secondItem="HPb-p2-a3l" secondAttribute="centerY" id="YdK-F9-10v"/>
+                                    <constraint firstItem="PmY-Rh-ZvM" firstAttribute="centerX" secondItem="HPb-p2-a3l" secondAttribute="centerX" id="YxZ-1X-PEK"/>
+                                    <constraint firstItem="PmY-Rh-ZvM" firstAttribute="height" secondItem="HPb-p2-a3l" secondAttribute="height" multiplier="0.1" id="hUo-b1-YP1"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="lw7-f1-d91" firstAttribute="top" secondItem="ixM-uB-KWH" secondAttribute="bottom" constant="25" id="1B6-oI-EPA"/>
+                            <constraint firstItem="arE-4u-sjl" firstAttribute="width" secondItem="nJR-2o-HaM" secondAttribute="width" multiplier="0.75" id="3Jc-Jd-q9j"/>
                             <constraint firstItem="M9L-Ue-uKy" firstAttribute="leading" secondItem="KHH-Yh-FvD" secondAttribute="leading" id="4nw-7F-er6"/>
+                            <constraint firstItem="HPb-p2-a3l" firstAttribute="trailing" secondItem="l13-OL-Vbo" secondAttribute="trailing" id="5yd-PG-VGT"/>
                             <constraint firstItem="Klz-lQ-IOK" firstAttribute="leading" secondItem="nJR-2o-HaM" secondAttribute="leadingMargin" constant="25" id="66g-G9-euN"/>
                             <constraint firstItem="M9L-Ue-uKy" firstAttribute="trailing" secondItem="KHH-Yh-FvD" secondAttribute="trailing" id="7fH-dp-lS4"/>
                             <constraint firstAttribute="trailing" secondItem="l13-OL-Vbo" secondAttribute="trailing" constant="10" id="ByK-yw-JfV"/>
@@ -213,12 +305,15 @@
                             <constraint firstItem="ixM-uB-KWH" firstAttribute="top" secondItem="KHH-Yh-FvD" secondAttribute="bottom" constant="50" id="EH5-zt-BH4"/>
                             <constraint firstItem="F5U-id-gSW" firstAttribute="top" secondItem="l13-OL-Vbo" secondAttribute="top" id="FF4-Gf-EIb"/>
                             <constraint firstItem="ixM-uB-KWH" firstAttribute="leading" secondItem="KHH-Yh-FvD" secondAttribute="leading" id="GB8-V4-XG0"/>
+                            <constraint firstItem="HPb-p2-a3l" firstAttribute="bottom" secondItem="l13-OL-Vbo" secondAttribute="bottom" id="GyP-8a-TN9"/>
                             <constraint firstItem="l13-OL-Vbo" firstAttribute="top" secondItem="67W-3i-RUe" secondAttribute="bottom" constant="10" id="JJY-2m-BtT"/>
                             <constraint firstItem="sjW-Nm-95m" firstAttribute="top" secondItem="lw7-f1-d91" secondAttribute="bottom" constant="50" id="KXp-WU-l87"/>
                             <constraint firstItem="KHH-Yh-FvD" firstAttribute="leading" secondItem="Klz-lQ-IOK" secondAttribute="leading" id="LJR-aD-mBG"/>
                             <constraint firstItem="lw7-f1-d91" firstAttribute="centerX" secondItem="nJR-2o-HaM" secondAttribute="centerX" id="Qs6-0v-K5a"/>
+                            <constraint firstItem="arE-4u-sjl" firstAttribute="height" secondItem="nJR-2o-HaM" secondAttribute="height" multiplier="0.1" id="R1i-cH-hES"/>
                             <constraint firstItem="sjW-Nm-95m" firstAttribute="top" secondItem="4f0-OI-RIK" secondAttribute="bottom" id="REv-hj-HbL"/>
                             <constraint firstItem="M9L-Ue-uKy" firstAttribute="top" secondItem="KHH-Yh-FvD" secondAttribute="bottom" constant="5" id="RM0-RT-DIe"/>
+                            <constraint firstItem="HPb-p2-a3l" firstAttribute="leading" secondItem="l13-OL-Vbo" secondAttribute="leading" id="RWs-TC-m7v"/>
                             <constraint firstAttribute="trailing" secondItem="4f0-OI-RIK" secondAttribute="trailing" id="bri-dP-EJd"/>
                             <constraint firstItem="4f0-OI-RIK" firstAttribute="top" secondItem="67W-3i-RUe" secondAttribute="bottom" id="equ-Hs-7NB"/>
                             <constraint firstItem="0EE-yV-wRW" firstAttribute="centerX" secondItem="nJR-2o-HaM" secondAttribute="centerX" id="fvt-vQ-MsV"/>
@@ -228,6 +323,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="Klz-lQ-IOK" secondAttribute="trailing" constant="25" id="ivM-4I-WEn"/>
                             <constraint firstItem="Klz-lQ-IOK" firstAttribute="top" secondItem="0EE-yV-wRW" secondAttribute="bottom" constant="75" id="j52-c4-fzh"/>
                             <constraint firstItem="0EE-yV-wRW" firstAttribute="height" secondItem="nJR-2o-HaM" secondAttribute="height" multiplier="0.25" id="ky1-FZ-yBV"/>
+                            <constraint firstItem="HPb-p2-a3l" firstAttribute="top" secondItem="l13-OL-Vbo" secondAttribute="top" id="mJT-TX-Lla"/>
                             <constraint firstItem="sjW-Nm-95m" firstAttribute="top" secondItem="l13-OL-Vbo" secondAttribute="bottom" constant="10" id="scb-Ui-aiy"/>
                             <constraint firstItem="lw7-f1-d91" firstAttribute="width" secondItem="nJR-2o-HaM" secondAttribute="width" multiplier="0.7" id="tkm-cy-y7f"/>
                             <constraint firstItem="KHH-Yh-FvD" firstAttribute="trailing" secondItem="Klz-lQ-IOK" secondAttribute="trailing" id="vhp-92-oXY"/>
@@ -239,8 +335,12 @@
                     <navigationItem key="navigationItem" id="Nlx-6O-gNU"/>
                     <connections>
                         <outlet property="errorLabel" destination="M9L-Ue-uKy" id="uba-ho-nbE"/>
+                        <outlet property="forgetNo" destination="EJ8-Ak-a1H" id="P0k-fg-Xpd"/>
+                        <outlet property="forgetPasswordView" destination="HPb-p2-a3l" id="Ola-dp-wYP"/>
                         <outlet property="mobileNoTxt" destination="Klz-lQ-IOK" id="p6p-uV-Wam"/>
                         <outlet property="passwordTxt" destination="KHH-Yh-FvD" id="TuC-f0-J8D"/>
+                        <outlet property="sendNoView" destination="PmY-Rh-ZvM" id="XeF-RQ-iHV"/>
+                        <outlet property="sendPasswordView" destination="arE-4u-sjl" id="CKu-2Q-HVD"/>
                         <outlet property="verificationView" destination="F5U-id-gSW" id="dFg-fM-NFs"/>
                         <segue destination="SXz-DA-802" kind="show" identifier="GoBackMain" id="aCn-Ru-WyN"/>
                     </connections>
@@ -496,6 +596,7 @@
                         <outlet property="mobileTxt" destination="2KB-g7-poC" id="qTH-sz-Wno"/>
                         <outlet property="passwordError" destination="BKe-fb-VIg" id="vr0-e7-S0H"/>
                         <outlet property="passwordTxt" destination="fVy-no-BL4" id="Ie4-SY-laE"/>
+                        <outlet property="verificationLabel" destination="dvQ-ij-PNe" id="5HX-xJ-9WC"/>
                         <outlet property="verificationView" destination="ThZ-du-E7h" id="n01-Ub-0yY"/>
                     </connections>
                 </viewController>
