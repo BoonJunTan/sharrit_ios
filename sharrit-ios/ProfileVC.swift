@@ -16,8 +16,10 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let tableViewIcons = [[#imageLiteral(resourceName: "Sharrit_Logo"), #imageLiteral(resourceName: "reputation")], [#imageLiteral(resourceName: "profile2"), #imageLiteral(resourceName: "help"), #imageLiteral(resourceName: "change_role"), #imageLiteral(resourceName: "logout")]]
     var tableViewItems = [["My Sharres", "Reputation"], ["Profile Settings", "Help Centre", "Switch to Sharror", "Logout"]]
 
+    @IBOutlet weak var profileLabe: UILabel!
     @IBOutlet weak var starRating: CosmosView!
     let fakeRatingDouble = 4.7
+    @IBOutlet weak var profileDate: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +31,27 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         self.navigationItem.rightBarButtonItem = navBarBubble
         starRating.rating = fakeRatingDouble
         starRating.settings.fillMode = .precise
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        profileLabe.text = (appDelegate.user?.firstName)! + " " + (appDelegate.user?.lastName)!
+        
+        // Get user profile creation date
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = NSTimeZone(abbreviation: "GMT+08")! as TimeZone
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+        let currentDate = Date()
+        let currentDateString = dateFormatter.string(from: currentDate)
+        let todayDate = dateFormatter.date(from: currentDateString)
+        
+        let dateFormatter2 = DateFormatter()
+        dateFormatter2.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
+        let endDate = dateFormatter2.date(from: (appDelegate.user?.createDate)!)
+        
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.day, .weekOfMonth]
+        formatter.unitsStyle = .full
+        profileDate.text = formatter.string(from: endDate!, to: todayDate!)
         
         tableView.delegate = self
         tableView.dataSource = self

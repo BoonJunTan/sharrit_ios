@@ -78,13 +78,13 @@
                                                     <rect key="frame" x="0.0" y="42.5" width="247.5" height="11"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timer" translatesAutoresizingMaskIntoConstraints="NO" id="6GD-Cl-s7I">
-                                                            <rect key="frame" x="0.0" y="2" width="8" height="8.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="11" height="11"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="6GD-Cl-s7I" secondAttribute="height" multiplier="1:1" id="4dm-h7-ep6"/>
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1d" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DLr-rW-4FW">
-                                                            <rect key="frame" x="13" y="-3.5" width="16" height="18"/>
+                                                            <rect key="frame" x="16" y="-3.5" width="16" height="18"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -95,7 +95,7 @@
                                                         <constraint firstItem="6GD-Cl-s7I" firstAttribute="leading" secondItem="Udv-3v-LPg" secondAttribute="leading" id="Hp7-44-fHz"/>
                                                         <constraint firstItem="6GD-Cl-s7I" firstAttribute="centerY" secondItem="Udv-3v-LPg" secondAttribute="centerY" id="QI8-ao-Pov"/>
                                                         <constraint firstItem="DLr-rW-4FW" firstAttribute="centerY" secondItem="Udv-3v-LPg" secondAttribute="centerY" id="QSE-wc-PiE"/>
-                                                        <constraint firstItem="6GD-Cl-s7I" firstAttribute="height" secondItem="Udv-3v-LPg" secondAttribute="height" multiplier="0.7" id="Rsg-7x-TYW"/>
+                                                        <constraint firstItem="6GD-Cl-s7I" firstAttribute="height" secondItem="Udv-3v-LPg" secondAttribute="height" id="Rsg-7x-TYW"/>
                                                         <constraint firstItem="DLr-rW-4FW" firstAttribute="leading" secondItem="6GD-Cl-s7I" secondAttribute="trailing" constant="5" id="stL-sW-U2G"/>
                                                     </constraints>
                                                 </view>

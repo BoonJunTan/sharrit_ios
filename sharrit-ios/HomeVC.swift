@@ -82,8 +82,12 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     }
     
     func checkIfUserLoggedIn() {
-        let isUserLoggedIn = UserDefaults.standard.bool(forKey: "isUserLoggedIn")
-        if (!isUserLoggedIn) {
+        // Need to call UserDefaults.standard.set(userInfoDict, forKey: "userInfo") instead
+        if let userInfo = UserDefaults.standard.object(forKey: "userInfo") as? [String: Any] {
+            let userAccount = User(userID: Int((userInfo["userId"] as? String)!)!, firstName: userInfo["firstName"] as! String, lastName: userInfo["lastName"] as! String, password: userInfo["password"] as! String, mobile: Int((userInfo["mobile"] as? String)!)!, accessToken: userInfo["accessToken"] as! String, createDate: userInfo["createDate"] as! String)
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.user = userAccount
+        } else {
             let mainStoryboard = UIStoryboard(name: "LoginAndSignUp" , bundle: nil)
             let loginVC = mainStoryboard.instantiateViewController(withIdentifier: "Login") as! LoginVC
             loginVC.modalTransitionStyle = .crossDissolve

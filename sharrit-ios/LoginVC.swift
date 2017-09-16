@@ -72,8 +72,6 @@ class LoginVC: UIViewController {
                     if let data = (response.result.value as? Dictionary<String, Any>) {
                         if let statusCode = data["status"] as? Int {
                             if statusCode == 1 {
-                                preferences.set(true, forKey: "isUserLoggedIn")
-                                
                                 if let value = response.result.value {
                                     var json = JSON(value)
                                     let userID = json["content"]["userId"].int!
@@ -94,8 +92,6 @@ class LoginVC: UIViewController {
                                     
                                     UserDefaults.standard.set(userInfoDict, forKey: "userInfo")
                                     UserDefaults.standard.synchronize()
-                                    
-                                    // For retrieving later on - UserDefaults.standard.object(forKey: "userInfo")
                                     
                                     // This is to pass around VC
                                     let userAccount = User(userID: userID, firstName: firstName, lastName: lastName, password: self.passwordTxt.text!, mobile: Int(self.mobileNoTxt.text!)!, accessToken: accessToken, createDate: createDate)

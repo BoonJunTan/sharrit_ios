@@ -231,6 +231,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="hjk-Gk-hD6"/>
                     <connections>
+                        <outlet property="profileDate" destination="PzR-Ap-gb7" id="hDs-YA-5dX"/>
+                        <outlet property="profileLabe" destination="CD0-N2-rQZ" id="BUe-M7-9gO"/>
                         <outlet property="starRating" destination="eDb-ZK-46f" id="bh9-sL-sOo"/>
                         <outlet property="tableView" destination="Ivk-ht-ZvZ" id="SW1-KE-DAi"/>
                     </connections>
