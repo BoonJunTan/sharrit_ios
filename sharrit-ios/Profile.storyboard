@@ -139,7 +139,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u4V-Xt-dY7">
                                         <rect key="frame" x="25" y="23" width="105" height="105"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sharrit_Logo" translatesAutoresizingMaskIntoConstraints="NO" id="Btj-QG-JMe">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_pic" translatesAutoresizingMaskIntoConstraints="NO" id="Btj-QG-JMe">
                                                 <rect key="frame" x="5" y="5" width="95" height="95"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </imageView>
@@ -243,8 +243,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Sharrit_Logo" width="461" height="611"/>
         <image name="profile" width="25" height="25"/>
+        <image name="profile_pic" width="100" height="100"/>
         <image name="timer" width="50" height="50"/>
     </resources>
 </document>

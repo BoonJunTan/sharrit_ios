@@ -13,8 +13,8 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
     let tableViewSection = ["", "SETTINGS"]
-    let tableViewIcons = [[#imageLiteral(resourceName: "Sharrit_Logo"), #imageLiteral(resourceName: "reputation")], [#imageLiteral(resourceName: "profile2"), #imageLiteral(resourceName: "help"), #imageLiteral(resourceName: "change_role"), #imageLiteral(resourceName: "logout")]]
-    var tableViewItems = [["My Sharres", "Reputation"], ["Profile Settings", "Help Centre", "Switch to Sharror", "Logout"]]
+    var tableViewIcons:[[UIImage]]!
+    var tableViewItems:[[String]]!
 
     @IBOutlet weak var profileLabe: UILabel!
     @IBOutlet weak var starRating: CosmosView!
@@ -53,6 +53,8 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         formatter.unitsStyle = .full
         profileDate.text = formatter.string(from: endDate!, to: todayDate!)
         
+        setupProfileBtn()
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView() // For Hiding away empty cell
@@ -61,6 +63,17 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func setupProfileBtn() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if (appDelegate.user?.role == .Sharrie) {
+            tableViewIcons = [[#imageLiteral(resourceName: "Sharrit_Logo"),#imageLiteral(resourceName: "reputation")], [#imageLiteral(resourceName: "profile2"), #imageLiteral(resourceName: "help"), #imageLiteral(resourceName: "change_role"), #imageLiteral(resourceName: "logout")]]
+            tableViewItems = [["My Sharres", "Reputation"], ["Profile Settings", "Help Centre", "Switch to Sharror", "Logout"]]
+        } else {
+            tableViewIcons = [[#imageLiteral(resourceName: "Sharrit_Logo"), #imageLiteral(resourceName: "business"),#imageLiteral(resourceName: "reputation")], [#imageLiteral(resourceName: "profile2"), #imageLiteral(resourceName: "help"), #imageLiteral(resourceName: "change_role"), #imageLiteral(resourceName: "logout")]]
+            tableViewItems = [["My Sharres", "Sharing Business", "Reputation"], ["Profile Settings", "Help Centre", "Switch to Sharrie", "Logout"]]
+        }
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -89,6 +102,12 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch tableViewItems[indexPath.section][indexPath.row] {
+        case "My Sharres":
+            break
+        case "Sharing Business":
+            break
+        case "Profile Settings":
+            break
         case "Switch to Sharror":
             tableViewItems[indexPath.section][indexPath.row] = "Switch to Sharrie"
             switchRole(newRole: .Sharror)
@@ -125,7 +144,9 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func switchRole(newRole: Role) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.user?.role = newRole
-        self.navigationController?.navigationBar.barTintColor = NavBarUI().getNavBar()
+        navigationController?.navigationBar.barTintColor = NavBarUI().getNavBar()
+        setupProfileBtn()
+        tableView.reloadData()
     }
     
     func logoutPressed() {

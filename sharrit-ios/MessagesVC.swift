@@ -30,6 +30,8 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         tableView.dataSource = self
         tableView.tableFooterView = UIView() // For Hiding away empty cell
         
+        self.navigationController?.navigationBar.barTintColor = NavBarUI().getNavBar()
+        
         chats.append(Message(id: "1", name: "Test"))
     }
     

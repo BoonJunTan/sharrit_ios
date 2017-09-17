@@ -15,9 +15,10 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     @IBOutlet weak var carouselView: ImageSlideshow!
     
     @IBOutlet weak var categoryCollectionView: UICollectionView!
-    var categoryImage = [#imageLiteral(resourceName: "category1"), #imageLiteral(resourceName: "category2"), #imageLiteral(resourceName: "category3"), #imageLiteral(resourceName: "category4"), #imageLiteral(resourceName: "category5"), #imageLiteral(resourceName: "category6")]
-    var categoryLabel = ["HOME APPLIANCES", "SPORTS EQUIPMENT", "WOMEN’S FASHION", "MEN’S FASHION", "TRAVEL ACCESSORIES", "TRANSPORT"]
-    
+    var categoryImage = [#imageLiteral(resourceName: "category1"), #imageLiteral(resourceName: "category2"), #imageLiteral(resourceName: "category3"), #imageLiteral(resourceName: "category4"), #imageLiteral(resourceName: "category5"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category6")]
+    //var categoryLabel = ["HOME APPLIANCES", "SPORTS EQUIPMENT", "WOMEN’S FASHION", "MEN’S FASHION", "TRAVEL ACCESSORIES", "TRANSPORT"]
+    var categoryLabel = ["Accessories", "Video, DVD, & Blu-ray", "Travel Accessories", "Transport", "Sports & Outdoors", "Services", "Pet Accessories", "Mobile & gadgets", "Men's Fashion", "Home Appliances", "Health & Personal Care", "Games & Hobbies", "Food & Beverages", "Design & Crafts", "Computers and Peripherals", "Books", "Bags", "Automotive", "Watches", "Women's Fashion"]
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
