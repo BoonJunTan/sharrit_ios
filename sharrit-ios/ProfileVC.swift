@@ -107,6 +107,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         case "Sharing Business":
             break
         case "Profile Settings":
+            self.performSegue(withIdentifier: "editProfile", sender: self)
             break
         case "Switch to Sharror":
             tableViewItems[indexPath.section][indexPath.row] = "Switch to Sharrie"
