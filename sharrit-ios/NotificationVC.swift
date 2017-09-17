@@ -23,6 +23,11 @@ class NotificationVC: UITableViewController {
         tableView.tableFooterView = UIView() // For Hiding away empty cell
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.barTintColor = NavBarUI().getNavBar()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

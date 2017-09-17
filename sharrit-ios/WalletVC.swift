@@ -33,6 +33,11 @@ class WalletVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
         walletView.layer.cornerRadius = 10
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.barTintColor = NavBarUI().getNavBar()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

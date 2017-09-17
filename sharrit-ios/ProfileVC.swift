@@ -91,11 +91,11 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         switch tableViewItems[indexPath.section][indexPath.row] {
         case "Switch to Sharror":
             tableViewItems[indexPath.section][indexPath.row] = "Switch to Sharrie"
-            switchRole()
+            switchRole(newRole: .Sharror)
             break
         case "Switch to Sharrie":
             tableViewItems[indexPath.section][indexPath.row] = "Switch to Sharror"
-            switchRole()
+            switchRole(newRole: .Sharrie)
             break
         case "Logout":
             logoutPressed()
@@ -122,8 +122,10 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         })
     }
     
-    func switchRole() {
-        
+    func switchRole(newRole: Role) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.user?.role = newRole
+        self.navigationController?.navigationBar.barTintColor = NavBarUI().getNavBar()
     }
     
     func logoutPressed() {
