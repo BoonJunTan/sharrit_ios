@@ -12,5 +12,6 @@ target 'sharrit-ios' do
   pod 'JSQMessagesViewController'
   pod 'ImageSlideshow'
   pod 'SwiftyJSON'
+  pod 'CountryPickerSwift'
 
 end

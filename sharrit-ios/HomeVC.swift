@@ -8,6 +8,8 @@
 
 import UIKit
 import ImageSlideshow
+import Alamofire
+import SwiftyJSON
 
 class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
@@ -15,14 +17,15 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     @IBOutlet weak var carouselView: ImageSlideshow!
     
     @IBOutlet weak var categoryCollectionView: UICollectionView!
-    var categoryImage = [#imageLiteral(resourceName: "category1"), #imageLiteral(resourceName: "category2"), #imageLiteral(resourceName: "category3"), #imageLiteral(resourceName: "category4"), #imageLiteral(resourceName: "category5"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category6")]
-    //var categoryLabel = ["HOME APPLIANCES", "SPORTS EQUIPMENT", "WOMEN’S FASHION", "MEN’S FASHION", "TRAVEL ACCESSORIES", "TRANSPORT"]
-    var categoryLabel = ["Accessories", "Video, DVD, & Blu-ray", "Travel Accessories", "Transport", "Sports & Outdoors", "Services", "Pet Accessories", "Mobile & gadgets", "Men's Fashion", "Home Appliances", "Health & Personal Care", "Games & Hobbies", "Food & Beverages", "Design & Crafts", "Computers and Peripherals", "Books", "Bags", "Automotive", "Watches", "Women's Fashion"]
+    var categoryImage = [#imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "category5"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category2"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "category4"), #imageLiteral(resourceName: "category1"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "category3")]
+    var categoryLabel:[String] = []
         
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         checkIfUserLoggedIn()
+        
+        getCategoryDetails()
         
         searchBar = UISearchBar()
         searchBar.placeholder = setPlaceHolder(placeholder: "Search");
@@ -49,8 +52,28 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         // Dispose of any resources that can be recreated.
     }
     
+    func getCategoryDetails() {
+        let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/category/"
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+            response in
+            switch response.result {
+            case .success(_):
+                if let data = response.result.value {
+                    for (_, subJson) in JSON(data) {
+                        self.categoryLabel.append(subJson["categoryName"].description)
+                    }
+                    self.categoryCollectionView.reloadData()
+                }
+                break
+            case .failure(_):
+                print("Retrieve categories API failed")
+                break
+            }
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return categoryImage.count
+        return categoryLabel.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

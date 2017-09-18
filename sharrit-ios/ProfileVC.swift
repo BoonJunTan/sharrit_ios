@@ -151,7 +151,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func logoutPressed() {
-        UserDefaults.standard.removeObject(forKey: "isUserLoggedIn")
+        UserDefaults.standard.removeObject(forKey: "userInfo")
         
         let mainStoryboard = UIStoryboard(name: "LoginAndSignUp" , bundle: nil)
         let loginVC = mainStoryboard.instantiateViewController(withIdentifier: "Login") as! LoginVC

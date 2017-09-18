@@ -8,12 +8,20 @@
 
 import UIKit
 import Alamofire
+import CountryPicker
 
-class SignUpVC: UIViewController {
+class SignUpVC: UIViewController, CountryPickerDelegate {
 
     @IBOutlet weak var firstNameTxt: UITextField!
     @IBOutlet weak var lastNameTxt: UITextField!
     @IBOutlet weak var mobileTxt: UITextField!
+    
+    @IBOutlet weak var mobileCountryCodeBtn: SharritButton!
+    @IBOutlet weak var mobileCountryCode: CountryPicker!
+    @IBOutlet weak var mobileCountryView: UIView!
+    var currentCountry = "SG"
+    var currentSelectedCode = ""
+    
     @IBOutlet weak var passwordTxt: UITextField!
     @IBOutlet weak var verificationView: UIView!
     @IBOutlet weak var verificationLabel: UILabel!
@@ -51,6 +59,12 @@ class SignUpVC: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        // Setup default country code
+        mobileCountryCode.countryPickerDelegate = self
+        mobileCountryCode.showPhoneNumbers = true
+        mobileCountryCode.setCountry(currentCountry)
+        mobileCountryView.isHidden = true
+        
         verificationView.isHidden = true
         firstNameError.isHidden = true
         lastNameError.isHidden = true
@@ -61,6 +75,24 @@ class SignUpVC: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func countryPhoneCodePicker(_ picker: CountryPicker, didSelectCountryWithName name: String, countryCode: String, phoneCode: String, flag: UIImage) {
+        currentSelectedCode = phoneCode
+    }
+    
+    @IBAction func changeCountryBtnPressed(_ sender: SharritButton) {
+        mobileCountryView.isHidden = false
+    }
+    
+    @IBAction func countryCancelBtn(_ sender: UIButton) {
+        mobileCountryCode.setCountry(currentCountry)
+        mobileCountryView.isHidden = true
+    }
+    
+    @IBAction func countryDoneBtn(_ sender: UIButton) {
+        mobileCountryCodeBtn.setTitle(currentSelectedCode, for: .normal)
+        mobileCountryView.isHidden = true
     }
     
     @IBAction func signUpBtnPressed(_ sender: SharritButton) {
@@ -81,7 +113,10 @@ class SignUpVC: UIViewController {
         if !firstNameEmpty && !lastNameEmpty && !mobileEmpty && !passwordEmpty {
             verificationView.isHidden = false
             
-            let signUpData: [String: Any] = ["firstName": firstNameTxt.text, "lastName": lastNameTxt.text, "phoneNumber": mobileTxt.text, "password": passwordTxt.text]
+            var mobileCountryCode = mobileCountryCodeBtn.titleLabel?.text
+            mobileCountryCode?.remove(at: (mobileCountryCode?.startIndex)!)
+            
+            let signUpData: [String: Any] = ["firstName": firstNameTxt.text, "lastName": lastNameTxt.text, "phoneNumber": mobileCountryCode! + mobileTxt.text!, "password": passwordTxt.text]
             
             let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/user"
             

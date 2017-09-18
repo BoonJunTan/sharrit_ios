@@ -9,14 +9,21 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import CountryPicker
 
-class LoginVC: UIViewController {
+class LoginVC: UIViewController, CountryPickerDelegate {
     
     @IBOutlet weak var mobileNoTxt: UITextField!
     @IBOutlet weak var passwordTxt: UITextField!
     @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var verificationView: UIView!
     @IBOutlet weak var resendVerfication: UIButton!
+    
+    @IBOutlet weak var mobileCountryBtn: SharritButton!
+    @IBOutlet weak var mobileCountryCode: CountryPicker!
+    @IBOutlet weak var mobileCountryView: UIView!
+    var currentCountry = "SG"
+    var currentSelectedCode = ""
     
     @IBOutlet weak var forgetPasswordView: UIView! // First View
     
@@ -33,6 +40,11 @@ class LoginVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        mobileCountryCode.countryPickerDelegate = self
+        mobileCountryCode.showPhoneNumbers = true
+        mobileCountryCode.setCountry(currentCountry)
+        mobileCountryView.isHidden = true
+        
         errorLabel.isHidden = true
         verificationView.isHidden = true
         forgetPasswordView.isHidden = true
@@ -44,6 +56,24 @@ class LoginVC: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func countryPhoneCodePicker(_ picker: CountryPicker, didSelectCountryWithName name: String, countryCode: String, phoneCode: String, flag: UIImage) {
+        currentSelectedCode = phoneCode
+    }
+    
+    @IBAction func mobileCountryCodeBtn(_ sender: SharritButton) {
+        mobileCountryView.isHidden = false
+    }
+    
+    @IBAction func mobileCancelBtn(_ sender: UIButton) {
+        mobileCountryCode.setCountry(currentCountry)
+        mobileCountryView.isHidden = true
+    }
+    
+    @IBAction func mobileDoneBtn(_ sender: UIButton) {
+        mobileCountryBtn.setTitle(currentSelectedCode, for: .normal)
+        mobileCountryView.isHidden = true
     }
     
     @IBAction func dismissBtnPressed(_ sender: UIButton) {
