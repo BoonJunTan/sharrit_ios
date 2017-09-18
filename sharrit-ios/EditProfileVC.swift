@@ -13,6 +13,7 @@ class EditProfileVC: UIViewController {
     
     @IBOutlet weak var userFirstName: UITextField!
     @IBOutlet weak var userLastName: UITextField!
+    @IBOutlet weak var succesfulUpdateView: UIView!
     
     // Not available at the moment
     @IBOutlet weak var emailView: UIView!
@@ -21,6 +22,7 @@ class EditProfileVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         emailView.isHidden = true
+        succesfulUpdateView.isHidden = true
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         userFirstName.text = appDelegate.user?.firstName
@@ -37,7 +39,8 @@ class EditProfileVC: UIViewController {
         
         let signUpData: [String: Any] = ["firstName": userFirstName.text, "lastName": userLastName.text]
         
-        let url = "http://localhost:5000/api/user/1"// + String(describing: appDelegate.user!.userID)
+        let url = "http://localhost:5000/api/user/1"
+        // let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/user" + String(describing: appDelegate.user!.userID)
         
         Alamofire.request(url, method: .put, parameters: signUpData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in
@@ -55,7 +58,15 @@ class EditProfileVC: UIViewController {
                     UserDefaults.standard.set(userInfo, forKey: "userInfo")
                     UserDefaults.standard.synchronize()
                 }
-                self.navigationController?.popViewController(animated: true)
+                self.succesfulUpdateView.isHidden = false
+                
+                UIView.animate(withDuration: 5, animations: {
+                    self.succesfulUpdateView.alpha = 0
+                }) { (finished) in
+                    self.succesfulUpdateView.alpha = 1
+                    self.succesfulUpdateView.isHidden = true
+                    self.navigationController?.popViewController(animated: true)
+                }
                 break
             case .failure(_):
                 print("Edit Profile API failed")
