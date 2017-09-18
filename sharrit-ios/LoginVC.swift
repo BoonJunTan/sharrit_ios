@@ -88,8 +88,11 @@ class LoginVC: UIViewController, CountryPickerDelegate {
         errorLabel.text = "*Mobile and password are required"
         loginEmpty = ((mobileNoTxt.text?.isEmpty)! || (passwordTxt.text?.isEmpty)!)
         
+        var mobileCountryCode = mobileCountryBtn.titleLabel?.text
+        mobileCountryCode?.remove(at: (mobileCountryCode?.startIndex)!)
+        // Remember to add in this in future
+        
         if !loginEmpty {
-            let preferences = UserDefaults.standard
             let signUpData: [String: Any] = ["phoneNumber": mobileNoTxt.text, "password": passwordTxt.text]
             
             let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/auth/userlogin"
