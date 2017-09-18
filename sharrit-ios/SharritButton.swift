@@ -18,7 +18,7 @@ class SharritButton: UIButton {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.backgroundColor = Colours.Blue.sharritBlue
-        self.setTitleColor(UIColor.black, for: .normal)
+        self.setTitleColor(UIColor.white, for: .normal)
     }
     
     @IBInspectable var isRounded: Bool = false {

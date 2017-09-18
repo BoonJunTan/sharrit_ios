@@ -33,7 +33,6 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         starRating.settings.fillMode = .precise
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        profileLabe.text = (appDelegate.user?.firstName)! + " " + (appDelegate.user?.lastName)!
         
         // Get user profile creation date
         let dateFormatter = DateFormatter()
@@ -63,6 +62,12 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        profileLabe.text = (appDelegate.user?.firstName)! + " " + (appDelegate.user?.lastName)!
     }
     
     func setupProfileBtn() {

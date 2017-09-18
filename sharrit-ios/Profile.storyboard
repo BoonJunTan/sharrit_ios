@@ -255,22 +255,22 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YFZ-1s-i59">
-                                <rect key="frame" x="37.5" y="200.5" width="300" height="266.5"/>
+                                <rect key="frame" x="37.5" y="167" width="300" height="333.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="2xy-Bb-pjI">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="266.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="333.5"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lae-sI-2sZ">
-                                                <rect key="frame" x="0.0" y="0.0" width="300" height="36"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lae-sI-2sZ" customClass="UIViewWithBorder" customModule="sharrit_ios" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="300" height="39"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile2" translatesAutoresizingMaskIntoConstraints="NO" id="nWa-BQ-vr9">
-                                                        <rect key="frame" x="10" y="9" width="18.5" height="18"/>
+                                                        <rect key="frame" x="10" y="10" width="20" height="19.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="nWa-BQ-vr9" secondAttribute="height" multiplier="1:1" id="pvk-vE-YSa"/>
                                                         </constraints>
                                                     </imageView>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1G0-pA-Vd5">
-                                                        <rect key="frame" x="38.5" y="3" width="251.5" height="30"/>
+                                                        <rect key="frame" x="40" y="4.5" width="250" height="30"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
@@ -285,18 +285,29 @@
                                                     <constraint firstItem="nWa-BQ-vr9" firstAttribute="leading" secondItem="lae-sI-2sZ" secondAttribute="leading" constant="10" id="h2Q-t8-sq6"/>
                                                     <constraint firstItem="1G0-pA-Vd5" firstAttribute="leading" secondItem="nWa-BQ-vr9" secondAttribute="trailing" constant="10" id="jla-ZO-GTD"/>
                                                 </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" red="0.26666666666666666" green="0.69411764705882351" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dWE-QM-gKh">
-                                                <rect key="frame" x="0.0" y="46" width="300" height="36"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dWE-QM-gKh" customClass="UIViewWithBorder" customModule="sharrit_ios" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="49" width="300" height="39"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile2" translatesAutoresizingMaskIntoConstraints="NO" id="kF3-mp-Ftv">
-                                                        <rect key="frame" x="10" y="8" width="19" height="18.5"/>
+                                                        <rect key="frame" x="10" y="9" width="19.5" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="kF3-mp-Ftv" secondAttribute="height" multiplier="1:1" id="vH8-dl-EZ7"/>
                                                         </constraints>
                                                     </imageView>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g5R-jW-Phs">
-                                                        <rect key="frame" x="39" y="2.5" width="251" height="30"/>
+                                                        <rect key="frame" x="39.5" y="4.5" width="250.5" height="30"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
@@ -311,18 +322,29 @@
                                                     <constraint firstItem="g5R-jW-Phs" firstAttribute="leading" secondItem="kF3-mp-Ftv" secondAttribute="trailing" constant="10" id="fld-t9-hWj"/>
                                                     <constraint firstItem="g5R-jW-Phs" firstAttribute="centerY" secondItem="dWE-QM-gKh" secondAttribute="centerY" id="vVM-zd-YJx"/>
                                                 </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" red="0.2666666667" green="0.69411764710000001" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f5I-pp-VU0">
-                                                <rect key="frame" x="0.0" y="92" width="300" height="36.5"/>
+                                                <rect key="frame" x="0.0" y="98" width="300" height="39"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="email" translatesAutoresizingMaskIntoConstraints="NO" id="myv-td-uWK">
-                                                        <rect key="frame" x="10" y="9" width="18.5" height="18"/>
+                                                        <rect key="frame" x="10" y="9.5" width="19.5" height="19.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="myv-td-uWK" secondAttribute="height" multiplier="1:1" id="Mss-Za-HRv"/>
                                                         </constraints>
                                                     </imageView>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email (Not available currently)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lEe-Mb-lJ9">
-                                                        <rect key="frame" x="38.5" y="2.5" width="251.5" height="30"/>
+                                                        <rect key="frame" x="39.5" y="4.5" width="250.5" height="30"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
@@ -338,8 +360,12 @@
                                                     <constraint firstItem="lEe-Mb-lJ9" firstAttribute="leading" secondItem="myv-td-uWK" secondAttribute="trailing" constant="10" id="ntt-cm-ZJz"/>
                                                 </constraints>
                                             </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xPy-Vw-L0s">
+                                                <rect key="frame" x="0.0" y="147" width="300" height="39.5"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Rq-go-Pne" customClass="SharritButton" customModule="sharrit_ios" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="138.5" width="300" height="36"/>
+                                                <rect key="frame" x="0.0" y="196.5" width="300" height="39"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <state key="normal" title="SAVE"/>
                                                 <userDefinedRuntimeAttributes>
@@ -348,13 +374,12 @@
                                                         <real key="value" value="15"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="saveBtnTapped:" destination="U1V-k9-Wzg" eventType="touchUpInside" id="LGn-cu-PUa"/>
+                                                </connections>
                                             </button>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="STB-s5-Qnl">
-                                                <rect key="frame" x="0.0" y="184.5" width="300" height="36"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z99-t3-Jg2" customClass="SharritButton" customModule="sharrit_ios" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="230.5" width="300" height="36"/>
+                                                <rect key="frame" x="0.0" y="245.5" width="300" height="39"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <state key="normal" title="CHANGE PASSWORD"/>
                                                 <userDefinedRuntimeAttributes>
@@ -366,6 +391,17 @@
                                                 <connections>
                                                     <segue destination="vHl-LT-cKq" kind="show" id="76C-wV-vAp"/>
                                                 </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yuz-VO-ZkW" customClass="SharritButton" customModule="sharrit_ios" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="294.5" width="300" height="39"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <state key="normal" title="DEACTIVATE ACCOUNT"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isRounded" value="YES"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="15"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -382,11 +418,17 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="YFZ-1s-i59" firstAttribute="centerY" secondItem="89s-rm-Xe7" secondAttribute="centerY" id="5sC-Uz-VU2"/>
-                            <constraint firstItem="YFZ-1s-i59" firstAttribute="height" secondItem="89s-rm-Xe7" secondAttribute="height" multiplier="0.4" id="AkJ-gN-QeE"/>
+                            <constraint firstItem="YFZ-1s-i59" firstAttribute="height" secondItem="89s-rm-Xe7" secondAttribute="height" multiplier="0.5" id="AkJ-gN-QeE"/>
                             <constraint firstItem="YFZ-1s-i59" firstAttribute="width" secondItem="89s-rm-Xe7" secondAttribute="width" multiplier="0.8" id="G8a-vE-SUc"/>
                             <constraint firstItem="YFZ-1s-i59" firstAttribute="centerX" secondItem="89s-rm-Xe7" secondAttribute="centerX" id="IiK-4G-Fwv"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="emailView" destination="f5I-pp-VU0" id="Qsz-Dw-Fo9"/>
+                        <outlet property="userEmail" destination="lEe-Mb-lJ9" id="3vY-8w-dLA"/>
+                        <outlet property="userFirstName" destination="1G0-pA-Vd5" id="ayg-BT-UzI"/>
+                        <outlet property="userLastName" destination="g5R-jW-Phs" id="iR0-K9-a6y"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yle-pj-xlI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -410,17 +452,17 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="SUS-B4-Xrh">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="266.5"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pew-id-5RN">
-                                                <rect key="frame" x="0.0" y="0.0" width="300" height="59"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pew-id-5RN" customClass="UIViewWithBorder" customModule="sharrit_ios" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="300" height="45.5"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="password" translatesAutoresizingMaskIntoConstraints="NO" id="JgM-mG-MYN">
-                                                        <rect key="frame" x="10" y="14.5" width="29.5" height="29.5"/>
+                                                        <rect key="frame" x="10" y="11" width="22.5" height="22.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="JgM-mG-MYN" secondAttribute="height" multiplier="1:1" id="fWt-YR-1dm"/>
                                                         </constraints>
                                                     </imageView>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Old Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UnC-mU-7Ku">
-                                                        <rect key="frame" x="49.5" y="14.5" width="240.5" height="30"/>
+                                                        <rect key="frame" x="42.5" y="7.5" width="247.5" height="30"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
@@ -435,18 +477,29 @@
                                                     <constraint firstItem="JgM-mG-MYN" firstAttribute="centerY" secondItem="Pew-id-5RN" secondAttribute="centerY" id="i4q-Cm-0ae"/>
                                                     <constraint firstItem="JgM-mG-MYN" firstAttribute="height" secondItem="Pew-id-5RN" secondAttribute="height" multiplier="0.5" id="lUJ-ax-Q3m"/>
                                                 </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" red="0.2666666667" green="0.69411764710000001" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="59c-4w-WgJ">
-                                                <rect key="frame" x="0.0" y="69" width="300" height="59.5"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="59c-4w-WgJ" customClass="UIViewWithBorder" customModule="sharrit_ios" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="55.5" width="300" height="45"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="password" translatesAutoresizingMaskIntoConstraints="NO" id="kja-p4-6g8">
-                                                        <rect key="frame" x="10" y="16" width="29" height="29"/>
+                                                        <rect key="frame" x="10" y="12.5" width="22" height="21.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="kja-p4-6g8" secondAttribute="height" multiplier="1:1" id="KFR-8L-IgO"/>
                                                         </constraints>
                                                     </imageView>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q1e-6Z-A43">
-                                                        <rect key="frame" x="49" y="15" width="241" height="30"/>
+                                                        <rect key="frame" x="42" y="7.5" width="248" height="30"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
@@ -461,18 +514,29 @@
                                                     <constraint firstItem="kja-p4-6g8" firstAttribute="leading" secondItem="59c-4w-WgJ" secondAttribute="leading" constant="10" id="XR0-4Q-CeR"/>
                                                     <constraint firstItem="kja-p4-6g8" firstAttribute="centerY" secondItem="59c-4w-WgJ" secondAttribute="centerY" id="fzN-dM-G9R"/>
                                                 </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" red="0.2666666667" green="0.69411764710000001" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="elm-1w-lSJ">
-                                                <rect key="frame" x="0.0" y="138.5" width="300" height="59"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="elm-1w-lSJ" customClass="UIViewWithBorder" customModule="sharrit_ios" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="110.5" width="300" height="45.5"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="password" translatesAutoresizingMaskIntoConstraints="NO" id="9Ae-Ra-AS3">
-                                                        <rect key="frame" x="10" y="14.5" width="30" height="29.5"/>
+                                                        <rect key="frame" x="10" y="11" width="23" height="23"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="9Ae-Ra-AS3" secondAttribute="height" multiplier="1:1" id="9e8-Uw-Gv4"/>
                                                         </constraints>
                                                     </imageView>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5zG-Pj-YoY">
-                                                        <rect key="frame" x="50" y="14.5" width="240" height="30"/>
+                                                        <rect key="frame" x="43" y="8" width="247" height="30"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
@@ -487,9 +551,24 @@
                                                     <constraint firstItem="5zG-Pj-YoY" firstAttribute="leading" secondItem="9Ae-Ra-AS3" secondAttribute="trailing" constant="10" id="jh5-pE-DNb"/>
                                                     <constraint firstItem="9Ae-Ra-AS3" firstAttribute="leading" secondItem="elm-1w-lSJ" secondAttribute="leading" constant="10" id="xJ5-si-bxR"/>
                                                 </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" red="0.2666666667" green="0.69411764710000001" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gCs-y2-dfx">
+                                                <rect key="frame" x="0.0" y="166" width="300" height="45"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S3u-8j-JJd" customClass="SharritButton" customModule="sharrit_ios" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="207.5" width="300" height="59"/>
+                                                <rect key="frame" x="0.0" y="221" width="300" height="45.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <state key="normal" title="SAVE"/>
                                                 <userDefinedRuntimeAttributes>
