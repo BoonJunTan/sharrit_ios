@@ -62,7 +62,7 @@ class LoginVC: UIViewController {
             let preferences = UserDefaults.standard
             let signUpData: [String: Any] = ["phoneNumber": mobileNoTxt.text, "password": passwordTxt.text]
             
-            let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/login"
+            let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/auth/userlogin"
             
             Alamofire.request(url, method: .post, parameters: signUpData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
                 response in
@@ -78,7 +78,7 @@ class LoginVC: UIViewController {
                                     let firstName = json["content"]["firstName"].string!
                                     let lastName = json["content"]["lastName"].string!
                                     let accessToken = json["content"]["accessToken"].string!
-                                    let createDate = json["content"]["createDate"].string!
+                                    let createDate = json["content"]["dateCreated"].string!
                                     
                                     json["content"]["mobile"].stringValue = self.mobileNoTxt.text!
                                     json["content"]["password"].stringValue = self.passwordTxt.text!
@@ -150,7 +150,7 @@ class LoginVC: UIViewController {
     }
     
     func resendVerification(mobile: String) {
-        let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/user/" + mobile
+        let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/auth/" + mobile
         
         Alamofire.request(url, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in
