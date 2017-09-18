@@ -6,4 +6,4 @@ Setup procedure
 2. "pod setup --verbose"
 3. "cd" to a path that you want to clone this repo and run "git clone this repo"
 4. "pod install"
-5. Run and build repo in xCode.
+5. Run and build repo in Xcode.
