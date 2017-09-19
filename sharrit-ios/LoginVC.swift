@@ -32,6 +32,10 @@ class LoginVC: UIViewController, CountryPickerDelegate {
     
     @IBOutlet weak var sendPasswordView: UIView! // Third View
     
+    @IBOutlet weak var activationView: UIView!
+    
+    @IBOutlet weak var banView: UIView!
+    
     var loginEmpty:Bool = true {
         didSet {
             errorLabel.isHidden = !loginEmpty
@@ -50,6 +54,8 @@ class LoginVC: UIViewController, CountryPickerDelegate {
         forgetPasswordView.isHidden = true
         sendNoView.isHidden = true
         sendPasswordView.isHidden = true
+        activationView.isHidden = true
+        banView.isHidden = true
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -89,13 +95,12 @@ class LoginVC: UIViewController, CountryPickerDelegate {
         loginEmpty = ((mobileNoTxt.text?.isEmpty)! || (passwordTxt.text?.isEmpty)!)
         
         var mobileCountryCode = mobileCountryBtn.titleLabel?.text
-        mobileCountryCode?.remove(at: (mobileCountryCode?.startIndex)!)
-        // Remember to add in this in future
         
         if !loginEmpty {
-            let signUpData: [String: Any] = ["phoneNumber": mobileNoTxt.text, "password": passwordTxt.text]
+            let signUpData: [String: Any] = ["phoneNumber": mobileCountryCode! + mobileNoTxt.text!, "password": passwordTxt.text]
             
-            let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/auth/userlogin"
+            let url = "http://localhost:5000/api/auth/userlogin"
+            //let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/auth/userlogin"
             
             Alamofire.request(url, method: .post, parameters: signUpData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
                 response in
@@ -113,7 +118,7 @@ class LoginVC: UIViewController, CountryPickerDelegate {
                                     let accessToken = json["content"]["accessToken"].string!
                                     let createDate = json["content"]["dateCreated"].string!
                                     
-                                    json["content"]["mobile"].stringValue = self.mobileNoTxt.text!
+                                    json["content"]["mobile"].stringValue = self.mobileCountryBtn.titleLabel!.text! + self.mobileNoTxt.text!
                                     json["content"]["password"].stringValue = self.passwordTxt.text!
                                     
                                     // This is to save to user preference
@@ -127,7 +132,7 @@ class LoginVC: UIViewController, CountryPickerDelegate {
                                     UserDefaults.standard.synchronize()
                                     
                                     // This is to pass around VC
-                                    let userAccount = User(userID: userID, firstName: firstName, lastName: lastName, password: self.passwordTxt.text!, mobile: Int(self.mobileNoTxt.text!)!, accessToken: accessToken, createDate: createDate)
+                                    let userAccount = User(userID: userID, firstName: firstName, lastName: lastName, password: self.passwordTxt.text!, mobile: (self.mobileCountryBtn.titleLabel!.text! + self.mobileNoTxt.text!), accessToken: accessToken, createDate: createDate)
                                     let appDelegate = UIApplication.shared.delegate as! AppDelegate
                                     appDelegate.user = userAccount
                                 }
@@ -135,9 +140,9 @@ class LoginVC: UIViewController, CountryPickerDelegate {
                             } else if statusCode == -1 { // Failed
                                
                             } else if statusCode == -2 { // Not active
-                                
+                                self.activationView.isHidden = false
                             } else if statusCode == -3 { // Banned
-                                
+                                self.banView.isHidden = false
                             } else if statusCode == -4 { // Not verified
                                 self.verificationView.isHidden = false
                                 self.resendVerification(mobile: self.mobileNoTxt.text!)
@@ -172,7 +177,8 @@ class LoginVC: UIViewController, CountryPickerDelegate {
     }
     
     @IBAction func dismissForgetPassword(_ sender: UIButton) {
-        let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/user/forget"
+        let url = "http://localhost:5000/api/user/forget"
+        //let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/user/forget"
         
         Alamofire.request(url, method: .post, parameters: ["phoneNumber": forgetNo.text!], encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in
@@ -189,18 +195,47 @@ class LoginVC: UIViewController, CountryPickerDelegate {
     }
     
     func resendVerification(mobile: String) {
-        let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/auth/" + mobile
+        let mobileCountryCode = mobileCountryBtn.titleLabel?.text
+
+        let url = "http://localhost:5000/api/auth/reverify/" + mobileCountryCode! + mobile
+        //let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/auth/reverify/" + mobileCountryCode! + mobile
         
         Alamofire.request(url, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in
             switch response.result {
             case .failure(_):
-                print("API failure to call")
+                print("Resend Verification API failed")
                 break
             default:
                 break
             }
         }
+    }
+    
+    @IBAction func resentActivation(_ sender: UIButton) {
+        let mobileCountryCode = mobileCountryBtn.titleLabel?.text
+        
+        let url = "http://localhost:5000/api/auth/activate/" + mobileCountryCode! + mobileNoTxt.text!
+        //let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/auth/activate/" + mobileCountryCode! + mobileNoTxt.text!
+        
+        Alamofire.request(url, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+            response in
+            switch response.result {
+            case .failure(_):
+                print("Reactivate Acc API failed")
+                break
+            default:
+                break
+            }
+        }
+    }
+    
+    @IBAction func dismissActivationView(_ sender: UIButton) {
+        activationView.isHidden = true
+    }
+    
+    @IBAction func dismissBanView(_ sender: UIButton) {
+        banView.isHidden = true
     }
     
 }

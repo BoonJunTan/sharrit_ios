@@ -38,7 +38,7 @@ class EditProfileVC: UIViewController {
         
         let signUpData: [String: Any] = ["firstName": userFirstName.text, "lastName": userLastName.text]
         
-        let url = "http://localhost:5000/api/user/1"
+        let url = "http://localhost:5000/api/user/" + String(describing: appDelegate.user!.userID)
         // let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/user" + String(describing: appDelegate.user!.userID)
         
         Alamofire.request(url, method: .put, parameters: signUpData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
@@ -82,14 +82,15 @@ class EditProfileVC: UIViewController {
         alertController.addAction(UIAlertAction(title: "Deactivate", style: UIAlertActionStyle.default,handler: { action in
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             
-            let url = "http://localhost:5000/api/auth/deactive/" + String(describing: appDelegate.user!.mobile)
+            let url = "http://localhost:5000/api/auth/deactivate/" + String(describing: appDelegate.user!.mobile)
             
-            // let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/auth/deactive/" + String(describing: appDelegate.user!.mobile)
+            // let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/auth/deactivate/" + String(describing: appDelegate.user!.mobile)
             
             Alamofire.request(url, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
                 response in
                 switch response.result {
                 case .success(_):
+                    self.dismiss(animated: true, completion: nil)
                     break
                 case .failure(_):
                     print("Disable Profile API failed")

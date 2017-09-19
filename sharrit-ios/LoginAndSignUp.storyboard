@@ -232,6 +232,104 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ynf-Ib-rhB" userLabel="Activation View">
+                                <rect key="frame" x="10" y="74" width="394" height="652"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BWI-nV-8ne">
+                                        <rect key="frame" x="49.666666666666657" y="277" width="295.33333333333337" height="98"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" text="Your account has been deactivated. Click on &quot;Send&quot; to reactivate your account. Cheers!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qke-WP-WHw">
+                                                <rect key="frame" x="0.0" y="0.0" width="295.33333333333331" height="61"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="9LX-pm-6jg">
+                                                <rect key="frame" x="0.0" y="71" width="295.33333333333331" height="27"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qn4-Zt-qZz">
+                                                        <rect key="frame" x="0.0" y="0.0" width="147.66666666666669" height="27"/>
+                                                        <state key="normal" title="Send"/>
+                                                        <connections>
+                                                            <action selector="resentActivation:" destination="c89-ed-Ev1" eventType="touchUpInside" id="VuY-db-H7f"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vOs-kI-8eC">
+                                                        <rect key="frame" x="147.66666666666669" y="0.0" width="147.66666666666669" height="27"/>
+                                                        <state key="normal" title="Dismiss"/>
+                                                        <connections>
+                                                            <action selector="dismissActivationView:" destination="c89-ed-Ev1" eventType="touchUpInside" id="1u6-e2-Idm"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="9LX-pm-6jg" firstAttribute="top" secondItem="qke-WP-WHw" secondAttribute="bottom" constant="10" id="4Ry-YZ-x10"/>
+                                            <constraint firstItem="qke-WP-WHw" firstAttribute="top" secondItem="BWI-nV-8ne" secondAttribute="top" id="5Pd-W5-Q1k"/>
+                                            <constraint firstItem="qke-WP-WHw" firstAttribute="leading" secondItem="BWI-nV-8ne" secondAttribute="leading" id="6yF-9l-h6f"/>
+                                            <constraint firstItem="9LX-pm-6jg" firstAttribute="leading" secondItem="BWI-nV-8ne" secondAttribute="leading" id="K1u-UI-4Rn"/>
+                                            <constraint firstAttribute="trailing" secondItem="9LX-pm-6jg" secondAttribute="trailing" id="S90-lM-fQx"/>
+                                            <constraint firstAttribute="trailing" secondItem="qke-WP-WHw" secondAttribute="trailing" id="ais-8F-SPF"/>
+                                            <constraint firstAttribute="bottom" secondItem="9LX-pm-6jg" secondAttribute="bottom" id="pfx-vU-fHb"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="BWI-nV-8ne" firstAttribute="centerY" secondItem="Ynf-Ib-rhB" secondAttribute="centerY" id="0oZ-Wt-eVK"/>
+                                    <constraint firstItem="BWI-nV-8ne" firstAttribute="centerX" secondItem="Ynf-Ib-rhB" secondAttribute="centerX" id="Myv-Re-t91"/>
+                                    <constraint firstItem="BWI-nV-8ne" firstAttribute="height" secondItem="Ynf-Ib-rhB" secondAttribute="height" multiplier="0.15" id="ZnJ-Yb-grE"/>
+                                    <constraint firstItem="BWI-nV-8ne" firstAttribute="width" secondItem="Ynf-Ib-rhB" secondAttribute="width" multiplier="0.75" id="gUc-3w-kal"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6v1-RG-cAV" userLabel="Ban View">
+                                <rect key="frame" x="10" y="74" width="394" height="652"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cm7-VK-eLU">
+                                        <rect key="frame" x="50" y="244.66666666666669" width="295.66666666666669" height="163"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="53f-JR-xv9">
+                                                <rect key="frame" x="0.0" y="0.0" width="295.66666666666669" height="101.66666666666663"/>
+                                                <string key="text">Your account has been banned. Please proceed to https://is41031718it02.southeastasia.cloudapp.azure.com/... to request for unlock. Cheers!</string>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="PK0-EU-IIx">
+                                                <rect key="frame" x="0.0" y="111.66666666666663" width="295.66666666666669" height="51.666666666666686"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9SX-aT-xg9">
+                                                        <rect key="frame" x="0.0" y="0.0" width="295.66666666666669" height="51.666666666666686"/>
+                                                        <state key="normal" title="Dismiss"/>
+                                                        <connections>
+                                                            <action selector="dismissBanView:" destination="c89-ed-Ev1" eventType="touchUpInside" id="asO-vp-tjg"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="PK0-EU-IIx" secondAttribute="bottom" id="DD1-l9-Kqs"/>
+                                            <constraint firstItem="53f-JR-xv9" firstAttribute="top" secondItem="cm7-VK-eLU" secondAttribute="top" id="QfY-aN-6Dq"/>
+                                            <constraint firstItem="53f-JR-xv9" firstAttribute="leading" secondItem="cm7-VK-eLU" secondAttribute="leading" id="SUY-cZ-bqA"/>
+                                            <constraint firstItem="PK0-EU-IIx" firstAttribute="leading" secondItem="cm7-VK-eLU" secondAttribute="leading" id="Uxp-r0-GpF"/>
+                                            <constraint firstItem="PK0-EU-IIx" firstAttribute="top" secondItem="53f-JR-xv9" secondAttribute="bottom" constant="10" id="YsW-Ko-lee"/>
+                                            <constraint firstAttribute="trailing" secondItem="53f-JR-xv9" secondAttribute="trailing" id="iG8-Zv-u3d"/>
+                                            <constraint firstAttribute="trailing" secondItem="PK0-EU-IIx" secondAttribute="trailing" id="vJv-MX-zaW"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="cm7-VK-eLU" firstAttribute="height" secondItem="6v1-RG-cAV" secondAttribute="height" multiplier="0.25" id="A0k-xy-iXB"/>
+                                    <constraint firstItem="cm7-VK-eLU" firstAttribute="centerY" secondItem="6v1-RG-cAV" secondAttribute="centerY" id="HhR-Rz-pqY"/>
+                                    <constraint firstItem="cm7-VK-eLU" firstAttribute="width" secondItem="6v1-RG-cAV" secondAttribute="width" multiplier="0.75" id="Ol7-vM-ERR"/>
+                                    <constraint firstItem="cm7-VK-eLU" firstAttribute="centerX" secondItem="6v1-RG-cAV" secondAttribute="centerX" id="Otj-5Q-HZN"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HPb-p2-a3l" userLabel="Forget Password View">
                                 <rect key="frame" x="10" y="74" width="394" height="652"/>
                                 <subviews>
@@ -407,6 +505,8 @@
                             <constraint firstItem="M9L-Ue-uKy" firstAttribute="leading" secondItem="KHH-Yh-FvD" secondAttribute="leading" id="4nw-7F-er6"/>
                             <constraint firstItem="HPb-p2-a3l" firstAttribute="trailing" secondItem="l13-OL-Vbo" secondAttribute="trailing" id="5yd-PG-VGT"/>
                             <constraint firstItem="M9L-Ue-uKy" firstAttribute="trailing" secondItem="KHH-Yh-FvD" secondAttribute="trailing" id="7fH-dp-lS4"/>
+                            <constraint firstItem="6v1-RG-cAV" firstAttribute="bottom" secondItem="l13-OL-Vbo" secondAttribute="bottom" id="7i2-S5-BbG"/>
+                            <constraint firstItem="Ynf-Ib-rhB" firstAttribute="leading" secondItem="l13-OL-Vbo" secondAttribute="leading" id="Aic-2H-qFh"/>
                             <constraint firstAttribute="trailing" secondItem="l13-OL-Vbo" secondAttribute="trailing" constant="10" id="ByK-yw-JfV"/>
                             <constraint firstItem="4f0-OI-RIK" firstAttribute="leading" secondItem="nJR-2o-HaM" secondAttribute="leading" id="C9e-hl-lDD"/>
                             <constraint firstItem="F5U-id-gSW" firstAttribute="bottom" secondItem="l13-OL-Vbo" secondAttribute="bottom" id="E16-L7-d85"/>
@@ -415,6 +515,7 @@
                             <constraint firstItem="ixM-uB-KWH" firstAttribute="leading" secondItem="KHH-Yh-FvD" secondAttribute="leading" id="GB8-V4-XG0"/>
                             <constraint firstItem="HPb-p2-a3l" firstAttribute="bottom" secondItem="l13-OL-Vbo" secondAttribute="bottom" id="GyP-8a-TN9"/>
                             <constraint firstItem="fWY-vf-oek" firstAttribute="top" secondItem="67W-3i-RUe" secondAttribute="bottom" id="IUk-rp-0AW"/>
+                            <constraint firstItem="6v1-RG-cAV" firstAttribute="leading" secondItem="l13-OL-Vbo" secondAttribute="leading" id="IrG-b2-yZ7"/>
                             <constraint firstItem="l13-OL-Vbo" firstAttribute="top" secondItem="67W-3i-RUe" secondAttribute="bottom" constant="10" id="JJY-2m-BtT"/>
                             <constraint firstItem="sjW-Nm-95m" firstAttribute="top" secondItem="fWY-vf-oek" secondAttribute="bottom" id="JK6-Jw-bbX"/>
                             <constraint firstItem="KHH-Yh-FvD" firstAttribute="top" secondItem="1Wd-D7-Ut3" secondAttribute="bottom" id="JgL-oY-uLQ"/>
@@ -424,17 +525,22 @@
                             <constraint firstItem="sjW-Nm-95m" firstAttribute="top" secondItem="4f0-OI-RIK" secondAttribute="bottom" id="REv-hj-HbL"/>
                             <constraint firstItem="M9L-Ue-uKy" firstAttribute="top" secondItem="KHH-Yh-FvD" secondAttribute="bottom" constant="5" id="RM0-RT-DIe"/>
                             <constraint firstItem="HPb-p2-a3l" firstAttribute="leading" secondItem="l13-OL-Vbo" secondAttribute="leading" id="RWs-TC-m7v"/>
+                            <constraint firstItem="Ynf-Ib-rhB" firstAttribute="top" secondItem="l13-OL-Vbo" secondAttribute="top" id="U4d-PI-779"/>
                             <constraint firstItem="fWY-vf-oek" firstAttribute="leading" secondItem="nJR-2o-HaM" secondAttribute="leading" id="YlE-EG-b0W"/>
                             <constraint firstItem="KHH-Yh-FvD" firstAttribute="trailing" secondItem="1Wd-D7-Ut3" secondAttribute="trailing" id="b8C-Hx-T0b"/>
                             <constraint firstAttribute="trailing" secondItem="4f0-OI-RIK" secondAttribute="trailing" id="bri-dP-EJd"/>
+                            <constraint firstItem="Ynf-Ib-rhB" firstAttribute="trailing" secondItem="l13-OL-Vbo" secondAttribute="trailing" id="cmH-tC-iKr"/>
                             <constraint firstItem="4f0-OI-RIK" firstAttribute="top" secondItem="67W-3i-RUe" secondAttribute="bottom" id="equ-Hs-7NB"/>
                             <constraint firstItem="0EE-yV-wRW" firstAttribute="centerX" secondItem="nJR-2o-HaM" secondAttribute="centerX" id="fvt-vQ-MsV"/>
                             <constraint firstItem="1Wd-D7-Ut3" firstAttribute="top" secondItem="0EE-yV-wRW" secondAttribute="bottom" constant="75" id="fzL-5t-U5b"/>
                             <constraint firstItem="F5U-id-gSW" firstAttribute="trailing" secondItem="l13-OL-Vbo" secondAttribute="trailing" id="gvT-Cv-T5Y"/>
                             <constraint firstAttribute="trailingMargin" secondItem="1Wd-D7-Ut3" secondAttribute="trailing" constant="25" id="hXj-OC-lDe"/>
                             <constraint firstItem="l13-OL-Vbo" firstAttribute="leading" secondItem="nJR-2o-HaM" secondAttribute="leading" constant="10" id="i6o-hl-W8d"/>
+                            <constraint firstItem="6v1-RG-cAV" firstAttribute="top" secondItem="l13-OL-Vbo" secondAttribute="top" id="iZu-jk-E2d"/>
                             <constraint firstItem="0EE-yV-wRW" firstAttribute="height" secondItem="nJR-2o-HaM" secondAttribute="height" multiplier="0.25" id="ky1-FZ-yBV"/>
+                            <constraint firstItem="6v1-RG-cAV" firstAttribute="trailing" secondItem="l13-OL-Vbo" secondAttribute="trailing" id="mEe-ff-oIx"/>
                             <constraint firstItem="HPb-p2-a3l" firstAttribute="top" secondItem="l13-OL-Vbo" secondAttribute="top" id="mJT-TX-Lla"/>
+                            <constraint firstItem="Ynf-Ib-rhB" firstAttribute="bottom" secondItem="l13-OL-Vbo" secondAttribute="bottom" id="oet-Qk-ipG"/>
                             <constraint firstItem="sjW-Nm-95m" firstAttribute="top" secondItem="l13-OL-Vbo" secondAttribute="bottom" constant="10" id="scb-Ui-aiy"/>
                             <constraint firstItem="KHH-Yh-FvD" firstAttribute="leading" secondItem="1Wd-D7-Ut3" secondAttribute="leading" id="tHu-K3-y5r"/>
                             <constraint firstItem="lw7-f1-d91" firstAttribute="width" secondItem="nJR-2o-HaM" secondAttribute="width" multiplier="0.7" id="tkm-cy-y7f"/>
@@ -446,6 +552,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="Nlx-6O-gNU"/>
                     <connections>
+                        <outlet property="activationView" destination="Ynf-Ib-rhB" id="nhw-go-3wz"/>
+                        <outlet property="banView" destination="6v1-RG-cAV" id="yiW-Bw-Woc"/>
                         <outlet property="errorLabel" destination="M9L-Ue-uKy" id="uba-ho-nbE"/>
                         <outlet property="forgetNo" destination="EJ8-Ak-a1H" id="P0k-fg-Xpd"/>
                         <outlet property="forgetPasswordView" destination="HPb-p2-a3l" id="Ola-dp-wYP"/>

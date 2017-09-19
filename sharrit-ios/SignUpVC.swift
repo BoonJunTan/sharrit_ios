@@ -114,11 +114,11 @@ class SignUpVC: UIViewController, CountryPickerDelegate {
             verificationView.isHidden = false
             
             var mobileCountryCode = mobileCountryCodeBtn.titleLabel?.text
-            mobileCountryCode?.remove(at: (mobileCountryCode?.startIndex)!)
             
             let signUpData: [String: Any] = ["firstName": firstNameTxt.text, "lastName": lastNameTxt.text, "phoneNumber": mobileCountryCode! + mobileTxt.text!, "password": passwordTxt.text]
             
-            let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/user"
+            let url = "http://localhost:5000/api/user"
+            //let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/user"
             
             Alamofire.request(url, method: .post, parameters: signUpData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
                 response in
