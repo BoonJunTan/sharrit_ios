@@ -124,7 +124,8 @@ final class ConversationVC: JSQMessagesViewController {
     override func collectionView(_ collectionView: JSQMessagesCollectionView, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout, heightForCellTopLabelAt indexPath: IndexPath) -> CGFloat {
         
         if (indexPath.item == 0) {
-            return kJSQMessagesCollectionViewCellLabelHeightDefault        }
+            return kJSQMessagesCollectionViewCellLabelHeightDefault
+        }
         
         if (indexPath.item - 1 > 0) {
             let previousMessage = messages[indexPath.item - 1]
