@@ -115,6 +115,7 @@ class LoginVC: UIViewController, CountryPickerDelegate {
                                     let userID = json["content"]["userId"].int!
                                     let firstName = json["content"]["firstName"].string!
                                     let lastName = json["content"]["lastName"].string!
+                                    let profilePhoto = json["content"]["imageSrc"].string!
                                     let accessToken = json["content"]["accessToken"].string!
                                     let createDate = json["content"]["dateCreated"].string!
                                     
@@ -132,7 +133,7 @@ class LoginVC: UIViewController, CountryPickerDelegate {
                                     UserDefaults.standard.synchronize()
                                     
                                     // This is to pass around VC
-                                    let userAccount = User(userID: userID, firstName: firstName, lastName: lastName, password: self.passwordTxt.text!, mobile: (self.mobileCountryBtn.titleLabel!.text! + self.mobileNoTxt.text!), accessToken: accessToken, createDate: createDate)
+                                    let userAccount = User(userID: userID, firstName: firstName, lastName: lastName, password: self.passwordTxt.text!, mobile: (self.mobileCountryBtn.titleLabel!.text! + self.mobileNoTxt.text!), profilePhoto: profilePhoto, accessToken: accessToken, createDate: createDate)
                                     let appDelegate = UIApplication.shared.delegate as! AppDelegate
                                     appDelegate.user = userAccount
                                 }

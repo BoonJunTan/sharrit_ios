@@ -8,19 +8,24 @@
 
 import UIKit
 import Cosmos
+import Photos
+import Alamofire
+import SwiftyJSON
 
-class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     let tableViewSection = ["", "SETTINGS"]
     var tableViewIcons = [[#imageLiteral(resourceName: "Sharrit_Logo"), #imageLiteral(resourceName: "Sharrit_Logo"),#imageLiteral(resourceName: "reputation"), #imageLiteral(resourceName: "business")], [#imageLiteral(resourceName: "profile2"), #imageLiteral(resourceName: "help"), #imageLiteral(resourceName: "logout")]]
     var tableViewItems = [["Sharres Requested", "Sharres Offered", "Reputation", "Sharing Business"], ["Profile Settings", "Help Centre", "Logout"]]
 
-    @IBOutlet weak var profileImageBtn: UIButton!
+    @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var profileLabe: UILabel!
     @IBOutlet weak var starRating: CosmosView!
     let fakeRatingDouble = 4.7
     @IBOutlet weak var profileDate: UILabel!
+    
+    let imagePicker = UIImagePickerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +57,18 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         formatter.allowedUnits = [.day, .weekOfMonth]
         formatter.unitsStyle = .full
         profileDate.text = formatter.string(from: endDate!, to: todayDate!)
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(profileImageBtnTapped(taoGestureRecognizer:)))
+        profileImage.isUserInteractionEnabled = true
+        if appDelegate.user!.profilePhoto == "" {
+            profileImage.image = nil
+        } else {
+            if let checkedUrl = URL(string: appDelegate.user!.profilePhoto) {
+                downloadProfilePhoto(from: checkedUrl)
+            }
+        }
+        profileImage.addGestureRecognizer(tapGestureRecognizer)
+        imagePicker.delegate = self
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -126,8 +143,91 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         })
     }
     
-    @IBAction func profileImageBtnTapped(_ sender: UIButton) {
+    func downloadProfilePhoto(from url: URL) {
+        getDataFromUrl(url: url) { (data, response, error)  in
+            guard let data = data, error == nil else { return }
+            DispatchQueue.main.async() { () -> Void in
+                self.profileImage.image = UIImage(data: data)
+            }
+        }
+    }
+    
+    func getDataFromUrl(url: URL, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void) {
+        URLSession.shared.dataTask(with: url) {
+            (data, response, error) in
+            completion(data, response, error)
+            }.resume()
+    }
+    
+    func profileImageBtnTapped(taoGestureRecognizer: UITapGestureRecognizer) {
+        PHPhotoLibrary.requestAuthorization { status in
+            switch status {
+            case .authorized:
+                self.imagePicker.allowsEditing = true
+                self.imagePicker.sourceType = .photoLibrary
+                self.present(self.imagePicker, animated: true, completion: nil)
+                break
+            case .denied, .restricted:
+                let alert = UIAlertController(title: "Error", message: "Sharrit has no access to your photo album. Please allow access in order to change your profile photo. Cheers!", preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "Setting", style: .default, handler: { (_) in
+                    DispatchQueue.main.async {
+                        if let settingsURL = URL(string: UIApplicationOpenSettingsURLString) {
+                            UIApplication.shared.openURL(settingsURL)
+                        }
+                    }
+                }))
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                break
+            default:
+                break
+            }
+        }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+
+            let url = "http://localhost:5000/api/user/upload/" + String(describing: appDelegate.user!.userID)
+            //let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/user/upload/" + String(describing: appDelegate.user!.userID)
+            
+            Alamofire.upload(multipartFormData: { multipartFormData in
+                if let imageData = UIImageJPEGRepresentation(pickedImage, 1) {
+                    multipartFormData.append(imageData, withName: "file", fileName: "userID" + String(describing: appDelegate.user!.userID) + ".png", mimeType: "image/png")
+                }}, to: url, method: .post, headers: ["Authorization": "auth_token"],
+                    encodingCompletion: { encodingResult in
+                        switch encodingResult {
+                        case .success(let upload, _, _):
+                            
+                            upload.responseJSON { response in
+                                
+                                if let value = response.result.value {
+                                    var json = JSON(value)
+                                    let newUrlString = json["content"]["fileName"].string!
+                                    
+                                    // Change Actual
+                                    self.profileImage.image = pickedImage
+                                    
+                                    // Change App Delegate
+                                    appDelegate.user!.profilePhoto = newUrlString
+                                    
+                                    // Change User Default
+                                    if var userInfo = UserDefaults.standard.object(forKey: "userInfo") as? [String: Any] {
+                                        userInfo["imageSrc"] = newUrlString
+                                        UserDefaults.standard.set(userInfo, forKey: "userInfo")
+                                        UserDefaults.standard.synchronize()
+                                    }
+                                }
+                            }
+                        case .failure(_):
+                            print("Upload Profile Photo API failed")
+                        }
+            })
+        }
         
+        dismiss(animated: true, completion: nil)
     }
     
     func logoutPressed() {

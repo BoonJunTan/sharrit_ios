@@ -139,22 +139,18 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u4V-Xt-dY7">
                                         <rect key="frame" x="25" y="23" width="105" height="105"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cd3-Bt-gx2">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_pic" translatesAutoresizingMaskIntoConstraints="NO" id="TY6-tW-mzD">
                                                 <rect key="frame" x="5" y="5" width="95" height="95"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <state key="normal" image="profile_pic"/>
-                                                <connections>
-                                                    <action selector="profileImageBtnTapped:" destination="jD7-tv-vCk" eventType="touchUpInside" id="P6X-CT-R3v"/>
-                                                </connections>
-                                            </button>
+                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="cd3-Bt-gx2" secondAttribute="bottom" constant="5" id="7Ml-iu-G9S"/>
-                                            <constraint firstAttribute="trailing" secondItem="cd3-Bt-gx2" secondAttribute="trailing" constant="5" id="Gdl-dk-22D"/>
                                             <constraint firstAttribute="width" secondItem="u4V-Xt-dY7" secondAttribute="height" multiplier="1:1" id="UgY-48-eSm"/>
-                                            <constraint firstItem="cd3-Bt-gx2" firstAttribute="leading" secondItem="u4V-Xt-dY7" secondAttribute="leading" constant="5" id="iOO-PM-DCw"/>
-                                            <constraint firstItem="cd3-Bt-gx2" firstAttribute="top" secondItem="u4V-Xt-dY7" secondAttribute="top" constant="5" id="t9I-3p-oke"/>
+                                            <constraint firstAttribute="bottom" secondItem="TY6-tW-mzD" secondAttribute="bottom" constant="5" id="ZsB-ne-Vd5"/>
+                                            <constraint firstItem="TY6-tW-mzD" firstAttribute="top" secondItem="u4V-Xt-dY7" secondAttribute="top" constant="5" id="kbF-xP-CQA"/>
+                                            <constraint firstAttribute="trailing" secondItem="TY6-tW-mzD" secondAttribute="trailing" constant="5" id="szP-2k-Vbf"/>
+                                            <constraint firstItem="TY6-tW-mzD" firstAttribute="leading" secondItem="u4V-Xt-dY7" secondAttribute="leading" constant="5" id="u25-cN-Dte"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -236,7 +232,7 @@
                     <navigationItem key="navigationItem" title="Profile" id="hjk-Gk-hD6"/>
                     <connections>
                         <outlet property="profileDate" destination="PzR-Ap-gb7" id="hDs-YA-5dX"/>
-                        <outlet property="profileImageBtn" destination="cd3-Bt-gx2" id="Weo-BQ-Dao"/>
+                        <outlet property="profileImage" destination="TY6-tW-mzD" id="VZ5-Gh-stv"/>
                         <outlet property="profileLabe" destination="CD0-N2-rQZ" id="BUe-M7-9gO"/>
                         <outlet property="starRating" destination="eDb-ZK-46f" id="bh9-sL-sOo"/>
                         <outlet property="tableView" destination="Ivk-ht-ZvZ" id="SW1-KE-DAi"/>
