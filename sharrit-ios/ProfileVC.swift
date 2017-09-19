@@ -16,6 +16,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var tableViewIcons = [[#imageLiteral(resourceName: "Sharrit_Logo"), #imageLiteral(resourceName: "Sharrit_Logo"),#imageLiteral(resourceName: "reputation"), #imageLiteral(resourceName: "business")], [#imageLiteral(resourceName: "profile2"), #imageLiteral(resourceName: "help"), #imageLiteral(resourceName: "logout")]]
     var tableViewItems = [["Sharres Requested", "Sharres Offered", "Reputation", "Sharing Business"], ["Profile Settings", "Help Centre", "Logout"]]
 
+    @IBOutlet weak var profileImageBtn: UIButton!
     @IBOutlet weak var profileLabe: UILabel!
     @IBOutlet weak var starRating: CosmosView!
     let fakeRatingDouble = 4.7
@@ -123,6 +124,10 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 }
             }
         })
+    }
+    
+    @IBAction func profileImageBtnTapped(_ sender: UIButton) {
+        
     }
     
     func logoutPressed() {
