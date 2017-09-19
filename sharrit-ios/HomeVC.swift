@@ -28,7 +28,7 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         getCategoryDetails()
         
         searchBar = UISearchBar()
-        searchBar.placeholder = setPlaceHolder(placeholder: "Search");
+        searchBar.placeholder = setPlaceHolder(placeholder: "Search Sharrit");
         self.navigationItem.titleView = searchBar
         
         let navBarBubble = UIBarButtonItem(image: #imageLiteral(resourceName: "chat"),
@@ -39,7 +39,7 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         
         carouselView.setImageInputs([ImageSource(image: #imageLiteral(resourceName: "carousel1")), ImageSource(image: #imageLiteral(resourceName: "carousel2")), ImageSource(image: #imageLiteral(resourceName: "carousel3"))])
         carouselView.contentScaleMode = .scaleToFill
-        carouselView.slideshowInterval = 3
+        carouselView.slideshowInterval = 5
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -105,8 +105,8 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // handle tap events
-        print("You selected cell #\(indexPath.item)!")
+        let selectedCategory = categoryLabel[indexPath.item]
+        performSegue(withIdentifier: "viewSharesCollection", sender: selectedCategory)
     }
     
     func checkIfUserLoggedIn() {
@@ -163,6 +163,16 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
                 }
             }
         })
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "viewSharesCollection" {
+            if let sharesCollectionVC = segue.destination as? SharesCollectionVC {
+                if let category = sender as? String {
+                    sharesCollectionVC.currentCategory = category
+                }
+            }
+        }
     }
   
 }

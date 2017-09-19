@@ -21,6 +21,7 @@
 		27ABAE811F670D81007F6CDB /* LoginAndSignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27ABAE801F670D81007F6CDB /* LoginAndSignUp.storyboard */; };
 		27B37F931F6EC2E200565AA8 /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B37F921F6EC2E200565AA8 /* EditProfileVC.swift */; };
 		27C0B0401F6BDBC4009E69CA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C0B03F1F6BDBC4009E69CA /* User.swift */; };
+		27C114841F717B5900CD9FB9 /* SharesCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C114831F717B5800CD9FB9 /* SharesCollectionVC.swift */; };
 		27F256421F6AA1C6006B1697 /* ButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F256411F6AA1C6006B1697 /* ButtonCollectionViewCell.swift */; };
 		27F256441F6ACE8D006B1697 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F256431F6ACE8D006B1697 /* NotificationTableViewCell.swift */; };
 		27FCB7D41F677533008E973C /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27FCB7D31F677533008E973C /* Home.storyboard */; };
@@ -59,6 +60,7 @@
 		27ABAE801F670D81007F6CDB /* LoginAndSignUp.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LoginAndSignUp.storyboard; sourceTree = "<group>"; };
 		27B37F921F6EC2E200565AA8 /* EditProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
 		27C0B03F1F6BDBC4009E69CA /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		27C114831F717B5800CD9FB9 /* SharesCollectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharesCollectionVC.swift; sourceTree = "<group>"; };
 		27F256411F6AA1C6006B1697 /* ButtonCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCollectionViewCell.swift; sourceTree = "<group>"; };
 		27F256431F6ACE8D006B1697 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
 		27FCB7D31F677533008E973C /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				27FCB7D31F677533008E973C /* Home.storyboard */,
 				27FCB7D51F67753F008E973C /* HomeVC.swift */,
 				2751E4F01F6AE6D700E1B1E2 /* CategoryCollectionViewCell.swift */,
+				27C114831F717B5800CD9FB9 /* SharesCollectionVC.swift */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 				27F256441F6ACE8D006B1697 /* NotificationTableViewCell.swift in Sources */,
 				27FCB7E11F6776B6008E973C /* WalletVC.swift in Sources */,
 				2777645E1F6A594A0023CDCA /* MessageTableViewCell.swift in Sources */,
+				27C114841F717B5900CD9FB9 /* SharesCollectionVC.swift in Sources */,
 				277764601F6A5D2D0023CDCA /* ConversationVC.swift in Sources */,
 				274A36851F700F2100FD5E3C /* UIViewWithBorder.swift in Sources */,
 				2751E4F11F6AE6D700E1B1E2 /* CategoryCollectionViewCell.swift in Sources */,

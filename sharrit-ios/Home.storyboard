@@ -120,11 +120,30 @@
                     <connections>
                         <outlet property="carouselView" destination="JM4-WK-wo2" id="NVJ-Yg-x4W"/>
                         <outlet property="categoryCollectionView" destination="DA6-aK-SxZ" id="F7O-oE-lOp"/>
+                        <segue destination="whb-Nr-vIo" kind="show" identifier="viewSharesCollection" id="1x2-3u-PWD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uab-04-23U" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-423.19999999999999" y="1.3493253373313345"/>
+            <point key="canvasLocation" x="-322" y="1"/>
+        </scene>
+        <!--Shares CollectionVC-->
+        <scene sceneID="3QZ-jC-Gx7">
+            <objects>
+                <viewController id="whb-Nr-vIo" customClass="SharesCollectionVC" customModule="sharrit_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hKa-4f-Vkk"/>
+                        <viewControllerLayoutGuide type="bottom" id="Jxu-dt-GAm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="I1v-Xf-eTa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OZf-rQ-LUi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="631" y="0.0"/>
         </scene>
     </scenes>
     <resources>

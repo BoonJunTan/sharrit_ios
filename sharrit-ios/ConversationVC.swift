@@ -31,7 +31,7 @@ final class ConversationVC: JSQMessagesViewController {
     var chat: Conversation? {
         didSet {
             title = chat?.conversationPartner
-            senderId = chat!.conversationPartner
+            senderId = (appDelegate.user!.firstName + " " + appDelegate.user!.lastName)
             senderDisplayName = (appDelegate.user!.firstName + " " + appDelegate.user!.lastName)
             
             // TODO: Get and Change Avatar
@@ -102,8 +102,7 @@ final class ConversationVC: JSQMessagesViewController {
     }
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
-        let message = messages[indexPath.item]
-        if message.senderId == (appDelegate.user!.firstName + " " + appDelegate.user!.lastName) {
+        if messages[indexPath.item].senderId == (appDelegate.user!.firstName + " " + appDelegate.user!.lastName) {
             return receiverAvatar
         } else {
             return senderAvatar

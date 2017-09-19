@@ -101,7 +101,7 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             case .success(_):
                 if let data = response.result.value {
                     for (_, subJson) in JSON(data) {
-                        self.chats.append(Conversation(id: Int(subJson["conversationId"].description)!, conversationPartner: subJson["senderName"].description, latestMessage: "Test message Test message Test message Test message Test message Test message Test message Test message", subjectTitle: subJson["subject"].description, lastestMessageDate: subJson["dateCreated"].description))
+                        self.chats.append(Conversation(id: Int(subJson["conversationId"].description)!, conversationPartner: subJson["senderName"].description, latestMessage: subJson["body"].description, subjectTitle: subJson["subject"].description, lastestMessageDate: subJson["dateCreated"].description))
                     }
                     self.tableView.reloadData()
                 }
