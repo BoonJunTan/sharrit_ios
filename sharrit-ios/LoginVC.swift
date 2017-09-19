@@ -104,7 +104,7 @@ class LoginVC: UIViewController, CountryPickerDelegate {
                 case .success(_):
                     if let data = (response.result.value as? Dictionary<String, Any>) {
                         if let statusCode = data["status"] as? Int {
-                            if statusCode == 1 {
+                            if statusCode == 1 { // Logged in successfully
                                 if let value = response.result.value {
                                     var json = JSON(value)
                                     let userID = json["content"]["userId"].int!
@@ -132,12 +132,18 @@ class LoginVC: UIViewController, CountryPickerDelegate {
                                     appDelegate.user = userAccount
                                 }
                                 self.performSegue(withIdentifier: "GoBackMain", sender: nil)
-                            } else if statusCode == -1 {
-                                self.loginEmpty = true
-                                self.errorLabel.text = "*Invalid mobile no. or password"
-                            } else {
+                            } else if statusCode == -1 { // Failed
+                               
+                            } else if statusCode == -2 { // Not active
+                                
+                            } else if statusCode == -3 { // Banned
+                                
+                            } else if statusCode == -4 { // Not verified
                                 self.verificationView.isHidden = false
                                 self.resendVerification(mobile: self.mobileNoTxt.text!)
+                            } else if statusCode == 0 { // Not Found
+                                self.loginEmpty = true
+                                self.errorLabel.text = "*Invalid mobile no. or password"
                             }
                         }
                     }

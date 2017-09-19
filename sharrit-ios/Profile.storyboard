@@ -236,11 +236,78 @@
                         <outlet property="starRating" destination="eDb-ZK-46f" id="bh9-sL-sOo"/>
                         <outlet property="tableView" destination="Ivk-ht-ZvZ" id="SW1-KE-DAi"/>
                         <segue destination="U1V-k9-Wzg" kind="show" identifier="editProfile" id="IYw-Sn-OcR"/>
+                        <segue destination="nRI-jY-KqF" kind="show" identifier="showHelp" id="kZR-zd-7qq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I9N-hg-0ir" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="276" y="-27"/>
+        </scene>
+        <!--Help InfoVC-->
+        <scene sceneID="Kwl-R0-HB8">
+            <objects>
+                <viewController id="nRI-jY-KqF" customClass="HelpInfoVC" customModule="sharrit_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hAh-4s-paq"/>
+                        <viewControllerLayoutGuide type="bottom" id="WHW-dK-wHs"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="U8v-DZ-r7D">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sharrit_Logo" translatesAutoresizingMaskIntoConstraints="NO" id="87O-HZ-sRj">
+                                <rect key="frame" x="120.5" y="114" width="133" height="133.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="87O-HZ-sRj" secondAttribute="height" multiplier="1:1" id="S6i-oO-9xb"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zbJ-om-985">
+                                <rect key="frame" x="19" y="272.5" width="337.5" height="267"/>
+                                <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iD7-vp-K7U" customClass="SharritButton" customModule="sharrit_ios" customModuleProvider="target">
+                                <rect key="frame" x="37.5" y="564.5" width="300" height="30"/>
+                                <state key="normal" title="Contact Us!"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isRounded" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="4Nv-II-aZO" kind="show" id="dhS-iQ-dj9"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="iD7-vp-K7U" firstAttribute="centerX" secondItem="U8v-DZ-r7D" secondAttribute="centerX" id="7u7-v4-5qw"/>
+                            <constraint firstItem="zbJ-om-985" firstAttribute="height" secondItem="U8v-DZ-r7D" secondAttribute="height" multiplier="0.4" id="Dw4-CY-Is9"/>
+                            <constraint firstItem="87O-HZ-sRj" firstAttribute="height" secondItem="U8v-DZ-r7D" secondAttribute="height" multiplier="0.2" id="LVc-DK-lVT"/>
+                            <constraint firstItem="zbJ-om-985" firstAttribute="centerX" secondItem="U8v-DZ-r7D" secondAttribute="centerX" id="Ybh-uH-bQk"/>
+                            <constraint firstItem="iD7-vp-K7U" firstAttribute="width" secondItem="U8v-DZ-r7D" secondAttribute="width" multiplier="0.8" id="ZaF-Ap-T7l"/>
+                            <constraint firstItem="zbJ-om-985" firstAttribute="width" secondItem="U8v-DZ-r7D" secondAttribute="width" multiplier="0.9" id="a8C-32-uT6"/>
+                            <constraint firstItem="87O-HZ-sRj" firstAttribute="centerX" secondItem="U8v-DZ-r7D" secondAttribute="centerX" id="awN-BY-uZl"/>
+                            <constraint firstItem="iD7-vp-K7U" firstAttribute="top" secondItem="zbJ-om-985" secondAttribute="bottom" constant="25" id="dRw-qd-iSy"/>
+                            <constraint firstItem="zbJ-om-985" firstAttribute="top" secondItem="87O-HZ-sRj" secondAttribute="bottom" constant="25" id="shL-Te-jds"/>
+                            <constraint firstItem="87O-HZ-sRj" firstAttribute="top" secondItem="hAh-4s-paq" secondAttribute="bottom" constant="50" id="wEl-Tq-U0r"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UzU-Vj-VMk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="276" y="727.28635682158927"/>
+        </scene>
+        <!--Messages-->
+        <scene sceneID="xg3-s0-UHH">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Messages" id="4Nv-II-aZO" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ddE-u8-Vwe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1106" y="727"/>
         </scene>
         <!--Edit Profile-->
         <scene sceneID="DL5-CA-8T6">
@@ -402,6 +469,9 @@
                                                         <real key="value" value="15"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="deactivateBtnTapped:" destination="U1V-k9-Wzg" eventType="touchUpInside" id="ghg-Xu-2Br"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -670,6 +740,7 @@ Cheers!</string>
         </scene>
     </scenes>
     <resources>
+        <image name="Sharrit_Logo" width="461" height="611"/>
         <image name="email" width="50" height="50"/>
         <image name="password" width="50" height="50"/>
         <image name="profile" width="25" height="25"/>

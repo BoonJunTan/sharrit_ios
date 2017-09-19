@@ -31,7 +31,6 @@ class EditProfileVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.barTintColor = NavBarUI().getNavBar()
     }
     
     @IBAction func saveBtnTapped(_ sender: SharritButton) {
@@ -73,6 +72,33 @@ class EditProfileVC: UIViewController {
                 break
             }
         }
+    }
+    
+    @IBAction func deactivateBtnTapped(_ sender: SharritButton) {
+        let alertController = UIAlertController(title: "Deactivate Account", message:
+            "Deactivating your account will disable your profile and other users will not be able to communicate with you.", preferredStyle: UIAlertControllerStyle.alert)
+        
+        alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default,handler: nil))
+        alertController.addAction(UIAlertAction(title: "Deactivate", style: UIAlertActionStyle.default,handler: { action in
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            
+            let url = "http://localhost:5000/api/auth/deactive/" + String(describing: appDelegate.user!.mobile)
+            
+            // let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/auth/deactive/" + String(describing: appDelegate.user!.mobile)
+            
+            Alamofire.request(url, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+                response in
+                switch response.result {
+                case .success(_):
+                    break
+                case .failure(_):
+                    print("Disable Profile API failed")
+                    break
+                }
+            }
+        }))
+        
+        self.present(alertController, animated: true, completion: nil)
     }
     
 }

@@ -44,7 +44,6 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.barTintColor = NavBarUI().getNavBar()
     }
     
     override func didReceiveMemoryWarning() {

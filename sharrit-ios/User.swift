@@ -22,7 +22,6 @@ class User {
     //var profilePhoto: String
     var accessToken: String
     var createDate: String
-    var role: Role!
     
     init(userID: Int, firstName: String, lastName: String, password: String, mobile: Int, accessToken: String, createDate: String) {
         self.userID = userID
@@ -32,6 +31,5 @@ class User {
         self.mobile = mobile
         self.accessToken = accessToken
         self.createDate = createDate
-        self.role = .Sharrie
     }
 }

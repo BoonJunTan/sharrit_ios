@@ -27,7 +27,6 @@ class EditPasswordVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.barTintColor = NavBarUI().getNavBar()
     }
     
     @IBAction func saveBtnTapped(_ sender: SharritButton) {

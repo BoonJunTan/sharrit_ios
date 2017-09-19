@@ -8,6 +8,8 @@
 
 import UIKit
 import JSQMessagesViewController
+import Alamofire
+import SwiftyJSON
 
 final class ConversationVC: JSQMessagesViewController {
     
@@ -23,23 +25,24 @@ final class ConversationVC: JSQMessagesViewController {
     var latitudeToSend: CLLocationDegrees?
     var longitudeToSend: CLLocationDegrees?
     
-    var chat: Message? {
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    
+    // Setup for Conversation - Details
+    var chat: Conversation? {
         didSet {
-            title = chat?.name
+            title = chat?.conversationPartner
+            senderId = String(describing: chat?.id)
+            senderDisplayName = (appDelegate.user?.firstName)! + " " + (appDelegate.user?.lastName)!
+            
+            // TODO: Get and Change Avatar
+            senderAvatar = JSQMessagesAvatarImageFactory.avatarImage(withPlaceholder: #imageLiteral(resourceName: "star"), diameter: 20)!
+            receiverAvatar = JSQMessagesAvatarImageFactory.avatarImage(withPlaceholder: #imageLiteral(resourceName: "profile2"), diameter: 20)!
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        self.navigationController?.navigationBar.barTintColor = NavBarUI().getNavBar()
-        
-        // Setup for Conversation - Details
-        senderId = "1"
-        senderDisplayName = "Dyllan"
-        title = "Ronald" // Receiver Name
-        senderAvatar = JSQMessagesAvatarImageFactory.avatarImage(withPlaceholder: #imageLiteral(resourceName: "star"), diameter: 20)!
-        receiverAvatar = JSQMessagesAvatarImageFactory.avatarImage(withPlaceholder: #imageLiteral(resourceName: "profile2"), diameter: 20)!
         
         // Setup for Conversation - Outgoing & Incoming Bubble
         outgoingBubbleImageView = setupOutgoingBubble()
@@ -170,7 +173,24 @@ final class ConversationVC: JSQMessagesViewController {
     
     // MARK: Observer for messages
     private func getMessages() {
-        // Do API Call here to get messages
+        // let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/message/" + String(describing: chat!.id)
+        let url = "http://localhost:5000/api/message/" + String(describing: chat!.id)
+        
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+            response in
+            switch response.result {
+            case .success(_):
+                if let data = response.result.value {
+                    for (_, subJson) in JSON(data) {
+                        
+                    }
+                }
+                break
+            case .failure(_):
+                break
+            }
+        }
+
         addMessage(withId: "1", name: "Dyllan", text: "Let's Meet")
         addMessage(withId: "2", name: "Ronald", text: "Lorem ipsum dolor sit amet, rebum nulla cum ei, usu ad erroribus gubergren. Id nec quaeque iudicabit. Eu eam dissentias omittantur theophrastus. Errem commodo usu ea. In eos noster debitis, at omnes nusquam mel.")
         addMessage(withId: "1", name: "Ronald", text: "Sure")
