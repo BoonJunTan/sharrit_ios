@@ -14,7 +14,10 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
     
     var allCategories: [String]!
     var currentCategory: String!
+    var currentCategoryID: Int!
     var searchBar:UISearchBar!
+    
+    var sharesCollection: [Business]! = []
     
     // Future Implementation - Location, Category & Filter
     @IBOutlet weak var categoryTabView: UIView!
@@ -32,6 +35,8 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        getSharesForCategory()
         
         searchBar = UISearchBar()
         searchBar.placeholder = setPlaceHolder(placeholder: "Search " + currentCategory);
@@ -59,13 +64,14 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
         filterDropDown.isHidden = true
         let filterTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(filterBtnTapped(tapGestureRecognizer:)))
         filterTabView.addGestureRecognizer(filterTapGestureRecognizer)
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == tabCollectionView {
             return 7
         } else {
-            return 6
+            return sharesCollection.count
         }
     }
     
@@ -79,6 +85,10 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
             
         } else {
             let sharesCell = collectionView.dequeueReusableCell(withReuseIdentifier: "sharesCell", for: indexPath as IndexPath) as! SharesCollectionViewCell
+            //sharesCell.sharesTitle =
+            //sharesCell.sharesCreatedDate =
+            //sharesCell.sharesOwnerImage =
+            sharesCell.sharesOwnerName.text = sharesCollection[indexPath.item].businessName
             sharesCell.sharesImage.image = #imageLiteral(resourceName: "power_bank")
             return sharesCell
         }
@@ -93,7 +103,7 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
                           height: tabCollectionView.layer.frame.height)
         } else {
             return CGSize(width: sharesCollectionView.layer.frame.width/2 - 10,
-                          height: sharesCollectionView.layer.frame.height/2 - 10)
+                          height: sharesCollectionView.layer.frame.height/2 + 10)
         }
     }
     
@@ -131,7 +141,7 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
         if collectionView == tabCollectionView {
             
         } else {
-            performSegue(withIdentifier: "viewSharesInfo", sender: nil)
+            performSegue(withIdentifier: "viewSharesInfo", sender: sharesCollection[indexPath.item])
         }
         //let selectedCategory = categoryLabel[indexPath.item]
         //performSegue(withIdentifier: "viewSharesCollection", sender: selectedCategory)
@@ -189,5 +199,38 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
     @IBAction func filterChoiceBtnTapped(_ sender: UIButton) {
         filterChoiceLabel.text = sender.titleLabel?.text
         filterDropDown.isHidden = true
+    }
+    
+    func getSharesForCategory() {
+        let url = SharritURL.devURL + "business/category/" + String(describing: currentCategoryID!)
+        
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+            response in
+            switch response.result {
+            case .success(_):
+                if let data = response.result.value {
+                    for (_, subJson) in JSON(data)["content"] {
+                        let businessId = subJson["businessId"].int!
+                        let businessName = subJson["name"].description
+                        let description = subJson["description"].description
+                        let dateCreated = subJson["dateCreated"].description
+                        self.sharesCollection.append(Business(businessId: subJson["businessId"].int!, businessName: businessName, description: description, dateCreated: dateCreated))
+                    }
+                    self.sharesCollectionView.reloadData()
+                }
+                break
+            case .failure(_):
+                print("Retrieve categories API failed")
+                break
+            }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "viewSharesInfo" {
+            if let sharesInfoVC = segue.destination as? SharesInfoVC {
+                sharesInfoVC.businessInfo = sender as! Business
+            }
+        }
     }
 }

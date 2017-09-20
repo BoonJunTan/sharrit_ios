@@ -19,6 +19,7 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     @IBOutlet weak var categoryCollectionView: UICollectionView!
     var categoryImage = [#imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "category5"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category2"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "category4"), #imageLiteral(resourceName: "category1"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "category3")]
     var categoryLabel:[String] = []
+    var categoryID: [Int] = []
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +63,7 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
                 if let data = response.result.value {
                     for (_, subJson) in JSON(data) {
                         self.categoryLabel.append(subJson["categoryName"].description)
+                        self.categoryID.append(subJson["categoryId"].int!)
                     }
                     self.categoryCollectionView.reloadData()
                 }
@@ -121,7 +123,9 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedCategory = categoryLabel[indexPath.item]
+        var selectedCategory = [String : Any]()
+        selectedCategory["categoryName"] = categoryLabel[indexPath.item]
+        selectedCategory["categoryID"] = categoryID[indexPath.item]
         performSegue(withIdentifier: "viewSharesCollection", sender: selectedCategory)
     }
     
@@ -184,9 +188,10 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "viewSharesCollection" {
             if let sharesCollectionVC = segue.destination as? SharesCollectionVC {
-                if let category = sender as? String {
-                    sharesCollectionVC.currentCategory = category
+                if let category = sender as? [String : Any] {
+                    sharesCollectionVC.currentCategory = category["categoryName"] as! String
                     sharesCollectionVC.allCategories = categoryLabel
+                    sharesCollectionVC.currentCategoryID = category["categoryID"] as! Int
                 }
             }
         }
