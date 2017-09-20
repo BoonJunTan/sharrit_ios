@@ -26,16 +26,11 @@ class WalletVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
                                            target: self, action: #selector(goToMessages))
         
         self.navigationItem.rightBarButtonItem = navBarBubble
-        self.navigationController?.navigationBar.isTranslucent = false
-        
-        walletView.layer.borderColor = UIColor(colorLiteralRed: 192/255.0, green: 192/255.0, blue: 192/255.0, alpha: 1).cgColor
-        walletView.layer.borderWidth = 3
-        walletView.layer.cornerRadius = 10
+        self.navigationController?.navigationBar.isTranslucent = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.barTintColor = NavBarUI().getNavBar()
     }
     
     override func didReceiveMemoryWarning() {

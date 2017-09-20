@@ -8,6 +8,8 @@
 
 import UIKit
 import JSQMessagesViewController
+import Alamofire
+import SwiftyJSON
 
 final class ConversationVC: JSQMessagesViewController {
     
@@ -23,23 +25,24 @@ final class ConversationVC: JSQMessagesViewController {
     var latitudeToSend: CLLocationDegrees?
     var longitudeToSend: CLLocationDegrees?
     
-    var chat: Message? {
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    
+    // Setup for Conversation - Details
+    var chat: Conversation? {
         didSet {
-            title = chat?.name
+            title = chat?.conversationPartner
+            senderId = (appDelegate.user!.firstName + " " + appDelegate.user!.lastName)
+            senderDisplayName = (appDelegate.user!.firstName + " " + appDelegate.user!.lastName)
+            
+            // TODO: Get and Change Avatar
+            senderAvatar = JSQMessagesAvatarImageFactory.avatarImage(withPlaceholder: #imageLiteral(resourceName: "star"), diameter: 20)!
+            receiverAvatar = JSQMessagesAvatarImageFactory.avatarImage(withPlaceholder: #imageLiteral(resourceName: "profile2"), diameter: 20)!
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        self.navigationController?.navigationBar.barTintColor = NavBarUI().getNavBar()
-        
-        // Setup for Conversation - Details
-        senderId = "1"
-        senderDisplayName = "Dyllan"
-        title = "Ronald" // Receiver Name
-        senderAvatar = JSQMessagesAvatarImageFactory.avatarImage(withPlaceholder: #imageLiteral(resourceName: "star"), diameter: 20)!
-        receiverAvatar = JSQMessagesAvatarImageFactory.avatarImage(withPlaceholder: #imageLiteral(resourceName: "profile2"), diameter: 20)!
         
         // Setup for Conversation - Outgoing & Incoming Bubble
         outgoingBubbleImageView = setupOutgoingBubble()
@@ -95,12 +98,11 @@ final class ConversationVC: JSQMessagesViewController {
     }
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAt indexPath: IndexPath!) -> JSQMessageBubbleImageDataSource! {
-        return messages[indexPath.item].senderId == self.senderId ? outgoingBubbleImageView : incomingBubbleImageView
+        return messages[indexPath.item].senderId == (appDelegate.user!.firstName + " " + appDelegate.user!.lastName) ? outgoingBubbleImageView : incomingBubbleImageView
     }
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
-        let message = messages[indexPath.item]
-        if message.senderId == "1" {
+        if messages[indexPath.item].senderId == (appDelegate.user!.firstName + " " + appDelegate.user!.lastName) {
             return receiverAvatar
         } else {
             return senderAvatar
@@ -120,11 +122,40 @@ final class ConversationVC: JSQMessagesViewController {
     }
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout, heightForCellTopLabelAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.item % 3 == 0 {
+        
+        if (indexPath.item == 0) {
             return kJSQMessagesCollectionViewCellLabelHeightDefault
         }
         
+        if (indexPath.item - 1 > 0) {
+            let previousMessage = messages[indexPath.item - 1]
+            let message = messages[indexPath.item]
+            
+            if (message.date.timeIntervalSince(previousMessage.date) / 60 > 1) {
+                return kJSQMessagesCollectionViewCellLabelHeightDefault
+            }
+        }
+        
         return 0.0
+        
+    }
+    
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, attributedTextForCellTopLabelAt indexPath: IndexPath!) -> NSAttributedString! {
+        
+        let message = messages[indexPath.item]
+        
+        if (indexPath.item == 0) {
+            return JSQMessagesTimestampFormatter.shared().attributedTimestamp(for: message.date)
+        }
+        
+        if (indexPath.item - 1 > 0) {
+            let previousMessage = messages[indexPath.item - 1]
+            if (message.date.timeIntervalSince(previousMessage.date) / 60 > 1) {
+                return JSQMessagesTimestampFormatter.shared().attributedTimestamp(for: message.date)
+            }
+        }
+        
+        return nil;
     }
     
     func buildLocationItem(latitude: CLLocationDegrees, longitude: CLLocationDegrees) -> JSQLocationMediaItem {
@@ -156,31 +187,54 @@ final class ConversationVC: JSQMessagesViewController {
         let message = JSQMessage(senderId: senderId, senderDisplayName: senderDisplayName, date: date, text: text)!
         messages.append(message)
         finishSendingMessage(animated: true)
-    }
-    
-    override func collectionView(_ collectionView: JSQMessagesCollectionView, attributedTextForCellTopLabelAt indexPath: IndexPath) -> NSAttributedString? {
         
-        if (indexPath.item % 3 == 0) {
-            let message = self.messages[indexPath.item]
-            return JSQMessagesTimestampFormatter.shared().attributedTimestamp(for: message.date)
+        // let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/message/" + String(describing: chat!.id)
+        let url = "http://localhost:5000/api/message/" + String(describing: chat!.id)
+        
+        let messageData: [String: Any] = ["body": text, "senderName": senderId]
+        
+        Alamofire.request(url, method: .post, parameters: messageData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+            response in
+            switch response.result {
+            case .success(_):
+                break
+            case .failure(_):
+                print("Write new message API failed")
+                break
+            }
         }
-        
-        return nil
     }
     
     // MARK: Observer for messages
     private func getMessages() {
-        // Do API Call here to get messages
-        addMessage(withId: "1", name: "Dyllan", text: "Let's Meet")
-        addMessage(withId: "2", name: "Ronald", text: "Lorem ipsum dolor sit amet, rebum nulla cum ei, usu ad erroribus gubergren. Id nec quaeque iudicabit. Eu eam dissentias omittantur theophrastus. Errem commodo usu ea. In eos noster debitis, at omnes nusquam mel.")
-        addMessage(withId: "1", name: "Ronald", text: "Sure")
-        addMessage(withId: "1", name: "Ronald", text: "Lorem ipsum dolor sit amet, rebum nulla cum ei, usu ad erroribus gubergren. Id nec quaeque iudicabit. Eu eam dissentias omittantur theophrastus. Errem commodo usu ea. In eos noster debitis, at omnes nusquam mel.")
+        // let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/message/" + String(describing: chat!.id)
+        let url = "http://localhost:5000/api/message/" + String(describing: chat!.id)
+        
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+            response in
+            switch response.result {
+            case .success(_):
+                if let data = response.result.value {
+                    for (_, subJson) in JSON(data)["content"] {
+                        self.addMessage(withId: subJson["senderName"].description, name: subJson["senderName"].description, dateSent: subJson["dateCreated"].description, text: subJson["body"].description)
+                    }
+                }
+                break
+            case .failure(_):
+                break
+            }
+        }
         finishReceivingMessage()
     }
     
     // Creation of Messages
-    private func addMessage(withId id:String, name:String, text:String){
-        if let message = JSQMessage(senderId: id, displayName: name, text: text) {
+    private func addMessage(withId id:String, name:String, dateSent: String, text:String) {
+        // Format Date
+        let dateFormatter2 = DateFormatter()
+        dateFormatter2.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
+        let messageDate = dateFormatter2.date(from: dateSent)
+        
+        if let message = JSQMessage(senderId: id, senderDisplayName: name, date: messageDate, text: text) {
             messages.append(message)
         }
     }

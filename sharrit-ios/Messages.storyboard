@@ -23,15 +23,56 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EfO-Up-hNo">
+                                <rect key="frame" x="0.0" y="64" width="375" height="66.5"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="abx-f6-0fw">
+                                        <rect key="frame" x="47" y="17" width="281" height="33.5"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TBu-Zh-iYr">
+                                                <rect key="frame" x="0.0" y="0.0" width="93.5" height="33.5"/>
+                                                <state key="normal" title="All"/>
+                                                <state key="highlighted">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="allBtnPressed:" destination="fQf-mT-1AX" eventType="touchUpInside" id="5ZW-7K-ssX"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Isg-uN-XTt">
+                                                <rect key="frame" x="93.5" y="0.0" width="94" height="33.5"/>
+                                                <state key="normal" title="Sharrie"/>
+                                                <connections>
+                                                    <action selector="sharrieBtnPressed:" destination="fQf-mT-1AX" eventType="touchUpInside" id="HaR-fn-4yd"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jys-tp-vIr">
+                                                <rect key="frame" x="187.5" y="0.0" width="93.5" height="33.5"/>
+                                                <state key="normal" title="Sharror"/>
+                                                <connections>
+                                                    <action selector="sharrorBtnPressed:" destination="fQf-mT-1AX" eventType="touchUpInside" id="Alb-dY-hoG"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="abx-f6-0fw" firstAttribute="centerX" secondItem="EfO-Up-hNo" secondAttribute="centerX" id="098-EE-kVN"/>
+                                    <constraint firstItem="abx-f6-0fw" firstAttribute="height" secondItem="EfO-Up-hNo" secondAttribute="height" multiplier="0.5" id="Li5-hA-BRe"/>
+                                    <constraint firstItem="abx-f6-0fw" firstAttribute="centerY" secondItem="EfO-Up-hNo" secondAttribute="centerY" id="Sko-c8-DEf"/>
+                                    <constraint firstItem="abx-f6-0fw" firstAttribute="width" secondItem="EfO-Up-hNo" secondAttribute="width" multiplier="0.75" id="ttS-h2-HHC"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iQo-5d-Hva">
-                                <rect key="frame" x="0.0" y="64" width="375" height="1"/>
+                                <rect key="frame" x="0.0" y="130.5" width="375" height="1"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="K0y-ue-PKD"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xcn-pa-ajG">
-                                <rect key="frame" x="0.0" y="65" width="375" height="602"/>
+                                <rect key="frame" x="0.0" y="131.5" width="375" height="535.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="messageCell" id="Y3G-gY-krA" customClass="MessageTableViewCell" customModule="sharrit_ios" customModuleProvider="target">
@@ -56,7 +97,7 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I will be coming from Yishun, see you later." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MlO-GY-BFS">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I will be coming from Yishun, see you later." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MlO-GY-BFS">
                                                             <rect key="frame" x="0.0" y="39" width="221" height="31.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                             <nil key="textColor"/>
@@ -111,16 +152,23 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="iQo-5d-Hva" firstAttribute="leading" secondItem="OqY-Ky-opF" secondAttribute="leading" id="0xt-W3-TFc"/>
+                            <constraint firstItem="EfO-Up-hNo" firstAttribute="height" secondItem="OqY-Ky-opF" secondAttribute="height" multiplier="0.1" id="9SI-Ze-3KL"/>
                             <constraint firstAttribute="trailing" secondItem="xcn-pa-ajG" secondAttribute="trailing" id="Hf0-e4-nlD"/>
+                            <constraint firstItem="EfO-Up-hNo" firstAttribute="leading" secondItem="OqY-Ky-opF" secondAttribute="leading" id="PNs-E3-trG"/>
                             <constraint firstItem="xcn-pa-ajG" firstAttribute="leading" secondItem="OqY-Ky-opF" secondAttribute="leading" id="Sev-Zv-vu1"/>
-                            <constraint firstItem="iQo-5d-Hva" firstAttribute="top" secondItem="rEC-Cl-rhe" secondAttribute="bottom" id="a37-se-SXW"/>
+                            <constraint firstItem="iQo-5d-Hva" firstAttribute="top" secondItem="EfO-Up-hNo" secondAttribute="bottom" id="a4l-CT-e7J"/>
                             <constraint firstItem="xcn-pa-ajG" firstAttribute="top" secondItem="iQo-5d-Hva" secondAttribute="bottom" id="h8e-1k-YoO"/>
+                            <constraint firstItem="EfO-Up-hNo" firstAttribute="top" secondItem="rEC-Cl-rhe" secondAttribute="bottom" id="hWW-XG-kTo"/>
+                            <constraint firstAttribute="trailing" secondItem="EfO-Up-hNo" secondAttribute="trailing" id="pVT-ke-6XI"/>
                             <constraint firstItem="y5B-Al-CIE" firstAttribute="top" secondItem="xcn-pa-ajG" secondAttribute="bottom" id="thv-sw-uRs"/>
                             <constraint firstAttribute="trailing" secondItem="iQo-5d-Hva" secondAttribute="trailing" id="yD1-n0-FyX"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Messages" id="8nq-b9-5rz"/>
                     <connections>
+                        <outlet property="allBtn" destination="TBu-Zh-iYr" id="wzD-LZ-HZV"/>
+                        <outlet property="sharrieBtn" destination="Isg-uN-XTt" id="zUz-6g-86t"/>
+                        <outlet property="sharrorBtn" destination="Jys-tp-vIr" id="s3v-RB-NEv"/>
                         <outlet property="tableView" destination="xcn-pa-ajG" id="0ZV-6i-sm9"/>
                         <segue destination="ndI-9w-RQs" kind="show" identifier="conversationIdentifier" id="CoS-6E-cBf"/>
                     </connections>
@@ -132,7 +180,6 @@
         <!--Conversation-->
         <scene sceneID="qSy-SQ-u0c">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xtf-Et-sKh" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController title="Conversation" id="ndI-9w-RQs" customClass="ConversationVC" customModule="sharrit_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rSS-dT-tKI"/>
@@ -144,6 +191,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xtf-Et-sKh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="822" y="-47"/>
         </scene>

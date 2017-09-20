@@ -8,6 +8,8 @@
 
 import UIKit
 import ImageSlideshow
+import Alamofire
+import SwiftyJSON
 
 class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
@@ -15,17 +17,18 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     @IBOutlet weak var carouselView: ImageSlideshow!
     
     @IBOutlet weak var categoryCollectionView: UICollectionView!
-    var categoryImage = [#imageLiteral(resourceName: "category1"), #imageLiteral(resourceName: "category2"), #imageLiteral(resourceName: "category3"), #imageLiteral(resourceName: "category4"), #imageLiteral(resourceName: "category5"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category6")]
-    //var categoryLabel = ["HOME APPLIANCES", "SPORTS EQUIPMENT", "WOMEN’S FASHION", "MEN’S FASHION", "TRAVEL ACCESSORIES", "TRANSPORT"]
-    var categoryLabel = ["Accessories", "Video, DVD, & Blu-ray", "Travel Accessories", "Transport", "Sports & Outdoors", "Services", "Pet Accessories", "Mobile & gadgets", "Men's Fashion", "Home Appliances", "Health & Personal Care", "Games & Hobbies", "Food & Beverages", "Design & Crafts", "Computers and Peripherals", "Books", "Bags", "Automotive", "Watches", "Women's Fashion"]
+    var categoryImage = [#imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "category5"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category2"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "category4"), #imageLiteral(resourceName: "category1"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "category3")]
+    var categoryLabel:[String] = []
         
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         checkIfUserLoggedIn()
         
+        getCategoryDetails()
+        
         searchBar = UISearchBar()
-        searchBar.placeholder = setPlaceHolder(placeholder: "Search");
+        searchBar.placeholder = setPlaceHolder(placeholder: "Search Sharrit");
         self.navigationItem.titleView = searchBar
         
         let navBarBubble = UIBarButtonItem(image: #imageLiteral(resourceName: "chat"),
@@ -36,12 +39,11 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         
         carouselView.setImageInputs([ImageSource(image: #imageLiteral(resourceName: "carousel1")), ImageSource(image: #imageLiteral(resourceName: "carousel2")), ImageSource(image: #imageLiteral(resourceName: "carousel3"))])
         carouselView.contentScaleMode = .scaleToFill
-        carouselView.slideshowInterval = 3
+        carouselView.slideshowInterval = 5
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.barTintColor = NavBarUI().getNavBar()
     }
     
     override func didReceiveMemoryWarning() {
@@ -49,8 +51,28 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         // Dispose of any resources that can be recreated.
     }
     
+    func getCategoryDetails() {
+        let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/category/"
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+            response in
+            switch response.result {
+            case .success(_):
+                if let data = response.result.value {
+                    for (_, subJson) in JSON(data) {
+                        self.categoryLabel.append(subJson["categoryName"].description)
+                    }
+                    self.categoryCollectionView.reloadData()
+                }
+                break
+            case .failure(_):
+                print("Retrieve categories API failed")
+                break
+            }
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return categoryImage.count
+        return categoryLabel.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -83,14 +105,13 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // handle tap events
-        print("You selected cell #\(indexPath.item)!")
+        let selectedCategory = categoryLabel[indexPath.item]
+        performSegue(withIdentifier: "viewSharesCollection", sender: selectedCategory)
     }
     
     func checkIfUserLoggedIn() {
-        // Need to call UserDefaults.standard.set(userInfoDict, forKey: "userInfo") instead
         if let userInfo = UserDefaults.standard.object(forKey: "userInfo") as? [String: Any] {
-            let userAccount = User(userID: Int((userInfo["userId"] as? String)!)!, firstName: userInfo["firstName"] as! String, lastName: userInfo["lastName"] as! String, password: userInfo["password"] as! String, mobile: Int((userInfo["mobile"] as? String)!)!, accessToken: userInfo["accessToken"] as! String, createDate: userInfo["dateCreated"] as! String)
+            let userAccount = User(userID: Int((userInfo["userId"] as? String)!)!, firstName: userInfo["firstName"] as! String, lastName: userInfo["lastName"] as! String, password: userInfo["password"] as! String, mobile: (userInfo["mobile"] as! String), profilePhoto: userInfo["imageSrc"] as! String, accessToken: userInfo["accessToken"] as! String, createDate: userInfo["dateCreated"] as! String)
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             appDelegate.user = userAccount
         } else {
@@ -142,6 +163,16 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
                 }
             }
         })
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "viewSharesCollection" {
+            if let sharesCollectionVC = segue.destination as? SharesCollectionVC {
+                if let category = sender as? String {
+                    sharesCollectionVC.currentCategory = category
+                }
+            }
+        }
     }
   
 }

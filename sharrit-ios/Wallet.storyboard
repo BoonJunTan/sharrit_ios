@@ -43,10 +43,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eCX-sj-TVi">
-                                <rect key="frame" x="5" y="69" width="365" height="209.5"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="219.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DeZ-mv-EpO">
-                                        <rect key="frame" x="76.5" y="44.5" width="213" height="122"/>
+                                        <rect key="frame" x="81.5" y="49.5" width="213" height="122"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="88.88" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uxz-KE-RGJ">
                                                 <rect key="frame" x="0.0" y="0.0" width="213" height="66"/>
@@ -74,7 +74,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.2666666667" green="0.69411764710000001" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="DeZ-mv-EpO" firstAttribute="centerX" secondItem="eCX-sj-TVi" secondAttribute="centerX" id="5bi-Lj-LGt"/>
                                     <constraint firstItem="DeZ-mv-EpO" firstAttribute="centerY" secondItem="eCX-sj-TVi" secondAttribute="centerY" id="m7p-fb-BeR"/>
@@ -155,12 +155,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="3vA-8e-2Jl" firstAttribute="top" secondItem="ycM-82-qGM" secondAttribute="bottom" id="1zn-ER-NZg"/>
-                            <constraint firstItem="ycM-82-qGM" firstAttribute="top" secondItem="eCX-sj-TVi" secondAttribute="bottom" constant="5" id="46F-fv-yTy"/>
-                            <constraint firstAttribute="trailing" secondItem="eCX-sj-TVi" secondAttribute="trailing" constant="5" id="4CO-cF-UPa"/>
+                            <constraint firstItem="ycM-82-qGM" firstAttribute="top" secondItem="eCX-sj-TVi" secondAttribute="bottom" id="46F-fv-yTy"/>
+                            <constraint firstAttribute="trailing" secondItem="eCX-sj-TVi" secondAttribute="trailing" id="4CO-cF-UPa"/>
                             <constraint firstItem="3vA-8e-2Jl" firstAttribute="height" secondItem="YXf-fs-3ha" secondAttribute="height" multiplier="0.5" id="AG7-8l-2JS"/>
-                            <constraint firstItem="eCX-sj-TVi" firstAttribute="top" secondItem="beI-I7-NfY" secondAttribute="bottom" constant="5" id="GdA-qc-XlX"/>
+                            <constraint firstItem="eCX-sj-TVi" firstAttribute="top" secondItem="beI-I7-NfY" secondAttribute="bottom" id="GdA-qc-XlX"/>
                             <constraint firstAttribute="trailing" secondItem="3vA-8e-2Jl" secondAttribute="trailing" id="J8p-Ff-vhr"/>
-                            <constraint firstAttribute="leading" secondItem="eCX-sj-TVi" secondAttribute="leading" constant="-5" id="OQI-s7-nh0"/>
+                            <constraint firstAttribute="leading" secondItem="eCX-sj-TVi" secondAttribute="leading" id="OQI-s7-nh0"/>
                             <constraint firstAttribute="trailing" secondItem="ycM-82-qGM" secondAttribute="trailing" id="RBR-hl-9BE"/>
                             <constraint firstItem="ycM-82-qGM" firstAttribute="leading" secondItem="YXf-fs-3ha" secondAttribute="leading" id="XhK-Tj-za2"/>
                             <constraint firstItem="snx-PN-yuE" firstAttribute="top" secondItem="3vA-8e-2Jl" secondAttribute="bottom" id="ajz-oG-chS"/>

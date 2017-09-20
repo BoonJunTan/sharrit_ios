@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 enum MessageType {
     case All
@@ -17,7 +19,24 @@ enum MessageType {
 class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
-    private var chats: [Message] = []
+    private var chats: [Conversation] = []
+    
+    @IBOutlet weak var allBtn: UIButton!
+    @IBOutlet weak var sharrieBtn: UIButton!
+    @IBOutlet weak var sharrorBtn: UIButton!
+    
+    var messageType: MessageType = .All {
+        didSet {
+            switch messageType {
+            case .All:
+                break
+            case .Sharries:
+                break
+            case .Sharror:
+                break
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,13 +45,13 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         let navBarClose = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(closeMessages))
         self.navigationItem.leftBarButtonItem = navBarClose
         
+        setupBtnUI()
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView() // For Hiding away empty cell
         
-        self.navigationController?.navigationBar.barTintColor = NavBarUI().getNavBar()
-        
-        chats.append(Message(id: "1", name: "Test"))
+        getAllConversation()
     }
     
     override func didReceiveMemoryWarning() {
@@ -45,16 +64,76 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         self.dismiss(animated: true, completion: nil)
     }
     
+    func setupBtnUI() {
+        allBtn.layer.borderColor = Colours.Blue.sharritBlue.cgColor
+        allBtn.layer.borderWidth = 1
+        currentBtnSelected(btn: allBtn)
+        sharrieBtn.layer.borderColor = Colours.Blue.sharritBlue.cgColor
+        sharrieBtn.layer.borderWidth = 1
+        sharrorBtn.layer.borderColor = Colours.Blue.sharritBlue.cgColor
+        sharrorBtn.layer.borderWidth = 1
+    }
+    
+    func currentBtnSelected(btn: UIButton) {
+        btn.backgroundColor = Colours.Blue.sharritBlue
+        btn.setTitleColor(UIColor.white, for: .normal)
+    }
+    
+    func defaultBtnUI() {
+        allBtn.backgroundColor = UIColor.white
+        allBtn.setTitleColor(Colours.Blue.sharritBlue, for: .normal)
+        sharrieBtn.backgroundColor = UIColor.white
+        sharrieBtn.setTitleColor(Colours.Blue.sharritBlue, for: .normal)
+        sharrorBtn.backgroundColor = UIColor.white
+        sharrorBtn.setTitleColor(Colours.Blue.sharritBlue, for: .normal)
+    }
+    
+    func getAllConversation() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+
+        let url = "http://localhost:5000/api/conversation/user/" + String(describing: appDelegate.user!.userID)
+
+        //let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/conversation/user/" + String(describing: appDelegate.user!.userID)
+        
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+            response in
+            switch response.result {
+            case .success(_):
+                if let data = response.result.value {
+                    for (_, subJson) in JSON(data) {
+                        self.chats.append(Conversation(id: Int(subJson["conversationId"].description)!, conversationPartner: subJson["senderName"].description, latestMessage: subJson["body"].description, subjectTitle: subJson["subject"].description, lastestMessageDate: subJson["dateCreated"].description))
+                    }
+                    self.tableView.reloadData()
+                }
+                break
+            case .failure(_):
+                print("Get Conversation API failed")
+                break
+            }
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 7
+        return chats.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "messageCell") as! MessageTableViewCell
-        /*
-        cell.iconLabel.text = tableViewItems[indexPath.section][indexPath.row]
-        cell.iconImage.image = tableViewIcons[indexPath.section][indexPath.row]
-        */
+        cell.itemTitle.text = chats[indexPath.row].subjectTitle
+        cell.profileName.text = chats[indexPath.row].conversationPartner
+        cell.messageLabel.text = chats[indexPath.row].latestMessage
+        
+        // Format Date
+        let dateFormatter2 = DateFormatter()
+        dateFormatter2.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
+        let messageDate = dateFormatter2.date(from: chats[indexPath.row].lastestMessageDate)
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMM, h:mm a"
+        dateFormatter.amSymbol = "AM"
+        dateFormatter.pmSymbol = "PM"
+        cell.messageDate.text = dateFormatter.string(from: messageDate!)
+
         return cell
     }
     
@@ -63,34 +142,34 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        /*
-        switch tableViewItems[indexPath.section][indexPath.row] {
-        case "View as Sharror":
-            tableViewItems[indexPath.section][indexPath.row] = "View as Sharries"
-            switchRole()
-            break
-        case "View as Sharries":
-            tableViewItems[indexPath.section][indexPath.row] = "View as Sharror"
-            switchRole()
-            break
-        case "Logout":
-            logoutPressed()
-            break
-        default:
-            break
-        }
-        tableView.reloadData()
-        */
         let chat = chats[indexPath.row]
         performSegue(withIdentifier: "conversationIdentifier", sender: chat)
     }
     
+    @IBAction func allBtnPressed(_ sender: UIButton) {
+        messageType = .All
+        defaultBtnUI()
+        currentBtnSelected(btn: allBtn)
+    }
+    
+    @IBAction func sharrieBtnPressed(_ sender: UIButton) {
+        messageType = .Sharries
+        defaultBtnUI()
+        currentBtnSelected(btn: sharrieBtn)
+    }
+    
+    @IBAction func sharrorBtnPressed(_ sender: UIButton) {
+        messageType = .Sharror
+        defaultBtnUI()
+        currentBtnSelected(btn: sharrorBtn)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
-        if let chat = sender as? Message {
+        if let chat = sender as? Conversation {
             let chatVC = segue.destination as! ConversationVC
             
-            //chatVC.senderDisplayName = senderDisplayName
+            chatVC.senderDisplayName = chat.conversationPartner
             chatVC.chat = chat
         }
     }

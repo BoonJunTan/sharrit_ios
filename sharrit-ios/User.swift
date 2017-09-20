@@ -18,20 +18,19 @@ class User {
     var firstName: String
     var lastName: String
     var password: String
-    var mobile: Int
-    //var profilePhoto: String
+    var mobile: String
+    var profilePhoto: String
     var accessToken: String
     var createDate: String
-    var role: Role!
     
-    init(userID: Int, firstName: String, lastName: String, password: String, mobile: Int, accessToken: String, createDate: String) {
+    init(userID: Int, firstName: String, lastName: String, password: String, mobile: String, profilePhoto: String, accessToken: String, createDate: String) {
         self.userID = userID
         self.firstName = firstName
         self.lastName = lastName
         self.password = password
         self.mobile = mobile
+        self.profilePhoto = profilePhoto
         self.accessToken = accessToken
         self.createDate = createDate
-        self.role = .Sharrie
     }
 }

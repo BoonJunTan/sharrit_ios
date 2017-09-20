@@ -8,18 +8,24 @@
 
 import UIKit
 import Cosmos
+import Photos
+import Alamofire
+import SwiftyJSON
 
-class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     let tableViewSection = ["", "SETTINGS"]
-    var tableViewIcons:[[UIImage]]!
-    var tableViewItems:[[String]]!
+    var tableViewIcons = [[#imageLiteral(resourceName: "Sharrit_Logo"), #imageLiteral(resourceName: "Sharrit_Logo"),#imageLiteral(resourceName: "reputation"), #imageLiteral(resourceName: "business")], [#imageLiteral(resourceName: "profile2"), #imageLiteral(resourceName: "help"), #imageLiteral(resourceName: "logout")]]
+    var tableViewItems = [["Sharres Requested", "Sharres Offered", "Reputation", "Sharing Business"], ["Profile Settings", "Help Centre", "Logout"]]
 
+    @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var profileLabe: UILabel!
     @IBOutlet weak var starRating: CosmosView!
     let fakeRatingDouble = 4.7
     @IBOutlet weak var profileDate: UILabel!
+    
+    let imagePicker = UIImagePickerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +39,6 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         starRating.settings.fillMode = .precise
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        profileLabe.text = (appDelegate.user?.firstName)! + " " + (appDelegate.user?.lastName)!
         
         // Get user profile creation date
         let dateFormatter = DateFormatter()
@@ -53,7 +58,17 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         formatter.unitsStyle = .full
         profileDate.text = formatter.string(from: endDate!, to: todayDate!)
         
-        setupProfileBtn()
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(profileImageBtnTapped(taoGestureRecognizer:)))
+        profileImage.isUserInteractionEnabled = true
+        if appDelegate.user!.profilePhoto == "" {
+            profileImage.image = nil
+        } else {
+            if let checkedUrl = URL(string: appDelegate.user!.profilePhoto) {
+                downloadProfilePhoto(from: checkedUrl)
+            }
+        }
+        profileImage.addGestureRecognizer(tapGestureRecognizer)
+        imagePicker.delegate = self
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -65,15 +80,10 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         // Dispose of any resources that can be recreated.
     }
     
-    func setupProfileBtn() {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        if (appDelegate.user?.role == .Sharrie) {
-            tableViewIcons = [[#imageLiteral(resourceName: "Sharrit_Logo"),#imageLiteral(resourceName: "reputation")], [#imageLiteral(resourceName: "profile2"), #imageLiteral(resourceName: "help"), #imageLiteral(resourceName: "change_role"), #imageLiteral(resourceName: "logout")]]
-            tableViewItems = [["My Sharres", "Reputation"], ["Profile Settings", "Help Centre", "Switch to Sharror", "Logout"]]
-        } else {
-            tableViewIcons = [[#imageLiteral(resourceName: "Sharrit_Logo"), #imageLiteral(resourceName: "business"),#imageLiteral(resourceName: "reputation")], [#imageLiteral(resourceName: "profile2"), #imageLiteral(resourceName: "help"), #imageLiteral(resourceName: "change_role"), #imageLiteral(resourceName: "logout")]]
-            tableViewItems = [["My Sharres", "Sharing Business", "Reputation"], ["Profile Settings", "Help Centre", "Switch to Sharrie", "Logout"]]
-        }
+        profileLabe.text = (appDelegate.user?.firstName)! + " " + (appDelegate.user?.lastName)!
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -102,20 +112,11 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch tableViewItems[indexPath.section][indexPath.row] {
-        case "My Sharres":
-            break
-        case "Sharing Business":
-            break
         case "Profile Settings":
             self.performSegue(withIdentifier: "editProfile", sender: self)
             break
-        case "Switch to Sharror":
-            tableViewItems[indexPath.section][indexPath.row] = "Switch to Sharrie"
-            switchRole(newRole: .Sharror)
-            break
-        case "Switch to Sharrie":
-            tableViewItems[indexPath.section][indexPath.row] = "Switch to Sharror"
-            switchRole(newRole: .Sharrie)
+        case "Help Centre":
+            self.performSegue(withIdentifier: "showHelp", sender: self)
             break
         case "Logout":
             logoutPressed()
@@ -142,16 +143,95 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         })
     }
     
-    func switchRole(newRole: Role) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.user?.role = newRole
-        navigationController?.navigationBar.barTintColor = NavBarUI().getNavBar()
-        setupProfileBtn()
-        tableView.reloadData()
+    func downloadProfilePhoto(from url: URL) {
+        getDataFromUrl(url: url) { (data, response, error)  in
+            guard let data = data, error == nil else { return }
+            DispatchQueue.main.async() { () -> Void in
+                self.profileImage.image = UIImage(data: data)
+            }
+        }
+    }
+    
+    func getDataFromUrl(url: URL, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void) {
+        URLSession.shared.dataTask(with: url) {
+            (data, response, error) in
+            completion(data, response, error)
+            }.resume()
+    }
+    
+    func profileImageBtnTapped(taoGestureRecognizer: UITapGestureRecognizer) {
+        PHPhotoLibrary.requestAuthorization { status in
+            switch status {
+            case .authorized:
+                self.imagePicker.allowsEditing = true
+                self.imagePicker.sourceType = .photoLibrary
+                self.present(self.imagePicker, animated: true, completion: nil)
+                break
+            case .denied, .restricted:
+                let alert = UIAlertController(title: "Error", message: "Sharrit has no access to your photo album. Please allow access in order to change your profile photo. Cheers!", preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "Setting", style: .default, handler: { (_) in
+                    DispatchQueue.main.async {
+                        if let settingsURL = URL(string: UIApplicationOpenSettingsURLString) {
+                            UIApplication.shared.openURL(settingsURL)
+                        }
+                    }
+                }))
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                break
+            default:
+                break
+            }
+        }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+
+            let url = "http://localhost:5000/api/user/upload/" + String(describing: appDelegate.user!.userID)
+            //let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/user/upload/" + String(describing: appDelegate.user!.userID)
+            
+            Alamofire.upload(multipartFormData: { multipartFormData in
+                if let imageData = UIImageJPEGRepresentation(pickedImage, 1) {
+                    multipartFormData.append(imageData, withName: "file", fileName: "userID" + String(describing: appDelegate.user!.userID) + ".png", mimeType: "image/png")
+                }}, to: url, method: .post, headers: ["Authorization": "auth_token"],
+                    encodingCompletion: { encodingResult in
+                        switch encodingResult {
+                        case .success(let upload, _, _):
+                            
+                            upload.responseJSON { response in
+                                
+                                if let value = response.result.value {
+                                    var json = JSON(value)
+                                    let newUrlString = json["content"]["fileName"].string!
+                                    
+                                    // Change Actual
+                                    self.profileImage.image = pickedImage
+                                    
+                                    // Change App Delegate
+                                    appDelegate.user!.profilePhoto = newUrlString
+                                    
+                                    // Change User Default
+                                    if var userInfo = UserDefaults.standard.object(forKey: "userInfo") as? [String: Any] {
+                                        userInfo["imageSrc"] = newUrlString
+                                        UserDefaults.standard.set(userInfo, forKey: "userInfo")
+                                        UserDefaults.standard.synchronize()
+                                    }
+                                }
+                            }
+                        case .failure(_):
+                            print("Upload Profile Photo API failed")
+                        }
+            })
+        }
+        
+        dismiss(animated: true, completion: nil)
     }
     
     func logoutPressed() {
-        UserDefaults.standard.removeObject(forKey: "isUserLoggedIn")
+        UserDefaults.standard.removeObject(forKey: "userInfo")
         
         let mainStoryboard = UIStoryboard(name: "LoginAndSignUp" , bundle: nil)
         let loginVC = mainStoryboard.instantiateViewController(withIdentifier: "Login") as! LoginVC
