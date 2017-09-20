@@ -91,13 +91,26 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     func getAllConversation() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
-        let url = SharritURL.devURL + "conversation/user/" + String(describing: appDelegate.user!.userID)
+        let url: String!
+        
+        switch messageType {
+        case .All:
+            url = SharritURL.devURL + "conversation/user/" + String(describing: appDelegate.user!.userID)
+            break
+        case .Sharries:
+            url = SharritURL.devURL + "conversation/sharrie/" + String(describing: appDelegate.user!.userID)
+            break
+        case .Sharror:
+            url = SharritURL.devURL + "conversation/sharror/" + String(describing: appDelegate.user!.userID)
+            break
+        }
         
         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in
             switch response.result {
             case .success(_):
                 if let data = response.result.value {
+                    self.chats.removeAll()
                     for (_, subJson) in JSON(data) {
                         self.chats.append(Conversation(id: Int(subJson["conversationId"].description)!, conversationPartner: subJson["senderName"].description, latestMessage: subJson["body"].description, subjectTitle: subJson["subject"].description, lastestMessageDate: subJson["dateCreated"].description))
                     }
@@ -148,18 +161,21 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         messageType = .All
         defaultBtnUI()
         currentBtnSelected(btn: allBtn)
+        getAllConversation()
     }
     
     @IBAction func sharrieBtnPressed(_ sender: UIButton) {
         messageType = .Sharries
         defaultBtnUI()
         currentBtnSelected(btn: sharrieBtn)
+        getAllConversation()
     }
     
     @IBAction func sharrorBtnPressed(_ sender: UIButton) {
         messageType = .Sharror
         defaultBtnUI()
         currentBtnSelected(btn: sharrorBtn)
+        getAllConversation()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

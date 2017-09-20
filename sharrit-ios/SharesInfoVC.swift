@@ -64,15 +64,16 @@ class SharesInfoVC: UIViewController {
         })
     }
     
-    @IBAction func chatWithSB(_ sender: SharritButton) {
-        
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "submitForm" {
             if let sharrorFormVC = segue.destination as? SharrorFormVC {
                 sharrorFormVC.companyName = businessInfo.businessName
                 sharrorFormVC.companyId = businessInfo.businessId
+            }
+        } else if segue.identifier == "contactBusiness" {
+            if let contactBusinessVC = segue.destination as? ContactBusinessVC {
+                contactBusinessVC.sharingBusinessName = businessInfo.businessName
+                contactBusinessVC.sharingBusinessID = businessInfo.businessId
             }
         }
     }

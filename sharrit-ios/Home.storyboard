@@ -625,10 +625,10 @@
             </objects>
             <point key="canvasLocation" x="623" y="0.0"/>
         </scene>
-        <!--View Controller-->
+        <!--Contact BusinessVC-->
         <scene sceneID="Phb-ye-9e1">
             <objects>
-                <viewController id="CBv-rB-MxY" sceneMemberID="viewController">
+                <viewController id="CBv-rB-MxY" customClass="ContactBusinessVC" customModule="sharrit_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="TDl-n0-U3k"/>
                         <viewControllerLayoutGuide type="bottom" id="lSB-8r-KRl"/>
@@ -636,12 +636,102 @@
                     <view key="view" contentMode="scaleToFill" id="wrj-lt-r5i">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hFK-TW-9qz">
+                                <rect key="frame" x="38" y="133.5" width="300" height="400.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subject:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H7M-Qd-E9O">
+                                        <rect key="frame" x="0.0" y="0.0" width="74" height="23"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FtJ-oa-8ww">
+                                        <rect key="frame" x="0.0" y="33" width="300" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1dj-bf-zBI">
+                                        <rect key="frame" x="0.0" y="88" width="86" height="23"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="aZN-f7-7qk">
+                                        <rect key="frame" x="0.0" y="121" width="300" height="191.5"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*Subject and message cannot be empty." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nm3-ny-th4">
+                                        <rect key="frame" x="0.0" y="337.5" width="300" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fAD-2l-cIJ" customClass="SharritButton" customModule="sharrit_ios" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="360.5" width="300" height="30"/>
+                                        <state key="normal" title="Contact Us"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isRounded" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="sendBtnTapped:" destination="CBv-rB-MxY" eventType="touchUpInside" id="HvJ-6R-6wF"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="FtJ-oa-8ww" secondAttribute="trailing" id="3Q8-3l-tDl"/>
+                                    <constraint firstItem="FtJ-oa-8ww" firstAttribute="top" secondItem="H7M-Qd-E9O" secondAttribute="bottom" constant="10" id="615-NY-5Xi"/>
+                                    <constraint firstItem="1dj-bf-zBI" firstAttribute="top" secondItem="FtJ-oa-8ww" secondAttribute="bottom" constant="25" id="JYX-kC-FNu"/>
+                                    <constraint firstAttribute="bottom" secondItem="fAD-2l-cIJ" secondAttribute="bottom" constant="10" id="OmM-BZ-gUi"/>
+                                    <constraint firstItem="FtJ-oa-8ww" firstAttribute="leading" secondItem="hFK-TW-9qz" secondAttribute="leading" id="QwL-zQ-XJF"/>
+                                    <constraint firstItem="nm3-ny-th4" firstAttribute="top" secondItem="aZN-f7-7qk" secondAttribute="bottom" constant="25" id="RxL-O5-akd"/>
+                                    <constraint firstItem="1dj-bf-zBI" firstAttribute="leading" secondItem="H7M-Qd-E9O" secondAttribute="leading" id="TAp-b3-MST"/>
+                                    <constraint firstItem="fAD-2l-cIJ" firstAttribute="top" secondItem="nm3-ny-th4" secondAttribute="bottom" constant="5" id="XDC-dy-UIQ"/>
+                                    <constraint firstItem="H7M-Qd-E9O" firstAttribute="top" secondItem="hFK-TW-9qz" secondAttribute="top" id="Xbh-Yx-Awf"/>
+                                    <constraint firstAttribute="trailing" secondItem="fAD-2l-cIJ" secondAttribute="trailing" id="XeF-Sr-OPd"/>
+                                    <constraint firstAttribute="trailing" secondItem="aZN-f7-7qk" secondAttribute="trailing" id="YPi-8W-ofk"/>
+                                    <constraint firstAttribute="trailing" secondItem="nm3-ny-th4" secondAttribute="trailing" id="ZLM-df-Ldl"/>
+                                    <constraint firstItem="nm3-ny-th4" firstAttribute="leading" secondItem="hFK-TW-9qz" secondAttribute="leading" id="bvb-LN-PpM"/>
+                                    <constraint firstItem="fAD-2l-cIJ" firstAttribute="leading" secondItem="hFK-TW-9qz" secondAttribute="leading" id="hBC-Ce-q7c"/>
+                                    <constraint firstItem="H7M-Qd-E9O" firstAttribute="leading" secondItem="hFK-TW-9qz" secondAttribute="leading" id="joo-gl-SdS"/>
+                                    <constraint firstItem="aZN-f7-7qk" firstAttribute="top" secondItem="1dj-bf-zBI" secondAttribute="bottom" constant="10" id="rbk-D6-EYV"/>
+                                    <constraint firstItem="aZN-f7-7qk" firstAttribute="leading" secondItem="hFK-TW-9qz" secondAttribute="leading" id="sFo-WE-Hsj"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="hFK-TW-9qz" firstAttribute="width" secondItem="wrj-lt-r5i" secondAttribute="width" multiplier="0.8" id="0Rr-Ae-pkH"/>
+                            <constraint firstItem="hFK-TW-9qz" firstAttribute="centerX" secondItem="wrj-lt-r5i" secondAttribute="centerX" id="VrY-d1-FAl"/>
+                            <constraint firstItem="hFK-TW-9qz" firstAttribute="centerY" secondItem="wrj-lt-r5i" secondAttribute="centerY" id="Zxh-Kg-rC8"/>
+                            <constraint firstItem="hFK-TW-9qz" firstAttribute="height" secondItem="wrj-lt-r5i" secondAttribute="height" multiplier="0.6" id="dUD-8b-zTX"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="errorView" destination="nm3-ny-th4" id="mvy-AG-1by"/>
+                        <outlet property="messageText" destination="aZN-f7-7qk" id="2ZE-VS-hEg"/>
+                        <outlet property="subjectLabel" destination="FtJ-oa-8ww" id="nZy-IU-RMO"/>
+                        <segue destination="od9-99-9fs" kind="show" identifier="showConversation" id="J7u-Ia-QFN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TIj-re-yFZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1582" y="778"/>
+        </scene>
+        <!--Messages-->
+        <scene sceneID="xo7-qI-M7M">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Messages" id="od9-99-9fs" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="clA-90-qMR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2553" y="777"/>
         </scene>
         <!--Shares InfoVC-->
         <scene sceneID="8Xo-zQ-ekW">
@@ -732,7 +822,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="chatWithSB:" destination="7NM-ia-QVX" eventType="touchUpInside" id="AAV-Qq-WZj"/>
+                                            <segue destination="CBv-rB-MxY" kind="show" identifier="contactBusiness" id="Tha-DN-BzJ"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8h8-SQ-I98" customClass="SharritButton" customModule="sharrit_ios" customModuleProvider="target">
