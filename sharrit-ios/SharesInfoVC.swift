@@ -72,6 +72,7 @@ class SharesInfoVC: UIViewController {
         if segue.identifier == "submitForm" {
             if let sharrorFormVC = segue.destination as? SharrorFormVC {
                 sharrorFormVC.companyName = businessInfo.businessName
+                sharrorFormVC.companyId = businessInfo.businessId
             }
         }
     }

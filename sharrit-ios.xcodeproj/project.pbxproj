@@ -16,6 +16,7 @@
 		2764C47B1F725E2D00DB7199 /* Business.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2764C47A1F725E2D00DB7199 /* Business.swift */; };
 		2764C47D1F726FDD00DB7199 /* SharrorFormVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2764C47C1F726FDD00DB7199 /* SharrorFormVC.swift */; };
 		2764C4811F7271AB00DB7199 /* SharrorFormCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2764C4801F7271AB00DB7199 /* SharrorFormCollectionViewCell.swift */; };
+		2764C4831F72DE1400DB7199 /* ContactUsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2764C4821F72DE1400DB7199 /* ContactUsVC.swift */; };
 		27702CD51F69531900A1C652 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27702CD41F69531900A1C652 /* ProfileTableViewCell.swift */; };
 		27702CD91F69621900A1C652 /* Messages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27702CD81F69621900A1C652 /* Messages.storyboard */; };
 		27702CDB1F6962F900A1C652 /* MessagesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27702CDA1F6962F900A1C652 /* MessagesVC.swift */; };
@@ -62,6 +63,7 @@
 		2764C47A1F725E2D00DB7199 /* Business.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Business.swift; sourceTree = "<group>"; };
 		2764C47C1F726FDD00DB7199 /* SharrorFormVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharrorFormVC.swift; sourceTree = "<group>"; };
 		2764C4801F7271AB00DB7199 /* SharrorFormCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharrorFormCollectionViewCell.swift; sourceTree = "<group>"; };
+		2764C4821F72DE1400DB7199 /* ContactUsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactUsVC.swift; sourceTree = "<group>"; };
 		27702CD41F69531900A1C652 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		27702CD81F69621900A1C652 /* Messages.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Messages.storyboard; sourceTree = "<group>"; };
 		27702CDA1F6962F900A1C652 /* MessagesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesVC.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 				27B37F921F6EC2E200565AA8 /* EditProfileVC.swift */,
 				274A36881F7024A000FD5E3C /* EditPasswordVC.swift */,
 				274A368A1F70318200FD5E3C /* HelpInfoVC.swift */,
+				2764C4821F72DE1400DB7199 /* ContactUsVC.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -404,6 +407,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				27FCB7DD1F67768C008E973C /* ProfileVC.swift in Sources */,
+				2764C4831F72DE1400DB7199 /* ContactUsVC.swift in Sources */,
 				2764C47B1F725E2D00DB7199 /* Business.swift in Sources */,
 				27FCB7F21F67DB8F008E973C /* SignUpVC.swift in Sources */,
 				27FCB7EC1F678FD1008E973C /* Colours.swift in Sources */,

@@ -273,7 +273,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="4Nv-II-aZO" kind="show" id="dhS-iQ-dj9"/>
+                                    <segue destination="gOk-xr-aUw" kind="show" id="gtG-Td-fKs"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -296,13 +296,113 @@
             </objects>
             <point key="canvasLocation" x="276" y="727.28635682158927"/>
         </scene>
-        <!--Messages-->
-        <scene sceneID="xg3-s0-UHH">
+        <!--Contact Us!-->
+        <scene sceneID="5e9-5r-69z">
             <objects>
-                <viewControllerPlaceholder storyboardName="Messages" id="4Nv-II-aZO" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ddE-u8-Vwe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController title="Contact Us!" id="gOk-xr-aUw" customClass="ContactUsVC" customModule="sharrit_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xRr-E9-Rk7"/>
+                        <viewControllerLayoutGuide type="bottom" id="4tD-QW-sFp"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="UFe-QD-dIL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NIZ-Rt-BNS">
+                                <rect key="frame" x="37" y="133" width="300" height="400"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subject:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qK0-NZ-T3o">
+                                        <rect key="frame" x="0.0" y="0.0" width="74" height="23"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fV8-7i-3gn">
+                                        <rect key="frame" x="0.0" y="33" width="300" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EGZ-4O-Hgm">
+                                        <rect key="frame" x="0.0" y="88" width="86" height="23"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="HXk-EK-1tI">
+                                        <rect key="frame" x="0.0" y="121" width="300" height="191"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*Subject and message cannot be empty." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fNK-Hc-e9W">
+                                        <rect key="frame" x="0.0" y="337" width="300" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kbc-bl-uBb" customClass="SharritButton" customModule="sharrit_ios" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="360" width="300" height="30"/>
+                                        <state key="normal" title="Contact Us"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isRounded" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="sendBtnTapped:" destination="gOk-xr-aUw" eventType="touchUpInside" id="zhc-f6-NhJ"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="fV8-7i-3gn" secondAttribute="trailing" id="0RD-F3-rDd"/>
+                                    <constraint firstAttribute="trailing" secondItem="HXk-EK-1tI" secondAttribute="trailing" id="0sr-SF-B73"/>
+                                    <constraint firstItem="qK0-NZ-T3o" firstAttribute="top" secondItem="NIZ-Rt-BNS" secondAttribute="top" id="2rH-bo-ykX"/>
+                                    <constraint firstItem="fV8-7i-3gn" firstAttribute="leading" secondItem="NIZ-Rt-BNS" secondAttribute="leading" id="6aJ-H6-DQY"/>
+                                    <constraint firstItem="Kbc-bl-uBb" firstAttribute="top" secondItem="fNK-Hc-e9W" secondAttribute="bottom" constant="5" id="AFM-OK-tPH"/>
+                                    <constraint firstAttribute="trailing" secondItem="fNK-Hc-e9W" secondAttribute="trailing" id="FRy-19-0an"/>
+                                    <constraint firstItem="HXk-EK-1tI" firstAttribute="top" secondItem="EGZ-4O-Hgm" secondAttribute="bottom" constant="10" id="SEN-UX-BtN"/>
+                                    <constraint firstItem="Kbc-bl-uBb" firstAttribute="leading" secondItem="NIZ-Rt-BNS" secondAttribute="leading" id="SlJ-pZ-VXM"/>
+                                    <constraint firstItem="fNK-Hc-e9W" firstAttribute="top" secondItem="HXk-EK-1tI" secondAttribute="bottom" constant="25" id="Trn-rz-tc2"/>
+                                    <constraint firstItem="EGZ-4O-Hgm" firstAttribute="top" secondItem="fV8-7i-3gn" secondAttribute="bottom" constant="25" id="UdL-vR-f6c"/>
+                                    <constraint firstAttribute="bottom" secondItem="Kbc-bl-uBb" secondAttribute="bottom" constant="10" id="XBn-jj-Ca4"/>
+                                    <constraint firstItem="HXk-EK-1tI" firstAttribute="leading" secondItem="NIZ-Rt-BNS" secondAttribute="leading" id="Xpv-We-6s1"/>
+                                    <constraint firstItem="fV8-7i-3gn" firstAttribute="top" secondItem="qK0-NZ-T3o" secondAttribute="bottom" constant="10" id="aL6-Ux-FqC"/>
+                                    <constraint firstItem="EGZ-4O-Hgm" firstAttribute="leading" secondItem="qK0-NZ-T3o" secondAttribute="leading" id="eB8-C1-DRO"/>
+                                    <constraint firstItem="qK0-NZ-T3o" firstAttribute="leading" secondItem="NIZ-Rt-BNS" secondAttribute="leading" id="fdU-Ct-tge"/>
+                                    <constraint firstItem="fNK-Hc-e9W" firstAttribute="leading" secondItem="NIZ-Rt-BNS" secondAttribute="leading" id="sQK-6J-b7l"/>
+                                    <constraint firstAttribute="trailing" secondItem="Kbc-bl-uBb" secondAttribute="trailing" id="veh-Wf-n64"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="NIZ-Rt-BNS" firstAttribute="height" secondItem="UFe-QD-dIL" secondAttribute="height" multiplier="0.6" id="4sP-vg-Qtm"/>
+                            <constraint firstItem="NIZ-Rt-BNS" firstAttribute="centerX" secondItem="UFe-QD-dIL" secondAttribute="centerX" id="V8p-Zb-S25"/>
+                            <constraint firstItem="NIZ-Rt-BNS" firstAttribute="centerY" secondItem="UFe-QD-dIL" secondAttribute="centerY" id="b5t-ol-A0i"/>
+                            <constraint firstItem="NIZ-Rt-BNS" firstAttribute="width" secondItem="UFe-QD-dIL" secondAttribute="width" multiplier="0.8" id="hFq-aK-xsR"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="errorView" destination="fNK-Hc-e9W" id="E02-Sf-N3M"/>
+                        <outlet property="messageText" destination="HXk-EK-1tI" id="xpS-Rz-DFR"/>
+                        <outlet property="subjectLabel" destination="fV8-7i-3gn" id="qxu-Sw-ctU"/>
+                        <segue destination="Eif-bh-V8f" kind="show" identifier="showConversation" id="pGv-qM-pQq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Epn-OD-IRM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1106" y="727"/>
+            <point key="canvasLocation" x="1181.5999999999999" y="726.38680659670172"/>
+        </scene>
+        <!--Messages-->
+        <scene sceneID="rzm-4k-5JL">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Messages" id="Eif-bh-V8f" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FR8-9b-VPY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1878" y="726"/>
         </scene>
         <!--Edit Profile-->
         <scene sceneID="DL5-CA-8T6">

@@ -625,6 +625,24 @@
             </objects>
             <point key="canvasLocation" x="623" y="0.0"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="Phb-ye-9e1">
+            <objects>
+                <viewController id="CBv-rB-MxY" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="TDl-n0-U3k"/>
+                        <viewControllerLayoutGuide type="bottom" id="lSB-8r-KRl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wrj-lt-r5i">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TIj-re-yFZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1582" y="778"/>
+        </scene>
         <!--Shares InfoVC-->
         <scene sceneID="8Xo-zQ-ekW">
             <objects>
@@ -931,21 +949,43 @@
                                     <outlet property="delegate" destination="0zi-ZS-ggp" id="bUr-jw-xQA"/>
                                 </connections>
                             </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p1w-SS-kq0">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your application has been sent. Please wait to be notify. Cheers!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h0b-UH-DcU">
+                                        <rect key="frame" x="37.5" y="257" width="300" height="41"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="h0b-UH-DcU" firstAttribute="centerX" secondItem="p1w-SS-kq0" secondAttribute="centerX" id="CRN-hS-2qq"/>
+                                    <constraint firstItem="h0b-UH-DcU" firstAttribute="width" secondItem="p1w-SS-kq0" secondAttribute="width" multiplier="0.8" id="ip6-lu-MlR"/>
+                                    <constraint firstItem="h0b-UH-DcU" firstAttribute="centerY" secondItem="p1w-SS-kq0" secondAttribute="centerY" id="jdj-2Q-Vqh"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="emw-nY-raM" firstAttribute="leading" secondItem="LE6-rZ-4jg" secondAttribute="leading" id="42g-e9-6wd"/>
                             <constraint firstItem="LE6-rZ-4jg" firstAttribute="leading" secondItem="AiG-IX-jHg" secondAttribute="leading" id="5G0-Ds-kHZ"/>
+                            <constraint firstItem="p1w-SS-kq0" firstAttribute="leading" secondItem="AiG-IX-jHg" secondAttribute="leading" id="9Uh-jx-zUy"/>
                             <constraint firstItem="vym-3L-aXe" firstAttribute="top" secondItem="LE6-rZ-4jg" secondAttribute="bottom" id="L0w-fL-4tt"/>
+                            <constraint firstItem="p1w-SS-kq0" firstAttribute="top" secondItem="Awj-ke-TPn" secondAttribute="bottom" id="WNB-6l-GXh"/>
+                            <constraint firstAttribute="trailing" secondItem="p1w-SS-kq0" secondAttribute="trailing" id="fNd-8f-TAy"/>
                             <constraint firstItem="LE6-rZ-4jg" firstAttribute="top" secondItem="emw-nY-raM" secondAttribute="bottom" id="jCR-3w-hwD"/>
                             <constraint firstItem="emw-nY-raM" firstAttribute="top" secondItem="Awj-ke-TPn" secondAttribute="bottom" id="pf9-pv-McU"/>
                             <constraint firstAttribute="trailing" secondItem="LE6-rZ-4jg" secondAttribute="trailing" id="sfI-i4-8JA"/>
+                            <constraint firstItem="vym-3L-aXe" firstAttribute="top" secondItem="p1w-SS-kq0" secondAttribute="bottom" id="xxH-eW-d6G"/>
                             <constraint firstItem="emw-nY-raM" firstAttribute="trailing" secondItem="LE6-rZ-4jg" secondAttribute="trailing" id="yuY-5U-5VO"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="eAG-wE-DIi"/>
                     <connections>
                         <outlet property="questionCollectionView" destination="LE6-rZ-4jg" id="szV-DV-SXR"/>
+                        <outlet property="succesfulApplicationView" destination="p1w-SS-kq0" id="Af2-4i-hRQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tkw-AX-PUT" userLabel="First Responder" sceneMemberID="firstResponder"/>
