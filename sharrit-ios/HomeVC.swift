@@ -53,6 +53,8 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     
     func getCategoryDetails() {
         let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/category/"
+        //let url = SharritURL.devURL + "category/"
+        
         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in
             switch response.result {
@@ -184,6 +186,7 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
             if let sharesCollectionVC = segue.destination as? SharesCollectionVC {
                 if let category = sender as? String {
                     sharesCollectionVC.currentCategory = category
+                    sharesCollectionVC.allCategories = categoryLabel
                 }
             }
         }

@@ -99,8 +99,7 @@ class LoginVC: UIViewController, CountryPickerDelegate {
         if !loginEmpty {
             let signUpData: [String: Any] = ["phoneNumber": mobileCountryCode! + mobileNoTxt.text!, "password": passwordTxt.text]
             
-            let url = "http://localhost:5000/api/auth/userlogin"
-            //let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/auth/userlogin"
+            let url = SharritURL.devURL + "auth/userlogin"
             
             Alamofire.request(url, method: .post, parameters: signUpData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
                 response in
@@ -178,8 +177,7 @@ class LoginVC: UIViewController, CountryPickerDelegate {
     }
     
     @IBAction func dismissForgetPassword(_ sender: UIButton) {
-        let url = "http://localhost:5000/api/user/forget"
-        //let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/user/forget"
+        let url = SharritURL.devURL + "user/forget"
         
         Alamofire.request(url, method: .post, parameters: ["phoneNumber": forgetNo.text!], encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in
@@ -198,8 +196,7 @@ class LoginVC: UIViewController, CountryPickerDelegate {
     func resendVerification(mobile: String) {
         let mobileCountryCode = mobileCountryBtn.titleLabel?.text
 
-        let url = "http://localhost:5000/api/auth/reverify/" + mobileCountryCode! + mobile
-        //let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/auth/reverify/" + mobileCountryCode! + mobile
+        let url = SharritURL.devURL + "auth/reverify/" + mobileCountryCode! + mobile
         
         Alamofire.request(url, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in
@@ -216,8 +213,7 @@ class LoginVC: UIViewController, CountryPickerDelegate {
     @IBAction func resentActivation(_ sender: UIButton) {
         let mobileCountryCode = mobileCountryBtn.titleLabel?.text
         
-        let url = "http://localhost:5000/api/auth/activate/" + mobileCountryCode! + mobileNoTxt.text!
-        //let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/auth/activate/" + mobileCountryCode! + mobileNoTxt.text!
+        let url = SharritURL.devURL + "auth/activate/" + mobileCountryCode! + mobileNoTxt.text!
         
         Alamofire.request(url, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in

@@ -117,8 +117,7 @@ class SignUpVC: UIViewController, CountryPickerDelegate {
             
             let signUpData: [String: Any] = ["firstName": firstNameTxt.text, "lastName": lastNameTxt.text, "phoneNumber": mobileCountryCode! + mobileTxt.text!, "password": passwordTxt.text]
             
-            let url = "http://localhost:5000/api/user"
-            //let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/user"
+            let url = SharritURL.devURL + "user"
             
             Alamofire.request(url, method: .post, parameters: signUpData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
                 response in

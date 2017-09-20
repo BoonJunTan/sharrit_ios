@@ -58,7 +58,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
         formatter.unitsStyle = .full
         profileDate.text = formatter.string(from: endDate!, to: todayDate!)
         
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(profileImageBtnTapped(taoGestureRecognizer:)))
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(profileImageBtnTapped(tapGestureRecognizer:)))
         profileImage.isUserInteractionEnabled = true
         if appDelegate.user!.profilePhoto == "" {
             profileImage.image = #imageLiteral(resourceName: "profile2")
@@ -159,7 +159,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
             }.resume()
     }
     
-    func profileImageBtnTapped(taoGestureRecognizer: UITapGestureRecognizer) {
+    func profileImageBtnTapped(tapGestureRecognizer: UITapGestureRecognizer) {
         PHPhotoLibrary.requestAuthorization { status in
             switch status {
             case .authorized:
@@ -190,8 +190,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
-            let url = "http://localhost:5000/api/user/upload/" + String(describing: appDelegate.user!.userID)
-            //let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/user/upload/" + String(describing: appDelegate.user!.userID)
+            let url = SharritURL.devURL + "user/upload/" + String(describing: appDelegate.user!.userID)
             
             Alamofire.upload(multipartFormData: { multipartFormData in
                 if let imageData = UIImageJPEGRepresentation(pickedImage, 1) {

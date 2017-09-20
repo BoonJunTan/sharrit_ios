@@ -12,11 +12,20 @@ import SwiftyJSON
 
 class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
+    var allCategories: [String]!
     var currentCategory: String!
     var searchBar:UISearchBar!
     
     // Future Implementation - Location, Category & Filter
+    @IBOutlet weak var categoryTabView: UIView!
     @IBOutlet weak var categoryLabel: UILabel!
+    @IBOutlet weak var categoryDropDown: UIView!
+    @IBOutlet weak var categoryStackView: UIStackView!
+    
+    // Filter
+    @IBOutlet weak var filterTabView: UIView!
+    @IBOutlet weak var filterDropDown: UIView!
+    @IBOutlet weak var filterChoiceLabel: UILabel!
     
     @IBOutlet weak var tabCollectionView: UICollectionView!
     @IBOutlet weak var sharesCollectionView: UICollectionView!
@@ -35,6 +44,21 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
         self.navigationItem.rightBarButtonItem = navBarBubble
         
         categoryLabel.text = currentCategory
+        for var i in 0..<allCategories.count {
+            let button = UIButton(frame: CGRect(x: 0, y: 0, width: 0, height: 100))
+            button.setTitle(allCategories[i], for: .normal)
+            button.setTitleColor(Colours.Blue.sharritBlue, for: .normal)
+            button.addTarget(self, action: #selector(categoryChoiceBtnTapped), for: .touchUpInside)
+            categoryStackView.addArrangedSubview(button)
+        }
+        
+        categoryDropDown.isHidden = true
+        let categoryTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(categoryBtnTapped(tapGestureRecognizer:)))
+        categoryTabView.addGestureRecognizer(categoryTapGestureRecognizer)
+        
+        filterDropDown.isHidden = true
+        let filterTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(filterBtnTapped(tapGestureRecognizer:)))
+        filterTabView.addGestureRecognizer(filterTapGestureRecognizer)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -55,7 +79,7 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
             
         } else {
             let sharesCell = collectionView.dequeueReusableCell(withReuseIdentifier: "sharesCell", for: indexPath as IndexPath) as! SharesCollectionViewCell
-            sharesCell.sharesImage.image = #imageLiteral(resourceName: "category2")
+            sharesCell.sharesImage.image = #imageLiteral(resourceName: "power_bank")
             return sharesCell
         }
         
@@ -107,7 +131,7 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
         if collectionView == tabCollectionView {
             
         } else {
-            
+            performSegue(withIdentifier: "viewSharesInfo", sender: nil)
         }
         //let selectedCategory = categoryLabel[indexPath.item]
         //performSegue(withIdentifier: "viewSharesCollection", sender: selectedCategory)
@@ -149,4 +173,21 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
         return placeholder;
     }
     
+    func categoryBtnTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+        categoryDropDown.isHidden = !categoryDropDown.isHidden
+    }
+    
+    func categoryChoiceBtnTapped(_ sender: UIButton) {
+        categoryLabel.text = sender.titleLabel?.text
+        categoryDropDown.isHidden = true
+    }
+    
+    func filterBtnTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+        filterDropDown.isHidden = !filterDropDown.isHidden
+    }
+    
+    @IBAction func filterChoiceBtnTapped(_ sender: UIButton) {
+        filterChoiceLabel.text = sender.titleLabel?.text
+        filterDropDown.isHidden = true
+    }
 }

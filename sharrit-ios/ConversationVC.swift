@@ -188,8 +188,7 @@ final class ConversationVC: JSQMessagesViewController {
         messages.append(message)
         finishSendingMessage(animated: true)
         
-        // let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/message/" + String(describing: chat!.id)
-        let url = "http://localhost:5000/api/message/" + String(describing: chat!.id)
+        let url = SharritURL.devURL + "message/" + String(describing: chat!.id)
         
         let messageData: [String: Any] = ["body": text, "senderName": senderId]
         
@@ -207,8 +206,7 @@ final class ConversationVC: JSQMessagesViewController {
     
     // MARK: Observer for messages
     private func getMessages() {
-        // let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/message/" + String(describing: chat!.id)
-        let url = "http://localhost:5000/api/message/" + String(describing: chat!.id)
+        let url = SharritURL.devURL + "message/" + String(describing: chat!.id)
         
         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in

@@ -91,9 +91,7 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     func getAllConversation() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
-        let url = "http://localhost:5000/api/conversation/user/" + String(describing: appDelegate.user!.userID)
-
-        //let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/conversation/user/" + String(describing: appDelegate.user!.userID)
+        let url = SharritURL.devURL + "conversation/user/" + String(describing: appDelegate.user!.userID)
         
         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in

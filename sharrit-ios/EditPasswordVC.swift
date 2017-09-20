@@ -41,8 +41,7 @@ class EditPasswordVC: UIViewController {
             
             let signUpData: [String: Any] = ["firstName": appDelegate.user!.firstName, "lastName": appDelegate.user!.lastName, "password" : newPasswordTxt.text!, "oldPassword" : oldPasswordTxt.text!]
             
-            let url = "http://localhost:5000/api/user/" + String(describing: appDelegate.user!.userID)
-            // let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/user" + String(describing: appDelegate.user!.userID)
+            let url = SharritURL.devURL + "user/" + String(describing: appDelegate.user!.userID)
             
             Alamofire.request(url, method: .put, parameters: signUpData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
                 response in
