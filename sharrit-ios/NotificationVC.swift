@@ -7,14 +7,17 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class NotificationVC: UITableViewController {
     
-    // url = /api/notification/user/{userid}
+    var notificationList: [Notification] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        getAllNotification()
         
         let navBarBubble = UIBarButtonItem(image: #imageLiteral(resourceName: "chat"),
                                            style: .plain ,
@@ -35,13 +38,23 @@ class NotificationVC: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return notificationList.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "notificationCell") as! NotificationTableViewCell
-//        cell.iconLabel.text = tableViewItems[indexPath.section][indexPath.row]
-//        cell.iconImage.image = tableViewIcons[indexPath.section][indexPath.row]
+
+        cell.notificationDetails.text = notificationList[indexPath.item].message
+        
+        let dateFormatter2 = DateFormatter()
+        dateFormatter2.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
+        let notificationDate = dateFormatter2.date(from: notificationList[indexPath.item].date)
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMM, h:mm a"
+        dateFormatter.amSymbol = "AM"
+        dateFormatter.pmSymbol = "PM"
+        cell.notificationDate.text = dateFormatter.string(from: notificationDate!)
         return cell
     }
     
@@ -65,4 +78,25 @@ class NotificationVC: UITableViewController {
         })
     }
     
+    func getAllNotification() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        let url = SharritURL.devURL + "notification/user/" + String(describing: appDelegate.user!.userID)
+        
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+            response in
+            switch response.result {
+            case .success(_):
+                if let data = response.result.value {
+                    for (_, subJson) in JSON(data) {
+                        self.notificationList.append(Notification(id: subJson["notificationId"].int!, type: subJson["type"].int!, typeId: subJson["typeId"].int!, date: subJson["dateCreated"].string!, message: subJson["message"].string!))
+                    }
+                }
+                self.tableView.reloadData()
+                break
+            case .failure(_):
+                break
+            }
+        }
+    }
 }

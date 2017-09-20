@@ -18,6 +18,7 @@
 		2764C4811F7271AB00DB7199 /* SharrorFormCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2764C4801F7271AB00DB7199 /* SharrorFormCollectionViewCell.swift */; };
 		2764C4831F72DE1400DB7199 /* ContactUsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2764C4821F72DE1400DB7199 /* ContactUsVC.swift */; };
 		2764C4851F72E4B500DB7199 /* ContactBusinessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2764C4841F72E4B500DB7199 /* ContactBusinessVC.swift */; };
+		2764C4871F72ECB700DB7199 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2764C4861F72ECB700DB7199 /* Notification.swift */; };
 		27702CD51F69531900A1C652 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27702CD41F69531900A1C652 /* ProfileTableViewCell.swift */; };
 		27702CD91F69621900A1C652 /* Messages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27702CD81F69621900A1C652 /* Messages.storyboard */; };
 		27702CDB1F6962F900A1C652 /* MessagesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27702CDA1F6962F900A1C652 /* MessagesVC.swift */; };
@@ -66,6 +67,7 @@
 		2764C4801F7271AB00DB7199 /* SharrorFormCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharrorFormCollectionViewCell.swift; sourceTree = "<group>"; };
 		2764C4821F72DE1400DB7199 /* ContactUsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactUsVC.swift; sourceTree = "<group>"; };
 		2764C4841F72E4B500DB7199 /* ContactBusinessVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactBusinessVC.swift; sourceTree = "<group>"; };
+		2764C4861F72ECB700DB7199 /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		27702CD41F69531900A1C652 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		27702CD81F69621900A1C652 /* Messages.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Messages.storyboard; sourceTree = "<group>"; };
 		27702CDA1F6962F900A1C652 /* MessagesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesVC.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 				27FCB7E21F6776C6008E973C /* Notification.storyboard */,
 				27FCB7DE1F6776A5008E973C /* NotificationVC.swift */,
 				27F256431F6ACE8D006B1697 /* NotificationTableViewCell.swift */,
+				2764C4861F72ECB700DB7199 /* Notification.swift */,
 			);
 			name = Notification;
 			sourceTree = "<group>";
@@ -417,6 +420,7 @@
 				27FCB7EC1F678FD1008E973C /* Colours.swift in Sources */,
 				274A36891F7024A000FD5E3C /* EditPasswordVC.swift in Sources */,
 				27FCB7DF1F6776A5008E973C /* NotificationVC.swift in Sources */,
+				2764C4871F72ECB700DB7199 /* Notification.swift in Sources */,
 				2764C4811F7271AB00DB7199 /* SharrorFormCollectionViewCell.swift in Sources */,
 				27F256441F6ACE8D006B1697 /* NotificationTableViewCell.swift in Sources */,
 				27FCB7E11F6776B6008E973C /* WalletVC.swift in Sources */,
