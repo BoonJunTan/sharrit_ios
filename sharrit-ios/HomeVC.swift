@@ -88,20 +88,34 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: categoryCollectionView.layer.frame.width/2,
-                      height: categoryCollectionView.layer.frame.height/3)
+        return CGSize(width: categoryCollectionView.layer.frame.width/2 - 5,
+                      height: categoryCollectionView.layer.frame.height/3 - 5)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        
+        let totalCellWidth = categoryCollectionView.layer.frame.width/2 * 2 - 5
+        let totalCellHeight = categoryCollectionView.layer.frame.height/3 * 3 - 5
+        
+        let leftInset = (categoryCollectionView.layer.frame.width - CGFloat(totalCellWidth)) / 2
+        let rightInset = leftInset
+        
+        let topInset = (categoryCollectionView.layer.frame.height - CGFloat(totalCellHeight)) / 2
+        let btnInset = topInset
+        
+        return UIEdgeInsetsMake(topInset, leftInset, btnInset, rightInset)
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        return 5
     }
     
     func collectionView(_ collectionView: UICollectionView, layout
         collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        return 5
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

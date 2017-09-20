@@ -15,6 +15,9 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
     var currentCategory: String!
     var searchBar:UISearchBar!
     
+    // Future Implementation - Location, Category & Filter
+    @IBOutlet weak var categoryLabel: UILabel!
+    
     @IBOutlet weak var tabCollectionView: UICollectionView!
     @IBOutlet weak var sharesCollectionView: UICollectionView!
     
@@ -30,6 +33,8 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
                                            target: self, action: #selector(goToMessages))
         
         self.navigationItem.rightBarButtonItem = navBarBubble
+        
+        categoryLabel.text = currentCategory
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -63,8 +68,8 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
             return CGSize(width: tabCollectionView.layer.frame.width/4,
                           height: tabCollectionView.layer.frame.height)
         } else {
-            return CGSize(width: sharesCollectionView.layer.frame.width/2 - 5,
-                          height: sharesCollectionView.layer.frame.height/2 - 5)
+            return CGSize(width: sharesCollectionView.layer.frame.width/2 - 10,
+                          height: sharesCollectionView.layer.frame.height/2 - 10)
         }
     }
     
@@ -74,7 +79,7 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
         if collectionView == tabCollectionView {
             return 0
         } else {
-            return 0
+            return 5
         }
     }
     
@@ -84,8 +89,18 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
         if collectionView == tabCollectionView {
             return 0
         } else {
-            return 0
+            return 5
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        
+        let totalCellWidth = sharesCollectionView.layer.frame.width/2 * 2 - 10
+        
+        let leftInset = (sharesCollectionView.layer.frame.width - CGFloat(totalCellWidth)) / 2
+        let rightInset = leftInset
+        
+        return UIEdgeInsetsMake(leftInset, leftInset, leftInset, rightInset)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

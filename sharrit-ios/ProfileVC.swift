@@ -61,7 +61,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(profileImageBtnTapped(taoGestureRecognizer:)))
         profileImage.isUserInteractionEnabled = true
         if appDelegate.user!.profilePhoto == "" {
-            profileImage.image = nil
+            profileImage.image = #imageLiteral(resourceName: "profile2")
         } else {
             if let checkedUrl = URL(string: appDelegate.user!.profilePhoto) {
                 downloadProfilePhoto(from: checkedUrl)
