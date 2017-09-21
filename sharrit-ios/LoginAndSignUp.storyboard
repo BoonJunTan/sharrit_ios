@@ -369,17 +369,52 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PmY-Rh-ZvM">
                                         <rect key="frame" x="49" y="277" width="295" height="98"/>
                                         <subviews>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Country Code + Mobile No." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EJ8-Ak-a1H">
-                                                <rect key="frame" x="5" y="10" width="285" height="30"/>
-                                                <nil key="textColor"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5jR-iT-4rt">
+                                                <rect key="frame" x="5" y="10" width="285" height="33"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vZp-QY-dnv" customClass="SharritButton" customModule="sharrit_ios" customModuleProvider="target">
+                                                        <rect key="frame" x="5" y="2" width="57" height="30"/>
+                                                        <state key="normal" title="+65"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isRounded" value="YES"/>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="5"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="mobileCountryCodeBtn:" destination="c89-ed-Ev1" eventType="touchUpInside" id="mqv-Vs-BdN"/>
+                                                        </connections>
+                                                    </button>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Mobile No" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EJ8-Ak-a1H">
+                                                        <rect key="frame" x="67" y="2" width="216" height="30"/>
+                                                        <nil key="textColor"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstItem="vZp-QY-dnv" firstAttribute="centerY" secondItem="5jR-iT-4rt" secondAttribute="centerY" id="0bm-eL-LRv"/>
+                                                    <constraint firstItem="EJ8-Ak-a1H" firstAttribute="centerY" secondItem="5jR-iT-4rt" secondAttribute="centerY" id="F0a-xE-eeA"/>
+                                                    <constraint firstAttribute="trailing" secondItem="EJ8-Ak-a1H" secondAttribute="trailing" constant="2" id="LFu-r8-3M1"/>
+                                                    <constraint firstItem="EJ8-Ak-a1H" firstAttribute="height" secondItem="5jR-iT-4rt" secondAttribute="height" multiplier="0.9" id="MeM-TK-Wa4"/>
+                                                    <constraint firstItem="vZp-QY-dnv" firstAttribute="height" secondItem="5jR-iT-4rt" secondAttribute="height" multiplier="0.9" id="SjA-v8-ZYj"/>
+                                                    <constraint firstItem="vZp-QY-dnv" firstAttribute="leading" secondItem="5jR-iT-4rt" secondAttribute="leading" constant="5" id="Uga-EN-IwN"/>
+                                                    <constraint firstItem="vZp-QY-dnv" firstAttribute="width" secondItem="5jR-iT-4rt" secondAttribute="width" multiplier="0.2" id="X8w-ch-ABC"/>
+                                                    <constraint firstItem="EJ8-Ak-a1H" firstAttribute="leading" secondItem="vZp-QY-dnv" secondAttribute="trailing" constant="5" id="j8B-lu-X3V"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBound" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="LpB-E7-oKU">
-                                                <rect key="frame" x="5" y="50" width="285" height="38"/>
+                                                <rect key="frame" x="5" y="53" width="285" height="35"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tKP-Jz-ran" customClass="SharritButton" customModule="sharrit_ios" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="137.66666666666666" height="38"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="137.66666666666666" height="35"/>
                                                         <state key="normal" title="Send"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isRounded" value="YES"/>
@@ -392,7 +427,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DK2-uc-fcH" customClass="SharritButton" customModule="sharrit_ios" customModuleProvider="target">
-                                                        <rect key="frame" x="147.66666666666663" y="0.0" width="137.33333333333337" height="38"/>
+                                                        <rect key="frame" x="147.66666666666663" y="0.0" width="137.33333333333337" height="35"/>
                                                         <state key="normal" title="Dismiss"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isRounded" value="YES"/>
@@ -410,11 +445,11 @@
                                         <color key="backgroundColor" red="0.8351485729" green="0.83512353900000003" blue="0.83513772490000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="LpB-E7-oKU" secondAttribute="trailing" constant="5" id="0d9-D1-sUQ"/>
-                                            <constraint firstItem="EJ8-Ak-a1H" firstAttribute="top" secondItem="PmY-Rh-ZvM" secondAttribute="top" constant="10" id="GZU-QK-vWz"/>
-                                            <constraint firstItem="LpB-E7-oKU" firstAttribute="top" secondItem="EJ8-Ak-a1H" secondAttribute="bottom" constant="10" id="Ik9-Hh-cPj"/>
+                                            <constraint firstAttribute="trailing" secondItem="5jR-iT-4rt" secondAttribute="trailing" constant="5" id="6yl-nF-Vti"/>
+                                            <constraint firstItem="LpB-E7-oKU" firstAttribute="top" secondItem="5jR-iT-4rt" secondAttribute="bottom" constant="10" id="CmG-34-87B"/>
+                                            <constraint firstItem="5jR-iT-4rt" firstAttribute="leading" secondItem="PmY-Rh-ZvM" secondAttribute="leading" constant="5" id="JrN-nQ-a8K"/>
+                                            <constraint firstItem="5jR-iT-4rt" firstAttribute="top" secondItem="PmY-Rh-ZvM" secondAttribute="top" constant="10" id="VLn-p9-n91"/>
                                             <constraint firstAttribute="bottom" secondItem="LpB-E7-oKU" secondAttribute="bottom" constant="10" id="e97-q6-Dda"/>
-                                            <constraint firstItem="EJ8-Ak-a1H" firstAttribute="leading" secondItem="PmY-Rh-ZvM" secondAttribute="leading" constant="5" id="hLj-n5-KdV"/>
-                                            <constraint firstAttribute="trailing" secondItem="EJ8-Ak-a1H" secondAttribute="trailing" constant="5" id="l2t-ZA-DKv"/>
                                             <constraint firstItem="LpB-E7-oKU" firstAttribute="leading" secondItem="PmY-Rh-ZvM" secondAttribute="leading" constant="5" id="wwG-z9-Ixi"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
@@ -435,8 +470,8 @@
                                     <constraint firstItem="PmY-Rh-ZvM" firstAttribute="height" secondItem="HPb-p2-a3l" secondAttribute="height" multiplier="0.15" id="hUo-b1-YP1"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fWY-vf-oek">
-                                <rect key="frame" x="0.0" y="64" width="414" height="672"/>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fWY-vf-oek">
+                                <rect key="frame" x="500" y="64" width="414" height="672"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9ed-Ek-k1R">
                                         <rect key="frame" x="47" y="213" width="320" height="246"/>
@@ -556,6 +591,7 @@
                         <outlet property="banView" destination="6v1-RG-cAV" id="yiW-Bw-Woc"/>
                         <outlet property="errorLabel" destination="M9L-Ue-uKy" id="uba-ho-nbE"/>
                         <outlet property="forgetNo" destination="EJ8-Ak-a1H" id="P0k-fg-Xpd"/>
+                        <outlet property="forgetPasswordCountryBtn" destination="vZp-QY-dnv" id="2iY-d6-rfv"/>
                         <outlet property="forgetPasswordView" destination="HPb-p2-a3l" id="Ola-dp-wYP"/>
                         <outlet property="mobileCountryBtn" destination="z7c-2f-fsn" id="Toa-He-ByT"/>
                         <outlet property="mobileCountryCode" destination="YL3-LJ-zoA" id="sWa-Hg-R9V"/>

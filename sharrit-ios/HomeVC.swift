@@ -18,9 +18,10 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     
     @IBOutlet weak var categoryCollectionView: UICollectionView!
     var categoryImage = [#imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "category5"), #imageLiteral(resourceName: "category6"), #imageLiteral(resourceName: "category2"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "category4"), #imageLiteral(resourceName: "category1"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "empty"), #imageLiteral(resourceName: "category3")]
+    //var categoryImage: [String] = []
     var categoryLabel:[String] = []
     var categoryID: [Int] = []
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -67,6 +68,7 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
             case .success(_):
                 if let data = response.result.value {
                     for (_, subJson) in JSON(data) {
+                        //self.categoryImage.append(subJson["photo"])
                         self.categoryLabel.append(subJson["categoryName"].description)
                         self.categoryID.append(subJson["categoryId"].int!)
                     }
@@ -80,6 +82,23 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         }
     }
     
+    func downloadCategoryImage(from url: URL) -> UIImage {
+        getDataFromUrl(url: url) { (data, response, error)  in
+            guard let data = data, error == nil else { return }
+            DispatchQueue.main.async() { () -> Void in
+                return UIImage(data: data)
+            }
+        }
+        return #imageLiteral(resourceName: "empty")
+    }
+    
+    func getDataFromUrl(url: URL, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void) {
+        URLSession.shared.dataTask(with: url) {
+            (data, response, error) in
+            completion(data, response, error)
+            }.resume()
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return categoryLabel.count
     }
@@ -89,6 +108,7 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoryCell", for: indexPath as IndexPath) as! CategoryCollectionViewCell
         
         cell.categoryImage.image = categoryImage[indexPath.item]
+        //cell.categoryImage.image = downloadCategoryImage(from url: categoryImage[indexPath.item])
         cell.categoryLabel.text = categoryLabel[indexPath.item]
         
         return cell

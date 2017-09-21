@@ -121,8 +121,6 @@ class SignUpVC: UIViewController, CountryPickerDelegate {
         }
         
         if !firstNameEmpty && !lastNameEmpty && !mobileEmpty && !passwordEmpty {
-            verificationView.isHidden = false
-            
             var mobileCountryCode = mobileCountryCodeBtn.titleLabel?.text
             
             let signUpData: [String: Any] = ["firstName": firstNameTxt.text, "lastName": lastNameTxt.text, "phoneNumber": mobileCountryCode! + mobileTxt.text!, "password": passwordTxt.text]
@@ -133,6 +131,7 @@ class SignUpVC: UIViewController, CountryPickerDelegate {
                 response in
                 switch response.result {
                 case .success(_):
+                    self.verificationView.isHidden = true
                     self.verificationLabel.text = "We have sent you an SMS verification with instructions to join us. Cheers!"
                     UIView.animate(withDuration: 5, animations: {
                         self.verificationView.alpha = 0
@@ -144,6 +143,7 @@ class SignUpVC: UIViewController, CountryPickerDelegate {
                     }
                     break
                 case .failure(_):
+                    self.verificationView.isHidden = true
                     self.verificationLabel.text = "An account with this mobile number already existed. Try forgetting password, Cheers!"
                     UIView.animate(withDuration: 5, animations: {
                         self.verificationView.alpha = 0

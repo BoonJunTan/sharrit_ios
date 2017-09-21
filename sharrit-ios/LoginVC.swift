@@ -26,6 +26,7 @@ class LoginVC: UIViewController, CountryPickerDelegate {
     var currentSelectedCode = ""
     
     @IBOutlet weak var forgetPasswordView: UIView! // First View
+    @IBOutlet weak var forgetPasswordCountryBtn: SharritButton!
     
     @IBOutlet weak var forgetNo: UITextField!
     @IBOutlet weak var sendNoView: UIView! // Second View
@@ -82,6 +83,8 @@ class LoginVC: UIViewController, CountryPickerDelegate {
     
     @IBAction func mobileDoneBtn(_ sender: UIButton) {
         mobileCountryBtn.setTitle(currentSelectedCode, for: .normal)
+        forgetPasswordCountryBtn.setTitle(currentSelectedCode, for: .normal)
+        
         mobileCountryView.isHidden = true
     }
     
@@ -181,7 +184,9 @@ class LoginVC: UIViewController, CountryPickerDelegate {
     }
     
     @IBAction func sendPasswordBtnTapped(_ sender: UIButton) {
-        let url = SharritURL.devURL + "auth/forget/" + forgetNo.text!
+        let mobileCountryCode = forgetPasswordCountryBtn.titleLabel?.text
+        
+        let url = SharritURL.devURL + "auth/forget/" + mobileCountryCode! + forgetNo.text!
         
         Alamofire.request(url, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in
