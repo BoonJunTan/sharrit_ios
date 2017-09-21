@@ -14,13 +14,15 @@ class Notification {
     let typeId: Int!
     let date: String!
     let message: String!
+    let isRead: Bool!
     
-    init(id: Int, type: Int, typeId: Int, date: String, message: String) {
+    init(id: Int, type: Int, typeId: Int, date: String, message: String, isRead: Bool) {
         self.id = id
         self.type = type
         self.typeId = typeId
         self.date = date
         self.message = message
+        self.isRead = isRead
     }
     
 }

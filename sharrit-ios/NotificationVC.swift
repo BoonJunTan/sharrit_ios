@@ -57,6 +57,13 @@ class NotificationVC: UITableViewController {
         dateFormatter.amSymbol = "AM"
         dateFormatter.pmSymbol = "PM"
         cell.notificationDate.text = dateFormatter.string(from: notificationDate!)
+        
+        if !notificationList[indexPath.item].isRead {
+            cell.backgroundColor = Colours.Gray.superLightGray
+        } else {
+            cell.backgroundColor = UIColor.white
+        }
+        
         return cell
     }
     
@@ -97,7 +104,7 @@ class NotificationVC: UITableViewController {
                 if let data = response.result.value {
                     self.notificationList = []
                     for (_, subJson) in JSON(data) {
-                        self.notificationList.append(Notification(id: subJson["notificationId"].int!, type: subJson["type"].int!, typeId: subJson["typeId"].int!, date: subJson["dateCreated"].string!, message: subJson["message"].string!))
+                        self.notificationList.append(Notification(id: subJson["notificationId"].int!, type: subJson["type"].int!, typeId: subJson["typeId"].int!, date: subJson["dateCreated"].string!, message: subJson["message"].string!, isRead: subJson["isRead"].bool!))
                     }
                 }
                 self.tableView.reloadData()
