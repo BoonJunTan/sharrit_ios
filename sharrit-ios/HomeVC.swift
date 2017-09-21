@@ -140,6 +140,8 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             appDelegate.user = userAccount
             
+            grabLatestNotificationCount()
+            
             // Update Notification Badge in background thread
             appDelegate.timerTest = Timer.scheduledTimer(timeInterval: 5,
                                  target: self,
@@ -165,7 +167,7 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     
     func grabLatestNotificationCount() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let url = SharritURL.devURL + "notification/user/" + String(describing: appDelegate.user!.userID)
+        let url = SharritURL.devURL + "notification/user/count/" + String(describing: appDelegate.user!.userID)
         
         var newNotificationNumber = 0
         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
@@ -173,11 +175,10 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
             switch response.result {
             case .success(_):
                 if let data = response.result.value {
-                    newNotificationNumber = 10
+                    newNotificationNumber = data as! Int
                     if let tabController = appDelegate.window?.rootViewController as? UITabBarController {
                         let tabItem = tabController.tabBar.items![2]
-                        tabItem.badgeValue = String(describing: newNotificationNumber)
-                        print("After" + tabItem.badgeValue!)
+                        newNotificationNumber == 0 ? (tabItem.badgeValue = nil) : (tabItem.badgeValue = String(describing: newNotificationNumber))
                     }
                 }
                 break

@@ -181,6 +181,18 @@ class LoginVC: UIViewController, CountryPickerDelegate {
     }
     
     @IBAction func sendPasswordBtnTapped(_ sender: UIButton) {
+        let url = SharritURL.devURL + "auth/forget/" + forgetNo.text!
+        
+        Alamofire.request(url, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+            response in
+            switch response.result {
+            case .failure(_):
+                print("API failure to call")
+                break
+            default:
+                break
+            }
+        }
         sendNoView.isHidden = true
         sendPasswordView.isHidden = false
     }
@@ -191,18 +203,6 @@ class LoginVC: UIViewController, CountryPickerDelegate {
     }
     
     @IBAction func dismissForgetPassword(_ sender: UIButton) {
-        let url = SharritURL.devURL + "user/forget"
-        
-        Alamofire.request(url, method: .post, parameters: ["phoneNumber": forgetNo.text!], encoding: JSONEncoding.default, headers: [:]).responseJSON {
-            response in
-            switch response.result {
-            case .failure(_):
-                print("API failure to call")
-                break
-            default:
-                break
-            }
-        }
         sendPasswordView.isHidden = true
         forgetPasswordView.isHidden = true
     }

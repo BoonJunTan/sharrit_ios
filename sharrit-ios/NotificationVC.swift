@@ -17,8 +17,6 @@ class NotificationVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        getAllNotification()
-        
         let navBarBubble = UIBarButtonItem(image: #imageLiteral(resourceName: "chat"),
                                            style: .plain ,
                                            target: self, action: #selector(goToMessages))
@@ -30,6 +28,10 @@ class NotificationVC: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        getAllNotification()
+        
+        readAllNotification()
     }
     
     override func didReceiveMemoryWarning() {
@@ -93,6 +95,7 @@ class NotificationVC: UITableViewController {
             switch response.result {
             case .success(_):
                 if let data = response.result.value {
+                    self.notificationList = []
                     for (_, subJson) in JSON(data) {
                         self.notificationList.append(Notification(id: subJson["notificationId"].int!, type: subJson["type"].int!, typeId: subJson["typeId"].int!, date: subJson["dateCreated"].string!, message: subJson["message"].string!))
                     }
@@ -100,6 +103,34 @@ class NotificationVC: UITableViewController {
                 self.tableView.reloadData()
                 break
             case .failure(_):
+                print("Get All Notification API failed")
+                break
+            }
+        }
+    }
+    
+    func readAllNotification() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        let url = SharritURL.devURL + "notification/clear/" + String(describing: appDelegate.user!.userID)
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + appDelegate.user!.accessToken,
+            "Accept": "application/json" // Need this?
+        ]
+        
+        Alamofire.request(url, method: .put, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON {
+            response in
+            switch response.result {
+            case .success(_):
+                if let tabController = appDelegate.window?.rootViewController as? UITabBarController {
+                    let tabItem = tabController.tabBar.items![2]
+                    tabItem.badgeValue = nil
+                }
+                self.tableView.reloadData()
+                break
+            case .failure(_):
+                print("Read Notification API failed")
                 break
             }
         }

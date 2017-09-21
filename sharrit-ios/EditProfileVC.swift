@@ -97,7 +97,17 @@ class EditProfileVC: UIViewController {
                 response in
                 switch response.result {
                 case .success(_):
-                    self.dismiss(animated: true, completion: nil)
+                    let mainStoryboard = UIStoryboard(name: "LoginAndSignUp" , bundle: nil)
+                    let loginVC = mainStoryboard.instantiateViewController(withIdentifier: "Login") as! LoginVC
+                    loginVC.modalTransitionStyle = .coverVertical
+                    self.modalPresentationStyle = .fullScreen
+                    self.present(loginVC, animated: true, completion:{
+                        if let subviewsCount = self.tabBarController?.view.subviews.count {
+                            if subviewsCount > 2 {
+                                self.tabBarController?.view.subviews[2].removeFromSuperview()
+                            }
+                        }
+                    })
                     break
                 case .failure(_):
                     print("Disable Profile API failed")
