@@ -43,7 +43,12 @@ class EditPasswordVC: UIViewController {
             
             let url = SharritURL.devURL + "user/" + String(describing: appDelegate.user!.userID)
             
-            Alamofire.request(url, method: .put, parameters: signUpData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+            let headers: HTTPHeaders = [
+                "Authorization": "Bearer " + appDelegate.user!.accessToken,
+                "Accept": "application/json" // Need this?
+            ]
+            
+            Alamofire.request(url, method: .put, parameters: signUpData, encoding: JSONEncoding.default, headers: headers).responseJSON {
                 response in
                 switch response.result {
                 case .success(_):

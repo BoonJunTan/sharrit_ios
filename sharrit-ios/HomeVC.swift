@@ -26,8 +26,6 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         // Do any additional setup after loading the view, typically from a nib.
         checkIfUserLoggedIn()
         
-        getCategoryDetails()
-        
         searchBar = UISearchBar()
         searchBar.placeholder = setPlaceHolder(placeholder: "Search Sharrit");
         self.navigationItem.titleView = searchBar
@@ -53,10 +51,16 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     }
     
     func getCategoryDetails() {
-        let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/api/category/"
-        //let url = SharritURL.devURL + "category/"
+        let url = SharritURL.devURL + "category/"
         
-        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + appDelegate.user!.accessToken,
+            "Accept": "application/json" // Need this?
+        ]
+        
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON {
             response in
             switch response.result {
             case .success(_):
@@ -134,6 +138,15 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
             let userAccount = User(userID: Int((userInfo["userId"] as? String)!)!, firstName: userInfo["firstName"] as! String, lastName: userInfo["lastName"] as! String, password: userInfo["password"] as! String, mobile: (userInfo["mobile"] as! String), profilePhoto: userInfo["imageSrc"] as! String, accessToken: userInfo["accessToken"] as! String, createDate: userInfo["dateCreated"] as! String)
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             appDelegate.user = userAccount
+            
+            // Update Notification Badge in background thread
+            Timer.scheduledTimer(timeInterval: 1,
+                                 target: self,
+                                 selector: #selector(grabLatestNotificationCount),
+                                 userInfo: nil,
+                                 repeats: true)
+            
+            getCategoryDetails()
         } else {
             let mainStoryboard = UIStoryboard(name: "LoginAndSignUp" , bundle: nil)
             let loginVC = mainStoryboard.instantiateViewController(withIdentifier: "Login") as! LoginVC
@@ -146,6 +159,13 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
                     }
                 }
             })
+        }
+    }
+    
+    func grabLatestNotificationCount() {
+        DispatchQueue.global(qos: .background).async {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.getNewNotificationNumber()
         }
     }
     

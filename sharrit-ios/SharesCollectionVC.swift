@@ -204,7 +204,14 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
     func getSharesForCategory() {
         let url = SharritURL.devURL + "business/category/" + String(describing: currentCategoryID!)
         
-        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + appDelegate.user!.accessToken,
+            "Accept": "application/json" // Need this?
+        ]
+        
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON {
             response in
             switch response.result {
             case .success(_):

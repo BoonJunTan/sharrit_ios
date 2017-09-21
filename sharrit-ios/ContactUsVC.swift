@@ -34,7 +34,12 @@ class ContactUsVC: UIViewController {
             
             let url = SharritURL.devURL + "conversation"
             
-            Alamofire.request(url, method: .post, parameters: messageData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+            let headers: HTTPHeaders = [
+                "Authorization": "Bearer " + appDelegate.user!.accessToken,
+                "Accept": "application/json" // Need this?
+            ]
+            
+            Alamofire.request(url, method: .post, parameters: messageData, encoding: JSONEncoding.default, headers: headers).responseJSON {
                 response in
                 switch response.result {
                 case .success(_):

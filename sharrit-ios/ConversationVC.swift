@@ -190,9 +190,14 @@ final class ConversationVC: JSQMessagesViewController {
         
         let url = SharritURL.devURL + "message/" + String(describing: chat!.id)
         
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + appDelegate.user!.accessToken,
+            "Accept": "application/json" // Need this?
+        ]
+        
         let messageData: [String: Any] = ["body": text, "senderName": senderId]
         
-        Alamofire.request(url, method: .post, parameters: messageData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+        Alamofire.request(url, method: .post, parameters: messageData, encoding: JSONEncoding.default, headers: headers).responseJSON {
             response in
             switch response.result {
             case .success(_):
@@ -208,7 +213,12 @@ final class ConversationVC: JSQMessagesViewController {
     private func getMessages() {
         let url = SharritURL.devURL + "message/" + String(describing: chat!.id)
         
-        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + appDelegate.user!.accessToken,
+            "Accept": "application/json" // Need this?
+        ]
+        
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON {
             response in
             switch response.result {
             case .success(_):

@@ -419,7 +419,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DEL-lU-vaR">
                                                 <rect key="frame" x="0.0" y="0.0" width="125" height="37.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <state key="normal" title="Company"/>
+                                                <state key="normal" title="Company">
+                                                    <color key="titleColor" red="0.2666666667" green="0.69411764710000001" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="filterChoiceBtnTapped:" destination="whb-Nr-vIo" eventType="touchUpInside" id="0qx-r1-Ps4"/>
                                                 </connections>
@@ -427,7 +429,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6OY-uD-CQV">
                                                 <rect key="frame" x="0.0" y="37.5" width="125" height="37.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <state key="normal" title="Individuals"/>
+                                                <state key="normal" title="Individuals">
+                                                    <color key="titleColor" red="0.26666666666666666" green="0.69411764705882351" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="filterChoiceBtnTapped:" destination="whb-Nr-vIo" eventType="touchUpInside" id="GLp-1L-gcu"/>
                                                 </connections>

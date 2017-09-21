@@ -192,10 +192,15 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
 
             let url = SharritURL.devURL + "user/upload/" + String(describing: appDelegate.user!.userID)
             
+            let headers: HTTPHeaders = [
+                "Authorization": "Bearer " + appDelegate.user!.accessToken,
+                "Accept": "application/json" // Need this?
+            ]
+            
             Alamofire.upload(multipartFormData: { multipartFormData in
                 if let imageData = UIImageJPEGRepresentation(pickedImage, 1) {
                     multipartFormData.append(imageData, withName: "file", fileName: "userID" + String(describing: appDelegate.user!.userID) + ".png", mimeType: "image/png")
-                }}, to: url, method: .post, headers: ["Authorization": "auth_token"],
+                }}, to: url, method: .post, headers: headers,
                     encodingCompletion: { encodingResult in
                         switch encodingResult {
                         case .success(let upload, _, _):
