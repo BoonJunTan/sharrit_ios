@@ -59,6 +59,8 @@ class SignUpVC: UIViewController, CountryPickerDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        mobileTxt.keyboardType = .numberPad
+        
         // Setup default country code
         mobileCountryCode.countryPickerDelegate = self
         mobileCountryCode.showPhoneNumbers = true
@@ -99,12 +101,20 @@ class SignUpVC: UIViewController, CountryPickerDelegate {
         
         firstNameEmpty = (firstNameTxt.text?.isEmpty)!
         lastNameEmpty = (lastNameTxt.text?.isEmpty)!
-        passwordEmpty = (passwordTxt.text?.isEmpty)!
+        
+        passwordEmpty = true
+        if (passwordTxt.text?.isEmpty)! {
+            passwordError.text = "*Password is required"
+        } else if !(RegexCheck().checkMinPassword(password: passwordTxt.text!)) {
+            passwordError.text = "*Password has to be at least 8 characters"
+        } else {
+            passwordEmpty = false
+        }
         
         mobileEmpty = true
         if (mobileTxt.text?.isEmpty)! {
             mobileError.text = "*Mobile no. is required"
-        } else if !phoneValidate(with: mobileTxt.text!) {
+        } else if !RegexCheck().checkGeneralPhone(phoneNumber: mobileTxt.text!) {
             mobileError.text = "*Please enter valid mobile no."
         } else {
             mobileEmpty = false
@@ -152,13 +162,6 @@ class SignUpVC: UIViewController, CountryPickerDelegate {
     @IBAction func signInBtnPressed(_ sender: UIButton) {
         self.modalTransitionStyle = .coverVertical
         self.dismiss(animated: true, completion: nil)
-    }
-    
-    func phoneValidate(with value: String) -> Bool {
-        let PHONE_REGEX = "^[8-9]\\d{7}$"
-        let phoneTest = NSPredicate(format: "SELF MATCHES %@", PHONE_REGEX)
-        let result =  phoneTest.evaluate(with: value)
-        return result
     }
     
 }

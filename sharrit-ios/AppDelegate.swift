@@ -17,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var user:User?
     var navBarColour = UINavigationBar.appearance().tintColor
+    
+    var timerTest : Timer?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -54,28 +56,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
+    func startTimer() {
+        timerTest = Timer.scheduledTimer(timeInterval: 5,
+                                         target: self,
+                                         selector: #selector(getNewNotificationNumber),
+                                         userInfo: nil,
+                                         repeats: true)
+    }
+    
     func getNewNotificationNumber() {
-        //TODO: Get API for new notification count
-        let url = SharritURL.devURL + "notification/user/" + String(describing: user!.userID)
-        
-        var newNotificationNumber = 0
-        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
-            response in
-            switch response.result {
-            case .success(_):
-                if let data = response.result.value {
-                    //
-                    newNotificationNumber = 10
-                    if let tabController = self.window?.rootViewController as? UITabBarController {
-                        let tabItem = tabController.tabBar.items![2]
-                        tabItem.badgeValue = String(describing: newNotificationNumber)
+            //TODO: Get API for new notification count
+            let url = SharritURL.devURL + "notification/user/" + String(describing: self.user!.userID)
+            
+            var newNotificationNumber = 0
+            Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+                response in
+                switch response.result {
+                case .success(_):
+                    if let data = response.result.value {
+                        newNotificationNumber = 10
+                            if let tabController = self.window?.rootViewController as? UITabBarController {
+                                let tabItem = tabController.tabBar.items![2]
+                                print(tabItem.badgeValue)
+                                tabItem.badgeValue = String(describing: newNotificationNumber)
+                            }
                     }
+                    break
+                case .failure(_):
+                    break
                 }
-                break
-            case .failure(_):
-                break
             }
-        }
+        
     }
 }
 

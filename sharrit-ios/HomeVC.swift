@@ -24,8 +24,7 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        checkIfUserLoggedIn()
-        
+    
         searchBar = UISearchBar()
         searchBar.placeholder = setPlaceHolder(placeholder: "Search Sharrit");
         self.navigationItem.titleView = searchBar
@@ -43,6 +42,8 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        checkIfUserLoggedIn()
     }
     
     override func didReceiveMemoryWarning() {
@@ -140,7 +141,7 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
             appDelegate.user = userAccount
             
             // Update Notification Badge in background thread
-            Timer.scheduledTimer(timeInterval: 1,
+            appDelegate.timerTest = Timer.scheduledTimer(timeInterval: 5,
                                  target: self,
                                  selector: #selector(grabLatestNotificationCount),
                                  userInfo: nil,
@@ -163,9 +164,26 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     }
     
     func grabLatestNotificationCount() {
-        DispatchQueue.global(qos: .background).async {
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.getNewNotificationNumber()
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let url = SharritURL.devURL + "notification/user/" + String(describing: appDelegate.user!.userID)
+        
+        var newNotificationNumber = 0
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+            response in
+            switch response.result {
+            case .success(_):
+                if let data = response.result.value {
+                    newNotificationNumber = 10
+                    if let tabController = appDelegate.window?.rootViewController as? UITabBarController {
+                        let tabItem = tabController.tabBar.items![2]
+                        tabItem.badgeValue = String(describing: newNotificationNumber)
+                        print("After" + tabItem.badgeValue!)
+                    }
+                }
+                break
+            case .failure(_):
+                break
+            }
         }
     }
     

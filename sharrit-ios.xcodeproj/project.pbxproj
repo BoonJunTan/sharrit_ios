@@ -32,6 +32,7 @@
 		27C114841F717B5900CD9FB9 /* SharesCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C114831F717B5800CD9FB9 /* SharesCollectionVC.swift */; };
 		27C114861F718C9100CD9FB9 /* TabCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C114851F718C9100CD9FB9 /* TabCollectionViewCell.swift */; };
 		27C114881F718CCE00CD9FB9 /* SharesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C114871F718CCE00CD9FB9 /* SharesCollectionViewCell.swift */; };
+		27D0186C1F7407CA00D5B798 /* RegexCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D0186B1F7407CA00D5B798 /* RegexCheck.swift */; };
 		27F256421F6AA1C6006B1697 /* ButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F256411F6AA1C6006B1697 /* ButtonCollectionViewCell.swift */; };
 		27F256441F6ACE8D006B1697 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F256431F6ACE8D006B1697 /* NotificationTableViewCell.swift */; };
 		27FCB7D41F677533008E973C /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27FCB7D31F677533008E973C /* Home.storyboard */; };
@@ -81,6 +82,7 @@
 		27C114831F717B5800CD9FB9 /* SharesCollectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharesCollectionVC.swift; sourceTree = "<group>"; };
 		27C114851F718C9100CD9FB9 /* TabCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabCollectionViewCell.swift; sourceTree = "<group>"; };
 		27C114871F718CCE00CD9FB9 /* SharesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharesCollectionViewCell.swift; sourceTree = "<group>"; };
+		27D0186B1F7407CA00D5B798 /* RegexCheck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexCheck.swift; sourceTree = "<group>"; };
 		27F256411F6AA1C6006B1697 /* ButtonCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCollectionViewCell.swift; sourceTree = "<group>"; };
 		27F256431F6ACE8D006B1697 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
 		27FCB7D31F677533008E973C /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
@@ -146,6 +148,22 @@
 			name = LoginAndSignUp;
 			sourceTree = "<group>";
 		};
+		27D018691F7407A800D5B798 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				277DD71A1F723F3F005B7752 /* SharritURL.swift */,
+			);
+			name = Networking;
+			sourceTree = "<group>";
+		};
+		27D0186A1F7407B000D5B798 /* General */ = {
+			isa = PBXGroup;
+			children = (
+				27D0186B1F7407CA00D5B798 /* RegexCheck.swift */,
+			);
+			name = General;
+			sourceTree = "<group>";
+		};
 		27FCB7D21F67750B008E973C /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -207,7 +225,6 @@
 				27FCB7EF1F679857008E973C /* SharritButton.swift */,
 				27FCB7EB1F678FD1008E973C /* Colours.swift */,
 				274A36841F700F2100FD5E3C /* UIViewWithBorder.swift */,
-				277DD71A1F723F3F005B7752 /* SharritURL.swift */,
 			);
 			name = UIComponent;
 			sourceTree = "<group>";
@@ -233,6 +250,8 @@
 		872D31601F6705520069381A /* sharrit-ios */ = {
 			isa = PBXGroup;
 			children = (
+				27D0186A1F7407B000D5B798 /* General */,
+				27D018691F7407A800D5B798 /* Networking */,
 				27FCB7E81F678F67008E973C /* UIComponent */,
 				27FCB7D91F67766E008E973C /* Profile */,
 				27FCB7D81F677668008E973C /* Notification */,
@@ -419,6 +438,7 @@
 			files = (
 				27FCB7DD1F67768C008E973C /* ProfileVC.swift in Sources */,
 				2764C4831F72DE1400DB7199 /* ContactUsVC.swift in Sources */,
+				27D0186C1F7407CA00D5B798 /* RegexCheck.swift in Sources */,
 				2764C47B1F725E2D00DB7199 /* Business.swift in Sources */,
 				2764C4851F72E4B500DB7199 /* ContactBusinessVC.swift in Sources */,
 				27FCB7F21F67DB8F008E973C /* SignUpVC.swift in Sources */,

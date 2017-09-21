@@ -44,6 +44,9 @@ class LoginVC: UIViewController, CountryPickerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        mobileNoTxt.keyboardType = .numberPad
+        
         mobileCountryCode.countryPickerDelegate = self
         mobileCountryCode.showPhoneNumbers = true
         mobileCountryCode.setCountry(currentCountry)
@@ -136,7 +139,18 @@ class LoginVC: UIViewController, CountryPickerDelegate {
                                     let appDelegate = UIApplication.shared.delegate as! AppDelegate
                                     appDelegate.user = userAccount
                                 }
-                                self.performSegue(withIdentifier: "GoBackMain", sender: nil)
+                                
+                                // This is to check every log in = Home page *Especially for Logout
+                                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                                if appDelegate.window!.rootViewController as? UITabBarController != nil {
+                                    var tabBarController = appDelegate.window!.rootViewController as! UITabBarController
+                                    tabBarController.selectedIndex = 0 // Change back first view
+                                    
+                                    let tabItem = tabBarController.tabBar.items![2]
+                                    tabItem.badgeValue = nil
+                                }
+                                
+                                self.dismiss(animated: true, completion: nil)
                             } else if statusCode == -1 { // Failed
                                
                             } else if statusCode == -2 { // Not active

@@ -31,6 +31,14 @@
             </objects>
             <point key="canvasLocation" x="-615" y="-26"/>
         </scene>
+        <!--Home-->
+        <scene sceneID="xXT-wN-A3w">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Home" id="M6J-nz-q7w" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xqe-e0-Nh5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="977" y="-478"/>
+        </scene>
         <!--Profile-->
         <scene sceneID="zd8-NW-OT0">
             <objects>
@@ -232,6 +240,7 @@
                         <outlet property="tableView" destination="Ivk-ht-ZvZ" id="SW1-KE-DAi"/>
                         <segue destination="U1V-k9-Wzg" kind="show" identifier="editProfile" id="IYw-Sn-OcR"/>
                         <segue destination="nRI-jY-KqF" kind="show" identifier="showHelp" id="kZR-zd-7qq"/>
+                        <segue destination="M6J-nz-q7w" kind="show" identifier="goBackHome" id="M0k-5N-cbx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I9N-hg-0ir" userLabel="First Responder" sceneMemberID="firstResponder"/>

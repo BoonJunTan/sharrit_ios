@@ -235,6 +235,9 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
     }
     
     func logoutPressed() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.timerTest?.invalidate()
+        appDelegate.timerTest = nil
         UserDefaults.standard.removeObject(forKey: "userInfo")
         
         let mainStoryboard = UIStoryboard(name: "LoginAndSignUp" , bundle: nil)

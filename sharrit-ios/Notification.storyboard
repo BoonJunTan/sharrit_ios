@@ -15,7 +15,7 @@
         <scene sceneID="O1U-sr-WJA">
             <objects>
                 <navigationController id="sIL-3K-chP" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="notification" badgeValue="5" id="G6r-uO-sQr">
+                    <tabBarItem key="tabBarItem" title="" image="notification" id="G6r-uO-sQr">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
