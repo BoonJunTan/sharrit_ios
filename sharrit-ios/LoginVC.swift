@@ -103,7 +103,7 @@ class LoginVC: UIViewController, CountryPickerDelegate {
         var mobileCountryCode = mobileCountryBtn.titleLabel?.text
         
         if !loginEmpty {
-            let signUpData: [String: Any] = ["phoneNumber": mobileCountryCode! + mobileNoTxt.text!, "password": passwordTxt.text]
+            let signUpData: [String: Any] = ["phoneNumber": mobileCountryCode! + mobileNoTxt.text!, "password": passwordTxt.text!]
             
             let url = SharritURL.devURL + "auth/userlogin"
             

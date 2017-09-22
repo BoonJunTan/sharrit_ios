@@ -66,6 +66,8 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
             response in
             switch response.result {
             case .success(_):
+                self.categoryLabel = []
+                self.categoryID = []
                 if let data = response.result.value {
                     for (_, subJson) in JSON(data) {
                         //self.categoryImage.append(subJson["photo"])

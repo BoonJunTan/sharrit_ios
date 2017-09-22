@@ -123,15 +123,16 @@ class SignUpVC: UIViewController, CountryPickerDelegate {
         if !firstNameEmpty && !lastNameEmpty && !mobileEmpty && !passwordEmpty {
             var mobileCountryCode = mobileCountryCodeBtn.titleLabel?.text
             
-            let signUpData: [String: Any] = ["firstName": firstNameTxt.text, "lastName": lastNameTxt.text, "phoneNumber": mobileCountryCode! + mobileTxt.text!, "password": passwordTxt.text]
+            let signUpData: [String: Any] = ["firstName": firstNameTxt.text!, "lastName": lastNameTxt.text!, "phoneNumber": mobileCountryCode! + mobileTxt.text!, "password": passwordTxt.text!]
             
             let url = SharritURL.devURL + "user"
+            
+            self.verificationView.isHidden = false
             
             Alamofire.request(url, method: .post, parameters: signUpData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
                 response in
                 switch response.result {
                 case .success(_):
-                    self.verificationView.isHidden = true
                     self.verificationLabel.text = "We have sent you an SMS verification with instructions to join us. Cheers!"
                     UIView.animate(withDuration: 5, animations: {
                         self.verificationView.alpha = 0
@@ -143,15 +144,12 @@ class SignUpVC: UIViewController, CountryPickerDelegate {
                     }
                     break
                 case .failure(_):
-                    self.verificationView.isHidden = true
                     self.verificationLabel.text = "An account with this mobile number already existed. Try forgetting password, Cheers!"
                     UIView.animate(withDuration: 5, animations: {
                         self.verificationView.alpha = 0
                     }) { (finished) in
                         self.verificationView.alpha = 1
                         self.verificationView.isHidden = true
-                        self.modalTransitionStyle = .crossDissolve
-                        self.dismiss(animated: true, completion: nil)
                     }
                     break
                 }

@@ -34,6 +34,8 @@ class EditPasswordVC: UIViewController {
             errorMsgLabel.text = "*Please fill up old, new and confirm password"
         } else if newPasswordTxt.text! != confirmPasswordTxt.text! {
             errorMsgLabel.text = "*New and confirm password mismatch"
+        } else if !RegexCheck().checkMinPassword(password: newPasswordTxt.text!) {
+            errorMsgLabel.text = "*Password has to be at least 8 characters"
         } else {
             errorMsgLabel.text = " "
             
