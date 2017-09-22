@@ -198,7 +198,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
             ]
             
             Alamofire.upload(multipartFormData: { multipartFormData in
-                if let imageData = UIImageJPEGRepresentation(pickedImage, 1) {
+                if let imageData = UIImageJPEGRepresentation(pickedImage, 0.5) {
                     multipartFormData.append(imageData, withName: "file", fileName: "userID" + String(describing: appDelegate.user!.userID) + ".png", mimeType: "image/png")
                 }}, to: url, method: .post, headers: headers,
                     encodingCompletion: { encodingResult in
@@ -206,7 +206,6 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
                         case .success(let upload, _, _):
                             
                             upload.responseJSON { response in
-                                
                                 if let value = response.result.value {
                                     var json = JSON(value)
                                     let newUrlString = json["content"]["fileName"].string!
@@ -230,7 +229,6 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
                         }
             })
         }
-        
         dismiss(animated: true, completion: nil)
     }
     

@@ -82,7 +82,7 @@ class SharrorFormVC: UIViewController, UICollectionViewDataSource, UICollectionV
     }
     
     func getSBQuestions() {
-        let url = SharritURL.devURL + "/requestform/" + String(describing: companyId)
+        let url = SharritURL.devURL + "requestform/" + String(describing: companyId!)
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         

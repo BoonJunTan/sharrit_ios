@@ -160,6 +160,11 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
             
             grabLatestNotificationCount()
             
+            let headers: HTTPHeaders = [
+                "Authorization": "Bearer " + appDelegate.user!.accessToken,
+                "Accept": "application/json" // Need this?
+            ]
+            
             // Update Notification Badge in background thread
             appDelegate.timerTest = Timer.scheduledTimer(timeInterval: 5,
                                  target: self,
@@ -197,10 +202,12 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
                     if let tabController = appDelegate.window?.rootViewController as? UITabBarController {
                         let tabItem = tabController.tabBar.items![2]
                         newNotificationNumber == 0 ? (tabItem.badgeValue = nil) : (tabItem.badgeValue = String(describing: newNotificationNumber))
+                        print("Notification no.: " + String(describing: newNotificationNumber))
                     }
                 }
                 break
             case .failure(_):
+                print("Get Notification count failed!")
                 break
             }
         }
