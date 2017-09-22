@@ -27,7 +27,6 @@ struct RegexCheck {
         let MIN_PASSWORD = "^.{8,}$"
         let passwordTest = NSPredicate(format: "SELF MATCHES %@", MIN_PASSWORD)
         let result = passwordTest.evaluate(with: password)
-        print(result)
         return result
     }
 }
