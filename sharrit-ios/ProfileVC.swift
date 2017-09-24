@@ -208,7 +208,8 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
                             upload.responseJSON { response in
                                 if let value = response.result.value {
                                     var json = JSON(value)
-                                    let newUrlString = json["content"]["fileName"].string!
+                                    var newUrlString = json["content"]["fileName"].string!
+                                    newUrlString = newUrlString.replacingOccurrences(of: "http", with: "https")
                                     
                                     // Change Actual
                                     self.profileImage.image = pickedImage
@@ -227,9 +228,9 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
                         case .failure(_):
                             print("Upload Profile Photo API failed")
                         }
+                        self.dismiss(animated: true, completion: nil)
             })
         }
-        dismiss(animated: true, completion: nil)
     }
     
     func logoutPressed() {
