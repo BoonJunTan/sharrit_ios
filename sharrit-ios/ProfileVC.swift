@@ -112,6 +112,13 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch tableViewItems[indexPath.section][indexPath.row] {
+        // Must TODO : 2nd System Release
+        case "Sharres Requested":
+            break
+        case "Sharres Offered":
+            break
+        case "Sharing Business":
+            break
         case "Profile Settings":
             self.performSegue(withIdentifier: "editProfile", sender: self)
             break

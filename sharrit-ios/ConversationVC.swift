@@ -34,7 +34,7 @@ final class ConversationVC: JSQMessagesViewController {
             senderId = (appDelegate.user!.firstName + " " + appDelegate.user!.lastName)
             senderDisplayName = (appDelegate.user!.firstName + " " + appDelegate.user!.lastName)
             
-            // TODO: Get and Change Avatar
+            // Must TODO: Get and Change Avatar
             senderAvatar = JSQMessagesAvatarImageFactory.avatarImage(withPlaceholder: #imageLiteral(resourceName: "star"), diameter: 20)!
             receiverAvatar = JSQMessagesAvatarImageFactory.avatarImage(withPlaceholder: #imageLiteral(resourceName: "profile2"), diameter: 20)!
         }

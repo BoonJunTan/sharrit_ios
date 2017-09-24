@@ -65,7 +65,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func getNewNotificationNumber() {
-            //TODO: Get API for new notification count
             let url = SharritURL.devURL + "notification/user/" + String(describing: self.user!.userID)
             
             var newNotificationNumber = 0
