@@ -129,7 +129,7 @@ class SharrorFormVC: UIViewController, UICollectionViewDataSource, UICollectionV
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
-        let url = SharritURL.devURL + "/answer/" + String(describing: companyId) + "/user" + String(describing: appDelegate.user!.userID)
+        let url = SharritURL.devURL + "answer/" + String(describing: companyId!) + "/user/" + String(describing: appDelegate.user!.userID)
         
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + appDelegate.user!.accessToken,
