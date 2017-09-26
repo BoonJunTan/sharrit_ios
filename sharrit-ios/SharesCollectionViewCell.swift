@@ -12,8 +12,6 @@ class SharesCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var sharesImage: UIImageView!
     @IBOutlet weak var sharesTitle: UILabel!
-    @IBOutlet weak var sharesOwnerImage: UIImageView!
-    @IBOutlet weak var sharesOwnerName: UILabel!
     @IBOutlet weak var sharesCreatedDate: UILabel!
     
 }

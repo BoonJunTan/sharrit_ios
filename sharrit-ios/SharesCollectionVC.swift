@@ -19,7 +19,12 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
     
     var sharesCollection: [Business]! = []
     
-    // Future Implementation - Location & Filter
+    // Future Implementation - Location, View & Filter
+    // View
+    @IBOutlet weak var viewTabView: UIView!
+    @IBOutlet weak var viewDropDown: UIView!
+    @IBOutlet weak var viewChoiceLabel: UILabel!
+    
     // Filter
     @IBOutlet weak var filterTabView: UIView!
     @IBOutlet weak var filterDropDown: UIView!
@@ -49,6 +54,10 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
             
         }
         
+        viewDropDown.isHidden = true
+        let viewTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewBtnTapped(tapGestureRecognizer:)))
+        viewTabView.addGestureRecognizer(viewTapGestureRecognizer)
+        
         filterDropDown.isHidden = true
         let filterTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(filterBtnTapped(tapGestureRecognizer:)))
         filterTabView.addGestureRecognizer(filterTapGestureRecognizer)
@@ -73,11 +82,29 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
             
         } else {
             let sharesCell = collectionView.dequeueReusableCell(withReuseIdentifier: "sharesCell", for: indexPath as IndexPath) as! SharesCollectionViewCell
-            //sharesCell.sharesTitle =
-            //sharesCell.sharesCreatedDate =
-            //sharesCell.sharesOwnerImage =
-            sharesCell.sharesOwnerName.text = sharesCollection[indexPath.item].businessName
-            sharesCell.sharesImage.image = #imageLiteral(resourceName: "power_bank")
+            sharesCell.sharesTitle.text = sharesCollection[indexPath.item].businessName
+            
+            // Get Company Creation Date and Format it
+            let dateFormatter = DateFormatter()
+            dateFormatter.timeZone = NSTimeZone(abbreviation: "GMT+08")! as TimeZone
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            
+            let currentDate = Date()
+            let currentDateString = dateFormatter.string(from: currentDate)
+            let todayDate = dateFormatter.date(from: currentDateString)
+            
+            let dateFormatter2 = DateFormatter()
+            dateFormatter2.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
+            let endDate = dateFormatter2.date(from: sharesCollection[indexPath.item].dateCreated)
+            
+            let formatter = DateComponentsFormatter()
+            formatter.allowedUnits = [.day, .weekOfMonth]
+            formatter.unitsStyle = .full
+            sharesCell.sharesCreatedDate.text = formatter.string(from: endDate!, to: todayDate!)
+            
+            // Image
+            ImageDownloader().imageFromServerURL(urlString: sharesCollection[indexPath.item].logoURL, imageView: sharesCell.sharesImage)
+            
             return sharesCell
         }
         
@@ -167,6 +194,15 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
         }
         
         return placeholder;
+    }
+    
+    func viewBtnTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+        viewDropDown.isHidden = !viewDropDown.isHidden
+    }
+    
+    @IBAction func viewChoiceBtnTapped(_ sender: UIButton) {
+        viewChoiceLabel.text = sender.titleLabel?.text
+        viewDropDown.isHidden = true
     }
     
     func filterBtnTapped(tapGestureRecognizer: UITapGestureRecognizer) {

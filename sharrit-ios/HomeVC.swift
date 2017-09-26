@@ -84,20 +84,6 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         }
     }
     
-    public func imageFromServerURL(urlString: String, cell: CategoryCollectionViewCell) {
-        URLSession.shared.dataTask(with: NSURL(string: urlString)! as URL, completionHandler: { (data, response, error) -> Void in
-            
-            if error != nil {
-                return
-            }
-            DispatchQueue.main.async(execute: { () -> Void in
-                if let image = UIImage(data: data!) {
-                    cell.categoryImage.image = image
-                }
-            })
-        }).resume()
-    }
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return categoryLabel.count
     }
@@ -106,7 +92,7 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoryCell", for: indexPath as IndexPath) as! CategoryCollectionViewCell
         
-        imageFromServerURL(urlString: ("https://is41031718it02.southeastasia.cloudapp.azure.com/uploads/category/" + categoryImage[indexPath.item]), cell: cell)
+        ImageDownloader().imageFromServerURL(urlString: ("https://is41031718it02.southeastasia.cloudapp.azure.com/uploads/category/" + categoryImage[indexPath.item]), imageView: cell.categoryImage)
         cell.categoryLabel.text = categoryLabel[indexPath.item]
         
         return cell
