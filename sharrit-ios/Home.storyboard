@@ -504,7 +504,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="183" height="182"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_empty" translatesAutoresizingMaskIntoConstraints="NO" id="mPI-S2-0Ck">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty" translatesAutoresizingMaskIntoConstraints="NO" id="mPI-S2-0Ck">
                                                     <rect key="frame" x="0.0" y="0.0" width="183" height="109"/>
                                                 </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="RNl-U7-xM0">
@@ -756,10 +756,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_empty" translatesAutoresizingMaskIntoConstraints="NO" id="BWb-fx-Rdm">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty" translatesAutoresizingMaskIntoConstraints="NO" id="BWb-fx-Rdm">
                                 <rect key="frame" x="0.0" y="64" width="375" height="133.5"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_empty" translatesAutoresizingMaskIntoConstraints="NO" id="GOr-3z-A4A">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty" translatesAutoresizingMaskIntoConstraints="NO" id="GOr-3z-A4A">
                                 <rect key="frame" x="20" y="182.5" width="133.5" height="133.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -1101,7 +1101,6 @@
         <image name="eye" width="26" height="26"/>
         <image name="filter" width="26" height="26"/>
         <image name="home" width="25" height="25"/>
-        <image name="image_empty" width="450" height="313"/>
         <image name="location" width="48" height="48"/>
         <image name="timer" width="50" height="50"/>
     </resources>
