@@ -19,12 +19,7 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
     
     var sharesCollection: [Business]! = []
     
-    // Future Implementation - Location, Category & Filter
-    @IBOutlet weak var categoryTabView: UIView!
-    @IBOutlet weak var categoryLabel: UILabel!
-    @IBOutlet weak var categoryDropDown: UIView!
-    @IBOutlet weak var categoryStackView: UIStackView!
-    
+    // Future Implementation - Location & Filter
     // Filter
     @IBOutlet weak var filterTabView: UIView!
     @IBOutlet weak var filterDropDown: UIView!
@@ -48,18 +43,11 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
         
         self.navigationItem.rightBarButtonItem = navBarBubble
         
-        categoryLabel.text = currentCategory
-        for var i in 0..<allCategories.count {
-            let button = UIButton(frame: CGRect(x: 0, y: 0, width: 0, height: 100))
-            button.setTitle(allCategories[i], for: .normal)
-            button.setTitleColor(Colours.Blue.sharritBlue, for: .normal)
-            button.addTarget(self, action: #selector(categoryChoiceBtnTapped), for: .touchUpInside)
-            categoryStackView.addArrangedSubview(button)
-        }
         
-        categoryDropDown.isHidden = true
-        let categoryTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(categoryBtnTapped(tapGestureRecognizer:)))
-        categoryTabView.addGestureRecognizer(categoryTapGestureRecognizer)
+        // TODO: Set Tab Bar
+        for var i in 0..<allCategories.count {
+            
+        }
         
         filterDropDown.isHidden = true
         let filterTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(filterBtnTapped(tapGestureRecognizer:)))
@@ -143,8 +131,6 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
         } else {
             performSegue(withIdentifier: "viewSharesInfo", sender: sharesCollection[indexPath.item])
         }
-        //let selectedCategory = categoryLabel[indexPath.item]
-        //performSegue(withIdentifier: "viewSharesCollection", sender: selectedCategory)
     }
     
     func goToMessages() {
@@ -183,15 +169,6 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
         return placeholder;
     }
     
-    func categoryBtnTapped(tapGestureRecognizer: UITapGestureRecognizer) {
-        categoryDropDown.isHidden = !categoryDropDown.isHidden
-    }
-    
-    func categoryChoiceBtnTapped(_ sender: UIButton) {
-        categoryLabel.text = sender.titleLabel?.text
-        categoryDropDown.isHidden = true
-    }
-    
     func filterBtnTapped(tapGestureRecognizer: UITapGestureRecognizer) {
         filterDropDown.isHidden = !filterDropDown.isHidden
     }
@@ -220,8 +197,17 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
                         let businessId = subJson["businessId"].int!
                         let businessName = subJson["name"].description
                         let description = subJson["description"].description
+                        let businessType = subJson["type"].int!
+                        let logo = subJson["logo"].description
+                        let banner = subJson["banner"].description
+                        let comRate = subJson["comissionRate"].double!
                         let dateCreated = subJson["dateCreated"].description
-                        self.sharesCollection.append(Business(businessId: subJson["businessId"].int!, businessName: businessName, description: description, dateCreated: dateCreated))
+                        var business = Business(businessId: businessId, businessName: businessName, description: description, businessType: businessType, logoURL: logo, bannerURL: banner, commissionRate: comRate, dateCreated: dateCreated)
+                        
+                        let requestFormID = subJson["requestFormId"].int!
+                        if requestFormID == -1 { business.requestFormID = requestFormID }
+                        
+                        self.sharesCollection.append(business)
                     }
                     self.sharesCollectionView.reloadData()
                 }

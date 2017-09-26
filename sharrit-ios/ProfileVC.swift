@@ -35,10 +35,28 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
                                            target: self, action: #selector(goToMessages))
         
         self.navigationItem.rightBarButtonItem = navBarBubble
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.tableFooterView = UIView() // For Hiding away empty cell
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupProfile()
+    }
+    
+    func setupProfile() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        profileLabe.text = (appDelegate.user?.firstName)! + " " + (appDelegate.user?.lastName)!
+        
         starRating.rating = fakeRatingDouble
         starRating.settings.fillMode = .precise
-        
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         // Get user profile creation date
         let dateFormatter = DateFormatter()
@@ -69,21 +87,6 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
         }
         profileImage.addGestureRecognizer(tapGestureRecognizer)
         imagePicker.delegate = self
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.tableFooterView = UIView() // For Hiding away empty cell
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        profileLabe.text = (appDelegate.user?.firstName)! + " " + (appDelegate.user?.lastName)!
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

@@ -13,6 +13,7 @@ class SharesInfoVC: UIViewController {
     var businessInfo: Business!
     @IBOutlet weak var businessName: UILabel!
     @IBOutlet weak var businessStartDate: UILabel!
+    @IBOutlet weak var joinSharrorBtn: SharritButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +46,7 @@ class SharesInfoVC: UIViewController {
         formatter.unitsStyle = .full
         businessStartDate.text = formatter.string(from: endDate!, to: todayDate!)
 
-        
+        (businessInfo.requestFormID != -1 && businessInfo.businessType == 1) ? (joinSharrorBtn.isHidden = false) : (joinSharrorBtn.isHidden = true)
     }
     
     func goToMessages() {

@@ -13,7 +13,7 @@ class Business {
     var businessId: Int!
     var businessName: String!
     var description: String!
-    //var type: Int!
+    var businessType: Int!
     //var tag: String?
     //var isVerified: Bool!
     //var isActive: Bool!
@@ -21,11 +21,19 @@ class Business {
     //var dateUpdated: String
     //var category: String?
     //var categoryId: Int!
+    var logoURL: String
+    var bannerURL: String
+    var requestFormID: Int?
+    var commissionRate: Double
     
-    init(businessId: Int, businessName: String, description: String, dateCreated: String) {
+    init(businessId: Int, businessName: String, description: String, businessType: Int, logoURL: String, bannerURL: String, commissionRate: Double, dateCreated: String) {
         self.businessId = businessId
         self.businessName = businessName
         self.description = description
+        self.businessType = businessType
+        self.logoURL = logoURL
+        self.bannerURL = bannerURL
+        self.commissionRate = commissionRate
         self.dateCreated = dateCreated
     }
 }
