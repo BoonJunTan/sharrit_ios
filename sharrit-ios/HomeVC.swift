@@ -52,6 +52,7 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         // Dispose of any resources that can be recreated.
     }
     
+    // Get All Category Details
     func getCategoryDetails() {
         let url = SharritURL.devURL + "category/"
         
@@ -84,6 +85,7 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         }
     }
     
+    // Set up all necessary component for Collection View
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return categoryLabel.count
     }
@@ -138,6 +140,7 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         performSegue(withIdentifier: "viewSharesCollection", sender: selectedCategory)
     }
     
+    // Check if User is Logged in or not
     func checkIfUserLoggedIn() {
         // Must TODO : If any profile details are changed, UserDefaults won't get reflected for auto login.
         if let userInfo = UserDefaults.standard.object(forKey: "userInfo") as? [String: Any] {
@@ -175,6 +178,7 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         }
     }
     
+    // Notification
     func grabLatestNotificationCount() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let url = SharritURL.devURL + "notification/user/count/" + String(describing: appDelegate.user!.userID)
@@ -200,6 +204,7 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         }
     }
     
+    // Setup Search Bar
     func setPlaceHolder(placeholder: String) -> String {
         var text = placeholder
         if text.characters.last! != " " {
@@ -220,6 +225,7 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         return placeholder;
     }
     
+    // Go To Messages
     func goToMessages() {
         let messageSB = UIStoryboard(name: "Messages" , bundle: nil)
         let messageVC = messageSB.instantiateViewController(withIdentifier: "messages") as! MessagesVC
@@ -236,12 +242,14 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         })
     }
     
+    // Prepare for Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "viewSharesCollection" {
             if let sharesCollectionVC = segue.destination as? SharesCollectionVC {
                 if let category = sender as? [String : Any] {
                     sharesCollectionVC.currentCategory = category["categoryName"] as! String
                     sharesCollectionVC.allCategories = categoryLabel
+                    sharesCollectionVC.allCategoriesImageStr = categoryImage
                     sharesCollectionVC.currentCategoryID = category["categoryID"] as! Int
                 }
             }

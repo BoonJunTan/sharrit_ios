@@ -13,6 +13,7 @@ import SwiftyJSON
 class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     var allCategories: [String]!
+    var allCategoriesImageStr: [String]!
     var currentCategory: String!
     var currentCategoryID: Int!
     var searchBar:UISearchBar!
@@ -48,12 +49,6 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
         
         self.navigationItem.rightBarButtonItem = navBarBubble
         
-        
-        // TODO: Set Tab Bar
-        for var i in 0..<allCategories.count {
-            
-        }
-        
         viewDropDown.isHidden = true
         let viewTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewBtnTapped(tapGestureRecognizer:)))
         viewTabView.addGestureRecognizer(viewTapGestureRecognizer)
@@ -61,12 +56,11 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
         filterDropDown.isHidden = true
         let filterTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(filterBtnTapped(tapGestureRecognizer:)))
         filterTabView.addGestureRecognizer(filterTapGestureRecognizer)
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == tabCollectionView {
-            return 7
+            return allCategories.count
         } else {
             return sharesCollection.count
         }
@@ -74,12 +68,10 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == tabCollectionView {
-            
             let tabCell = collectionView.dequeueReusableCell(withReuseIdentifier: "tabCell", for: indexPath as IndexPath) as! TabCollectionViewCell
-            tabCell.tabImage.image = #imageLiteral(resourceName: "category1")
-            tabCell.tabLabel.text = "This is for tab label"
+            ImageDownloader().imageFromServerURL(urlString: "https://is41031718it02.southeastasia.cloudapp.azure.com/uploads/category/" + allCategoriesImageStr[indexPath.item], imageView: tabCell.tabImage)
+            tabCell.tabLabel.text = allCategories[indexPath.item]
             return tabCell
-            
         } else {
             let sharesCell = collectionView.dequeueReusableCell(withReuseIdentifier: "sharesCell", for: indexPath as IndexPath) as! SharesCollectionViewCell
             sharesCell.sharesTitle.text = sharesCollection[indexPath.item].businessName
@@ -154,12 +146,14 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == tabCollectionView {
-            
+            currentCategoryID = (indexPath.item + 1)
+            getSharesForCategory()
         } else {
             performSegue(withIdentifier: "viewSharesInfo", sender: sharesCollection[indexPath.item])
         }
     }
     
+    // Go To Messages
     func goToMessages() {
         let messageSB = UIStoryboard(name: "Messages" , bundle: nil)
         let messageVC = messageSB.instantiateViewController(withIdentifier: "messages") as! MessagesVC
@@ -176,10 +170,10 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
         })
     }
     
+    // Setup Search Bar
     func setPlaceHolder(placeholder: String) -> String {
         var text = placeholder
         if text.characters.last! != " " {
-            
             let maxSize = CGSize(width: UIScreen.main.bounds.size.width - 130, height: 40)
             let widthText = text.boundingRect( with: maxSize, options: .usesLineFragmentOrigin, attributes:nil, context:nil).size.width
             let widthSpace = " ".boundingRect( with: maxSize, options: .usesLineFragmentOrigin, attributes:nil, context:nil).size.width
@@ -196,6 +190,7 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
         return placeholder;
     }
     
+    // View by functions
     func viewBtnTapped(tapGestureRecognizer: UITapGestureRecognizer) {
         viewDropDown.isHidden = !viewDropDown.isHidden
     }
@@ -205,6 +200,7 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
         viewDropDown.isHidden = true
     }
     
+    // Filter by functions
     func filterBtnTapped(tapGestureRecognizer: UITapGestureRecognizer) {
         filterDropDown.isHidden = !filterDropDown.isHidden
     }
@@ -214,6 +210,7 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
         filterDropDown.isHidden = true
     }
     
+    // Retrieve Business based on category
     func getSharesForCategory() {
         let url = SharritURL.devURL + "business/category/" + String(describing: currentCategoryID!)
         
@@ -228,6 +225,7 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
             response in
             switch response.result {
             case .success(_):
+                self.sharesCollection = []
                 if let data = response.result.value {
                     for (_, subJson) in JSON(data)["content"] {
                         let businessId = subJson["businessId"].int!
@@ -255,6 +253,7 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
         }
     }
     
+    // Prepare for segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "viewSharesInfo" {
             if let sharesInfoVC = segue.destination as? SharesInfoVC {
