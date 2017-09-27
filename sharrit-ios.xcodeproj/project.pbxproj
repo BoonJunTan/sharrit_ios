@@ -20,6 +20,11 @@
 		2764C4831F72DE1400DB7199 /* ContactUsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2764C4821F72DE1400DB7199 /* ContactUsVC.swift */; };
 		2764C4851F72E4B500DB7199 /* ContactBusinessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2764C4841F72E4B500DB7199 /* ContactBusinessVC.swift */; };
 		2764C4871F72ECB700DB7199 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2764C4861F72ECB700DB7199 /* Notification.swift */; };
+		276D1B861F7B89A400A3EAF3 /* DescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276D1B851F7B89A400A3EAF3 /* DescriptionTableViewCell.swift */; };
+		276D1B8A1F7B8A0500A3EAF3 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276D1B891F7B8A0500A3EAF3 /* ReviewTableViewCell.swift */; };
+		276D1B8C1F7B9E7000A3EAF3 /* BusinessSharesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276D1B8B1F7B9E6F00A3EAF3 /* BusinessSharesVC.swift */; };
+		276D1B8E1F7BA11800A3EAF3 /* SharesInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276D1B8D1F7BA11700A3EAF3 /* SharesInfoCollectionViewCell.swift */; };
+		276D1B901F7BA25700A3EAF3 /* Shares.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276D1B8F1F7BA25700A3EAF3 /* Shares.swift */; };
 		27702CD51F69531900A1C652 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27702CD41F69531900A1C652 /* ProfileTableViewCell.swift */; };
 		27702CD91F69621900A1C652 /* Messages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27702CD81F69621900A1C652 /* Messages.storyboard */; };
 		27702CDB1F6962F900A1C652 /* MessagesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27702CDA1F6962F900A1C652 /* MessagesVC.swift */; };
@@ -71,6 +76,11 @@
 		2764C4821F72DE1400DB7199 /* ContactUsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactUsVC.swift; sourceTree = "<group>"; };
 		2764C4841F72E4B500DB7199 /* ContactBusinessVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactBusinessVC.swift; sourceTree = "<group>"; };
 		2764C4861F72ECB700DB7199 /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		276D1B851F7B89A400A3EAF3 /* DescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionTableViewCell.swift; sourceTree = "<group>"; };
+		276D1B891F7B8A0500A3EAF3 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
+		276D1B8B1F7B9E6F00A3EAF3 /* BusinessSharesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessSharesVC.swift; sourceTree = "<group>"; };
+		276D1B8D1F7BA11700A3EAF3 /* SharesInfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharesInfoCollectionViewCell.swift; sourceTree = "<group>"; };
+		276D1B8F1F7BA25700A3EAF3 /* Shares.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shares.swift; sourceTree = "<group>"; };
 		27702CD41F69531900A1C652 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		27702CD81F69621900A1C652 /* Messages.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Messages.storyboard; sourceTree = "<group>"; };
 		27702CDA1F6962F900A1C652 /* MessagesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesVC.swift; sourceTree = "<group>"; };
@@ -128,6 +138,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		276D1B841F7B888300A3EAF3 /* Business Information */ = {
+			isa = PBXGroup;
+			children = (
+				277DD7181F72238C005B7752 /* SharesInfoVC.swift */,
+				276D1B851F7B89A400A3EAF3 /* DescriptionTableViewCell.swift */,
+				276D1B891F7B8A0500A3EAF3 /* ReviewTableViewCell.swift */,
+				276D1B8B1F7B9E6F00A3EAF3 /* BusinessSharesVC.swift */,
+				276D1B8D1F7BA11700A3EAF3 /* SharesInfoCollectionViewCell.swift */,
+			);
+			name = "Business Information";
+			sourceTree = "<group>";
+		};
 		27702CD71F69620800A1C652 /* Messages */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,11 +198,12 @@
 				27C114831F717B5800CD9FB9 /* SharesCollectionVC.swift */,
 				27C114851F718C9100CD9FB9 /* TabCollectionViewCell.swift */,
 				27C114871F718CCE00CD9FB9 /* SharesCollectionViewCell.swift */,
-				277DD7181F72238C005B7752 /* SharesInfoVC.swift */,
+				276D1B841F7B888300A3EAF3 /* Business Information */,
 				2764C47A1F725E2D00DB7199 /* Business.swift */,
 				2764C47C1F726FDD00DB7199 /* SharrorFormVC.swift */,
 				2764C4801F7271AB00DB7199 /* SharrorFormCollectionViewCell.swift */,
 				2764C4841F72E4B500DB7199 /* ContactBusinessVC.swift */,
+				276D1B8F1F7BA25700A3EAF3 /* Shares.swift */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -444,6 +467,7 @@
 				27D0186C1F7407CA00D5B798 /* RegexCheck.swift in Sources */,
 				2764C47B1F725E2D00DB7199 /* Business.swift in Sources */,
 				2764C4851F72E4B500DB7199 /* ContactBusinessVC.swift in Sources */,
+				276D1B901F7BA25700A3EAF3 /* Shares.swift in Sources */,
 				27FCB7F21F67DB8F008E973C /* SignUpVC.swift in Sources */,
 				27FCB7EC1F678FD1008E973C /* Colours.swift in Sources */,
 				274A36891F7024A000FD5E3C /* EditPasswordVC.swift in Sources */,
@@ -455,6 +479,8 @@
 				2777645E1F6A594A0023CDCA /* MessageTableViewCell.swift in Sources */,
 				27C114841F717B5900CD9FB9 /* SharesCollectionVC.swift in Sources */,
 				277764601F6A5D2D0023CDCA /* ConversationVC.swift in Sources */,
+				276D1B8A1F7B8A0500A3EAF3 /* ReviewTableViewCell.swift in Sources */,
+				276D1B861F7B89A400A3EAF3 /* DescriptionTableViewCell.swift in Sources */,
 				275FA0E61F7A5E9D008EF252 /* ImageDownloader.swift in Sources */,
 				274A36851F700F2100FD5E3C /* UIViewWithBorder.swift in Sources */,
 				277DD71B1F723F3F005B7752 /* SharritURL.swift in Sources */,
@@ -463,6 +489,7 @@
 				27B37F931F6EC2E200565AA8 /* EditProfileVC.swift in Sources */,
 				27702CDB1F6962F900A1C652 /* MessagesVC.swift in Sources */,
 				27702CD51F69531900A1C652 /* ProfileTableViewCell.swift in Sources */,
+				276D1B8E1F7BA11800A3EAF3 /* SharesInfoCollectionViewCell.swift in Sources */,
 				27FCB7E71F677AB3008E973C /* LoginVC.swift in Sources */,
 				27FCB7D61F67753F008E973C /* HomeVC.swift in Sources */,
 				27C0B0401F6BDBC4009E69CA /* User.swift in Sources */,
@@ -471,6 +498,7 @@
 				27C114861F718C9100CD9FB9 /* TabCollectionViewCell.swift in Sources */,
 				27F256421F6AA1C6006B1697 /* ButtonCollectionViewCell.swift in Sources */,
 				2764C47D1F726FDD00DB7199 /* SharrorFormVC.swift in Sources */,
+				276D1B8C1F7B9E7000A3EAF3 /* BusinessSharesVC.swift in Sources */,
 				2764A4BF1F6A73250014CCF3 /* Conversation.swift in Sources */,
 				277DD7191F72238C005B7752 /* SharesInfoVC.swift in Sources */,
 				274A368B1F70318200FD5E3C /* HelpInfoVC.swift in Sources */,

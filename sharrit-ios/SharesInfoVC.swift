@@ -8,12 +8,17 @@
 
 import UIKit
 
-class SharesInfoVC: UIViewController {
+class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var businessInfo: Business!
     @IBOutlet weak var businessName: UILabel!
     @IBOutlet weak var businessStartDate: UILabel!
     @IBOutlet weak var joinSharrorBtn: SharritButton!
+    
+    @IBOutlet weak var tableView: UITableView!
+    let tableViewSection = ["Description", "Reviews"]
+    var review:[String] = []
+    var tableViewItems:[[String]] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +29,7 @@ class SharesInfoVC: UIViewController {
         
         self.navigationItem.rightBarButtonItem = navBarBubble
         
-        self.title = "Best Power Bank!"
+        self.title = businessInfo.businessName
         
         businessName.text = businessInfo.businessName
         
@@ -47,8 +52,56 @@ class SharesInfoVC: UIViewController {
         businessStartDate.text = formatter.string(from: endDate!, to: todayDate!)
 
         (businessInfo.requestFormID != -1 && businessInfo.businessType == 1) ? (joinSharrorBtn.isHidden = false) : (joinSharrorBtn.isHidden = true)
+        
+        tableViewItems.append([businessInfo.description])
+        
+        // Setup some test data
+        review.append("Review Test Data 1")
+        review.append("Review Test Data 2")
+        tableViewItems.append(review)
     }
     
+    // Set up Table View - Description and Reviews
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return tableViewSection[section]
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 30.0
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return tableViewSection.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100.0
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tableViewItems[section].count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "descriptionCell") as! DescriptionTableViewCell
+            cell.descriptionLabel.text = businessInfo.description
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "reviewCell") as! ReviewTableViewCell
+            cell.profileImage.image = #imageLiteral(resourceName: "empty")
+            cell.profileName.text = "Test Profile Name"
+            cell.ratingLabel.text = review[indexPath.item]
+            cell.ratingView.rating = 4.5
+            return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.reloadData()
+    }
+    
+    // Go To Messages
     func goToMessages() {
         let messageSB = UIStoryboard(name: "Messages" , bundle: nil)
         let messageVC = messageSB.instantiateViewController(withIdentifier: "messages") as! MessagesVC

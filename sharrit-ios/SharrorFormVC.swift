@@ -96,18 +96,16 @@ class SharrorFormVC: UIViewController, UICollectionViewDataSource, UICollectionV
             switch response.result {
             case .success(_):
                 if let data = response.result.value {
-                    for (_, subJson) in JSON(data)["content"] {
-                        let stringQuestion = subJson["question"].string!
-                        if let convertedQuestion = stringQuestion.data(using: String.Encoding.utf8) {
-                            do {
-                                let dictionary = try JSONSerialization.jsonObject(with: convertedQuestion, options: []) as? [String:AnyObject]
-                                for (_, question) in dictionary! {
-                                    self.questions.append(question as! String)
-                                }
-                                self.questionCollectionView.reloadData()
-                            } catch let error as NSError {
-                                print("Error converting string to json")
+                    let stringQuestion = JSON(data)["content"]["question"].string!
+                    if let convertedQuestion = stringQuestion.data(using: String.Encoding.utf8) {
+                        do {
+                            let dictionary = try JSONSerialization.jsonObject(with: convertedQuestion, options: []) as? [String:AnyObject]
+                            for (_, question) in dictionary! {
+                                self.questions.append(question as! String)
                             }
+                            self.questionCollectionView.reloadData()
+                        } catch let error as NSError {
+                            print("Error converting string to json")
                         }
                     }
                 }
