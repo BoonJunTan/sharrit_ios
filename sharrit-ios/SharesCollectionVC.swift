@@ -147,6 +147,7 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == tabCollectionView {
             currentCategoryID = (indexPath.item + 1)
+            searchBar.placeholder = setPlaceHolder(placeholder: "Search " + allCategories[indexPath.item]);
             getSharesForCategory()
         } else {
             performSegue(withIdentifier: "viewSharesInfo", sender: sharesCollection[indexPath.item])
@@ -174,7 +175,7 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
     func setPlaceHolder(placeholder: String) -> String {
         var text = placeholder
         if text.characters.last! != " " {
-            let maxSize = CGSize(width: UIScreen.main.bounds.size.width - 130, height: 40)
+            let maxSize = CGSize(width: UIScreen.main.bounds.size.width, height: 40)
             let widthText = text.boundingRect( with: maxSize, options: .usesLineFragmentOrigin, attributes:nil, context:nil).size.width
             let widthSpace = " ".boundingRect( with: maxSize, options: .usesLineFragmentOrigin, attributes:nil, context:nil).size.width
             let spaces = floor((maxSize.width - widthText) / widthSpace) - 18

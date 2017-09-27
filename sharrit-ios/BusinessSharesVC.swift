@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class BusinessSharesVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
@@ -110,7 +112,7 @@ class BusinessSharesVC: UIViewController, UICollectionViewDataSource, UICollecti
                         let requestFormID = subJson["requestFormId"].int!
                         if requestFormID == -1 { business.requestFormID = requestFormID }
                         
-                        self.sharesCollection.append(business)
+                        //self.sharesCollection.append(business)
                     }
                     self.sharesCollectionView.reloadData()
                 }
