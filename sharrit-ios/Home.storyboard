@@ -143,7 +143,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="RPr-VE-2I9">
-                                <rect key="frame" x="0.0" y="104" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="50"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dSE-Mi-C7K" userLabel="Location">
                                         <rect key="frame" x="0.0" y="0.0" width="125" height="50"/>
@@ -355,7 +355,7 @@
                                 </subviews>
                             </stackView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="GTn-30-N7i">
-                                <rect key="frame" x="0.0" y="154" width="375" height="100"/>
+                                <rect key="frame" x="0.0" y="114" width="375" height="100"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="vdO-Yr-JpL">
                                     <size key="itemSize" width="67" height="57.5"/>
@@ -412,7 +412,7 @@
                                 </connections>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0v7-YF-uEk" userLabel="View By Drop Down">
-                                <rect key="frame" x="125" y="154" width="125" height="75"/>
+                                <rect key="frame" x="125" y="114" width="125" height="75"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="fZQ-2o-e7K">
                                         <rect key="frame" x="0.0" y="0.0" width="125" height="75"/>
@@ -450,7 +450,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hOB-CJ-hZz" userLabel="Filter Sort Drop Down">
-                                <rect key="frame" x="250" y="154" width="125" height="75"/>
+                                <rect key="frame" x="250" y="114" width="125" height="75"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="0kH-cO-Rra">
                                         <rect key="frame" x="0.0" y="0.0" width="125" height="75"/>
@@ -488,7 +488,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="FEe-Ge-hne">
-                                <rect key="frame" x="0.0" y="254" width="375" height="364"/>
+                                <rect key="frame" x="0.0" y="214" width="375" height="404"/>
                                 <color key="backgroundColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="FZv-XY-JWc">
                                     <size key="itemSize" width="183" height="182"/>
@@ -727,7 +727,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TIj-re-yFZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1582" y="778"/>
+            <point key="canvasLocation" x="1529" y="1081"/>
         </scene>
         <!--Business SharesVC-->
         <scene sceneID="pld-gm-1o2">
@@ -974,11 +974,30 @@
                     </view>
                     <connections>
                         <outlet property="sharesCollectionView" destination="Otf-7R-fWT" id="bXg-37-ObD"/>
+                        <segue destination="lRs-lQ-Jme" kind="show" identifier="viewSharre" id="EdK-t1-FNT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yxz-eR-9W1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2776.8000000000002" y="308.9955022488756"/>
+        </scene>
+        <!--View Sharre-->
+        <scene sceneID="eOK-5Z-PKt">
+            <objects>
+                <viewController title="View Sharre" id="lRs-lQ-Jme" customClass="ViewSharreVC" customModule="sharrit_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jqE-lZ-PEh"/>
+                        <viewControllerLayoutGuide type="bottom" id="ZAZ-Sc-fbW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="D30-6c-Tws">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iGm-2t-zs6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3759" y="309"/>
         </scene>
         <!--Messages-->
         <scene sceneID="xo7-qI-M7M">
@@ -986,12 +1005,30 @@
                 <viewControllerPlaceholder storyboardName="Messages" id="od9-99-9fs" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="clA-90-qMR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2553" y="777"/>
+            <point key="canvasLocation" x="2156" y="1080"/>
+        </scene>
+        <!--New Sharre-->
+        <scene sceneID="X4t-dm-oz9">
+            <objects>
+                <viewController title="New Sharre" id="39q-ys-GTx" customClass="NewSharreVC" customModule="sharrit_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="BHR-e8-y5r"/>
+                        <viewControllerLayoutGuide type="bottom" id="IRl-nJ-Pca"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fLY-ze-TuL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kHI-go-l9z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2777" y="1234"/>
         </scene>
         <!--Shares InfoVC-->
         <scene sceneID="8Xo-zQ-ekW">
             <objects>
-                <viewController id="7NM-ia-QVX" customClass="SharesInfoVC" customModule="sharrit_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="showBusinessInfo" id="7NM-ia-QVX" customClass="SharesInfoVC" customModule="sharrit_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="u2D-aB-Eaa"/>
                         <viewControllerLayoutGuide type="bottom" id="4Qb-Ax-ZdO"/>
@@ -1014,13 +1051,13 @@
                                 <rect key="frame" x="173.5" y="202.5" width="196.5" height="133.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bagman" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fxG-83-v5k">
-                                        <rect key="frame" x="0.0" y="0.0" width="196.5" height="22.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="196.5" height="18"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BAN-vR-XOG" customClass="CosmosView" customModule="Cosmos">
-                                        <rect key="frame" x="0.0" y="27.5" width="196.5" height="23"/>
+                                        <rect key="frame" x="0.0" y="23" width="196.5" height="18"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="rating">
@@ -1041,16 +1078,16 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lnC-Sa-oaC">
-                                        <rect key="frame" x="0.0" y="55.5" width="196.5" height="22.5"/>
+                                        <rect key="frame" x="0.0" y="46" width="196.5" height="18.5"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timer" translatesAutoresizingMaskIntoConstraints="NO" id="fxB-3S-KGL">
-                                                <rect key="frame" x="5" y="2" width="17.5" height="17.5"/>
+                                                <rect key="frame" x="5" y="1.5" width="13.5" height="14"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="fxB-3S-KGL" secondAttribute="height" multiplier="1:1" id="7DZ-5V-XNo"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4w" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shc-dl-Jht">
-                                                <rect key="frame" x="32.5" y="2.5" width="154" height="18"/>
+                                                <rect key="frame" x="28.5" y="0.5" width="158" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -1067,7 +1104,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jaW-Gn-KaA" customClass="SharritButton" customModule="sharrit_ios" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="83" width="196.5" height="23"/>
+                                        <rect key="frame" x="0.0" y="69.5" width="196.5" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <state key="normal" title="CHAT NOW!"/>
                                         <userDefinedRuntimeAttributes>
@@ -1081,7 +1118,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8h8-SQ-I98" customClass="SharritButton" customModule="sharrit_ios" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="111" width="196.5" height="22.5"/>
+                                        <rect key="frame" x="0.0" y="92.5" width="196.5" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <state key="normal" title="BE A SHARROR!"/>
                                         <userDefinedRuntimeAttributes>
@@ -1092,6 +1129,20 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <segue destination="0zi-ZS-ggp" kind="show" identifier="submitForm" id="ttk-Ky-Qhd"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o2h-EW-h6d" userLabel="Create Shares" customClass="SharritButton" customModule="sharrit_ios" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="115.5" width="196.5" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <state key="normal" title="CREATE SHARRE!"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isRounded" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <segue destination="39q-ys-GTx" kind="show" id="sNo-oe-jas"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1251,6 +1302,7 @@
                     <connections>
                         <outlet property="businessName" destination="fxG-83-v5k" id="b9w-jZ-aIX"/>
                         <outlet property="businessStartDate" destination="shc-dl-Jht" id="VoO-vB-dwP"/>
+                        <outlet property="createSharreBtn" destination="o2h-EW-h6d" id="qKW-to-OgJ"/>
                         <outlet property="joinSharrorBtn" destination="8h8-SQ-I98" id="PNP-Ga-SWq"/>
                         <outlet property="tableView" destination="y6h-hE-czm" id="b0N-oY-Lhn"/>
                     </connections>
@@ -1272,13 +1324,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="emw-nY-raM">
-                                <rect key="frame" x="0.0" y="104" width="375" height="1"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="1"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="pbG-Re-Du9"/>
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="LE6-rZ-4jg">
-                                <rect key="frame" x="0.0" y="105" width="375" height="513"/>
+                                <rect key="frame" x="0.0" y="65" width="375" height="553"/>
                                 <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="gY0-c9-h7u">
                                     <size key="itemSize" width="197" height="214"/>
@@ -1370,10 +1422,10 @@
                                 </connections>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p1w-SS-kq0">
-                                <rect key="frame" x="0.0" y="104" width="375" height="514"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your application has been sent. Please wait to be notify. Cheers!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h0b-UH-DcU">
-                                        <rect key="frame" x="37.5" y="237" width="300" height="41"/>
+                                        <rect key="frame" x="37.5" y="257" width="300" height="41"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>

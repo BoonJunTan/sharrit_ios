@@ -99,7 +99,7 @@ class BusinessSharesVC: UIViewController, UICollectionViewDataSource, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //performSegue(withIdentifier: "viewSharesInfo", sender: sharesCollection[indexPath.item])
+        performSegue(withIdentifier: "viewSharre", sender: nil)
     }
     
     // Get Shares for Business

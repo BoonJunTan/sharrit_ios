@@ -1408,11 +1408,20 @@ Cheers!</string>
                     <navigationItem key="navigationItem" title="Sharing Business" id="AKx-nf-2rQ"/>
                     <connections>
                         <outlet property="collectionView" destination="GWl-Ok-j7W" id="zRf-FT-BZF"/>
+                        <segue destination="hVt-qy-SRN" kind="show" identifier="viewBusinessInfo" id="ykZ-jF-8Rv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A0A-WF-6xS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1233" y="-27"/>
+        </scene>
+        <!--showBusinessInfo-->
+        <scene sceneID="B9s-AT-wkK">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Home" referencedIdentifier="showBusinessInfo" id="hVt-qy-SRN" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RTb-KP-lFb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2116" y="-27"/>
         </scene>
     </scenes>
     <resources>

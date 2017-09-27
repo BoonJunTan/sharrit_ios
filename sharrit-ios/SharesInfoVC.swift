@@ -14,6 +14,7 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     @IBOutlet weak var businessName: UILabel!
     @IBOutlet weak var businessStartDate: UILabel!
     @IBOutlet weak var joinSharrorBtn: SharritButton!
+    @IBOutlet weak var createSharreBtn: SharritButton!
     
     @IBOutlet weak var tableView: UITableView!
     let tableViewSection = ["Description", "Reviews"]
@@ -51,7 +52,13 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         formatter.unitsStyle = .full
         businessStartDate.text = formatter.string(from: endDate!, to: todayDate!)
 
-        (businessInfo.requestFormID != -1 && businessInfo.businessType == 1) ? (joinSharrorBtn.isHidden = false) : (joinSharrorBtn.isHidden = true)
+        if businessInfo.businessType == 1 {
+            // TODO: Check if accepted as sharror before
+            // (createSharreBtn.isHidden = false) : (createSharreBtn.isHidden = true)
+            
+            // Else, Check if got form
+            businessInfo.requestFormID != -1 ? (joinSharrorBtn.isHidden = false) : (joinSharrorBtn.isHidden = true)
+        }
         
         tableViewItems.append([businessInfo.description])
         

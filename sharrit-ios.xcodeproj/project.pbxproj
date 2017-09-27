@@ -16,6 +16,8 @@
 		275C05071F7BE7AF00E78E06 /* SharesInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275C05061F7BE7AF00E78E06 /* SharesInfoTableViewCell.swift */; };
 		275C05091F7BE83800E78E06 /* ShowSharesInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275C05081F7BE83800E78E06 /* ShowSharesInfoVC.swift */; };
 		275C050B1F7BF40B00E78E06 /* BusinessInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275C050A1F7BF40B00E78E06 /* BusinessInfoCollectionViewCell.swift */; };
+		275C050E1F7C014C00E78E06 /* NewSharreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275C050D1F7C014C00E78E06 /* NewSharreVC.swift */; };
+		275C05101F7C01BF00E78E06 /* ViewSharreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275C050F1F7C01BF00E78E06 /* ViewSharreVC.swift */; };
 		275FA0E61F7A5E9D008EF252 /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275FA0E51F7A5E9D008EF252 /* ImageDownloader.swift */; };
 		2764A4BF1F6A73250014CCF3 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2764A4BE1F6A73250014CCF3 /* Conversation.swift */; };
 		2764C47B1F725E2D00DB7199 /* Business.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2764C47A1F725E2D00DB7199 /* Business.swift */; };
@@ -76,6 +78,8 @@
 		275C05061F7BE7AF00E78E06 /* SharesInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharesInfoTableViewCell.swift; sourceTree = "<group>"; };
 		275C05081F7BE83800E78E06 /* ShowSharesInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowSharesInfoVC.swift; sourceTree = "<group>"; };
 		275C050A1F7BF40B00E78E06 /* BusinessInfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessInfoCollectionViewCell.swift; sourceTree = "<group>"; };
+		275C050D1F7C014C00E78E06 /* NewSharreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSharreVC.swift; sourceTree = "<group>"; };
+		275C050F1F7C01BF00E78E06 /* ViewSharreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSharreVC.swift; sourceTree = "<group>"; };
 		275FA0E51F7A5E9D008EF252 /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
 		2764A4BE1F6A73250014CCF3 /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		2764C47A1F725E2D00DB7199 /* Business.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Business.swift; sourceTree = "<group>"; };
@@ -146,6 +150,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		275C050C1F7C012C00E78E06 /* New Sharre */ = {
+			isa = PBXGroup;
+			children = (
+				275C050D1F7C014C00E78E06 /* NewSharreVC.swift */,
+			);
+			name = "New Sharre";
+			sourceTree = "<group>";
+		};
 		276D1B841F7B888300A3EAF3 /* Business Information */ = {
 			isa = PBXGroup;
 			children = (
@@ -201,6 +213,7 @@
 		27F6C72E1F7BAB7A00DDB27B /* Shares Information */ = {
 			isa = PBXGroup;
 			children = (
+				275C050F1F7C01BF00E78E06 /* ViewSharreVC.swift */,
 			);
 			name = "Shares Information";
 			sourceTree = "<group>";
@@ -242,6 +255,7 @@
 				27F6C72F1F7BABA200DDB27B /* Category (Home) */,
 				27F6C7301F7BABC300DDB27B /* Business (Category) */,
 				276D1B841F7B888300A3EAF3 /* Business Information */,
+				275C050C1F7C012C00E78E06 /* New Sharre */,
 				27F6C7311F7BABE700DDB27B /* Sharror Form */,
 				27F6C72E1F7BAB7A00DDB27B /* Shares Information */,
 			);
@@ -517,6 +531,7 @@
 				27FCB7EC1F678FD1008E973C /* Colours.swift in Sources */,
 				274A36891F7024A000FD5E3C /* EditPasswordVC.swift in Sources */,
 				27FCB7DF1F6776A5008E973C /* NotificationVC.swift in Sources */,
+				275C050E1F7C014C00E78E06 /* NewSharreVC.swift in Sources */,
 				2764C4871F72ECB700DB7199 /* Notification.swift in Sources */,
 				2764C4811F7271AB00DB7199 /* SharrorFormCollectionViewCell.swift in Sources */,
 				27F256441F6ACE8D006B1697 /* NotificationTableViewCell.swift in Sources */,
@@ -549,6 +564,7 @@
 				276D1B8C1F7B9E7000A3EAF3 /* BusinessSharesVC.swift in Sources */,
 				2764A4BF1F6A73250014CCF3 /* Conversation.swift in Sources */,
 				277DD7191F72238C005B7752 /* SharesInfoVC.swift in Sources */,
+				275C05101F7C01BF00E78E06 /* ViewSharreVC.swift in Sources */,
 				274A368B1F70318200FD5E3C /* HelpInfoVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
