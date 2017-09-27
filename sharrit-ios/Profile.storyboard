@@ -1136,10 +1136,10 @@ Cheers!</string>
             </objects>
             <point key="canvasLocation" x="2415" y="-755"/>
         </scene>
-        <!--ShowSBVC-->
+        <!--Sharing Business-->
         <scene sceneID="MOi-7d-P6z">
             <objects>
-                <viewController id="sDc-fQ-nLs" customClass="ShowSBVC" customModule="sharrit_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Sharing Business" id="sDc-fQ-nLs" customClass="ShowSBVC" customModule="sharrit_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Vpc-wr-OcL"/>
                         <viewControllerLayoutGuide type="bottom" id="DBt-h6-kS4"/>
@@ -1405,7 +1405,7 @@ Cheers!</string>
                             <constraint firstItem="GWl-Ok-j7W" firstAttribute="top" secondItem="K9M-E4-she" secondAttribute="bottom" id="wKu-q4-Yq9"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="AKx-nf-2rQ"/>
+                    <navigationItem key="navigationItem" title="Sharing Business" id="AKx-nf-2rQ"/>
                     <connections>
                         <outlet property="collectionView" destination="GWl-Ok-j7W" id="zRf-FT-BZF"/>
                     </connections>
