@@ -10,10 +10,17 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
+enum ArriveFrom {
+    case SharingBusiness
+    case Sharror
+    case Sharrie
+}
+
 class BusinessSharesVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     var searchBar:UISearchBar!
     var sharesCollection: [Shares]! = []
+    var arriveFrom = ArriveFrom.SharingBusiness
     
     @IBOutlet weak var sharesCollectionView: UICollectionView!
     
@@ -22,8 +29,22 @@ class BusinessSharesVC: UIViewController, UICollectionViewDataSource, UICollecti
         
         getSharesForBusiness()
         
+        var arrivingFrom:String!
+        
+        switch arriveFrom {
+        case .Sharror:
+            arrivingFrom = "Offered Sharres"
+            break
+        case .Sharrie:
+            arrivingFrom = "Requested Sharres"
+            break
+        case .SharingBusiness:
+            arrivingFrom = "Business Sharres"
+            break
+        }
+        
         searchBar = UISearchBar()
-        searchBar.placeholder = setPlaceHolder(placeholder: "Search ");
+        searchBar.placeholder = setPlaceHolder(placeholder: "Search " + arrivingFrom);
         self.navigationItem.titleView = searchBar
         
         let navBarBubble = UIBarButtonItem(image: #imageLiteral(resourceName: "chat"),

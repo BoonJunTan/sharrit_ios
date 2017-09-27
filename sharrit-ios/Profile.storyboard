@@ -243,7 +243,7 @@
                         <segue destination="nRI-jY-KqF" kind="show" identifier="showHelp" id="kZR-zd-7qq"/>
                         <segue destination="M6J-nz-q7w" kind="show" identifier="goBackHome" id="M0k-5N-cbx"/>
                         <segue destination="WIP-B9-c5m" kind="show" identifier="showSB" id="6PP-YQ-n5F"/>
-                        <segue destination="lg0-2M-yTD" kind="show" identifier="showShares" id="Ie9-HM-gkA"/>
+                        <segue destination="SJS-I6-COn" kind="show" identifier="showShares" id="GvH-Q9-o7Z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I9N-hg-0ir" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -263,20 +263,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sharrit_Logo" translatesAutoresizingMaskIntoConstraints="NO" id="87O-HZ-sRj">
-                                <rect key="frame" x="120.5" y="154" width="133" height="133.5"/>
+                                <rect key="frame" x="120.5" y="114" width="133" height="133.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="87O-HZ-sRj" secondAttribute="height" multiplier="1:1" id="S6i-oO-9xb"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zbJ-om-985">
-                                <rect key="frame" x="19" y="312.5" width="337.5" height="267"/>
+                                <rect key="frame" x="19" y="272.5" width="337.5" height="267"/>
                                 <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iD7-vp-K7U" customClass="SharritButton" customModule="sharrit_ios" customModuleProvider="target">
-                                <rect key="frame" x="37.5" y="604.5" width="300" height="30"/>
+                                <rect key="frame" x="37.5" y="564.5" width="300" height="30"/>
                                 <state key="normal" title="Contact Us!"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isRounded" value="YES"/>
@@ -408,23 +408,13 @@
             </objects>
             <point key="canvasLocation" x="276" y="779"/>
         </scene>
-        <!--Show SharesVC-->
-        <scene sceneID="m0T-cS-Gku">
+        <!--showShares-->
+        <scene sceneID="k2l-Eb-zpl">
             <objects>
-                <viewController id="lg0-2M-yTD" customClass="ShowSharesVC" customModule="sharrit_ios" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="rjW-eV-Bff"/>
-                        <viewControllerLayoutGuide type="bottom" id="l5E-tg-WZa"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="ZGY-T5-0lZ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zFw-uQ-pec" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="Home" referencedIdentifier="showShares" id="SJS-I6-COn" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pcC-Nf-wFR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1233" y="779"/>
+            <point key="canvasLocation" x="1065" y="426"/>
         </scene>
         <!--Messages-->
         <scene sceneID="rzm-4k-5JL">

@@ -732,7 +732,7 @@
         <!--Business SharesVC-->
         <scene sceneID="pld-gm-1o2">
             <objects>
-                <viewController id="0jo-g7-l13" customClass="BusinessSharesVC" customModule="sharrit_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="showShares" id="0jo-g7-l13" customClass="BusinessSharesVC" customModule="sharrit_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="C57-FK-Otp"/>
                         <viewControllerLayoutGuide type="bottom" id="2QG-Es-aId"/>
@@ -1107,7 +1107,7 @@
                                         <rect key="frame" x="187.5" y="0.0" width="187.5" height="33.5"/>
                                         <state key="normal" title="SHARRES!"/>
                                         <connections>
-                                            <segue destination="0jo-g7-l13" kind="show" id="Koz-kg-iCh"/>
+                                            <segue destination="0jo-g7-l13" kind="show" identifier="sharesInfo" id="Koz-kg-iCh"/>
                                         </connections>
                                     </button>
                                 </subviews>

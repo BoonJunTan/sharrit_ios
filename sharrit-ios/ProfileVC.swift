@@ -264,8 +264,12 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showShares" {
-            if let showSharesVC = segue.destination as? ShowSharesVC {
-                showSharesVC.titleString = sender as! String
+            if let showSharesVC = segue.destination as? BusinessSharesVC {
+                if sender as? String == "Sharres Requested" {
+                    showSharesVC.arriveFrom = .Sharrie
+                } else {
+                    showSharesVC.arriveFrom = .Sharror
+                }
             }
         }
     }
