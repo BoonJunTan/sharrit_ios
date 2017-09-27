@@ -13,6 +13,9 @@
 		274A368B1F70318200FD5E3C /* HelpInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274A368A1F70318200FD5E3C /* HelpInfoVC.swift */; };
 		2751E4EF1F6AE3A700E1B1E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2751E4EE1F6AE3A700E1B1E2 /* Assets.xcassets */; };
 		2751E4F11F6AE6D700E1B1E2 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2751E4F01F6AE6D700E1B1E2 /* CategoryCollectionViewCell.swift */; };
+		275C05071F7BE7AF00E78E06 /* SharesInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275C05061F7BE7AF00E78E06 /* SharesInfoTableViewCell.swift */; };
+		275C05091F7BE83800E78E06 /* ShowSharesInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275C05081F7BE83800E78E06 /* ShowSharesInfoVC.swift */; };
+		275C050B1F7BF40B00E78E06 /* BusinessInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275C050A1F7BF40B00E78E06 /* BusinessInfoCollectionViewCell.swift */; };
 		275FA0E61F7A5E9D008EF252 /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275FA0E51F7A5E9D008EF252 /* ImageDownloader.swift */; };
 		2764A4BF1F6A73250014CCF3 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2764A4BE1F6A73250014CCF3 /* Conversation.swift */; };
 		2764C47B1F725E2D00DB7199 /* Business.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2764C47A1F725E2D00DB7199 /* Business.swift */; };
@@ -70,6 +73,9 @@
 		274A368A1F70318200FD5E3C /* HelpInfoVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpInfoVC.swift; sourceTree = "<group>"; };
 		2751E4EE1F6AE3A700E1B1E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2751E4F01F6AE6D700E1B1E2 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		275C05061F7BE7AF00E78E06 /* SharesInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharesInfoTableViewCell.swift; sourceTree = "<group>"; };
+		275C05081F7BE83800E78E06 /* ShowSharesInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowSharesInfoVC.swift; sourceTree = "<group>"; };
+		275C050A1F7BF40B00E78E06 /* BusinessInfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessInfoCollectionViewCell.swift; sourceTree = "<group>"; };
 		275FA0E51F7A5E9D008EF252 /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
 		2764A4BE1F6A73250014CCF3 /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		2764C47A1F725E2D00DB7199 /* Business.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Business.swift; sourceTree = "<group>"; };
@@ -274,7 +280,10 @@
 				274A36881F7024A000FD5E3C /* EditPasswordVC.swift */,
 				274A368A1F70318200FD5E3C /* HelpInfoVC.swift */,
 				2764C4821F72DE1400DB7199 /* ContactUsVC.swift */,
+				275C050A1F7BF40B00E78E06 /* BusinessInfoCollectionViewCell.swift */,
 				272508C71F7BAE9500A93BE3 /* ShowSBVC.swift */,
+				275C05061F7BE7AF00E78E06 /* SharesInfoTableViewCell.swift */,
+				275C05081F7BE83800E78E06 /* ShowSharesInfoVC.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -503,6 +512,7 @@
 				2764C47B1F725E2D00DB7199 /* Business.swift in Sources */,
 				2764C4851F72E4B500DB7199 /* ContactBusinessVC.swift in Sources */,
 				276D1B901F7BA25700A3EAF3 /* Shares.swift in Sources */,
+				275C050B1F7BF40B00E78E06 /* BusinessInfoCollectionViewCell.swift in Sources */,
 				27FCB7F21F67DB8F008E973C /* SignUpVC.swift in Sources */,
 				27FCB7EC1F678FD1008E973C /* Colours.swift in Sources */,
 				274A36891F7024A000FD5E3C /* EditPasswordVC.swift in Sources */,
@@ -512,6 +522,7 @@
 				27F256441F6ACE8D006B1697 /* NotificationTableViewCell.swift in Sources */,
 				27FCB7E11F6776B6008E973C /* WalletVC.swift in Sources */,
 				2777645E1F6A594A0023CDCA /* MessageTableViewCell.swift in Sources */,
+				275C05091F7BE83800E78E06 /* ShowSharesInfoVC.swift in Sources */,
 				27C114841F717B5900CD9FB9 /* SharesCollectionVC.swift in Sources */,
 				277764601F6A5D2D0023CDCA /* ConversationVC.swift in Sources */,
 				276D1B8A1F7B8A0500A3EAF3 /* ReviewTableViewCell.swift in Sources */,
@@ -530,6 +541,7 @@
 				27FCB7D61F67753F008E973C /* HomeVC.swift in Sources */,
 				27C0B0401F6BDBC4009E69CA /* User.swift in Sources */,
 				27FCB7F01F679857008E973C /* SharritButton.swift in Sources */,
+				275C05071F7BE7AF00E78E06 /* SharesInfoTableViewCell.swift in Sources */,
 				27C114881F718CCE00CD9FB9 /* SharesCollectionViewCell.swift in Sources */,
 				27C114861F718C9100CD9FB9 /* TabCollectionViewCell.swift in Sources */,
 				27F256421F6AA1C6006B1697 /* ButtonCollectionViewCell.swift in Sources */,
