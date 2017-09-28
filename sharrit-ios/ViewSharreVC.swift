@@ -19,6 +19,8 @@ class ViewSharreVC: UIViewController {
                                            target: self, action: #selector(goToMessages))
         
         self.navigationItem.rightBarButtonItem = navBarBubble
+        
+        self.tabBarController?.tabBar.isHidden = true
     }
     
     func goToMessages() {

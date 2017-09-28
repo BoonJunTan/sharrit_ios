@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class WalletVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
@@ -74,8 +76,17 @@ class WalletVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // handle tap events
-        print("You selected cell #\(indexPath.item)!")
+        switch btnLabel[indexPath.item] {
+        // Must TODO : 2nd System Release
+        case "Top Up", "Cash Out":
+            performSegue(withIdentifier: "walletTopUp", sender: btnLabel[indexPath.item])
+            break
+        case "History":
+            performSegue(withIdentifier: "viewAllTransaction", sender: nil)
+            break
+        default:
+            break
+        }
     }
     
     func goToMessages() {
@@ -92,6 +103,14 @@ class WalletVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
                 }
             }
         })
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "walletTopUp" {
+            if let walletManagementVC = segue.destination as? WalletTopUpVC {
+                sender as! String == "Top Up" ? (walletManagementVC.walletManagement = .TopUp) : (walletManagementVC.walletManagement = .CashOut)
+            }
+        }
     }
     
 }

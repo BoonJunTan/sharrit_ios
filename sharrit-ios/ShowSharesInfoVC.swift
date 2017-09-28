@@ -42,9 +42,6 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "sharesInfoCell") as! SharesInfoTableViewCell
 //        cell.sharesImage.image = tableViewItems[indexPath.row].
-//        cell.sharesTitle.text = tableViewItems[indexPath.row].
-//        cell.sharesDate = tableViewItems[indexPath.row].
-//        cell.sharesPrice = tableViewItems[indexPath.row].
         return cell
     }
     
