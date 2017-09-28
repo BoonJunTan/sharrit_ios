@@ -493,9 +493,10 @@
                                                 <color key="textColor" red="0.26529417560000002" green="0.69572879050000003" blue="0.99636000390000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="A really really long description" translatesAutoresizingMaskIntoConstraints="NO" id="C6b-Ji-nm9">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C6b-Ji-nm9">
                                                 <rect key="frame" x="47" y="460" width="318" height="80"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <string key="text">A really really long description. A really really long description. A really really long description. A really really long description. A really really long description.</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>

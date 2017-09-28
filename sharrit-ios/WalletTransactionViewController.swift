@@ -12,6 +12,8 @@ class WalletTransactionViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.tableFooterView = UIView() // For Hiding away empty cell
     }
 
     override func didReceiveMemoryWarning() {
