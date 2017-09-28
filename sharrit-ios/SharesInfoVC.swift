@@ -10,10 +10,15 @@ import UIKit
 
 class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    // Pass over value
     var businessInfo: Business!
+    var categoryID: Int!
+    var categoryName: String!
+    
     @IBOutlet weak var businessName: UILabel!
     @IBOutlet weak var businessStartDate: UILabel!
     @IBOutlet weak var joinSharrorBtn: SharritButton!
+    @IBOutlet weak var createSharreBtn: SharritButton!
     
     @IBOutlet weak var tableView: UITableView!
     let tableViewSection = ["Description", "Reviews"]
@@ -51,7 +56,13 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         formatter.unitsStyle = .full
         businessStartDate.text = formatter.string(from: endDate!, to: todayDate!)
 
-        (businessInfo.requestFormID != -1 && businessInfo.businessType == 1) ? (joinSharrorBtn.isHidden = false) : (joinSharrorBtn.isHidden = true)
+        if businessInfo.businessType == 1 {
+            // TODO: Check if accepted as sharror before
+            // (createSharreBtn.isHidden = false) : (createSharreBtn.isHidden = true)
+            
+            // Else, Check if got form
+            businessInfo.requestFormID != -1 ? (joinSharrorBtn.isHidden = false) : (joinSharrorBtn.isHidden = true)
+        }
         
         tableViewItems.append([businessInfo.description])
         
@@ -128,6 +139,13 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             if let contactBusinessVC = segue.destination as? ContactBusinessVC {
                 contactBusinessVC.sharingBusinessName = businessInfo.businessName
                 contactBusinessVC.sharingBusinessID = businessInfo.businessId
+            }
+        } else if segue.identifier == "createNewSharre" {
+            if let newShareVC = segue.destination as? NewSharreVC {
+                newShareVC.businessName = businessInfo.businessName
+                newShareVC.businessID = businessInfo.businessId
+                newShareVC.categoryID = categoryID
+                newShareVC.categoryName = categoryName
             }
         }
     }

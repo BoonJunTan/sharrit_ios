@@ -49,7 +49,7 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.reloadData()
+        //performSegue(withIdentifier: "viewSharesInfo", sender: sharesCollection[indexPath.item])
     }
     
     func goToMessages() {

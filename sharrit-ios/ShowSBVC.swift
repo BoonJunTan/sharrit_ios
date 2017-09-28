@@ -71,11 +71,11 @@ class ShowSBVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //performSegue(withIdentifier: "viewSharesInfo", sender: sharesCollection[indexPath.item])
+        performSegue(withIdentifier: "viewBusinessInfo", sender: businessCollection[indexPath.item])
     }
     
     func goToMessages() {
-        let messageSB = UIStoryboard(name: "Messages" , bundle: nil)
+        let messageSB = UIStoryboard(name: "Messages", bundle: nil)
         let messageVC = messageSB.instantiateViewController(withIdentifier: "messages") as! MessagesVC
         let messageWithNavController = UINavigationController(rootViewController: messageVC)
         
@@ -129,6 +129,15 @@ class ShowSBVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
             case .failure(_):
                 print("Retrieve Business for User API failed")
                 break
+            }
+        }
+    }
+    
+    // Prepare for segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "viewBusinessInfo" {
+            if let sharesInfoVC = segue.destination as? SharesInfoVC {
+                sharesInfoVC.businessInfo = sender as! Business
             }
         }
     }
