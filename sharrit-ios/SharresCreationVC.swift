@@ -13,10 +13,11 @@ class SharresCreationVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        let when = DispatchTime.now() + 4
-        DispatchQueue.main.asyncAfter(deadline: when) {
-            self.navigationController?.performSegue(withIdentifier: "viewSharre", sender: nil)
-        }
+        let timer = Timer.scheduledTimer(timeInterval: 4.0, target: self, selector: #selector(timeToMoveOn), userInfo: nil, repeats: false)
+    }
+    
+    func timeToMoveOn() {
+        self.performSegue(withIdentifier: "viewSharre", sender: self)
     }
 
     override func didReceiveMemoryWarning() {

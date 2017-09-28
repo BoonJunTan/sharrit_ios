@@ -1916,13 +1916,13 @@
                                         <rect key="frame" x="0.0" y="46" width="196.5" height="18.5"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timer" translatesAutoresizingMaskIntoConstraints="NO" id="fxB-3S-KGL">
-                                                <rect key="frame" x="5" y="1.5" width="13.5" height="14"/>
+                                                <rect key="frame" x="5" y="1.5" width="13" height="14"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="fxB-3S-KGL" secondAttribute="height" multiplier="1:1" id="7DZ-5V-XNo"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4w" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shc-dl-Jht">
-                                                <rect key="frame" x="28.5" y="0.5" width="158" height="18"/>
+                                                <rect key="frame" x="28" y="0.5" width="158.5" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
