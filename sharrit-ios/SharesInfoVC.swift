@@ -10,7 +10,11 @@ import UIKit
 
 class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    // Pass over value
     var businessInfo: Business!
+    var categoryID: Int!
+    var categoryName: String!
+    
     @IBOutlet weak var businessName: UILabel!
     @IBOutlet weak var businessStartDate: UILabel!
     @IBOutlet weak var joinSharrorBtn: SharritButton!
@@ -135,6 +139,13 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             if let contactBusinessVC = segue.destination as? ContactBusinessVC {
                 contactBusinessVC.sharingBusinessName = businessInfo.businessName
                 contactBusinessVC.sharingBusinessID = businessInfo.businessId
+            }
+        } else if segue.identifier == "createNewSharre" {
+            if let newShareVC = segue.destination as? NewSharreVC {
+                newShareVC.businessName = businessInfo.businessName
+                newShareVC.businessID = businessInfo.businessId
+                newShareVC.categoryID = categoryID
+                newShareVC.categoryName = categoryName
             }
         }
     }

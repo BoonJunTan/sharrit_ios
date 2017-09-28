@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		272508C81F7BAE9500A93BE3 /* ShowSBVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272508C71F7BAE9500A93BE3 /* ShowSBVC.swift */; };
+		2734E12B1F7C846500543F88 /* SharrePhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2734E12A1F7C846500543F88 /* SharrePhotoCollectionViewCell.swift */; };
 		274A36851F700F2100FD5E3C /* UIViewWithBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274A36841F700F2100FD5E3C /* UIViewWithBorder.swift */; };
 		274A36891F7024A000FD5E3C /* EditPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274A36881F7024A000FD5E3C /* EditPasswordVC.swift */; };
 		274A368B1F70318200FD5E3C /* HelpInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274A368A1F70318200FD5E3C /* HelpInfoVC.swift */; };
@@ -70,6 +71,7 @@
 		0C9F59F22649F3203E5DA86B /* Pods_sharrit_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sharrit_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		161ADFA0709DEF88BC30DC81 /* Pods-sharrit-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sharrit-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-sharrit-ios/Pods-sharrit-ios.release.xcconfig"; sourceTree = "<group>"; };
 		272508C71F7BAE9500A93BE3 /* ShowSBVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowSBVC.swift; sourceTree = "<group>"; };
+		2734E12A1F7C846500543F88 /* SharrePhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharrePhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		274A36841F700F2100FD5E3C /* UIViewWithBorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewWithBorder.swift; sourceTree = "<group>"; };
 		274A36881F7024A000FD5E3C /* EditPasswordVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditPasswordVC.swift; sourceTree = "<group>"; };
 		274A368A1F70318200FD5E3C /* HelpInfoVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpInfoVC.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				275C050D1F7C014C00E78E06 /* NewSharreVC.swift */,
+				2734E12A1F7C846500543F88 /* SharrePhotoCollectionViewCell.swift */,
 			);
 			name = "New Sharre";
 			sourceTree = "<group>";
@@ -535,6 +538,7 @@
 				2764C4871F72ECB700DB7199 /* Notification.swift in Sources */,
 				2764C4811F7271AB00DB7199 /* SharrorFormCollectionViewCell.swift in Sources */,
 				27F256441F6ACE8D006B1697 /* NotificationTableViewCell.swift in Sources */,
+				2734E12B1F7C846500543F88 /* SharrePhotoCollectionViewCell.swift in Sources */,
 				27FCB7E11F6776B6008E973C /* WalletVC.swift in Sources */,
 				2777645E1F6A594A0023CDCA /* MessageTableViewCell.swift in Sources */,
 				275C05091F7BE83800E78E06 /* ShowSharesInfoVC.swift in Sources */,

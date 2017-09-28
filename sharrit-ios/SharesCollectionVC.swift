@@ -259,6 +259,8 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
         if segue.identifier == "viewSharesInfo" {
             if let sharesInfoVC = segue.destination as? SharesInfoVC {
                 sharesInfoVC.businessInfo = sender as! Business
+                sharesInfoVC.categoryID = currentCategoryID
+                sharesInfoVC.categoryName = currentCategory
             }
         }
     }
