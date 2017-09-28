@@ -46,6 +46,12 @@
 		27C114861F718C9100CD9FB9 /* TabCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C114851F718C9100CD9FB9 /* TabCollectionViewCell.swift */; };
 		27C114881F718CCE00CD9FB9 /* SharesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C114871F718CCE00CD9FB9 /* SharesCollectionViewCell.swift */; };
 		27D0186C1F7407CA00D5B798 /* RegexCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D0186B1F7407CA00D5B798 /* RegexCheck.swift */; };
+		27DA994A1F7CCEC7006E415C /* WalletTopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DA99491F7CCEC7006E415C /* WalletTopUpVC.swift */; };
+		27DA994C1F7CE8F3006E415C /* TopUpTransactionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DA994B1F7CE8F3006E415C /* TopUpTransactionVC.swift */; };
+		27DA994E1F7CF6F0006E415C /* WalletTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DA994D1F7CF6F0006E415C /* WalletTransactionViewController.swift */; };
+		27DA99501F7CF794006E415C /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DA994F1F7CF794006E415C /* TransactionTableViewCell.swift */; };
+		27DA99521F7D08BE006E415C /* TransactionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DA99511F7D08BE006E415C /* TransactionVC.swift */; };
+		27DA99541F7D175B006E415C /* SharresCreationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DA99531F7D175B006E415C /* SharresCreationVC.swift */; };
 		27F256421F6AA1C6006B1697 /* ButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F256411F6AA1C6006B1697 /* ButtonCollectionViewCell.swift */; };
 		27F256441F6ACE8D006B1697 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F256431F6ACE8D006B1697 /* NotificationTableViewCell.swift */; };
 		27FCB7D41F677533008E973C /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27FCB7D31F677533008E973C /* Home.storyboard */; };
@@ -109,6 +115,12 @@
 		27C114851F718C9100CD9FB9 /* TabCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabCollectionViewCell.swift; sourceTree = "<group>"; };
 		27C114871F718CCE00CD9FB9 /* SharesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharesCollectionViewCell.swift; sourceTree = "<group>"; };
 		27D0186B1F7407CA00D5B798 /* RegexCheck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexCheck.swift; sourceTree = "<group>"; };
+		27DA99491F7CCEC7006E415C /* WalletTopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTopUpVC.swift; sourceTree = "<group>"; };
+		27DA994B1F7CE8F3006E415C /* TopUpTransactionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopUpTransactionVC.swift; sourceTree = "<group>"; };
+		27DA994D1F7CF6F0006E415C /* WalletTransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTransactionViewController.swift; sourceTree = "<group>"; };
+		27DA994F1F7CF794006E415C /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
+		27DA99511F7D08BE006E415C /* TransactionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionVC.swift; sourceTree = "<group>"; };
+		27DA99531F7D175B006E415C /* SharresCreationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharresCreationVC.swift; sourceTree = "<group>"; };
 		27F256411F6AA1C6006B1697 /* ButtonCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCollectionViewCell.swift; sourceTree = "<group>"; };
 		27F256431F6ACE8D006B1697 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
 		27FCB7D31F677533008E973C /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
@@ -157,6 +169,7 @@
 			children = (
 				275C050D1F7C014C00E78E06 /* NewSharreVC.swift */,
 				2734E12A1F7C846500543F88 /* SharrePhotoCollectionViewCell.swift */,
+				27DA99531F7D175B006E415C /* SharresCreationVC.swift */,
 			);
 			name = "New Sharre";
 			sourceTree = "<group>";
@@ -271,6 +284,11 @@
 				27FCB7E41F6776EC008E973C /* Wallet.storyboard */,
 				27FCB7E01F6776B6008E973C /* WalletVC.swift */,
 				27F256411F6AA1C6006B1697 /* ButtonCollectionViewCell.swift */,
+				27DA99491F7CCEC7006E415C /* WalletTopUpVC.swift */,
+				27DA994B1F7CE8F3006E415C /* TopUpTransactionVC.swift */,
+				27DA994D1F7CF6F0006E415C /* WalletTransactionViewController.swift */,
+				27DA994F1F7CF794006E415C /* TransactionTableViewCell.swift */,
+				27DA99511F7D08BE006E415C /* TransactionVC.swift */,
 			);
 			name = Wallet;
 			sourceTree = "<group>";
@@ -480,6 +498,7 @@
 				"${BUILT_PRODUCTS_DIR}/ImageSlideshow/ImageSlideshow.framework",
 				"${BUILT_PRODUCTS_DIR}/JSQMessagesViewController/JSQMessagesViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/JSQSystemSoundPlayer/JSQSystemSoundPlayer.framework",
+				"${BUILT_PRODUCTS_DIR}/MFCard/MFCard.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -491,6 +510,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImageSlideshow.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQMessagesViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQSystemSoundPlayer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MFCard.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -524,6 +544,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				27FCB7DD1F67768C008E973C /* ProfileVC.swift in Sources */,
+				27DA99501F7CF794006E415C /* TransactionTableViewCell.swift in Sources */,
 				2764C4831F72DE1400DB7199 /* ContactUsVC.swift in Sources */,
 				27D0186C1F7407CA00D5B798 /* RegexCheck.swift in Sources */,
 				2764C47B1F725E2D00DB7199 /* Business.swift in Sources */,
@@ -531,15 +552,18 @@
 				276D1B901F7BA25700A3EAF3 /* Shares.swift in Sources */,
 				275C050B1F7BF40B00E78E06 /* BusinessInfoCollectionViewCell.swift in Sources */,
 				27FCB7F21F67DB8F008E973C /* SignUpVC.swift in Sources */,
+				27DA99521F7D08BE006E415C /* TransactionVC.swift in Sources */,
 				27FCB7EC1F678FD1008E973C /* Colours.swift in Sources */,
 				274A36891F7024A000FD5E3C /* EditPasswordVC.swift in Sources */,
 				27FCB7DF1F6776A5008E973C /* NotificationVC.swift in Sources */,
 				275C050E1F7C014C00E78E06 /* NewSharreVC.swift in Sources */,
 				2764C4871F72ECB700DB7199 /* Notification.swift in Sources */,
+				27DA994A1F7CCEC7006E415C /* WalletTopUpVC.swift in Sources */,
 				2764C4811F7271AB00DB7199 /* SharrorFormCollectionViewCell.swift in Sources */,
 				27F256441F6ACE8D006B1697 /* NotificationTableViewCell.swift in Sources */,
 				2734E12B1F7C846500543F88 /* SharrePhotoCollectionViewCell.swift in Sources */,
 				27FCB7E11F6776B6008E973C /* WalletVC.swift in Sources */,
+				27DA994E1F7CF6F0006E415C /* WalletTransactionViewController.swift in Sources */,
 				2777645E1F6A594A0023CDCA /* MessageTableViewCell.swift in Sources */,
 				275C05091F7BE83800E78E06 /* ShowSharesInfoVC.swift in Sources */,
 				27C114841F717B5900CD9FB9 /* SharesCollectionVC.swift in Sources */,
@@ -549,11 +573,13 @@
 				275FA0E61F7A5E9D008EF252 /* ImageDownloader.swift in Sources */,
 				274A36851F700F2100FD5E3C /* UIViewWithBorder.swift in Sources */,
 				277DD71B1F723F3F005B7752 /* SharritURL.swift in Sources */,
+				27DA994C1F7CE8F3006E415C /* TopUpTransactionVC.swift in Sources */,
 				2751E4F11F6AE6D700E1B1E2 /* CategoryCollectionViewCell.swift in Sources */,
 				872D31621F6705520069381A /* AppDelegate.swift in Sources */,
 				27B37F931F6EC2E200565AA8 /* EditProfileVC.swift in Sources */,
 				27702CDB1F6962F900A1C652 /* MessagesVC.swift in Sources */,
 				27702CD51F69531900A1C652 /* ProfileTableViewCell.swift in Sources */,
+				27DA99541F7D175B006E415C /* SharresCreationVC.swift in Sources */,
 				272508C81F7BAE9500A93BE3 /* ShowSBVC.swift in Sources */,
 				276D1B8E1F7BA11800A3EAF3 /* SharesInfoCollectionViewCell.swift in Sources */,
 				27FCB7E71F677AB3008E973C /* LoginVC.swift in Sources */,

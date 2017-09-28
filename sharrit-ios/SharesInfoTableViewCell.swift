@@ -13,7 +13,8 @@ class SharesInfoTableViewCell: UITableViewCell {
     @IBOutlet weak var sharesImage: UIImageView!
     @IBOutlet weak var sharesTitle: UILabel!
     @IBOutlet weak var sharesDate: UILabel!
-    @IBOutlet weak var sharesPrice: UILabel!
+    @IBOutlet weak var sharesDeposit: UILabel!
+    @IBOutlet weak var sharesUsage: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

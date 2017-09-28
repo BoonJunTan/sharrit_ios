@@ -209,7 +209,7 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
     }
     
     @IBAction func createSharesBtnPressed(_ sender: SharritButton) {
-        
+        performSegue(withIdentifier: "createdSharre", sender: nil)
     }
     
 }
