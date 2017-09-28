@@ -14,5 +14,6 @@ target 'sharrit-ios' do
   pod 'SwiftyJSON'
   pod 'CountryPickerSwift'
   pod 'MFCard'
+  pod 'FSCalendar'
 
 end
