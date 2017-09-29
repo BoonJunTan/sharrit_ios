@@ -39,6 +39,7 @@
 		277764601F6A5D2D0023CDCA /* ConversationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2777645F1F6A5D2D0023CDCA /* ConversationVC.swift */; };
 		277DD7191F72238C005B7752 /* SharesInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277DD7181F72238C005B7752 /* SharesInfoVC.swift */; };
 		277DD71B1F723F3F005B7752 /* SharritURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277DD71A1F723F3F005B7752 /* SharritURL.swift */; };
+		279497CA1F7DED8B00522999 /* SharreTimeUsageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279497C91F7DED8B00522999 /* SharreTimeUsageVC.swift */; };
 		27ABAE811F670D81007F6CDB /* LoginAndSignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27ABAE801F670D81007F6CDB /* LoginAndSignUp.storyboard */; };
 		27B37F931F6EC2E200565AA8 /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B37F921F6EC2E200565AA8 /* EditProfileVC.swift */; };
 		27C0B0401F6BDBC4009E69CA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C0B03F1F6BDBC4009E69CA /* User.swift */; };
@@ -109,6 +110,7 @@
 		2777645F1F6A5D2D0023CDCA /* ConversationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationVC.swift; sourceTree = "<group>"; };
 		277DD7181F72238C005B7752 /* SharesInfoVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharesInfoVC.swift; sourceTree = "<group>"; };
 		277DD71A1F723F3F005B7752 /* SharritURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharritURL.swift; sourceTree = "<group>"; };
+		279497C91F7DED8B00522999 /* SharreTimeUsageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharreTimeUsageVC.swift; sourceTree = "<group>"; };
 		27ABAE801F670D81007F6CDB /* LoginAndSignUp.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LoginAndSignUp.storyboard; sourceTree = "<group>"; };
 		27B37F921F6EC2E200565AA8 /* EditProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
 		27C0B03F1F6BDBC4009E69CA /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				27DA99561F7D4894006E415C /* SharreBookingVC.swift */,
+				279497C91F7DED8B00522999 /* SharreTimeUsageVC.swift */,
 			);
 			name = "Book Sharre";
 			sourceTree = "<group>";
@@ -584,6 +587,7 @@
 				276D1B8A1F7B8A0500A3EAF3 /* ReviewTableViewCell.swift in Sources */,
 				276D1B861F7B89A400A3EAF3 /* DescriptionTableViewCell.swift in Sources */,
 				275FA0E61F7A5E9D008EF252 /* ImageDownloader.swift in Sources */,
+				279497CA1F7DED8B00522999 /* SharreTimeUsageVC.swift in Sources */,
 				274A36851F700F2100FD5E3C /* UIViewWithBorder.swift in Sources */,
 				277DD71B1F723F3F005B7752 /* SharritURL.swift in Sources */,
 				27DA994C1F7CE8F3006E415C /* TopUpTransactionVC.swift in Sources */,

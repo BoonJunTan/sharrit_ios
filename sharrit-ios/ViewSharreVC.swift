@@ -39,4 +39,10 @@ class ViewSharreVC: UIViewController {
         })
     }
     
+    @IBAction func sharreITBtnPressed(_ sender: SharritButton) {
+        // Check Appointment or Time-usage based
+        performSegue(withIdentifier: "viewAppointment", sender: nil)
+        //performSegue(withIdentifier: "viewTimeUsage", sender: nil)
+    }
+    
 }
