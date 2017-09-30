@@ -2173,13 +2173,13 @@
                                 <rect key="frame" x="173.5" y="202.5" width="196.5" height="133.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bagman" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fxG-83-v5k">
-                                        <rect key="frame" x="0.0" y="0.0" width="196.5" height="18"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="196.5" height="15"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BAN-vR-XOG" customClass="CosmosView" customModule="Cosmos">
-                                        <rect key="frame" x="0.0" y="23" width="196.5" height="18"/>
+                                        <rect key="frame" x="0.0" y="20" width="196.5" height="14.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="rating">
@@ -2200,16 +2200,16 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lnC-Sa-oaC">
-                                        <rect key="frame" x="0.0" y="46" width="196.5" height="18.5"/>
+                                        <rect key="frame" x="0.0" y="39.5" width="196.5" height="15"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timer" translatesAutoresizingMaskIntoConstraints="NO" id="fxB-3S-KGL">
-                                                <rect key="frame" x="5" y="1.5" width="13.5" height="14"/>
+                                                <rect key="frame" x="5" y="1" width="11.5" height="12"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="fxB-3S-KGL" secondAttribute="height" multiplier="1:1" id="7DZ-5V-XNo"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4w" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shc-dl-Jht">
-                                                <rect key="frame" x="28.5" y="0.5" width="158" height="18"/>
+                                                <rect key="frame" x="26.5" y="-2" width="160" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -2226,7 +2226,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jaW-Gn-KaA" customClass="SharritButton" customModule="sharrit_ios" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="69.5" width="196.5" height="18"/>
+                                        <rect key="frame" x="0.0" y="59.5" width="196.5" height="14.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <state key="normal" title="CHAT NOW!"/>
                                         <userDefinedRuntimeAttributes>
@@ -2240,7 +2240,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8h8-SQ-I98" customClass="SharritButton" customModule="sharrit_ios" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="92.5" width="196.5" height="18"/>
+                                        <rect key="frame" x="0.0" y="79" width="196.5" height="15"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <state key="normal" title="BE A SHARROR!"/>
                                         <userDefinedRuntimeAttributes>
@@ -2253,8 +2253,19 @@
                                             <segue destination="0zi-ZS-ggp" kind="show" identifier="submitForm" id="ttk-Ky-Qhd"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0uI-Fw-eqG" customClass="SharritButton" customModule="sharrit_ios" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="99" width="196.5" height="14.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <state key="normal" title="PENDING APPROVAL!"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isRounded" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o2h-EW-h6d" userLabel="Create Shares" customClass="SharritButton" customModule="sharrit_ios" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="115.5" width="196.5" height="18"/>
+                                        <rect key="frame" x="0.0" y="118.5" width="196.5" height="15"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <state key="normal" title="CREATE SHARRE!"/>
                                         <userDefinedRuntimeAttributes>
@@ -2426,6 +2437,7 @@
                         <outlet property="businessStartDate" destination="shc-dl-Jht" id="VoO-vB-dwP"/>
                         <outlet property="createSharreBtn" destination="o2h-EW-h6d" id="qKW-to-OgJ"/>
                         <outlet property="joinSharrorBtn" destination="8h8-SQ-I98" id="PNP-Ga-SWq"/>
+                        <outlet property="pendingApprovalBtn" destination="0uI-Fw-eqG" id="HKf-iG-s3H"/>
                         <outlet property="tableView" destination="y6h-hE-czm" id="b0N-oY-Lhn"/>
                     </connections>
                 </viewController>
@@ -2446,13 +2458,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="emw-nY-raM">
-                                <rect key="frame" x="0.0" y="104" width="375" height="1"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="1"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="pbG-Re-Du9"/>
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="LE6-rZ-4jg">
-                                <rect key="frame" x="0.0" y="105" width="375" height="513"/>
+                                <rect key="frame" x="0.0" y="65" width="375" height="553"/>
                                 <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="gY0-c9-h7u">
                                     <size key="itemSize" width="197" height="214"/>
@@ -2544,10 +2556,10 @@
                                 </connections>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p1w-SS-kq0">
-                                <rect key="frame" x="0.0" y="104" width="375" height="514"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your application has been sent. Please wait to be notify. Cheers!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h0b-UH-DcU">
-                                        <rect key="frame" x="37.5" y="237" width="300" height="41"/>
+                                        <rect key="frame" x="37.5" y="257" width="300" height="41"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>

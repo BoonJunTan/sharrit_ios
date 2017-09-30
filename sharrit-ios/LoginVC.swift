@@ -100,7 +100,7 @@ class LoginVC: UIViewController, CountryPickerDelegate {
         errorLabel.text = "*Mobile and password are required"
         loginEmpty = ((mobileNoTxt.text?.isEmpty)! || (passwordTxt.text?.isEmpty)!)
         
-        var mobileCountryCode = mobileCountryBtn.titleLabel?.text
+        let mobileCountryCode = mobileCountryBtn.titleLabel?.text
         
         if !loginEmpty {
             let signUpData: [String: Any] = ["phoneNumber": mobileCountryCode! + mobileNoTxt.text!, "password": passwordTxt.text!]
@@ -124,7 +124,8 @@ class LoginVC: UIViewController, CountryPickerDelegate {
                                     let accessToken = json["content"]["accessToken"].string!
                                     let createDate = json["content"]["dateCreated"].string!
                                     // Must TODO: Waiting for Ronald
-                                    let businessList = json["content"]["bizList"].string!
+                                    let joinedBusinessList = json["content"]["bizList"].arrayObject! as! [Int]
+                                    let pendingBusinessList = json["content"]["pendingList"].arrayObject! as! [Int]
                                     
                                     json["content"]["mobile"].stringValue = self.mobileCountryBtn.titleLabel!.text! + self.mobileNoTxt.text!
                                     json["content"]["password"].stringValue = self.passwordTxt.text!
@@ -133,14 +134,21 @@ class LoginVC: UIViewController, CountryPickerDelegate {
                                     var userInfoDict = [String: Any]()
                                     
                                     for (key,subJson):(String, JSON) in json["content"] {
-                                        userInfoDict.updateValue(subJson.stringValue, forKey: key)
+                                        if key == "bizList" {
+                                            userInfoDict.updateValue(joinedBusinessList, forKey: key)
+                                        } else if key == "pendingList" {
+                                            userInfoDict.updateValue(pendingBusinessList, forKey: key)
+                                        } else {
+                                            userInfoDict.updateValue(subJson.stringValue, forKey: key)
+                                        }
                                     }
                                     
                                     UserDefaults.standard.set(userInfoDict, forKey: "userInfo")
                                     UserDefaults.standard.synchronize()
                                     
                                     // This is to pass around VC
-                                    let userAccount = User(userID: userID, firstName: firstName, lastName: lastName, password: self.passwordTxt.text!, mobile: (self.mobileCountryBtn.titleLabel!.text! + self.mobileNoTxt.text!), profilePhoto: profilePhoto, accessToken: accessToken, createDate: createDate)
+                                    let userAccount = User(userID: userID, firstName: firstName, lastName: lastName, password: self.passwordTxt.text!, mobile: (self.mobileCountryBtn.titleLabel!.text! + self.mobileNoTxt.text!), profilePhoto: profilePhoto, accessToken: accessToken, createDate: createDate, joinedSBList: joinedBusinessList, pendingSBList: pendingBusinessList)
+                                    
                                     let appDelegate = UIApplication.shared.delegate as! AppDelegate
                                     appDelegate.user = userAccount
                                 }

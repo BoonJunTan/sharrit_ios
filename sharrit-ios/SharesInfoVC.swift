@@ -18,12 +18,15 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     @IBOutlet weak var businessName: UILabel!
     @IBOutlet weak var businessStartDate: UILabel!
     @IBOutlet weak var joinSharrorBtn: SharritButton!
+    @IBOutlet weak var pendingApprovalBtn: SharritButton!
     @IBOutlet weak var createSharreBtn: SharritButton!
     
     @IBOutlet weak var tableView: UITableView!
     let tableViewSection = ["Description", "Reviews"]
     var review:[String] = []
     var tableViewItems:[[String]] = []
+    
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,12 +59,23 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         formatter.unitsStyle = .full
         businessStartDate.text = formatter.string(from: endDate!, to: todayDate!)
 
+        createSharreBtn.isHidden = true
+        joinSharrorBtn.isHidden = true
+        pendingApprovalBtn.isHidden = true
+        
+        // First check - 3rd Party Business
         if businessInfo.businessType == 1 {
-            // Must TODO: Check if accepted as sharror before
-            // (createSharreBtn.isHidden = false) : (createSharreBtn.isHidden = true)
-            
-            // Else, Check if got form
-            businessInfo.requestFormID != -1 ? (joinSharrorBtn.isHidden = false) : (joinSharrorBtn.isHidden = true)
+            // Second check - If User already joined business or pending
+            if (appDelegate.user?.joinedSBList.contains(businessInfo.businessId))! {
+                createSharreBtn.isHidden = false
+            } else if (appDelegate.user?.pendingSBList.contains(businessInfo.businessId))! {
+                pendingApprovalBtn.isHidden = false
+            } else {
+                // Third check - If there is a request form
+                if businessInfo.requestFormID != -1 {
+                    joinSharrorBtn.isHidden = false
+                }
+            }
         }
         
         tableViewItems.append([businessInfo.description!])
