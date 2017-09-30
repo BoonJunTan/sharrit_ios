@@ -123,6 +123,8 @@ class LoginVC: UIViewController, CountryPickerDelegate {
                                     let profilePhoto = json["content"]["imageSrc"].string!
                                     let accessToken = json["content"]["accessToken"].string!
                                     let createDate = json["content"]["dateCreated"].string!
+                                    // Must TODO: Waiting for Ronald
+                                    let businessList = json["content"]["bizList"].string!
                                     
                                     json["content"]["mobile"].stringValue = self.mobileCountryBtn.titleLabel!.text! + self.mobileNoTxt.text!
                                     json["content"]["password"].stringValue = self.passwordTxt.text!

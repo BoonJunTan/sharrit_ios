@@ -12,8 +12,8 @@ class Business {
     
     var businessId: Int!
     var businessName: String!
-    var description: String!
-    var businessType: Int!
+    var description: String?
+    var businessType: Int?
     //var tag: String?
     //var isVerified: Bool!
     //var isActive: Bool!
@@ -22,9 +22,9 @@ class Business {
     //var category: String?
     //var categoryId: Int!
     var logoURL: String
-    var bannerURL: String
+    var bannerURL: String?
     var requestFormID: Int?
-    var commissionRate: Double
+    var commissionRate: Double?
     
     init(businessId: Int, businessName: String, description: String, businessType: Int, logoURL: String, bannerURL: String, commissionRate: Double, dateCreated: String) {
         self.businessId = businessId
@@ -34,6 +34,13 @@ class Business {
         self.logoURL = logoURL
         self.bannerURL = bannerURL
         self.commissionRate = commissionRate
+        self.dateCreated = dateCreated
+    }
+    
+    init(businessId: Int, businessName: String, logoURL: String, dateCreated: String) {
+        self.businessId = businessId
+        self.businessName = businessName
+        self.logoURL = logoURL
         self.dateCreated = dateCreated
     }
 }

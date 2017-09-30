@@ -57,14 +57,14 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         businessStartDate.text = formatter.string(from: endDate!, to: todayDate!)
 
         if businessInfo.businessType == 1 {
-            // TODO: Check if accepted as sharror before
+            // Must TODO: Check if accepted as sharror before
             // (createSharreBtn.isHidden = false) : (createSharreBtn.isHidden = true)
             
             // Else, Check if got form
             businessInfo.requestFormID != -1 ? (joinSharrorBtn.isHidden = false) : (joinSharrorBtn.isHidden = true)
         }
         
-        tableViewItems.append([businessInfo.description])
+        tableViewItems.append([businessInfo.description!])
         
         // Setup some test data
         review.append("Review Test Data 1")

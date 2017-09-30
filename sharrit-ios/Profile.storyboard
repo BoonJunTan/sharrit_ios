@@ -649,7 +649,7 @@ Cheers!</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="M8U-Pd-YdO">
-                                <rect key="frame" x="0.0" y="64" width="375" height="33.5"/>
+                                <rect key="frame" x="0.0" y="104" width="375" height="33.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pZc-0T-lgn" customClass="SharritButton" customModule="sharrit_ios" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="187.5" height="33.5"/>
@@ -670,14 +670,14 @@ Cheers!</string>
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mww-2q-ZjN">
-                                <rect key="frame" x="0.0" y="97.5" width="375" height="1"/>
+                                <rect key="frame" x="0.0" y="137.5" width="375" height="1"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="Slk-mb-Qse"/>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="MEV-kg-6Fa">
-                                <rect key="frame" x="0.0" y="98.5" width="375" height="66.5"/>
+                                <rect key="frame" x="0.0" y="138.5" width="375" height="66.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zwd-Wi-wBa" userLabel="Location">
                                         <rect key="frame" x="0.0" y="0.0" width="187.5" height="66.5"/>
@@ -820,7 +820,7 @@ Cheers!</string>
                                 </subviews>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3Gv-YH-rsE">
-                                <rect key="frame" x="0.0" y="165" width="375" height="453"/>
+                                <rect key="frame" x="0.0" y="205" width="375" height="413"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="sharesInfoCell" rowHeight="70" id="8Zl-B6-1gL" customClass="SharesInfoTableViewCell" customModule="sharrit_ios" customModuleProvider="target">
@@ -1403,7 +1403,7 @@ Cheers!</string>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Best Power Bank!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kbv-V7-UZ7">
                                                             <rect key="frame" x="0.0" y="0.0" width="163" height="24.5"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>

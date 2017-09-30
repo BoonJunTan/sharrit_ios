@@ -10,9 +10,24 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
+enum BusinessStatus {
+    case Joined
+    case Pending
+}
+
 class ShowSBVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout  {
     
-    var businessCollection: [Business]! = []
+    var businessCollection: [Business]! = [] // For Joined and Pending
+    
+    var businessStatus: BusinessStatus! {
+        didSet {
+            if businessStatus == .Joined {
+                
+            } else {
+                
+            }
+        }
+    }
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -29,15 +44,34 @@ class ShowSBVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 7 //businessCollection.count
+        return businessCollection.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let businessCell = collectionView.dequeueReusableCell(withReuseIdentifier: "businessInfoCell", for: indexPath as IndexPath) as! BusinessInfoCollectionViewCell
-        //ImageDownloader().imageFromServerURL(urlString: "https://is41031718it02.southeastasia.cloudapp.azure.com/uploads/category/" + allCategoriesImageStr[indexPath.item], imageView: businessCell.businessImage)
-        //businessCell.businessTitle.text =
-        businessCell.businessRating.rating = 4.7
-        //businessCell.businessDate
+        ImageDownloader().imageFromServerURL(urlString: "https://is41031718it02.southeastasia.cloudapp.azure.com/uploads/category/" + businessCollection[indexPath.item].logoURL, imageView: businessCell.businessImage)
+        businessCell.businessTitle.text = businessCollection[indexPath.item].businessName
+        
+        businessCell.businessRating.rating = 4.7 // Must TODO: In Future
+        
+        // Get Company Creation Date and Format it
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = NSTimeZone(abbreviation: "GMT+08")! as TimeZone
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+        let currentDate = Date()
+        let currentDateString = dateFormatter.string(from: currentDate)
+        let todayDate = dateFormatter.date(from: currentDateString)
+        
+        let dateFormatter2 = DateFormatter()
+        dateFormatter2.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
+        let endDate = dateFormatter2.date(from: businessCollection[indexPath.item].dateCreated)
+        
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.day, .weekOfMonth]
+        formatter.unitsStyle = .full
+        businessCell.businessDate.text = formatter.string(from: endDate!, to: todayDate!)
+        
         return businessCell
     }
     
@@ -92,9 +126,16 @@ class ShowSBVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
     
     // Retrieve Business based on User - Sharror
     func getBusinessForUser() {
-        let url = SharritURL.devURL + ""
-        
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        var url = ""
+        
+        if businessStatus == .Joined {
+            url = SharritURL.devURL + "sharror/" + String(describing: appDelegate.user!.userID)
+        } else {
+            // Must TODO: Ronald Give Me
+            //url = SharritURL.devURL + "sharror/" + String(describing: appDelegate.user!.userID)
+        }
         
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + appDelegate.user!.accessToken,
@@ -107,19 +148,13 @@ class ShowSBVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
             case .success(_):
                 self.businessCollection = []
                 if let data = response.result.value {
-                    for (_, subJson) in JSON(data)["content"] {
-                        let businessId = subJson["businessId"].int!
-                        let businessName = subJson["name"].description
-                        let description = subJson["description"].description
-                        let businessType = subJson["type"].int!
-                        let logo = subJson["logo"].description
-                        let banner = subJson["banner"].description
-                        let comRate = subJson["comissionRate"].double!
-                        let dateCreated = subJson["dateCreated"].description
-                        var business = Business(businessId: businessId, businessName: businessName, description: description, businessType: businessType, logoURL: logo, bannerURL: banner, commissionRate: comRate, dateCreated: dateCreated)
-                        
-                        let requestFormID = subJson["requestFormId"].int!
-                        if requestFormID == -1 { business.requestFormID = requestFormID }
+                    for (count, subJson) in JSON(data)["content"] {
+                        let currentCount = Int(count)!
+                        let businessId = subJson[currentCount]["businessId"].int!
+                        let businessName = subJson[currentCount]["name"].description
+                        let logo = subJson[currentCount]["logo"].description
+                        let dateCreated = subJson[currentCount]["dateCreated"].description
+                        let business = Business(businessId: businessId, businessName: businessName, logoURL: logo, dateCreated: dateCreated)
                         
                         self.businessCollection.append(business)
                     }
@@ -141,5 +176,4 @@ class ShowSBVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
             }
         }
     }
-    
 }

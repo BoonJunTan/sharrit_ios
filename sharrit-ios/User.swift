@@ -22,6 +22,8 @@ class User {
     var profilePhoto: String
     var accessToken: String
     var createDate: String
+    var joinedSBList: String?
+    var pendingSBList: String?
     
     init(userID: Int, firstName: String, lastName: String, password: String, mobile: String, profilePhoto: String, accessToken: String, createDate: String) {
         self.userID = userID
@@ -33,4 +35,5 @@ class User {
         self.accessToken = accessToken
         self.createDate = createDate
     }
+    
 }

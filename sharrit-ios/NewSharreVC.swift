@@ -37,6 +37,12 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
     @IBOutlet weak var sharreQuantity: UITextField!
     @IBOutlet weak var sharreDescription: UITextView!
     
+    @IBOutlet weak var dayMinuteStackView: UIStackView!
+    @IBOutlet weak var dayMinuteStackHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var startEndTimeStackView: UIStackView!
+    @IBOutlet weak var startEndTimeStackHeight: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let navBarBubble = UIBarButtonItem(image: #imageLiteral(resourceName: "chat"),
@@ -57,6 +63,9 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
         currentBtnSelected(btn: sharreDayBtn)
         
         sharreDescription.toolbarPlaceholder = "Enter Sharre Description"
+
+        startEndTimeStackView.isHidden = true
+        startEndTimeStackHeight.constant = 0
     }
     
     // Set up Collection View
@@ -191,21 +200,34 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
     @IBAction func scheduleBtnPressed(_ sender: SharritButton) {
         defaultChargeMethodBtnUI()
         currentBtnSelected(btn: sharreScheduleBtn)
+        dayMinuteStackView.isHidden = false
+        dayMinuteStackHeight.constant = 40
+        
+        defaultChargeTypeBtnUI()
+        currentBtnSelected(btn: sharreDayBtn)
     }
     
     @IBAction func timeBtnPressed(_ sender: SharritButton) {
         defaultChargeMethodBtnUI()
         currentBtnSelected(btn: sharreTimeBtn)
+        dayMinuteStackView.isHidden = true
+        dayMinuteStackHeight.constant = 0
+        startEndTimeStackView.isHidden = true
+        startEndTimeStackHeight.constant = 0
     }
     
     @IBAction func dayBtnPressed(_ sender: SharritButton) {
         defaultChargeTypeBtnUI()
         currentBtnSelected(btn: sharreDayBtn)
+        startEndTimeStackView.isHidden = true
+        startEndTimeStackHeight.constant = 0
     }
     
     @IBAction func thirtyBtnPressed(_ sender: SharritButton) {
         defaultChargeTypeBtnUI()
         currentBtnSelected(btn: sharreThirtyBtn)
+        startEndTimeStackView.isHidden = false
+        startEndTimeStackHeight.constant = 40
     }
     
     @IBAction func createSharesBtnPressed(_ sender: SharritButton) {

@@ -239,6 +239,8 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
                         let dateCreated = subJson["dateCreated"].description
                         var business = Business(businessId: businessId, businessName: businessName, description: description, businessType: businessType, logoURL: logo, bannerURL: banner, commissionRate: comRate, dateCreated: dateCreated)
                         
+                        // black listed id from Ronald
+                        
                         let requestFormID = subJson["requestFormId"].int!
                         if requestFormID == -1 { business.requestFormID = requestFormID }
                         

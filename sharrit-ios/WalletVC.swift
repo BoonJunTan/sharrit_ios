@@ -15,8 +15,6 @@ class WalletVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
     @IBOutlet weak var walletView: UIView!
     @IBOutlet weak var walletAmtLabel: UILabel!
     
-    // Must TODO : 2nd System Release
-    
     var btnIcon = [#imageLiteral(resourceName: "transaction"),#imageLiteral(resourceName: "deposit"),#imageLiteral(resourceName: "smart_card"), #imageLiteral(resourceName: "withdrawl")]
     var btnLabel = ["History", "Top Up", "Smart Card", "Cash Out"]
     @IBOutlet weak var btnCollectionView: UICollectionView!
