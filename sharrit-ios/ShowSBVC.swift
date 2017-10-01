@@ -133,8 +133,7 @@ class ShowSBVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
         if businessStatus == .Joined {
             url = SharritURL.devURL + "sharror/" + String(describing: appDelegate.user!.userID)
         } else {
-            // Must TODO: Ronald Give Me
-            //url = SharritURL.devURL + "sharror/" + String(describing: appDelegate.user!.userID)
+            url = SharritURL.devURL + "sharror/pending/" + String(describing: appDelegate.user!.userID)
         }
         
         let headers: HTTPHeaders = [
@@ -149,23 +148,21 @@ class ShowSBVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
                 self.businessCollection = []
                 if let data = response.result.value {
                     for (count, subJson) in JSON(data)["content"] {
-                        for (key, subInnerJSON) in subJson {
-                            let businessId = subInnerJSON["businessId"].int!
-                            let businessName = subInnerJSON["name"].description
-                            let description = subInnerJSON["description"].description
-                            let businessType = subInnerJSON["type"].int!
-                            let logo = subInnerJSON["logo"].description
-                            let banner = subInnerJSON["banner"].description
-                            let comRate = subInnerJSON["comissionRate"].double!
-                            let dateCreated = subInnerJSON["dateCreated"].description
-                            
-                            let business = Business(businessId: businessId, businessName: businessName, description: description, businessType: businessType, logoURL: logo, bannerURL: banner, commissionRate: comRate, dateCreated: dateCreated)
-                            
-                            let requestFormID = subInnerJSON["requestFormId"].int!
-                            if requestFormID == -1 { business.requestFormID = requestFormID }
-                            
-                            self.businessCollection.append(business)
-                        }
+                        let businessId = subJson["businessId"].int!
+                        let businessName = subJson["name"].description
+                        let description = subJson["description"].description
+                        let businessType = subJson["type"].int!
+                        let logo = subJson["logo"].description
+                        let banner = subJson["banner"].description
+                        let comRate = subJson["comissionRate"].double!
+                        let dateCreated = subJson["dateCreated"].description
+                        
+                        let business = Business(businessId: businessId, businessName: businessName, description: description, businessType: businessType, logoURL: logo, bannerURL: banner, commissionRate: comRate, dateCreated: dateCreated)
+                        
+                        let requestFormID = subJson["requestFormId"].int!
+                        if requestFormID == -1 { business.requestFormID = requestFormID }
+                        
+                        self.businessCollection.append(business)
                     }
                     self.collectionView.reloadData()
                 }

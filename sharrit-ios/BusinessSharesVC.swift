@@ -108,7 +108,7 @@ class BusinessSharesVC: UIViewController, UICollectionViewDataSource, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "viewSharre", sender: nil)
+        performSegue(withIdentifier: "viewSharre", sender: sharesCollection[indexPath.item].sharreId)
     }
     
     // Get Shares for Business
@@ -126,33 +126,31 @@ class BusinessSharesVC: UIViewController, UICollectionViewDataSource, UICollecti
                 if let data = response.result.value {
                     let json = JSON(data)
                     for (count, subJson) in json["content"] {
-                        for (key, subInnerJSON) in subJson {
-                            let sharreId = subInnerJSON["sharreId"].int!
-                            let sharreName = subInnerJSON["name"].description
-                            let sharreDescription = subInnerJSON["description"].description
-                            let sharreType = subInnerJSON["type"].int!
-                            let sharreQty = subInnerJSON["qty"].int!
-                            let sharreUnit = subInnerJSON["unit"].int!
-                            let sharrePrice = subInnerJSON["price"].double!
-                            let sharreDeposit = subInnerJSON["deposit"].double!
-                            let sharreLocation = subInnerJSON["name"].description
-                            let sharreDateCreated = subInnerJSON["name"].description
-                            let sharreOwnerType = subInnerJSON["ownerType"].int!
-                            let sharreOwnerId = subInnerJSON["ownerId"].int!
-                            let sharreIsActive = subInnerJSON["isActive"].boolValue
-                            
-                            let sharre = Shares(sharreId: sharreId, name: sharreName, description: sharreDescription, type: sharreType, qty: sharreQty, unit: sharreUnit, price: sharrePrice, deposit: sharreDeposit, location: sharreLocation, dateCreated: sharreDateCreated, ownerType: sharreOwnerType, ownerId: sharreOwnerId, isActive: sharreIsActive)
-                            
-                            let sharreActiveStart = subInnerJSON["activeStart"].description
-                            let sharreActiveEnd = subInnerJSON["activeEnd"].description
-                            
-                            if sharreActiveStart != "00:00:00" && sharreActiveEnd != "00:00:00" {
-                                sharre.activeStart = sharreActiveStart
-                                sharre.activeEnd = sharreActiveEnd
-                            }
-                            
-                            self.sharesCollection.append(sharre)
+                        let sharreId = subJson["sharreId"].int!
+                        let sharreName = subJson["name"].description
+                        let sharreDescription = subJson["description"].description
+                        let sharreType = subJson["type"].int!
+                        let sharreQty = subJson["qty"].int!
+                        let sharreUnit = subJson["unit"].int!
+                        let sharrePrice = subJson["price"].double!
+                        let sharreDeposit = subJson["deposit"].double!
+                        let sharreLocation = subJson["name"].description
+                        let sharreDateCreated = subJson["name"].description
+                        let sharreOwnerType = subJson["ownerType"].int!
+                        let sharreOwnerId = subJson["ownerId"].int!
+                        let sharreIsActive = subJson["isActive"].boolValue
+                        
+                        let sharre = Shares(sharreId: sharreId, name: sharreName, description: sharreDescription, type: sharreType, qty: sharreQty, unit: sharreUnit, price: sharrePrice, deposit: sharreDeposit, location: sharreLocation, dateCreated: sharreDateCreated, ownerType: sharreOwnerType, ownerId: sharreOwnerId, isActive: sharreIsActive)
+                        
+                        let sharreActiveStart = subJson["activeStart"].description
+                        let sharreActiveEnd = subJson["activeEnd"].description
+                        
+                        if sharreActiveStart != "00:00:00" && sharreActiveEnd != "00:00:00" {
+                            sharre.activeStart = sharreActiveStart
+                            sharre.activeEnd = sharreActiveEnd
                         }
+                        
+                        self.sharesCollection.append(sharre)
                     }
                     self.sharesCollectionView.reloadData()
                 }
@@ -197,6 +195,14 @@ class BusinessSharesVC: UIViewController, UICollectionViewDataSource, UICollecti
             }
         }
         return placeholder;
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "viewSharre" {
+            if let viewSharreVC = segue.destination as? ViewSharreVC {
+                viewSharreVC.sharreID = sender as! Int
+            }
+        }
     }
     
 }

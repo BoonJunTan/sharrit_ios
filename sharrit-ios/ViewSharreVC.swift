@@ -76,7 +76,7 @@ class ViewSharreVC: UIViewController {
                     var json = JSON(data)
                     self.sharreTitle.text = json["content"]["name"].string!
                     self.sharreDate.text = FormatDate().compareDaysCreated(dateCreated: json["content"]["dateCreated"].string!) + " by "
-                    //self.sharreOwner.text = json["content"]["ownerName"].string! // Ronald give me
+                    self.sharreOwner.text = json["content"]["ownerName"].string!
                     self.sharreStatus.text = json["content"]["isActive"].bool?.description
                     self.sharreDeposit.text = "Deposit: $" + String(describing: json["content"]["deposit"].int!)
                     self.sharreCharging.text = "Pay/hr: $" + String(describing: json["content"]["price"].int!)
@@ -94,7 +94,7 @@ class ViewSharreVC: UIViewController {
                     self.sharreStartTime.text = json["content"]["activeStart"].string!
                     self.sharreEndTime.text = json["content"]["activeEnd"].string!
                     self.sharreQuantity.text = String(describing: json["content"]["qty"].int!)
-                    //self.sharreCategory.text = json["content"]["category"].string! // Ronald give me
+                    self.sharreCategory.text = json["content"]["categoryName"].string!
                     self.sharreLocation.text = json["content"]["location"].string!
                     self.sharreDescription.text = json["content"]["description"].string!
                 }
