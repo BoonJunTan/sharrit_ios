@@ -36,7 +36,7 @@ class EditProfileVC: UIViewController {
     @IBAction func saveBtnTapped(_ sender: SharritButton) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
-        let signUpData: [String: Any] = ["firstName": userFirstName.text, "lastName": userLastName.text]
+        let signUpData: [String: Any] = ["firstName": userFirstName.text!, "lastName": userLastName.text!]
         
         let url = SharritURL.devURL + "user/" + String(describing: appDelegate.user!.userID)
         

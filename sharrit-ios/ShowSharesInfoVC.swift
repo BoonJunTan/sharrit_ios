@@ -142,7 +142,7 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
             case .success(_):
                 self.tableViewItems = []
                 if let data = response.result.value {
-                    for (count, subJson) in JSON(data)["content"] {
+                    for (_, subJson) in JSON(data)["content"] {
                         
                     }
                     self.tableView.reloadData()

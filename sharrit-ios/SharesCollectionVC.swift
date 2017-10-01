@@ -94,8 +94,7 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
             formatter.unitsStyle = .full
             sharesCell.sharesCreatedDate.text = formatter.string(from: endDate!, to: todayDate!)
             
-            // Image
-            ImageDownloader().imageFromServerURL(urlString: sharesCollection[indexPath.item].logoURL, imageView: sharesCell.sharesImage)
+            ImageDownloader().imageFromServerURL(urlString: SharritURL.devPhotoURL + sharesCollection[indexPath.item].logoURL, imageView: sharesCell.sharesImage)
             
             return sharesCell
         }
@@ -233,8 +232,8 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
                         let businessName = subJson["name"].description
                         let description = subJson["description"].description
                         let businessType = subJson["type"].int!
-                        let logo = subJson["logo"].description
-                        let banner = subJson["banner"].description
+                        let logo = subJson["logo"]["fileName"].description
+                        let banner = subJson["banner"]["fileName"].description
                         let comRate = subJson["comissionRate"].double!
                         let dateCreated = subJson["dateCreated"].description
                         let business = Business(businessId: businessId, businessName: businessName, description: description, businessType: businessType, logoURL: logo, bannerURL: banner, commissionRate: comRate, dateCreated: dateCreated)

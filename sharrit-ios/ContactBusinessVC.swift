@@ -35,7 +35,7 @@ class ContactBusinessVC: UIViewController {
             
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             
-            let messageData: [String: Any] = ["subject": subjectLabel.text, "senderId": appDelegate.user!.userID, "senderType": 0, "receiverType": 2, "receiverId": sharingBusinessID, "senderName": appDelegate.user!.firstName + " " + appDelegate.user!.lastName, "body" : messageText.text]
+            let messageData: [String: Any] = ["subject": subjectLabel.text!, "senderId": appDelegate.user!.userID, "senderType": 0, "receiverType": 2, "receiverId": sharingBusinessID, "senderName": appDelegate.user!.firstName + " " + appDelegate.user!.lastName, "body" : messageText.text!]
             
             let url = SharritURL.devURL + "conversation"
             

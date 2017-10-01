@@ -150,11 +150,6 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
             
             grabLatestNotificationCount()
             
-            let headers: HTTPHeaders = [
-                "Authorization": "Bearer " + appDelegate.user!.accessToken,
-                "Accept": "application/json" // Need this?
-            ]
-            
             // Update Notification Badge in background thread
             appDelegate.timerTest = Timer.scheduledTimer(timeInterval: 5,
                                  target: self,

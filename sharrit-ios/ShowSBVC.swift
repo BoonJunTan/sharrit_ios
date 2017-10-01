@@ -49,7 +49,9 @@ class ShowSBVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let businessCell = collectionView.dequeueReusableCell(withReuseIdentifier: "businessInfoCell", for: indexPath as IndexPath) as! BusinessInfoCollectionViewCell
-        ImageDownloader().imageFromServerURL(urlString: "https://is41031718it02.southeastasia.cloudapp.azure.com/uploads/category/" + businessCollection[indexPath.item].logoURL, imageView: businessCell.businessImage)
+        
+        ImageDownloader().imageFromServerURL(urlString: SharritURL.devPhotoURL + businessCollection[indexPath.item].logoURL, imageView: businessCell.businessImage)
+        
         businessCell.businessTitle.text = businessCollection[indexPath.item].businessName
         
         businessCell.businessRating.rating = 4.7 // Must TODO: In Future
@@ -147,13 +149,13 @@ class ShowSBVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
             case .success(_):
                 self.businessCollection = []
                 if let data = response.result.value {
-                    for (count, subJson) in JSON(data)["content"] {
+                    for (_, subJson) in JSON(data)["content"] {
                         let businessId = subJson["businessId"].int!
                         let businessName = subJson["name"].description
                         let description = subJson["description"].description
                         let businessType = subJson["type"].int!
-                        let logo = subJson["logo"].description
-                        let banner = subJson["banner"].description
+                        let logo = subJson["logo"]["fileName"].description
+                        let banner = subJson["banner"]["fileName"].description
                         let comRate = subJson["comissionRate"].double!
                         let dateCreated = subJson["dateCreated"].description
                         

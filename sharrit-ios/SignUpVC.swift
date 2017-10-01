@@ -121,7 +121,7 @@ class SignUpVC: UIViewController, CountryPickerDelegate {
         }
         
         if !firstNameEmpty && !lastNameEmpty && !mobileEmpty && !passwordEmpty {
-            var mobileCountryCode = mobileCountryCodeBtn.titleLabel?.text
+            let mobileCountryCode = mobileCountryCodeBtn.titleLabel?.text
             
             let signUpData: [String: Any] = ["firstName": firstNameTxt.text!, "lastName": lastNameTxt.text!, "phoneNumber": mobileCountryCode! + mobileTxt.text!, "password": passwordTxt.text!]
             

@@ -41,9 +41,9 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         self.title = businessInfo.businessName
         
-        ImageDownloader().imageFromServerURL(urlString: "https://is41031718it02.southeastasia.cloudapp.azure.com/uploads/category/" + businessInfo.bannerURL, imageView: businessBanner)
+        ImageDownloader().imageFromServerURL(urlString: SharritURL.devPhotoURL + businessInfo.bannerURL, imageView: businessBanner)
         
-        ImageDownloader().imageFromServerURL(urlString: "https://is41031718it02.southeastasia.cloudapp.azure.com/uploads/category/" + businessInfo.logoURL, imageView: businessLogo)
+        ImageDownloader().imageFromServerURL(urlString: SharritURL.devPhotoURL + businessInfo.logoURL, imageView: businessLogo)
         
         businessName.text = businessInfo.businessName
         

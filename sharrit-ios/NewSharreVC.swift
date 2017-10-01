@@ -232,7 +232,6 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
     
     @IBAction func timeBtnPressed(_ sender: SharritButton) {
         scheduleTimeCode = 1
-        unitCode = -1
         defaultChargeMethodBtnUI()
         currentBtnSelected(btn: sharreTimeBtn)
         dayMinuteStackView.isHidden = true
@@ -270,6 +269,10 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
         
         if unitCode == 0 && ((sharreStartTime.text?.isEmpty)! || (sharreEndTime.text?.isEmpty)!) {
             errorDetected = true
+        }
+        
+        if unitCode == -1 && !(sharreStartTime.text?.isEmpty)! && !(sharreEndTime.text?.isEmpty)! {
+            unitCode = 0
         }
         
         if errorDetected {
@@ -310,7 +313,7 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
     }
     
     func uploadImage(sharreID: String) {
-        let url = SharritURL.devURL + "sharre/uploads/" + sharreID
+        let url = SharritURL.devURL + "sharre/upload/" + sharreID
         
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + appDelegate.user!.accessToken,
@@ -322,9 +325,9 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
             for image in self.sharreImages {
                 if let imageData = UIImageJPEGRepresentation(image, 0.5) {
                     if counter == 0 {
-                        multipartFormData.append(imageData, withName: "file", fileName: sharreID + "-picture-" + String(describing: counter) + ".png", mimeType: "image/png")
+                        multipartFormData.append(imageData, withName: "file", fileName: sharreID + "-picture-" + String(describing: counter) + ".jpg", mimeType: "image/jpeg")
                     } else {
-                        multipartFormData.append(imageData, withName: "file" + String(describing: counter + 1), fileName: sharreID + "-picture-" + String(describing: counter) + ".png", mimeType: "image/png")
+                        multipartFormData.append(imageData, withName: "file" + String(describing: counter + 1), fileName: sharreID + "-picture-" + String(describing: counter) + ".jpg", mimeType: "image/jpeg")
                     }
                 }
                 counter = counter + 1
@@ -350,14 +353,14 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
     func updateStartEndTime(sharreID: String) {
         let url = SharritURL.devURL + "sharre/operatinghours/" + sharreID
         
-        var sharreData: [String: Any] = ["activeStart": sharreStartTime.text! + ":00", "activeEnd": sharreEndTime.text! + ":00"]
+        let sharreData: [String: Any] = ["activeStart": sharreStartTime.text! + ":00", "activeEnd": sharreEndTime.text! + ":00"]
         
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + appDelegate.user!.accessToken,
             "Accept": "application/json" // Need this?
         ]
         
-        Alamofire.request(url, method: .post, parameters: sharreData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+        Alamofire.request(url, method: .post, parameters: sharreData, encoding: JSONEncoding.default, headers: headers).responseJSON {
             response in
             switch response.result {
                 
