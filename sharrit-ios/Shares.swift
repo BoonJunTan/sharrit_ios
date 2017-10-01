@@ -18,7 +18,7 @@ class Shares {
     var price: Double
     var deposit: Double
     var location: String
-    //var photos": [],
+    var photos: [String]
     var dateCreated: String
     //var dateUpdated: String
     //var transactions: []
@@ -30,7 +30,7 @@ class Shares {
     // var dateDeleted
     //var isDeleted:
     
-    init(sharreId: Int, name: String, description: String, type: Int, qty: Int, unit: Int, price: Double, deposit: Double, location: String, dateCreated: String, ownerType: Int, ownerId: Int, isActive: Bool) {
+    init(sharreId: Int, name: String, description: String, type: Int, qty: Int, unit: Int, price: Double, deposit: Double, location: String, photos: [String], dateCreated: String, ownerType: Int, ownerId: Int, isActive: Bool) {
         self.sharreId = sharreId
         self.name = name
         self.description = description
@@ -40,6 +40,7 @@ class Shares {
         self.price = price
         self.deposit = deposit
         self.location = location
+        self.photos = photos
         self.dateCreated = dateCreated
         self.ownerType = ownerType
         self.ownerId = ownerId

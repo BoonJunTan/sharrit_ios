@@ -203,7 +203,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
-            let url = SharritURL.devURL + "user/uploads/" + String(describing: appDelegate.user!.userID)
+            let url = SharritURL.devURL + "user/upload/" + String(describing: appDelegate.user!.userID)
             
             let headers: HTTPHeaders = [
                 "Authorization": "Bearer " + appDelegate.user!.accessToken,

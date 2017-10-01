@@ -64,7 +64,7 @@ class BusinessSharesVC: UIViewController, UICollectionViewDataSource, UICollecti
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let sharesCell = collectionView.dequeueReusableCell(withReuseIdentifier: "sharesInfoCell", for: indexPath as IndexPath) as! SharesInfoCollectionViewCell
         sharesCell.sharesTitle.text = sharesCollection[indexPath.item].name
-        // ImageDownloader().imageFromServerURL(urlString: sharesCollection[indexPath.item].logoURL, imageView: sharesCell.sharesImage) -> Cover Page
+        ImageDownloader().imageFromServerURL(urlString: SharritURL.devPhotoURL + sharesCollection[indexPath.item].photos[0], imageView: sharesCell.sharesImage)
         sharesCell.sharesDeposit.text = "Deposit: " + String(describing: sharesCollection[indexPath.item].deposit)
         
         if sharesCollection[indexPath.item].unit == 1 {
@@ -125,7 +125,7 @@ class BusinessSharesVC: UIViewController, UICollectionViewDataSource, UICollecti
                 self.sharesCollection = []
                 if let data = response.result.value {
                     let json = JSON(data)
-                    for (count, subJson) in json["content"] {
+                    for (_, subJson) in json["content"] {
                         let sharreId = subJson["sharreId"].int!
                         let sharreName = subJson["name"].description
                         let sharreDescription = subJson["description"].description
@@ -135,12 +135,18 @@ class BusinessSharesVC: UIViewController, UICollectionViewDataSource, UICollecti
                         let sharrePrice = subJson["price"].double!
                         let sharreDeposit = subJson["deposit"].double!
                         let sharreLocation = subJson["name"].description
+                        
+                        var photoArray = [String]()
+                        for (_, photoPath) in subJson["photos"] {
+                            photoArray.append(photoPath["fileName"].description)
+                        }
+                        
                         let sharreDateCreated = subJson["name"].description
                         let sharreOwnerType = subJson["ownerType"].int!
                         let sharreOwnerId = subJson["ownerId"].int!
                         let sharreIsActive = subJson["isActive"].boolValue
                         
-                        let sharre = Shares(sharreId: sharreId, name: sharreName, description: sharreDescription, type: sharreType, qty: sharreQty, unit: sharreUnit, price: sharrePrice, deposit: sharreDeposit, location: sharreLocation, dateCreated: sharreDateCreated, ownerType: sharreOwnerType, ownerId: sharreOwnerId, isActive: sharreIsActive)
+                        let sharre = Shares(sharreId: sharreId, name: sharreName, description: sharreDescription, type: sharreType, qty: sharreQty, unit: sharreUnit, price: sharrePrice, deposit: sharreDeposit, location: sharreLocation, photos: photoArray, dateCreated: sharreDateCreated, ownerType: sharreOwnerType, ownerId: sharreOwnerId, isActive: sharreIsActive)
                         
                         let sharreActiveStart = subJson["activeStart"].description
                         let sharreActiveEnd = subJson["activeEnd"].description
