@@ -167,6 +167,11 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 newShareVC.categoryID = categoryID
                 newShareVC.categoryName = categoryName
             }
+        } else if segue.identifier == "sharesInfo" {
+            if let businessSharesVC = segue.destination as? BusinessSharesVC {
+                businessSharesVC.businessID = businessInfo.businessId
+                businessSharesVC.arriveFrom = .SharingBusiness
+            }
         }
     }
     

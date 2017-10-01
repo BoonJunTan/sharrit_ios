@@ -149,23 +149,23 @@ class ShowSBVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
                 self.businessCollection = []
                 if let data = response.result.value {
                     for (count, subJson) in JSON(data)["content"] {
-                        let currentCount = Int(count)!
-                        
-                        let businessId = subJson[currentCount]["businessId"].int!
-                        let businessName = subJson[currentCount]["name"].description
-                        let description = subJson[currentCount]["description"].description
-                        let businessType = subJson[currentCount]["type"].int!
-                        let logo = subJson[currentCount]["logo"].description
-                        let banner = subJson[currentCount]["banner"].description
-                        let comRate = subJson[currentCount]["comissionRate"].double!
-                        let dateCreated = subJson[currentCount]["dateCreated"].description
-                        
-                        let business = Business(businessId: businessId, businessName: businessName, description: description, businessType: businessType, logoURL: logo, bannerURL: banner, commissionRate: comRate, dateCreated: dateCreated)
-                        
-                        let requestFormID = subJson[currentCount]["requestFormId"].int!
-                        if requestFormID == -1 { business.requestFormID = requestFormID }
-                        
-                        self.businessCollection.append(business)
+                        for (key, subInnerJSON) in subJson {
+                            let businessId = subInnerJSON["businessId"].int!
+                            let businessName = subInnerJSON["name"].description
+                            let description = subInnerJSON["description"].description
+                            let businessType = subInnerJSON["type"].int!
+                            let logo = subInnerJSON["logo"].description
+                            let banner = subInnerJSON["banner"].description
+                            let comRate = subInnerJSON["comissionRate"].double!
+                            let dateCreated = subInnerJSON["dateCreated"].description
+                            
+                            let business = Business(businessId: businessId, businessName: businessName, description: description, businessType: businessType, logoURL: logo, bannerURL: banner, commissionRate: comRate, dateCreated: dateCreated)
+                            
+                            let requestFormID = subInnerJSON["requestFormId"].int!
+                            if requestFormID == -1 { business.requestFormID = requestFormID }
+                            
+                            self.businessCollection.append(business)
+                        }
                     }
                     self.collectionView.reloadData()
                 }
