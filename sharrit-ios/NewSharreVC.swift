@@ -222,6 +222,8 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
         currentBtnSelected(btn: sharreScheduleBtn)
         dayMinuteStackView.isHidden = false
         dayMinuteStackHeight.constant = 40
+        startEndTimeStackView.isHidden = true
+        startEndTimeStackHeight.constant = 0
         
         unitCode = 1
         defaultChargeTypeBtnUI()
@@ -235,8 +237,8 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
         currentBtnSelected(btn: sharreTimeBtn)
         dayMinuteStackView.isHidden = true
         dayMinuteStackHeight.constant = 0
-        startEndTimeStackView.isHidden = true
-        startEndTimeStackHeight.constant = 0
+        startEndTimeStackView.isHidden = false
+        startEndTimeStackHeight.constant = 40
     }
     
     @IBAction func dayBtnPressed(_ sender: SharritButton) {
@@ -308,7 +310,7 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
     }
     
     func uploadImage(sharreID: String) {
-        let url = SharritURL.devURL + "sharre/upload/" + sharreID
+        let url = SharritURL.devURL + "sharre/uploads/" + sharreID
         
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + appDelegate.user!.accessToken,
@@ -335,7 +337,7 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
                             if self.unitCode == 0 {
                                 self.updateStartEndTime(sharreID: sharreID)
                             } else {
-                                self.performSegue(withIdentifier: "createdSharre", sender: nil)
+                                self.performSegue(withIdentifier: "createdSharre", sender: sharreID)
                             }
                         }
                     case .failure(_):
@@ -346,7 +348,6 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
     }
     
     func updateStartEndTime(sharreID: String) {
-        // MUST TODO: Check with Ronald on API again
         let url = SharritURL.devURL + "sharre/operatinghours/" + sharreID
         
         var sharreData: [String: Any] = ["activeStart": sharreStartTime.text! + ":00", "activeEnd": sharreEndTime.text! + ":00"]
@@ -364,7 +365,7 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
                 if let data = (response.result.value as? Dictionary<String, Any>) {
                     if let statusCode = data["status"] as? Int {
                         if statusCode == 1 {
-                            self.performSegue(withIdentifier: "createdSharre", sender: nil)
+                            self.performSegue(withIdentifier: "createdSharre", sender: sharreID)
                         }
                     }
                 }
@@ -380,6 +381,7 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
         if segue.identifier == "createdSharre" {
             if let sharresCreationVC = segue.destination as? SharresCreationVC {
                 sharresCreationVC.sharreTitle = sharreName.text
+                sharresCreationVC.sharreID = Int(sender as! String)
             }
         }
     }

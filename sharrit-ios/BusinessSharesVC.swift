@@ -104,6 +104,7 @@ class BusinessSharesVC: UIViewController, UICollectionViewDataSource, UICollecti
     
     // Get Shares for Business
     func getSharesForBusiness() {
+        // MUST TODO: Waiting for Ronald
         let url = SharritURL.devURL + ""
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate

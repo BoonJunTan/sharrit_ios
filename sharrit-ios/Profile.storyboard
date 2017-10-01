@@ -649,35 +649,40 @@ Cheers!</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="M8U-Pd-YdO">
-                                <rect key="frame" x="0.0" y="104" width="375" height="33.5"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="33.5"/>
                                 <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xiz-dh-8EH" userLabel="Ongoing Btn" customClass="SharritButton" customModule="sharrit_ios" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="125" height="33.5"/>
+                                        <state key="normal" title="ON-GOING"/>
+                                        <connections>
+                                            <action selector="ongoingBtnPressed:" destination="XZx-pB-VQa" eventType="touchUpInside" id="s9h-jf-1wZ"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pZc-0T-lgn" customClass="SharritButton" customModule="sharrit_ios" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="187.5" height="33.5"/>
+                                        <rect key="frame" x="125" y="0.0" width="125" height="33.5"/>
                                         <state key="normal" title="UPCOMING"/>
                                         <connections>
-                                            <action selector="upcomingBtn:" destination="jxq-Sv-dXE" eventType="touchUpInside" id="YSS-Gp-j9H"/>
                                             <action selector="upcomingBtnPressed:" destination="XZx-pB-VQa" eventType="touchUpInside" id="gdo-l6-2xQ"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fmc-xD-ovx" customClass="SharritButton" customModule="sharrit_ios" customModuleProvider="target">
-                                        <rect key="frame" x="187.5" y="0.0" width="187.5" height="33.5"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fmc-xD-ovx" userLabel="Completed Btn" customClass="SharritButton" customModule="sharrit_ios" customModuleProvider="target">
+                                        <rect key="frame" x="250" y="0.0" width="125" height="33.5"/>
                                         <state key="normal" title="HISTORY"/>
                                         <connections>
-                                            <action selector="historyBtn:" destination="jxq-Sv-dXE" eventType="touchUpInside" id="0JF-KD-dwC"/>
                                             <action selector="historyBtnPressed:" destination="XZx-pB-VQa" eventType="touchUpInside" id="ZS4-sy-F2k"/>
                                         </connections>
                                     </button>
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mww-2q-ZjN">
-                                <rect key="frame" x="0.0" y="137.5" width="375" height="1"/>
+                                <rect key="frame" x="0.0" y="97.5" width="375" height="1"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="Slk-mb-Qse"/>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="MEV-kg-6Fa">
-                                <rect key="frame" x="0.0" y="138.5" width="375" height="66.5"/>
+                                <rect key="frame" x="0.0" y="98.5" width="375" height="66.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zwd-Wi-wBa" userLabel="Location">
                                         <rect key="frame" x="0.0" y="0.0" width="187.5" height="66.5"/>
@@ -820,7 +825,7 @@ Cheers!</string>
                                 </subviews>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3Gv-YH-rsE">
-                                <rect key="frame" x="0.0" y="205" width="375" height="413"/>
+                                <rect key="frame" x="0.0" y="165" width="375" height="453"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="sharesInfoCell" rowHeight="70" id="8Zl-B6-1gL" customClass="SharesInfoTableViewCell" customModule="sharrit_ios" customModuleProvider="target">
@@ -1005,12 +1010,12 @@ Cheers!</string>
                     </view>
                     <connections>
                         <outlet property="historyBtn" destination="Fmc-xD-ovx" id="0XJ-E9-9wF"/>
+                        <outlet property="ongoingBtn" destination="Xiz-dh-8EH" id="xpz-vO-RYy"/>
                         <outlet property="tableView" destination="3Gv-YH-rsE" id="RHd-aP-cmz"/>
                         <outlet property="upcomingBtn" destination="pZc-0T-lgn" id="MuC-IC-nOf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XoR-Ps-bpy" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="jxq-Sv-dXE" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1229.5999999999999" y="778.56071964017997"/>
         </scene>

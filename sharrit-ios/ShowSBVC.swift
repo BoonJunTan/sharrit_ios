@@ -150,11 +150,20 @@ class ShowSBVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
                 if let data = response.result.value {
                     for (count, subJson) in JSON(data)["content"] {
                         let currentCount = Int(count)!
+                        
                         let businessId = subJson[currentCount]["businessId"].int!
                         let businessName = subJson[currentCount]["name"].description
+                        let description = subJson[currentCount]["description"].description
+                        let businessType = subJson[currentCount]["type"].int!
                         let logo = subJson[currentCount]["logo"].description
+                        let banner = subJson[currentCount]["banner"].description
+                        let comRate = subJson[currentCount]["comissionRate"].double!
                         let dateCreated = subJson[currentCount]["dateCreated"].description
-                        let business = Business(businessId: businessId, businessName: businessName, logoURL: logo, bannerURL: "", dateCreated: dateCreated)
+                        
+                        let business = Business(businessId: businessId, businessName: businessName, description: description, businessType: businessType, logoURL: logo, bannerURL: banner, commissionRate: comRate, dateCreated: dateCreated)
+                        
+                        let requestFormID = subJson[currentCount]["requestFormId"].int!
+                        if requestFormID == -1 { business.requestFormID = requestFormID }
                         
                         self.businessCollection.append(business)
                     }

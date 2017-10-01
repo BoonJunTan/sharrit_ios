@@ -123,7 +123,6 @@ class LoginVC: UIViewController, CountryPickerDelegate {
                                     let profilePhoto = json["content"]["imageSrc"].string!
                                     let accessToken = json["content"]["accessToken"].string!
                                     let createDate = json["content"]["dateCreated"].string!
-                                    // Must TODO: Waiting for Ronald
                                     let joinedBusinessList = json["content"]["bizList"].arrayObject! as! [Int]
                                     let pendingBusinessList = json["content"]["pendingList"].arrayObject! as! [Int]
                                     
