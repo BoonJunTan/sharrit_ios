@@ -154,7 +154,7 @@ class ShowSBVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
                         let businessName = subJson[currentCount]["name"].description
                         let logo = subJson[currentCount]["logo"].description
                         let dateCreated = subJson[currentCount]["dateCreated"].description
-                        let business = Business(businessId: businessId, businessName: businessName, logoURL: logo, dateCreated: dateCreated)
+                        let business = Business(businessId: businessId, businessName: businessName, logoURL: logo, bannerURL: "", dateCreated: dateCreated)
                         
                         self.businessCollection.append(business)
                     }

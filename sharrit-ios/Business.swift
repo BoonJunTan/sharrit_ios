@@ -22,7 +22,7 @@ class Business {
     //var category: String?
     //var categoryId: Int!
     var logoURL: String
-    var bannerURL: String?
+    var bannerURL: String
     var requestFormID: Int?
     var commissionRate: Double?
     
@@ -37,10 +37,11 @@ class Business {
         self.dateCreated = dateCreated
     }
     
-    init(businessId: Int, businessName: String, logoURL: String, dateCreated: String) {
+    init(businessId: Int, businessName: String, logoURL: String, bannerURL: String, dateCreated: String) {
         self.businessId = businessId
         self.businessName = businessName
         self.logoURL = logoURL
+        self.bannerURL = bannerURL
         self.dateCreated = dateCreated
     }
 }

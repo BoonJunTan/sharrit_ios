@@ -156,7 +156,7 @@ class LoginVC: UIViewController, CountryPickerDelegate {
                                 // This is to check every log in = Home page *Especially for Logout
                                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
                                 if appDelegate.window!.rootViewController as? UITabBarController != nil {
-                                    var tabBarController = appDelegate.window!.rootViewController as! UITabBarController
+                                    let tabBarController = appDelegate.window!.rootViewController as! UITabBarController
                                     tabBarController.selectedIndex = 0 // Change back first view
                                     
                                     let tabItem = tabBarController.tabBar.items![2]

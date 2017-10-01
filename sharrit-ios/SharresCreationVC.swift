@@ -10,9 +10,15 @@ import UIKit
 
 class SharresCreationVC: UIViewController {
 
+    // Pass Over Data
+    var sharreTitle: String!
+    
+    @IBOutlet weak var sharreLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        sharreLabel.text = sharreTitle
         let when = DispatchTime.now() + 4
         DispatchQueue.main.asyncAfter(deadline: when) {
             self.performSegue(withIdentifier: "viewSharre", sender: nil)

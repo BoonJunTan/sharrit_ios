@@ -76,7 +76,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         newNotificationNumber = 10
                             if let tabController = self.window?.rootViewController as? UITabBarController {
                                 let tabItem = tabController.tabBar.items![2]
-                                print(tabItem.badgeValue)
                                 tabItem.badgeValue = String(describing: newNotificationNumber)
                             }
                     }

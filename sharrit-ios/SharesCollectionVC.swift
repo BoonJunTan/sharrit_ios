@@ -237,9 +237,7 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
                         let banner = subJson["banner"].description
                         let comRate = subJson["comissionRate"].double!
                         let dateCreated = subJson["dateCreated"].description
-                        var business = Business(businessId: businessId, businessName: businessName, description: description, businessType: businessType, logoURL: logo, bannerURL: banner, commissionRate: comRate, dateCreated: dateCreated)
-                        
-                        // black listed id from Ronald
+                        let business = Business(businessId: businessId, businessName: businessName, description: description, businessType: businessType, logoURL: logo, bannerURL: banner, commissionRate: comRate, dateCreated: dateCreated)
                         
                         let requestFormID = subJson["requestFormId"].int!
                         if requestFormID == -1 { business.requestFormID = requestFormID }

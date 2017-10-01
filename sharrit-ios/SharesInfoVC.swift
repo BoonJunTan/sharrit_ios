@@ -15,6 +15,8 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     var categoryID: Int!
     var categoryName: String!
     
+    @IBOutlet weak var businessBanner: UIImageView!
+    @IBOutlet weak var businessLogo: UIImageView!
     @IBOutlet weak var businessName: UILabel!
     @IBOutlet weak var businessStartDate: UILabel!
     @IBOutlet weak var joinSharrorBtn: SharritButton!
@@ -38,6 +40,10 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         self.navigationItem.rightBarButtonItem = navBarBubble
         
         self.title = businessInfo.businessName
+        
+        ImageDownloader().imageFromServerURL(urlString: "https://is41031718it02.southeastasia.cloudapp.azure.com/uploads/category/" + businessInfo.bannerURL, imageView: businessBanner)
+        
+        ImageDownloader().imageFromServerURL(urlString: "https://is41031718it02.southeastasia.cloudapp.azure.com/uploads/category/" + businessInfo.logoURL, imageView: businessLogo)
         
         businessName.text = businessInfo.businessName
         

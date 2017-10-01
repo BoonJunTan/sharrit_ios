@@ -15,6 +15,7 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
     
     @IBOutlet weak var collectionView: UICollectionView!
     var currentSelectedCell: SharrePhotoCollectionViewCell!
+    var currentSelectedCellIndex: Int!
     
     let imagePicker = UIImagePickerController()
     
@@ -29,12 +30,20 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
     
     @IBOutlet weak var sharreName: UITextField!
     @IBOutlet weak var sharreDeposit: UITextField!
+    
+    var scheduleTimeCode = 0
     @IBOutlet weak var sharreScheduleBtn: SharritButton!
     @IBOutlet weak var sharreTimeBtn: SharritButton!
+    
+    var unitCode = 1
     @IBOutlet weak var sharreDayBtn: SharritButton!
     @IBOutlet weak var sharreThirtyBtn: SharritButton!
+    
+    @IBOutlet weak var sharreStartTime: UITextField!
+    @IBOutlet weak var sharreEndTime: UITextField!
     @IBOutlet weak var sharreChargingPrice: UITextField!
     @IBOutlet weak var sharreQuantity: UITextField!
+    @IBOutlet weak var sharreLocation: UITextField!
     @IBOutlet weak var sharreDescription: UITextView!
     
     @IBOutlet weak var dayMinuteStackView: UIStackView!
@@ -42,6 +51,10 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
     
     @IBOutlet weak var startEndTimeStackView: UIStackView!
     @IBOutlet weak var startEndTimeStackHeight: NSLayoutConstraint!
+    
+    var sharreImages = [UIImage(), UIImage(), UIImage(), UIImage()]
+    
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,13 +69,17 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
         businessLabel.text = businessName
         categoryLabel.text = categoryName
         
+        sharreStartTime.keyboardType = .numberPad
+        sharreEndTime.keyboardType = .numberPad
+        sharreQuantity.keyboardType = .numberPad
+        sharreChargingPrice.keyboardType = .numbersAndPunctuation
+        sharreDeposit.keyboardType = .numbersAndPunctuation
+        
         defaultChargeMethodBtnUI()
         currentBtnSelected(btn: sharreScheduleBtn)
         
         defaultChargeTypeBtnUI()
         currentBtnSelected(btn: sharreDayBtn)
-        
-        sharreDescription.toolbarPlaceholder = "Enter Sharre Description"
 
         startEndTimeStackView.isHidden = true
         startEndTimeStackHeight.constant = 0
@@ -125,6 +142,7 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         currentSelectedCell = collectionView.cellForItem(at: indexPath) as! SharrePhotoCollectionViewCell
+        currentSelectedCellIndex = indexPath.row
         // Call Image Picker
         PHPhotoLibrary.requestAuthorization { status in
             switch status {
@@ -157,6 +175,7 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
             currentSelectedCell.sharreImage.image = pickedImage
             currentSelectedCell.sharreImage.contentMode = .scaleAspectFill
             currentSelectedCell.cancelBtn.isHidden = false
+            sharreImages[currentSelectedCellIndex] = pickedImage
             self.dismiss(animated: true, completion: nil)
         }
     }
@@ -198,16 +217,20 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
     }
     
     @IBAction func scheduleBtnPressed(_ sender: SharritButton) {
+        scheduleTimeCode = 0
         defaultChargeMethodBtnUI()
         currentBtnSelected(btn: sharreScheduleBtn)
         dayMinuteStackView.isHidden = false
         dayMinuteStackHeight.constant = 40
         
+        unitCode = 1
         defaultChargeTypeBtnUI()
         currentBtnSelected(btn: sharreDayBtn)
     }
     
     @IBAction func timeBtnPressed(_ sender: SharritButton) {
+        scheduleTimeCode = 1
+        unitCode = -1
         defaultChargeMethodBtnUI()
         currentBtnSelected(btn: sharreTimeBtn)
         dayMinuteStackView.isHidden = true
@@ -217,6 +240,7 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
     }
     
     @IBAction func dayBtnPressed(_ sender: SharritButton) {
+        unitCode = 1
         defaultChargeTypeBtnUI()
         currentBtnSelected(btn: sharreDayBtn)
         startEndTimeStackView.isHidden = true
@@ -224,6 +248,7 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
     }
     
     @IBAction func thirtyBtnPressed(_ sender: SharritButton) {
+        unitCode = 0
         defaultChargeTypeBtnUI()
         currentBtnSelected(btn: sharreThirtyBtn)
         startEndTimeStackView.isHidden = false
@@ -231,7 +256,131 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
     }
     
     @IBAction func createSharesBtnPressed(_ sender: SharritButton) {
-        performSegue(withIdentifier: "createdSharre", sender: nil)
+        var errorDetected = false
+        
+        if sharreImages[0].size == CGSize(width: 0, height: 0) {
+            errorDetected = true
+        }
+        
+        if (sharreName.text?.isEmpty)! || (sharreDescription.text?.isEmpty)! ||  (sharreQuantity.text?.isEmpty)! || (sharreChargingPrice.text?.isEmpty)! || (sharreDeposit.text?.isEmpty)! || (sharreLocation.text?.isEmpty)! {
+            errorDetected = true
+        }
+        
+        if unitCode == 0 && ((sharreStartTime.text?.isEmpty)! || (sharreEndTime.text?.isEmpty)!) {
+            errorDetected = true
+        }
+        
+        if errorDetected {
+            let alert = UIAlertController(title: "Error!", message: "Missing cover photo / Empty fields", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Back", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            var sharreData: [String: Any] = ["name": sharreName.text!, "description": sharreDescription.text!, "type": scheduleTimeCode, "qty": sharreQuantity.text!, "price": sharreChargingPrice.text!, "deposit": sharreDeposit.text!, "location": sharreLocation.text!]
+            
+            if unitCode != -1 {
+                sharreData["unit"] = unitCode
+            }
+            
+            let url = SharritURL.devURL + "sharre/third/" + String(describing: businessID!) + "/" + String(describing: appDelegate.user!.userID)
+            
+            Alamofire.request(url, method: .post, parameters: sharreData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+                response in
+                switch response.result {
+                    
+                case .success(_):
+                    if let data = (response.result.value as? Dictionary<String, Any>) {
+                        if let statusCode = data["status"] as? Int {
+                            if statusCode == 1 {
+                                if let value = response.result.value {
+                                    var json = JSON(value)
+                                    self.uploadImage(sharreID: String(describing: json["content"].int!))
+                                }
+                            }
+                        }
+                    }
+                    break
+                case .failure(_):
+                    print("Create Sharre API failed")
+                    break
+                }
+            }
+        }
     }
     
+    func uploadImage(sharreID: String) {
+        let url = SharritURL.devURL + "sharre/upload/" + sharreID
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + appDelegate.user!.accessToken,
+            "Accept": "application/json" // Need this?
+        ]
+        
+        Alamofire.upload(multipartFormData: { multipartFormData in
+            var counter = 0
+            for image in self.sharreImages {
+                if let imageData = UIImageJPEGRepresentation(image, 0.5) {
+                    if counter == 0 {
+                        multipartFormData.append(imageData, withName: "file", fileName: sharreID + "-picture-" + String(describing: counter) + ".png", mimeType: "image/png")
+                    } else {
+                        multipartFormData.append(imageData, withName: "file" + String(describing: counter + 1), fileName: sharreID + "-picture-" + String(describing: counter) + ".png", mimeType: "image/png")
+                    }
+                }
+                counter = counter + 1
+            }
+        }, to: url, method: .post, headers: headers,
+                encodingCompletion: { encodingResult in
+                    switch encodingResult {
+                    case .success(let upload, _, _):
+                        upload.responseJSON { response in
+                            if self.unitCode == 0 {
+                                self.updateStartEndTime(sharreID: sharreID)
+                            } else {
+                                self.performSegue(withIdentifier: "createdSharre", sender: nil)
+                            }
+                        }
+                    case .failure(_):
+                        print("Upload Profile Photo API failed")
+                    }
+                    self.dismiss(animated: true, completion: nil)
+        })
+    }
+    
+    func updateStartEndTime(sharreID: String) {
+        // MUST TODO: Check with Ronald on API again
+        let url = SharritURL.devURL + "sharre/operatinghours/" + sharreID
+        
+        var sharreData: [String: Any] = ["activeStart": sharreStartTime.text! + ":00", "activeEnd": sharreEndTime.text! + ":00"]
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + appDelegate.user!.accessToken,
+            "Accept": "application/json" // Need this?
+        ]
+        
+        Alamofire.request(url, method: .post, parameters: sharreData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+            response in
+            switch response.result {
+                
+            case .success(_):
+                if let data = (response.result.value as? Dictionary<String, Any>) {
+                    if let statusCode = data["status"] as? Int {
+                        if statusCode == 1 {
+                            self.performSegue(withIdentifier: "createdSharre", sender: nil)
+                        }
+                    }
+                }
+                break
+            case .failure(_):
+                print("Create Sharre API failed")
+                break
+            }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "createdSharre" {
+            if let sharresCreationVC = segue.destination as? SharresCreationVC {
+                sharresCreationVC.sharreTitle = sharreName.text
+            }
+        }
+    }
 }
