@@ -16,8 +16,8 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
     
     @IBOutlet weak var tableView: UITableView!
     let tableViewSection = ["", "SETTINGS"]
-    var tableViewIcons = [[#imageLiteral(resourceName: "reputation"), #imageLiteral(resourceName: "Sharrit_Logo"), #imageLiteral(resourceName: "Sharrit_Logo"), #imageLiteral(resourceName: "business")], [#imageLiteral(resourceName: "profile2"), #imageLiteral(resourceName: "help"), #imageLiteral(resourceName: "logout")]]
-    var tableViewItems = [["Reputation", "Sharres Requested", "Sharres Offered", "Sharing Business (Joined)"], ["Profile Settings", "Help Centre", "Logout"]]
+    var tableViewIcons = [[#imageLiteral(resourceName: "reputation"), #imageLiteral(resourceName: "Sharrit_Logo"), #imageLiteral(resourceName: "Sharrit_Logo"), #imageLiteral(resourceName: "business"), #imageLiteral(resourceName: "business")], [#imageLiteral(resourceName: "profile2"), #imageLiteral(resourceName: "help"), #imageLiteral(resourceName: "logout")]]
+    var tableViewItems = [["Reputation", "Sharres Requested", "Sharres Offered", "Sharing Business (Joined)", "Sharing Business (Pending)"], ["Profile Settings", "Help Centre", "Logout"]]
 
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var profileLabe: UILabel!
@@ -120,7 +120,10 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
             self.performSegue(withIdentifier: "showShares", sender: tableViewItems[indexPath.section][indexPath.row])
             break
         case "Sharing Business (Joined)":
-            self.performSegue(withIdentifier: "showSB", sender: self)
+            self.performSegue(withIdentifier: "showSB", sender: "Joined")
+            break
+        case "Sharing Business (Pending)":
+            self.performSegue(withIdentifier: "showSB", sender: "Pending")
             break
         case "Profile Settings":
             self.performSegue(withIdentifier: "editProfile", sender: self)
@@ -266,6 +269,11 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
         if segue.identifier == "showShares" {
             if let showSharesVC = segue.destination as? ShowSharesInfoVC {
                 showSharesVC.titleString = sender as? String
+                sender as? String == "Sharres Requested" ? (showSharesVC.userRole = .Sharrie) : (showSharesVC.userRole = .Sharror)
+            }
+        } else if segue.identifier == "showSB" {
+            if let showSBVC = segue.destination as? ShowSBVC {
+                (sender as? String == "Joined") ? (showSBVC.businessStatus = .Joined) : (showSBVC.businessStatus = .Pending)
             }
         }
     }

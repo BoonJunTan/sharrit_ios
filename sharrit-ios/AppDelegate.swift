@@ -72,13 +72,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 response in
                 switch response.result {
                 case .success(_):
-                    if let data = response.result.value {
-                        newNotificationNumber = 10
-                            if let tabController = self.window?.rootViewController as? UITabBarController {
-                                let tabItem = tabController.tabBar.items![2]
-                                print(tabItem.badgeValue)
-                                tabItem.badgeValue = String(describing: newNotificationNumber)
-                            }
+                    newNotificationNumber = 10
+                    if let tabController = self.window?.rootViewController as? UITabBarController {
+                        let tabItem = tabController.tabBar.items![2]
+                        tabItem.badgeValue = String(describing: newNotificationNumber)
                     }
                     break
                 case .failure(_):

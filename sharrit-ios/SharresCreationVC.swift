@@ -10,9 +10,16 @@ import UIKit
 
 class SharresCreationVC: UIViewController {
 
+    // Pass Over Data
+    var sharreTitle: String!
+    var sharreID: Int!
+    
+    @IBOutlet weak var sharreLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        sharreLabel.text = sharreTitle
         let when = DispatchTime.now() + 4
         DispatchQueue.main.asyncAfter(deadline: when) {
             self.performSegue(withIdentifier: "viewSharre", sender: nil)
@@ -24,15 +31,12 @@ class SharresCreationVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "viewSharre" {
+            if let viewSharreVC = segue.destination as? ViewSharreVC {
+                viewSharreVC.sharreID = sharreID
+            }
+        }
     }
-    */
 
 }
