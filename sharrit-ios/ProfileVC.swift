@@ -17,7 +17,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
     @IBOutlet weak var tableView: UITableView!
     let tableViewSection = ["COMMON", "SHARRIE", "SHARROR", "SETTINGS"]
     var tableViewIcons = [[#imageLiteral(resourceName: "reputation")], [#imageLiteral(resourceName: "transaction")], [#imageLiteral(resourceName: "Sharrit_Logo"), #imageLiteral(resourceName: "business"), #imageLiteral(resourceName: "business"), #imageLiteral(resourceName: "transaction")], [#imageLiteral(resourceName: "profile2"), #imageLiteral(resourceName: "help"), #imageLiteral(resourceName: "logout")]]
-    var tableViewItems = [["Reputation"], ["Sharres Transaction"], ["Sharres Offered", "Sharing Business (Joined)", "Sharing Business (Pending)", "Sharres Transaction"], ["Profile Settings", "Help Centre", "Logout"]]
+    var tableViewItems = [["Reputation"], ["Sharres Status OvervieW"], ["Sharres Offered", "Sharing Business (Joined)", "Sharing Business (Pending)", "Sharres Status Overview"], ["Profile Settings", "Help Centre", "Logout"]]
 
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var profileLabe: UILabel!
@@ -116,7 +116,11 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch tableViewItems[indexPath.section][indexPath.row] {
         // Must TODO : 2nd System Release
-        case "Sharres Requested", "Sharres Offered":
+        case "Reputation":
+            break
+        case "Sharres Offered":
+            break
+        case "Sharres Status OvervieW", "Sharres Status Overview":
             self.performSegue(withIdentifier: "showShares", sender: tableViewItems[indexPath.section][indexPath.row])
             break
         case "Sharing Business (Joined)":
