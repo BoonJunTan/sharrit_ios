@@ -239,7 +239,7 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
                         let business = Business(businessId: businessId, businessName: businessName, description: description, businessType: businessType, logoURL: logo, bannerURL: banner, commissionRate: comRate, dateCreated: dateCreated)
                         
                         let requestFormID = subJson["requestFormId"].int!
-                        if requestFormID == -1 { business.requestFormID = requestFormID }
+                        if requestFormID != -1 { business.requestFormID = requestFormID }
                         
                         self.sharesCollection.append(business)
                     }

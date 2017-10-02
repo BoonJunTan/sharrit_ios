@@ -2388,7 +2388,7 @@
                                             <segue destination="0zi-ZS-ggp" kind="show" identifier="submitForm" id="ttk-Ky-Qhd"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0uI-Fw-eqG" customClass="SharritButton" customModule="sharrit_ios" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0uI-Fw-eqG" customClass="SharritButton" customModule="sharrit_ios" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="99" width="196.5" height="14.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <state key="normal" title="PENDING APPROVAL!"/>
@@ -2398,6 +2398,9 @@
                                                 <real key="value" value="5"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <segue destination="0zi-ZS-ggp" kind="show" identifier="viewForm" id="vcD-lC-BM6"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o2h-EW-h6d" userLabel="Create Shares" customClass="SharritButton" customModule="sharrit_ios" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="118.5" width="196.5" height="15"/>
@@ -2752,6 +2755,7 @@
         <image name="timer" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="vcD-lC-BM6"/>
         <segue reference="EdK-t1-FNT"/>
     </inferredMetricsTieBreakers>
 </document>

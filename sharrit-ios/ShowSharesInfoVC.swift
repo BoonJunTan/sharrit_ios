@@ -99,42 +99,48 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         defaultBtnUI()
         currentBtnSelected(btn: ongoingBtn)
         transactionStatus = .Ongoing
+        retrieveShares()
     }
     
     @IBAction func upcomingBtnPressed(_ sender: Any) {
         defaultBtnUI()
         currentBtnSelected(btn: upcomingBtn)
         transactionStatus = .Upcoming
+        retrieveShares()
     }
     
     @IBAction func historyBtnPressed(_ sender: Any) {
         defaultBtnUI()
         currentBtnSelected(btn: historyBtn)
         transactionStatus = .History
+        retrieveShares()
     }
     
     func retrieveShares() {
-        var url = SharritURL.devURL + "user/history/"
+        var url = SharritURL.devURL
         
-        // MUST TODO: Check with Ronald on this
-        if userRole == .Sharror || userRole == .Sharrie {
-            if transactionStatus == .Ongoing {
-                url = url + "ongoing/"
-            } else if transactionStatus == .Upcoming {
-                url = url + "upcoming/"
-            } else {
-                url = url + "completed/"
-            }
-            
-            url = url + String(describing: appDelegate.user!.userID)
+        if userRole == .Sharrie {
+            url = url + "user/history/"
         } else {
-            
+            url = url + "sharror/history/"
         }
+        
+        if transactionStatus == .Ongoing {
+            url = url + "ongoing/"
+        } else if transactionStatus == .Upcoming {
+            url = url + "upcoming/"
+        } else {
+            url = url + "completed/"
+        }
+        
+        url = url + String(describing: appDelegate.user!.userID)
         
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + appDelegate.user!.accessToken,
             "Accept": "application/json" // Need this?
         ]
+        
+        print(url)
         
         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON {
             response in

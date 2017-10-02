@@ -273,7 +273,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
         if segue.identifier == "showShares" {
             if let showSharesVC = segue.destination as? ShowSharesInfoVC {
                 showSharesVC.titleString = sender as? String
-                sender as? String == "Sharres Requested" ? (showSharesVC.userRole = .Sharrie) : (showSharesVC.userRole = .Sharror)
+                sender as? String == "Sharres Status OvervieW" ? (showSharesVC.userRole = .Sharrie) : (showSharesVC.userRole = .Sharror)
             }
         } else if segue.identifier == "showSB" {
             if let showSBVC = segue.destination as? ShowSBVC {

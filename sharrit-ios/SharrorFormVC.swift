@@ -10,6 +10,11 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
+enum FormStatus {
+    case Create
+    case View
+}
+
 class SharrorFormVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var questionCollectionView: UICollectionView!
@@ -17,6 +22,9 @@ class SharrorFormVC: UIViewController, UICollectionViewDataSource, UICollectionV
     var companyId: Int!
     
     var questions:[String] = []
+    var answers:[String] = []
+    var formStatus: FormStatus!
+    var requestFormId: Int?
 
     @IBOutlet weak var succesfulApplicationView: UIView!
     
@@ -39,6 +47,11 @@ class SharrorFormVC: UIViewController, UICollectionViewDataSource, UICollectionV
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "formCell", for: indexPath as IndexPath) as! SharrorFormCollectionViewCell
         
         cell.questionLabel.text = questions[indexPath.item]
+        
+        if formStatus == .View {
+            cell.answerText.text = answers[indexPath.item]
+            cell.answerText.isEditable = false
+        }
         
         return cell
     }
@@ -78,13 +91,23 @@ class SharrorFormVC: UIViewController, UICollectionViewDataSource, UICollectionV
         
         let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "footerView", for: indexPath as IndexPath)
         
+        if formStatus == .View {
+            footerView.isHidden = true
+        }
+        
         return footerView
     }
     
     func getSBQuestions() {
-        let url = SharritURL.devURL + "requestform/" + String(describing: companyId!)
-        
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        var url:String!
+        
+        if formStatus == .View {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            url = SharritURL.devURL + "answer/pending/" + String(describing: requestFormId!) + "/" + String(describing: appDelegate.user!.userID)
+        } else {
+            url = SharritURL.devURL + "requestform/" + String(describing: companyId!)
+        }
         
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + appDelegate.user!.accessToken,
@@ -96,12 +119,22 @@ class SharrorFormVC: UIViewController, UICollectionViewDataSource, UICollectionV
             switch response.result {
             case .success(_):
                 if let data = response.result.value {
-                    let stringQuestion = JSON(data)["content"]["question"].string!
-                    if let convertedQuestion = stringQuestion.data(using: String.Encoding.utf8) {
+                    let questionAnswer: String
+                    if self.formStatus == .View {
+                        questionAnswer = JSON(data)["content"]["answer"].string!
+                    } else {
+                        questionAnswer = JSON(data)["content"]["question"].string!
+                    }
+                    if let convertedQuestion = questionAnswer.data(using: String.Encoding.utf8) {
                         do {
                             let dictionary = try JSONSerialization.jsonObject(with: convertedQuestion, options: []) as? [String:AnyObject]
-                            for (_, question) in dictionary! {
-                                self.questions.append(question as! String)
+                            for (key, question) in dictionary! {
+                                if self.formStatus == .View {
+                                    self.questions.append(key as! String)
+                                    self.answers.append(question as! String)
+                                } else {
+                                    self.questions.append(question as! String)
+                                }
                             }
                             self.questionCollectionView.reloadData()
                         } catch _ as NSError {
