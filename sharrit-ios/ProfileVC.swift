@@ -15,9 +15,9 @@ import SwiftyJSON
 class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
-    let tableViewSection = ["", "SETTINGS"]
-    var tableViewIcons = [[#imageLiteral(resourceName: "reputation"), #imageLiteral(resourceName: "Sharrit_Logo"), #imageLiteral(resourceName: "Sharrit_Logo"), #imageLiteral(resourceName: "business"), #imageLiteral(resourceName: "business")], [#imageLiteral(resourceName: "profile2"), #imageLiteral(resourceName: "help"), #imageLiteral(resourceName: "logout")]]
-    var tableViewItems = [["Reputation", "Sharres Requested", "Sharres Offered", "Sharing Business (Joined)", "Sharing Business (Pending)"], ["Profile Settings", "Help Centre", "Logout"]]
+    let tableViewSection = ["COMMON", "SHARRIE", "SHARROR", "SETTINGS"]
+    var tableViewIcons = [[#imageLiteral(resourceName: "reputation")], [#imageLiteral(resourceName: "transaction")], [#imageLiteral(resourceName: "Sharrit_Logo"), #imageLiteral(resourceName: "business"), #imageLiteral(resourceName: "business"), #imageLiteral(resourceName: "transaction")], [#imageLiteral(resourceName: "profile2"), #imageLiteral(resourceName: "help"), #imageLiteral(resourceName: "logout")]]
+    var tableViewItems = [["Reputation"], ["Sharres Transaction"], ["Sharres Offered", "Sharing Business (Joined)", "Sharing Business (Pending)", "Sharres Transaction"], ["Profile Settings", "Help Centre", "Logout"]]
 
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var profileLabe: UILabel!
