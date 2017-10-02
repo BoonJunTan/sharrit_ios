@@ -104,7 +104,7 @@ class SharrorFormVC: UIViewController, UICollectionViewDataSource, UICollectionV
                                 self.questions.append(question as! String)
                             }
                             self.questionCollectionView.reloadData()
-                        } catch let error as NSError {
+                        } catch _ as NSError {
                             print("Error converting string to json")
                         }
                     }

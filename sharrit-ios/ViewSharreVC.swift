@@ -31,6 +31,8 @@ class ViewSharreVC: UIViewController {
     @IBOutlet weak var sharreStartTime: UILabel!
     @IBOutlet weak var sharreEndTime: UILabel!
     
+    var photoArraySource = [ImageSource]()
+    
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
@@ -42,6 +44,10 @@ class ViewSharreVC: UIViewController {
         self.navigationItem.rightBarButtonItem = navBarBubble
         
         getSharesInfo()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
     
     func goToMessages() {
@@ -77,9 +83,19 @@ class ViewSharreVC: UIViewController {
                     self.sharreTitle.text = json["content"]["name"].string!
                     self.sharreDate.text = FormatDate().compareDaysCreated(dateCreated: json["content"]["dateCreated"].string!) + " by "
                     self.sharreOwner.text = json["content"]["ownerName"].string!
-                    self.sharreStatus.text = json["content"]["isActive"].bool?.description
+                    
+                    if let activeStatus = json["content"]["isActive"].bool {
+                        activeStatus ? (self.sharreStatus.text = "Active") : (self.sharreStatus.text = "Not Active")
+                    }
+                    
                     self.sharreDeposit.text = "Deposit: $" + String(describing: json["content"]["deposit"].int!)
                     self.sharreCharging.text = "Pay/hr: $" + String(describing: json["content"]["price"].int!)
+                    
+                    self.getAllPhoto(jsonData: json["content"]["photos"], completion: { photoArray in
+                        self.sharreImages.setImageInputs(Array(photoArray.prefix(4)))
+                        self.sharreImages.contentScaleMode = .scaleToFill
+                        self.sharreImages.circular = false
+                    })
                     
                     if json["content"]["type"].int! == 0 {
                         if json["content"]["unit"].int! == 0 {
@@ -91,9 +107,9 @@ class ViewSharreVC: UIViewController {
                         self.sharreType.text = "Time-Usage Based"
                     }
                     
-                    self.sharreStartTime.text = json["content"]["activeStart"].string!
-                    self.sharreEndTime.text = json["content"]["activeEnd"].string!
-                    self.sharreQuantity.text = String(describing: json["content"]["qty"].int!)
+                    self.sharreStartTime.text = "Start Time: " + json["content"]["activeStart"].string!
+                    self.sharreEndTime.text = "End Time: " + json["content"]["activeEnd"].string!
+                    self.sharreQuantity.text = String(describing: json["content"]["qty"].int!) + " units left"
                     self.sharreCategory.text = json["content"]["categoryName"].string!
                     self.sharreLocation.text = json["content"]["location"].string!
                     self.sharreDescription.text = json["content"]["description"].string!
@@ -103,6 +119,24 @@ class ViewSharreVC: UIViewController {
                 print("Retrieve Sharre Info API failed")
                 break
             }
+        }
+    }
+    
+    func getAllPhoto(jsonData: JSON, completion: @escaping ([ImageSource]) -> ()) {
+        photoArraySource = [ImageSource]()
+        
+        let myGroup = DispatchGroup()
+        
+        for (_, photoPath) in jsonData.reversed() {
+            myGroup.enter()
+            ImageDownloader().imageFromServerURL(urlString: SharritURL.devPhotoURL +  photoPath["fileName"].description, completion: { (image) in
+                self.photoArraySource.append(ImageSource(image: ImageResize().resizeImageWith(image: image, newWidth: 200)))
+                myGroup.leave()
+            })
+        }
+        
+        myGroup.notify(queue: .main) {
+            completion(self.photoArraySource)
         }
     }
     

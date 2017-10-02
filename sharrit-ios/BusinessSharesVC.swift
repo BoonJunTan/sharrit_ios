@@ -64,7 +64,11 @@ class BusinessSharesVC: UIViewController, UICollectionViewDataSource, UICollecti
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let sharesCell = collectionView.dequeueReusableCell(withReuseIdentifier: "sharesInfoCell", for: indexPath as IndexPath) as! SharesInfoCollectionViewCell
         sharesCell.sharesTitle.text = sharesCollection[indexPath.item].name
-        ImageDownloader().imageFromServerURL(urlString: SharritURL.devPhotoURL + sharesCollection[indexPath.item].photos[0], imageView: sharesCell.sharesImage)
+        
+        if sharesCollection[indexPath.item].photos.count != 0 {
+            ImageDownloader().imageFromServerURL(urlString: SharritURL.devPhotoURL + sharesCollection[indexPath.item].photos[0], imageView: sharesCell.sharesImage)
+        }
+        
         sharesCell.sharesDeposit.text = "Deposit: " + String(describing: sharesCollection[indexPath.item].deposit)
         
         if sharesCollection[indexPath.item].unit == 1 {
