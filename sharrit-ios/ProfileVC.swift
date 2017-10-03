@@ -81,7 +81,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
         if appDelegate.user!.profilePhoto == "" {
             profileImage.image = #imageLiteral(resourceName: "profile2")
         } else {
-            if let checkedUrl = URL(string: appDelegate.user!.profilePhoto) {
+            if let checkedUrl = URL(string: SharritURL.devPhotoURL + appDelegate.user!.profilePhoto) {
                 downloadProfilePhoto(from: checkedUrl)
             }
         }
@@ -225,9 +225,9 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
                             upload.responseJSON { response in
                                 if let value = response.result.value {
                                     var json = JSON(value)
-                                    var newUrlString = json["content"]["fileName"].string!
-                                    newUrlString = newUrlString.replacingOccurrences(of: "http", with: "https")
-                                    
+                                    json["content"]["fileName"].string! = json["content"]["fileName"].string!.replacingOccurrences(of: "/uploads/", with: "")
+                                    let newUrlString = json["content"]["fileName"].string!
+                                        
                                     // Change Actual
                                     self.profileImage.image = pickedImage
                                     

@@ -174,6 +174,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		273182D01F831A4100B5874A /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				27C0B03F1F6BDBC4009E69CA /* User.swift */,
+				2764C47A1F725E2D00DB7199 /* Business.swift */,
+				276D1B8F1F7BA25700A3EAF3 /* Shares.swift */,
+			);
+			name = Entity;
+			sourceTree = "<group>";
+		};
 		275C050C1F7C012C00E78E06 /* New Sharre */ = {
 			isa = PBXGroup;
 			children = (
@@ -288,8 +298,6 @@
 			isa = PBXGroup;
 			children = (
 				27FCB7D31F677533008E973C /* Home.storyboard */,
-				2764C47A1F725E2D00DB7199 /* Business.swift */,
-				276D1B8F1F7BA25700A3EAF3 /* Shares.swift */,
 				27F6C72F1F7BABA200DDB27B /* Category (Home) */,
 				27F6C7301F7BABC300DDB27B /* Business (Category) */,
 				276D1B841F7B888300A3EAF3 /* Business Information */,
@@ -331,7 +339,6 @@
 			isa = PBXGroup;
 			children = (
 				27FCB7DA1F677680008E973C /* Profile.storyboard */,
-				27C0B03F1F6BDBC4009E69CA /* User.swift */,
 				27FCB7DC1F67768C008E973C /* ProfileVC.swift */,
 				27702CD41F69531900A1C652 /* ProfileTableViewCell.swift */,
 				27B37F921F6EC2E200565AA8 /* EditProfileVC.swift */,
@@ -380,6 +387,7 @@
 			children = (
 				27D0186A1F7407B000D5B798 /* General */,
 				27D018691F7407A800D5B798 /* Networking */,
+				273182D01F831A4100B5874A /* Entity */,
 				27FCB7E81F678F67008E973C /* UIComponent */,
 				27FCB7D91F67766E008E973C /* Profile */,
 				27FCB7D81F677668008E973C /* Notification */,

@@ -188,7 +188,7 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
                     if let tabController = appDelegate.window?.rootViewController as? UITabBarController {
                         let tabItem = tabController.tabBar.items![2]
                         newNotificationNumber == 0 ? (tabItem.badgeValue = nil) : (tabItem.badgeValue = String(describing: newNotificationNumber))
-                        print("Notification no.: " + String(describing: newNotificationNumber))
+                        //print("Notification no.: " + String(describing: newNotificationNumber))
                     }
                 }
                 break

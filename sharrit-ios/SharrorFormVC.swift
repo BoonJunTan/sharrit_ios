@@ -130,7 +130,7 @@ class SharrorFormVC: UIViewController, UICollectionViewDataSource, UICollectionV
                             let dictionary = try JSONSerialization.jsonObject(with: convertedQuestion, options: []) as? [String:AnyObject]
                             for (key, question) in dictionary! {
                                 if self.formStatus == .View {
-                                    self.questions.append(key as! String)
+                                    self.questions.append(key)
                                     self.answers.append(question as! String)
                                 } else {
                                     self.questions.append(question as! String)
