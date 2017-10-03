@@ -10,17 +10,17 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-enum TransactionStatus {
+enum SharreStatus {
     case Ongoing
     case Upcoming
-    case History
+    case Completed
 }
 
 class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var titleString: String!
     var userRole: Role!
-    var transactionStatus: TransactionStatus!
+    var sharreStatus: SharreStatus!
     
     @IBOutlet weak var ongoingBtn: SharritButton!
     @IBOutlet weak var upcomingBtn: UIButton!
@@ -38,7 +38,7 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         defaultBtnUI()
         currentBtnSelected(btn: ongoingBtn)
-        transactionStatus = .Ongoing
+        sharreStatus = .Ongoing
         
         let navBarBubble = UIBarButtonItem(image: #imageLiteral(resourceName: "chat"),
                                            style: .plain ,
@@ -98,21 +98,21 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     @IBAction func ongoingBtnPressed(_ sender: SharritButton) {
         defaultBtnUI()
         currentBtnSelected(btn: ongoingBtn)
-        transactionStatus = .Ongoing
+        sharreStatus = .Ongoing
         retrieveShares()
     }
     
     @IBAction func upcomingBtnPressed(_ sender: Any) {
         defaultBtnUI()
         currentBtnSelected(btn: upcomingBtn)
-        transactionStatus = .Upcoming
+        sharreStatus = .Upcoming
         retrieveShares()
     }
     
     @IBAction func historyBtnPressed(_ sender: Any) {
         defaultBtnUI()
         currentBtnSelected(btn: historyBtn)
-        transactionStatus = .History
+        sharreStatus = .Completed
         retrieveShares()
     }
     
@@ -125,9 +125,9 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
             url = url + "sharror/history/"
         }
         
-        if transactionStatus == .Ongoing {
+        if sharreStatus == .Ongoing {
             url = url + "ongoing/"
-        } else if transactionStatus == .Upcoming {
+        } else if sharreStatus == .Upcoming {
             url = url + "upcoming/"
         } else {
             url = url + "completed/"

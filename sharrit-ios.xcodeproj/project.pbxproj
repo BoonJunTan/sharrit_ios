@@ -37,6 +37,7 @@
 		27702CD91F69621900A1C652 /* Messages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27702CD81F69621900A1C652 /* Messages.storyboard */; };
 		27702CDB1F6962F900A1C652 /* MessagesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27702CDA1F6962F900A1C652 /* MessagesVC.swift */; };
 		2770E2BC1F8339B400199B61 /* EditSharreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2770E2BB1F8339B400199B61 /* EditSharreVC.swift */; };
+		2770E2BE1F83D9FF00199B61 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2770E2BD1F83D9FF00199B61 /* Transaction.swift */; };
 		2777645E1F6A594A0023CDCA /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2777645D1F6A594A0023CDCA /* MessageTableViewCell.swift */; };
 		277764601F6A5D2D0023CDCA /* ConversationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2777645F1F6A5D2D0023CDCA /* ConversationVC.swift */; };
 		277DD7191F72238C005B7752 /* SharesInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277DD7181F72238C005B7752 /* SharesInfoVC.swift */; };
@@ -112,6 +113,7 @@
 		27702CD81F69621900A1C652 /* Messages.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Messages.storyboard; sourceTree = "<group>"; };
 		27702CDA1F6962F900A1C652 /* MessagesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesVC.swift; sourceTree = "<group>"; };
 		2770E2BB1F8339B400199B61 /* EditSharreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSharreVC.swift; sourceTree = "<group>"; };
+		2770E2BD1F83D9FF00199B61 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		2777645D1F6A594A0023CDCA /* MessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		2777645F1F6A5D2D0023CDCA /* ConversationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationVC.swift; sourceTree = "<group>"; };
 		277DD7181F72238C005B7752 /* SharesInfoVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharesInfoVC.swift; sourceTree = "<group>"; };
@@ -179,9 +181,10 @@
 		273182D01F831A4100B5874A /* Entity */ = {
 			isa = PBXGroup;
 			children = (
-				27C0B03F1F6BDBC4009E69CA /* User.swift */,
 				2764C47A1F725E2D00DB7199 /* Business.swift */,
 				276D1B8F1F7BA25700A3EAF3 /* Shares.swift */,
+				2770E2BD1F83D9FF00199B61 /* Transaction.swift */,
+				27C0B03F1F6BDBC4009E69CA /* User.swift */,
 			);
 			name = Entity;
 			sourceTree = "<group>";
@@ -597,6 +600,7 @@
 				27FCB7EC1F678FD1008E973C /* Colours.swift in Sources */,
 				274A36891F7024A000FD5E3C /* EditPasswordVC.swift in Sources */,
 				27FCB7DF1F6776A5008E973C /* NotificationVC.swift in Sources */,
+				2770E2BE1F83D9FF00199B61 /* Transaction.swift in Sources */,
 				275C050E1F7C014C00E78E06 /* NewSharreVC.swift in Sources */,
 				2764C4871F72ECB700DB7199 /* Notification.swift in Sources */,
 				27DA994A1F7CCEC7006E415C /* WalletTopUpVC.swift in Sources */,
