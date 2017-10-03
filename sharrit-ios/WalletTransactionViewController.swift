@@ -12,6 +12,10 @@ class WalletTransactionViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         tableView.tableFooterView = UIView() // For Hiding away empty cell
     }
