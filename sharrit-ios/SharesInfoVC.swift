@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -33,12 +35,6 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let navBarBubble = UIBarButtonItem(image: #imageLiteral(resourceName: "chat"),
-                                           style: .plain ,
-                                           target: self, action: #selector(goToMessages))
-        
-        self.navigationItem.rightBarButtonItem = navBarBubble
-        
         self.title = businessInfo.businessName
         
         ImageDownloader().imageFromServerURL(urlString: SharritURL.devPhotoURL + businessInfo.bannerURL, imageView: businessBanner)
@@ -47,7 +43,7 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         businessName.text = businessInfo.businessName
         
-        // Get user profile creation date
+        // Get Business profile creation date
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = NSTimeZone(abbreviation: "GMT+08")! as TimeZone
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -65,6 +61,16 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         formatter.unitsStyle = .full
         businessStartDate.text = formatter.string(from: endDate!, to: todayDate!)
 
+        tableViewItems.append([businessInfo.description!])
+        
+        // Setup some test data
+        review.append("Review Test Data 1")
+        review.append("Review Test Data 2")
+        tableViewItems.append(review)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         createSharreBtn.isHidden = true
         joinSharrorBtn.isHidden = true
         pendingApprovalBtn.isHidden = true
@@ -74,6 +80,10 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             // Second check - If User already joined business or pending
             if (appDelegate.user?.joinedSBList.contains(businessInfo.businessId))! {
                 createSharreBtn.isHidden = false
+                
+                let navBarQuit = UIBarButtonItem(title: "Quit", style: .plain, target: self, action: #selector(quitBusiness))
+                
+                self.navigationItem.rightBarButtonItem = navBarQuit
             } else if (appDelegate.user?.pendingSBList.contains(businessInfo.businessId))! {
                 pendingApprovalBtn.isHidden = false
             } else {
@@ -83,13 +93,6 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 }
             }
         }
-        
-        tableViewItems.append([businessInfo.description!])
-        
-        // Setup some test data
-        review.append("Review Test Data 1")
-        review.append("Review Test Data 2")
-        tableViewItems.append(review)
     }
     
     // Set up Table View - Description and Reviews
@@ -132,21 +135,34 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         tableView.reloadData()
     }
     
-    // Go To Messages
-    func goToMessages() {
-        let messageSB = UIStoryboard(name: "Messages" , bundle: nil)
-        let messageVC = messageSB.instantiateViewController(withIdentifier: "messages") as! MessagesVC
-        let messageWithNavController = UINavigationController(rootViewController: messageVC)
-        
-        messageWithNavController.modalTransitionStyle = .coverVertical
-        modalPresentationStyle = .fullScreen
-        present(messageWithNavController, animated: true, completion:{
-            if let subviewsCount = self.tabBarController?.view.subviews.count {
-                if subviewsCount > 2 {
-                    self.tabBarController?.view.subviews[2].removeFromSuperview()
+    // Quit Business
+    func quitBusiness() {
+        let alert = UIAlertController(title: "Quiting Business...", message: "Are you sure about this?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "I'm sure", style: .default, handler: { (_) in
+            let url = SharritURL.devURL + "sharror/withdraw/" + String(describing: self.businessInfo.businessId!) + "/" + String(describing: self.appDelegate.user!.userID)
+            
+            let headers: HTTPHeaders = [
+                "Authorization": "Bearer " + self.appDelegate.user!.accessToken,
+                "Accept": "application/json" // Need this?
+            ]
+            
+            Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON {
+                response in
+                switch response.result {
+                case .success(_):
+                    if let index = self.appDelegate.user?.joinedSBList.index(of: self.businessInfo.businessId) {
+                        self.appDelegate.user?.joinedSBList.remove(at: index)
+                    }
+                    self.viewWillAppear(true)
+                    break
+                case .failure(_):
+                    print("Withdraw Business API failed")
+                    break
                 }
             }
-        })
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
