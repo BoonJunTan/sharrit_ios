@@ -15,5 +15,8 @@ target 'sharrit-ios' do
   pod 'CountryPickerSwift'
   pod 'MFCard'
   pod 'FSCalendar'
+  pod 'Stripe'
+  pod 'CardIO'
+  pod 'SVProgressHUD'
 
 end

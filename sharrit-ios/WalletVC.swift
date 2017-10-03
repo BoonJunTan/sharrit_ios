@@ -14,10 +14,11 @@ class WalletVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
     
     @IBOutlet weak var walletView: UIView!
     @IBOutlet weak var walletAmtLabel: UILabel!
-    
+    @IBOutlet weak var walletAmt: UILabel!
     var btnIcon = [#imageLiteral(resourceName: "transaction"),#imageLiteral(resourceName: "deposit"),#imageLiteral(resourceName: "smart_card"), #imageLiteral(resourceName: "withdrawl")]
     var btnLabel = ["History", "Top Up", "Smart Card", "Cash Out"]
     @IBOutlet weak var btnCollectionView: UICollectionView!
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,10 +30,44 @@ class WalletVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
         
         self.navigationItem.rightBarButtonItem = navBarBubble
         self.navigationController?.navigationBar.isTranslucent = true
+        let url = SharritURL.devURL + "wallet/user/" + String(describing: appDelegate.user!.userID)
+        print(url)
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+            response in
+            switch response.result {
+            case .success(_):
+                if let data = response.result.value {
+                    let json = JSON(data)
+                    self.walletAmt.text = json["content"]["amount"].description
+                    self.walletAmt.text?.insert(".", at: (self.walletAmt.text?.index((self.walletAmt.text?.endIndex)!, offsetBy: -2))!)
+                }
+                break
+            case .failure(_):
+                print("error")
+                break
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        let url = SharritURL.devURL + "wallet/user/" + String(describing: appDelegate.user!.userID)
+        print(url)
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+            response in
+            switch response.result {
+            case .success(_):
+                if let data = response.result.value {
+                    let json = JSON(data)
+                    self.walletAmt.text = json["content"]["amount"].description
+                    self.walletAmt.text?.insert(".", at: (self.walletAmt.text?.index((self.walletAmt.text?.endIndex)!, offsetBy: -2))!)
+                }
+                break
+            case .failure(_):
+                print("error")
+                break
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {
