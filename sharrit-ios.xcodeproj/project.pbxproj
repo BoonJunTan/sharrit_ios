@@ -38,6 +38,7 @@
 		27702CDB1F6962F900A1C652 /* MessagesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27702CDA1F6962F900A1C652 /* MessagesVC.swift */; };
 		2770E2BC1F8339B400199B61 /* EditSharreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2770E2BB1F8339B400199B61 /* EditSharreVC.swift */; };
 		2770E2BE1F83D9FF00199B61 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2770E2BD1F83D9FF00199B61 /* Transaction.swift */; };
+		2770E2C01F83FA2E00199B61 /* DecimalConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2770E2BF1F83FA2E00199B61 /* DecimalConverter.swift */; };
 		2777645E1F6A594A0023CDCA /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2777645D1F6A594A0023CDCA /* MessageTableViewCell.swift */; };
 		277764601F6A5D2D0023CDCA /* ConversationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2777645F1F6A5D2D0023CDCA /* ConversationVC.swift */; };
 		277DD7191F72238C005B7752 /* SharesInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277DD7181F72238C005B7752 /* SharesInfoVC.swift */; };
@@ -114,6 +115,7 @@
 		27702CDA1F6962F900A1C652 /* MessagesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesVC.swift; sourceTree = "<group>"; };
 		2770E2BB1F8339B400199B61 /* EditSharreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSharreVC.swift; sourceTree = "<group>"; };
 		2770E2BD1F83D9FF00199B61 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
+		2770E2BF1F83FA2E00199B61 /* DecimalConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecimalConverter.swift; sourceTree = "<group>"; };
 		2777645D1F6A594A0023CDCA /* MessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		2777645F1F6A5D2D0023CDCA /* ConversationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationVC.swift; sourceTree = "<group>"; };
 		277DD7181F72238C005B7752 /* SharesInfoVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharesInfoVC.swift; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 				27D0186B1F7407CA00D5B798 /* RegexCheck.swift */,
 				275E00701F80C8E5005E6010 /* FormatDate.swift */,
 				27BFFC271F8275F6009FF404 /* ImageResize.swift */,
+				2770E2BF1F83FA2E00199B61 /* DecimalConverter.swift */,
 			);
 			name = General;
 			sourceTree = "<group>";
@@ -602,6 +605,7 @@
 				27FCB7DF1F6776A5008E973C /* NotificationVC.swift in Sources */,
 				2770E2BE1F83D9FF00199B61 /* Transaction.swift in Sources */,
 				275C050E1F7C014C00E78E06 /* NewSharreVC.swift in Sources */,
+				2770E2C01F83FA2E00199B61 /* DecimalConverter.swift in Sources */,
 				2764C4871F72ECB700DB7199 /* Notification.swift in Sources */,
 				27DA994A1F7CCEC7006E415C /* WalletTopUpVC.swift in Sources */,
 				2764C4811F7271AB00DB7199 /* SharrorFormCollectionViewCell.swift in Sources */,

@@ -24,7 +24,7 @@ enum TransactionStatus {
 class Transaction {
     
     var transactionId: Int
-    //var dateCreated: String
+    var dateCreated: String
     //var dateUpdated: String
     var payeeId: Int
     var payeeType: Int
@@ -40,8 +40,9 @@ class Transaction {
     var qty: Int
     var deposit: Double
     
-    init(transactionId: Int, payeeId: Int, payeeType: Int, payerId: Int, payerType: Int, amount: Int, promoId: Int, timeStart: String, timeEnd: String, status: Int, qty: Int, deposit: Double) {
+    init(transactionId: Int, dateCreated: String, payeeId: Int, payeeType: Int, payerId: Int, payerType: Int, amount: Int, promoId: Int, timeStart: String, timeEnd: String, status: Int, qty: Int, deposit: Double) {
         self.transactionId = transactionId
+        self.dateCreated = dateCreated
         self.payeeId = payeeId
         self.payeeType = payeeType
         self.payerId = payerId
