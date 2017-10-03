@@ -36,6 +36,7 @@
 		27702CD51F69531900A1C652 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27702CD41F69531900A1C652 /* ProfileTableViewCell.swift */; };
 		27702CD91F69621900A1C652 /* Messages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27702CD81F69621900A1C652 /* Messages.storyboard */; };
 		27702CDB1F6962F900A1C652 /* MessagesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27702CDA1F6962F900A1C652 /* MessagesVC.swift */; };
+		2770E2BC1F8339B400199B61 /* EditSharreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2770E2BB1F8339B400199B61 /* EditSharreVC.swift */; };
 		2777645E1F6A594A0023CDCA /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2777645D1F6A594A0023CDCA /* MessageTableViewCell.swift */; };
 		277764601F6A5D2D0023CDCA /* ConversationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2777645F1F6A5D2D0023CDCA /* ConversationVC.swift */; };
 		277DD7191F72238C005B7752 /* SharesInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277DD7181F72238C005B7752 /* SharesInfoVC.swift */; };
@@ -110,6 +111,7 @@
 		27702CD41F69531900A1C652 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		27702CD81F69621900A1C652 /* Messages.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Messages.storyboard; sourceTree = "<group>"; };
 		27702CDA1F6962F900A1C652 /* MessagesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesVC.swift; sourceTree = "<group>"; };
+		2770E2BB1F8339B400199B61 /* EditSharreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSharreVC.swift; sourceTree = "<group>"; };
 		2777645D1F6A594A0023CDCA /* MessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		2777645F1F6A5D2D0023CDCA /* ConversationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationVC.swift; sourceTree = "<group>"; };
 		277DD7181F72238C005B7752 /* SharesInfoVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharesInfoVC.swift; sourceTree = "<group>"; };
@@ -174,14 +176,25 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		275C050C1F7C012C00E78E06 /* New Sharre */ = {
+		273182D01F831A4100B5874A /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				27C0B03F1F6BDBC4009E69CA /* User.swift */,
+				2764C47A1F725E2D00DB7199 /* Business.swift */,
+				276D1B8F1F7BA25700A3EAF3 /* Shares.swift */,
+			);
+			name = Entity;
+			sourceTree = "<group>";
+		};
+		275C050C1F7C012C00E78E06 /* Sharre (New/Edit) */ = {
 			isa = PBXGroup;
 			children = (
 				275C050D1F7C014C00E78E06 /* NewSharreVC.swift */,
 				2734E12A1F7C846500543F88 /* SharrePhotoCollectionViewCell.swift */,
 				27DA99531F7D175B006E415C /* SharresCreationVC.swift */,
+				2770E2BB1F8339B400199B61 /* EditSharreVC.swift */,
 			);
-			name = "New Sharre";
+			name = "Sharre (New/Edit)";
 			sourceTree = "<group>";
 		};
 		276D1B841F7B888300A3EAF3 /* Business Information */ = {
@@ -288,12 +301,10 @@
 			isa = PBXGroup;
 			children = (
 				27FCB7D31F677533008E973C /* Home.storyboard */,
-				2764C47A1F725E2D00DB7199 /* Business.swift */,
-				276D1B8F1F7BA25700A3EAF3 /* Shares.swift */,
 				27F6C72F1F7BABA200DDB27B /* Category (Home) */,
 				27F6C7301F7BABC300DDB27B /* Business (Category) */,
 				276D1B841F7B888300A3EAF3 /* Business Information */,
-				275C050C1F7C012C00E78E06 /* New Sharre */,
+				275C050C1F7C012C00E78E06 /* Sharre (New/Edit) */,
 				27F6C7311F7BABE700DDB27B /* Sharror Form */,
 				27F6C72E1F7BAB7A00DDB27B /* Shares Information */,
 				27DA99551F7D4874006E415C /* Book Sharre */,
@@ -331,7 +342,6 @@
 			isa = PBXGroup;
 			children = (
 				27FCB7DA1F677680008E973C /* Profile.storyboard */,
-				27C0B03F1F6BDBC4009E69CA /* User.swift */,
 				27FCB7DC1F67768C008E973C /* ProfileVC.swift */,
 				27702CD41F69531900A1C652 /* ProfileTableViewCell.swift */,
 				27B37F921F6EC2E200565AA8 /* EditProfileVC.swift */,
@@ -380,6 +390,7 @@
 			children = (
 				27D0186A1F7407B000D5B798 /* General */,
 				27D018691F7407A800D5B798 /* Networking */,
+				273182D01F831A4100B5874A /* Entity */,
 				27FCB7E81F678F67008E973C /* UIComponent */,
 				27FCB7D91F67766E008E973C /* Profile */,
 				27FCB7D81F677668008E973C /* Notification */,
@@ -580,6 +591,7 @@
 				2764C4851F72E4B500DB7199 /* ContactBusinessVC.swift in Sources */,
 				276D1B901F7BA25700A3EAF3 /* Shares.swift in Sources */,
 				275C050B1F7BF40B00E78E06 /* BusinessInfoCollectionViewCell.swift in Sources */,
+				2770E2BC1F8339B400199B61 /* EditSharreVC.swift in Sources */,
 				27FCB7F21F67DB8F008E973C /* SignUpVC.swift in Sources */,
 				27DA99521F7D08BE006E415C /* TransactionVC.swift in Sources */,
 				27FCB7EC1F678FD1008E973C /* Colours.swift in Sources */,

@@ -31,39 +31,22 @@ class ViewSharreVC: UIViewController {
     @IBOutlet weak var sharreStartTime: UILabel!
     @IBOutlet weak var sharreEndTime: UILabel!
     
+    @IBOutlet weak var chatSharreStackView: UIStackView!
+    @IBOutlet weak var sharreItBtn: SharritButton!
+    
+    var sharreStatusBool: Bool!
     var photoArraySource = [ImageSource]()
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let navBarBubble = UIBarButtonItem(image: #imageLiteral(resourceName: "chat"),
-                                           style: .plain ,
-                                           target: self, action: #selector(goToMessages))
-        
-        self.navigationItem.rightBarButtonItem = navBarBubble
-        
-        getSharesInfo()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-    }
-    
-    func goToMessages() {
-        let messageSB = UIStoryboard(name: "Messages" , bundle: nil)
-        let messageVC = messageSB.instantiateViewController(withIdentifier: "messages") as! MessagesVC
-        let messageWithNavController = UINavigationController(rootViewController: messageVC)
         
-        messageWithNavController.modalTransitionStyle = .coverVertical
-        modalPresentationStyle = .fullScreen
-        present(messageWithNavController, animated: true, completion:{
-            if let subviewsCount = self.tabBarController?.view.subviews.count {
-                if subviewsCount > 2 {
-                    self.tabBarController?.view.subviews[2].removeFromSuperview()
-                }
-            }
-        })
+     getSharesInfo()
     }
     
     func getSharesInfo() {
@@ -81,15 +64,29 @@ class ViewSharreVC: UIViewController {
                 if let data = response.result.value {
                     var json = JSON(data)
                     self.sharreTitle.text = json["content"]["name"].string!
-                    self.sharreDate.text = FormatDate().compareDaysCreated(dateCreated: json["content"]["dateCreated"].string!) + " by "
+                    self.sharreDate.text = FormatDate().compareDaysCreated(dateCreated: json["content"]["dateCreated"].string!) + " ago by"
+                    
                     self.sharreOwner.text = json["content"]["ownerName"].string!
+                    if (self.appDelegate.user!.firstName + " " + self.appDelegate.user!.lastName) == self.sharreOwner.text {
+                        self.chatSharreStackView.isHidden = true
+                        let navBarBubble = UIBarButtonItem(image: ImageResize().resizeImageWith(image: #imageLiteral(resourceName: "edit"), newWidth: 20),
+                                                           style: .plain ,
+                                                           target: self, action: #selector(self.sharreAction))
+                        
+                        self.navigationItem.rightBarButtonItem = navBarBubble
+                    }
                     
                     if let activeStatus = json["content"]["isActive"].bool {
-                        activeStatus ? (self.sharreStatus.text = "Active") : (self.sharreStatus.text = "Not Active")
+                        self.sharreStatusBool = activeStatus
+                        if activeStatus {
+                            self.sharreStatus.text = "Active"
+                        } else {
+                            self.sharreItBtn.isHidden = true
+                            self.sharreStatus.text = "Not Active"
+                        }
                     }
                     
                     self.sharreDeposit.text = "Deposit: $" + String(describing: json["content"]["deposit"].int!)
-                    self.sharreCharging.text = "Pay/hr: $" + String(describing: json["content"]["price"].int!)
                     
                     self.getAllPhoto(jsonData: json["content"]["photos"], completion: { photoArray in
                         self.sharreImages.setImageInputs(Array(photoArray.prefix(4)))
@@ -99,8 +96,10 @@ class ViewSharreVC: UIViewController {
                     
                     if json["content"]["type"].int! == 0 {
                         if json["content"]["unit"].int! == 0 {
-                            self.sharreType.text = "Appointment Based - 30 Minutes Interval"
+                            self.sharreType.text = "Appointment Based - 30 mins Interval"
+                            self.sharreCharging.text = "Pay/hr: $" + String(describing: json["content"]["price"].int!)
                         } else {
+                            self.sharreCharging.text = "Pay/day: $" + String(describing: json["content"]["price"].int!)
                             self.sharreType.text = "Appointment Based - Daily"
                         }
                     } else {
@@ -140,10 +139,117 @@ class ViewSharreVC: UIViewController {
         }
     }
     
+    // Sharre Actions
+    func sharreAction() {
+        let optionMenu = UIAlertController(title: nil, message: "What would you like to do?", preferredStyle: .actionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action -> Void in
+            
+        }
+        
+        let editAction = UIAlertAction(title: "Edit Sharre", style: .default) { action -> Void in
+            self.performSegue(withIdentifier: "editSharre", sender: nil)
+        }
+        
+        var deactivateOrNotTitle: String!
+        if sharreStatusBool {
+            deactivateOrNotTitle = "Deactivate Sharre"
+        } else {
+            deactivateOrNotTitle = "Activate Sharre"
+        }
+        
+        let deactivateAction = UIAlertAction(title: deactivateOrNotTitle, style: .default) { action -> Void in
+            self.deactivateSharre()
+        }
+        
+        let deleteAction = UIAlertAction(title: "Delete Sharre", style: .default) { action -> Void in
+            self.deleteSharre()
+        }
+        
+        optionMenu.addAction(editAction)
+        optionMenu.addAction(deactivateAction)
+        optionMenu.addAction(deleteAction)
+        optionMenu.addAction(cancelAction)
+        self.present(optionMenu, animated: true, completion: nil)
+    }
+    
     @IBAction func sharreITBtnPressed(_ sender: SharritButton) {
         // Check Appointment or Time-usage based
         performSegue(withIdentifier: "viewAppointment", sender: nil)
         //performSegue(withIdentifier: "viewTimeUsage", sender: nil)
+    }
+    
+    // Deactivate Sharre
+    func deactivateSharre() {
+        var deactivateOrNotTitle: String!
+        if sharreStatusBool {
+            deactivateOrNotTitle = "Deactivating Sharre"
+        } else {
+            deactivateOrNotTitle = "Activating Sharre"
+        }
+        let alert = UIAlertController(title: deactivateOrNotTitle, message: "Are you sure about this?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "I'm sure", style: .default, handler: { (_) in
+            
+            let url:String!
+            if self.sharreStatusBool {
+                url = SharritURL.devURL + "sharre/status/" + String(describing: self.sharreID!) + "/false"
+            } else {
+                url = SharritURL.devURL + "sharre/status/" + String(describing: self.sharreID!) + "/true"
+            }
+            let headers: HTTPHeaders = [
+                "Authorization": "Bearer " + self.appDelegate.user!.accessToken,
+                "Accept": "application/json" // Need this?
+            ]
+            
+            Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON {
+                response in
+                switch response.result {
+                case .success(_):
+                    self.getSharesInfo()
+                    break
+                case .failure(_):
+                    print("Delete Sharre Info API failed")
+                    break
+                }
+            }
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    // Delete Sharre
+    func deleteSharre() {
+        let alert = UIAlertController(title: "Deleting Sharre...", message: "Are you sure about this?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "I'm sure", style: .default, handler: { (_) in
+            let url = SharritURL.devURL + "sharre/delete/" + String(describing: self.sharreID!) + "/true"
+            
+            let headers: HTTPHeaders = [
+                "Authorization": "Bearer " + self.appDelegate.user!.accessToken,
+                "Accept": "application/json" // Need this?
+            ]
+            
+            Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON {
+                response in
+                switch response.result {
+                case .success(_):
+                    self.navigationController?.popViewController(animated: true)
+                    break
+                case .failure(_):
+                    print("Delete Sharre Info API failed")
+                    break
+                }
+            }
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "editSharre" {
+            if let editSharreVC = segue.destination as? EditSharreVC {
+                editSharreVC.sharreId = sharreID
+            }
+        }
     }
     
 }
