@@ -120,7 +120,9 @@ class LoginVC: UIViewController, CountryPickerDelegate {
                                     let userID = json["content"]["userId"].int!
                                     let firstName = json["content"]["firstName"].string!
                                     let lastName = json["content"]["lastName"].string!
+                                    json["content"]["imageSrc"].string! = json["content"]["imageSrc"].string!.replacingOccurrences(of: "/uploads/", with: "")
                                     let profilePhoto = json["content"]["imageSrc"].string!
+                                    
                                     let accessToken = json["content"]["accessToken"].string!
                                     let createDate = json["content"]["dateCreated"].string!
                                     let joinedBusinessList = json["content"]["bizList"].arrayObject! as! [Int]

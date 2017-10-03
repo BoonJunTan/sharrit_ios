@@ -154,6 +154,14 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             if let sharrorFormVC = segue.destination as? SharrorFormVC {
                 sharrorFormVC.companyName = businessInfo.businessName
                 sharrorFormVC.companyId = businessInfo.businessId!
+                sharrorFormVC.formStatus = .Create
+            }
+        } else if segue.identifier == "viewForm" {
+            if let sharrorFormVC = segue.destination as? SharrorFormVC {
+                sharrorFormVC.companyName = businessInfo.businessName
+                sharrorFormVC.companyId = businessInfo.businessId!
+                sharrorFormVC.formStatus = .View
+                sharrorFormVC.requestFormId = businessInfo.requestFormID!
             }
         } else if segue.identifier == "contactBusiness" {
             if let contactBusinessVC = segue.destination as? ContactBusinessVC {

@@ -1,8 +1,8 @@
 //
-//  NewSharreVC.swift
+//  EditSharreVC.swift
 //  sharrit-ios
 //
-//  Created by Boon Jun on 27/9/17.
+//  Created by Boon Jun on 3/10/17.
 //  Copyright © 2017 thepoppingone. All rights reserved.
 //
 
@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyJSON
 import Photos
 
-class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class EditSharreVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var collectionView: UICollectionView!
     var currentSelectedCell: SharrePhotoCollectionViewCell!
@@ -20,22 +20,16 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
     let imagePicker = UIImagePickerController()
     
     // Pass over data
-    var businessName: String!
-    var businessID: Int!
-    var categoryName: String!
-    var categoryID: Int!
-    
-    @IBOutlet weak var businessLabel: UILabel!
-    @IBOutlet weak var categoryLabel: UILabel!
+    var sharreId: Int!
     
     @IBOutlet weak var sharreName: UITextField!
     @IBOutlet weak var sharreDeposit: UITextField!
     
-    var scheduleTimeCode = 0
+    var scheduleTimeCode: Int!
     @IBOutlet weak var sharreScheduleBtn: SharritButton!
     @IBOutlet weak var sharreTimeBtn: SharritButton!
     
-    var unitCode = 1
+    var unitCode: Int!
     @IBOutlet weak var sharreDayBtn: SharritButton!
     @IBOutlet weak var sharreThirtyBtn: SharritButton!
     
@@ -52,22 +46,14 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
     @IBOutlet weak var startEndTimeStackView: UIStackView!
     @IBOutlet weak var startEndTimeStackHeight: NSLayoutConstraint!
     
-    var sharreImages = [UIImage(), UIImage(), UIImage(), UIImage()]
+    var sharreImages = [UIImage]()
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let navBarBubble = UIBarButtonItem(image: #imageLiteral(resourceName: "chat"),
-                                           style: .plain ,
-                                           target: self, action: #selector(goToMessages))
-        
-        self.navigationItem.rightBarButtonItem = navBarBubble
         
         imagePicker.delegate = self
-        
-        businessLabel.text = businessName
-        categoryLabel.text = categoryName
         
         sharreStartTime.keyboardType = .numberPad
         sharreEndTime.keyboardType = .numberPad
@@ -75,14 +61,12 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
         sharreChargingPrice.keyboardType = .numbersAndPunctuation
         sharreDeposit.keyboardType = .numbersAndPunctuation
         
-        defaultChargeMethodBtnUI()
-        currentBtnSelected(btn: sharreScheduleBtn)
+        sharreScheduleBtn.addTarget(self, action: #selector(scheduleBtnPressed), for: .touchUpInside)
+        sharreTimeBtn.addTarget(self, action: #selector(timeBtnPressed), for: .touchUpInside)
+        sharreDayBtn.addTarget(self, action: #selector(dayBtnPressed), for: .touchUpInside)
+        sharreThirtyBtn.addTarget(self, action: #selector(thirtyBtnPressed), for: .touchUpInside)
         
-        defaultChargeTypeBtnUI()
-        currentBtnSelected(btn: sharreDayBtn)
-
-        startEndTimeStackView.isHidden = true
-        startEndTimeStackHeight.constant = 0
+        getShareDetails()
     }
     
     // Set up Collection View
@@ -92,11 +76,21 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let sharrePhotoCell = collectionView.dequeueReusableCell(withReuseIdentifier: "sharrePhotoCell", for: indexPath as IndexPath) as! SharrePhotoCollectionViewCell
+        
         indexPath.item == 0 ? (sharrePhotoCell.sharreLabel.isHidden = false) : (sharrePhotoCell.sharreLabel.isHidden = true)
-        sharrePhotoCell.sharreImage.image = #imageLiteral(resourceName: "add")
-        sharrePhotoCell.cancelBtn.isHidden = true
+        
         sharrePhotoCell.cancelBtn.layer.cornerRadius = sharrePhotoCell.cancelBtn.layer.frame.width / 2
         sharrePhotoCell.cancelBtn.layer.masksToBounds = true
+        
+        if sharreImages.indices.contains(indexPath.item) {
+            sharrePhotoCell.sharreImage.image = sharreImages[indexPath.item]
+            sharrePhotoCell.sharreImage.contentMode = .scaleAspectFill
+            sharrePhotoCell.cancelBtn.isHidden = false
+        } else {
+            (sharrePhotoCell.sharreImage.image = #imageLiteral(resourceName: "add"))
+            sharrePhotoCell.sharreImage.contentMode = .center
+            sharrePhotoCell.cancelBtn.isHidden = true
+        }
         
         // Add Dotted Line
         let yourViewBorder = CAShapeLayer()
@@ -180,21 +174,88 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
         }
     }
     
-    // Go To Messages
-    func goToMessages() {
-        let messageSB = UIStoryboard(name: "Messages" , bundle: nil)
-        let messageVC = messageSB.instantiateViewController(withIdentifier: "messages") as! MessagesVC
-        let messageWithNavController = UINavigationController(rootViewController: messageVC)
+    func getShareDetails() {
+        let url = SharritURL.devURL + "sharre/" + String(describing: sharreId!)
         
-        messageWithNavController.modalTransitionStyle = .coverVertical
-        modalPresentationStyle = .fullScreen
-        present(messageWithNavController, animated: true, completion:{
-            if let subviewsCount = self.tabBarController?.view.subviews.count {
-                if subviewsCount > 2 {
-                    self.tabBarController?.view.subviews[2].removeFromSuperview()
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + appDelegate.user!.accessToken,
+            "Accept": "application/json" // Need this?
+        ]
+        
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON {
+            response in
+            switch response.result {
+            case .success(_):
+                if let data = response.result.value {
+                    var json = JSON(data)
+                    self.sharreName.text = json["content"]["name"].string!
+                    
+                    self.sharreDeposit.text = String(describing: json["content"]["deposit"].int!)
+                    self.sharreChargingPrice.text = String(describing: json["content"]["price"].int!)
+                    
+                    self.getAllPhoto(jsonData: json["content"]["photos"], completion: { photoArray in
+                        self.collectionView.reloadData()
+                    })
+                    
+                    self.defaultChargeMethodBtnUI()
+                    self.defaultChargeTypeBtnUI()
+                    
+                    self.scheduleTimeCode = json["content"]["type"].int!
+                    if self.scheduleTimeCode == 0 {
+                        self.currentBtnSelected(btn: self.sharreScheduleBtn)
+                        
+                        self.dayMinuteStackView.isHidden = false
+                        self.dayMinuteStackHeight.constant = 40
+                        self.unitCode = json["content"]["unit"].int!
+                        if self.unitCode == 0 {
+                            self.currentBtnSelected(btn: self.sharreThirtyBtn)
+                            self.startEndTimeStackView.isHidden = false
+                            self.startEndTimeStackHeight.constant = 40
+                        } else {
+                            self.currentBtnSelected(btn: self.sharreDayBtn)
+                            self.startEndTimeStackView.isHidden = true
+                            self.startEndTimeStackHeight.constant = 0
+                        }
+                    } else {
+                        self.currentBtnSelected(btn: self.sharreTimeBtn)
+                        
+                        self.unitCode = -1
+                        self.dayMinuteStackView.isHidden = true
+                        self.dayMinuteStackHeight.constant = 0
+                        self.startEndTimeStackView.isHidden = false
+                        self.startEndTimeStackHeight.constant = 40
+                    }
+                    
+                    self.sharreStartTime.text = json["content"]["activeStart"].string! + " "
+                    self.sharreStartTime.text = self.sharreStartTime.text?.replacingOccurrences(of: ":00 ", with: "")
+                    self.sharreEndTime.text = json["content"]["activeEnd"].string! + " "
+                    self.sharreEndTime.text = self.sharreEndTime.text?.replacingOccurrences(of: ":00 ", with: "")
+                    self.sharreQuantity.text = String(describing: json["content"]["qty"].int!)
+                    self.sharreLocation.text = json["content"]["location"].string!
+                    self.sharreDescription.text = json["content"]["description"].string!
                 }
+                break
+            case .failure(_):
+                print("Retrieve Sharre Info API failed")
+                break
             }
-        })
+        }
+    }
+    
+    func getAllPhoto(jsonData: JSON, completion: @escaping () -> ()) {
+        let myGroup = DispatchGroup()
+        
+        for (_, photoPath) in jsonData.reversed() {
+            myGroup.enter()
+            ImageDownloader().imageFromServerURL(urlString: SharritURL.devPhotoURL +  photoPath["fileName"].description, completion: { (image) in
+                self.sharreImages.append(ImageResize().resizeImageWith(image: image, newWidth: 200))
+                myGroup.leave()
+            })
+        }
+        
+        myGroup.notify(queue: .main) {
+            completion()
+        }
     }
     
     func currentBtnSelected(btn: UIButton) {
@@ -216,10 +277,11 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
         sharreThirtyBtn.setTitleColor(Colours.Blue.sharritBlue, for: .normal)
     }
     
-    @IBAction func scheduleBtnPressed(_ sender: SharritButton) {
+    func scheduleBtnPressed() {
         scheduleTimeCode = 0
         defaultChargeMethodBtnUI()
         currentBtnSelected(btn: sharreScheduleBtn)
+        
         dayMinuteStackView.isHidden = false
         dayMinuteStackHeight.constant = 40
         startEndTimeStackView.isHidden = true
@@ -230,29 +292,33 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
         currentBtnSelected(btn: sharreDayBtn)
     }
     
-    @IBAction func timeBtnPressed(_ sender: SharritButton) {
+    func timeBtnPressed() {
         scheduleTimeCode = 1
         defaultChargeMethodBtnUI()
         currentBtnSelected(btn: sharreTimeBtn)
+        
         dayMinuteStackView.isHidden = true
         dayMinuteStackHeight.constant = 0
+        
         unitCode = -1
         startEndTimeStackView.isHidden = false
         startEndTimeStackHeight.constant = 40
     }
     
-    @IBAction func dayBtnPressed(_ sender: SharritButton) {
+    func dayBtnPressed() {
         unitCode = 1
         defaultChargeTypeBtnUI()
         currentBtnSelected(btn: sharreDayBtn)
+        
         startEndTimeStackView.isHidden = true
         startEndTimeStackHeight.constant = 0
     }
     
-    @IBAction func thirtyBtnPressed(_ sender: SharritButton) {
+    func thirtyBtnPressed() {
         unitCode = 0
         defaultChargeTypeBtnUI()
         currentBtnSelected(btn: sharreThirtyBtn)
+        
         startEndTimeStackView.isHidden = false
         startEndTimeStackHeight.constant = 40
     }
@@ -287,9 +353,9 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
                 sharreData["unit"] = unitCode
             }
             
-            let url = SharritURL.devURL + "sharre/third/" + String(describing: businessID!) + "/" + String(describing: appDelegate.user!.userID)
+            let url = SharritURL.devURL + "sharre/" + String(describing: sharreId!)
             
-            Alamofire.request(url, method: .post, parameters: sharreData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+            Alamofire.request(url, method: .put, parameters: sharreData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
                 response in
                 switch response.result {
                     
@@ -297,16 +363,13 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
                     if let data = (response.result.value as? Dictionary<String, Any>) {
                         if let statusCode = data["status"] as? Int {
                             if statusCode == 1 {
-                                if let value = response.result.value {
-                                    var json = JSON(value)
-                                    self.uploadImage(sharreID: String(describing: json["content"].int!))
-                                }
+                                self.uploadImage(sharreID: String(describing: self.sharreId!))
                             }
                         }
                     }
                     break
                 case .failure(_):
-                    print("Create Sharre API failed")
+                    print("Update Sharre API failed")
                     break
                 }
             }
@@ -334,20 +397,20 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
                 counter = counter + 1
             }
         }, to: url, method: .post, headers: headers,
-                encodingCompletion: { encodingResult in
-                    switch encodingResult {
-                    case .success(let upload, _, _):
-                        upload.responseJSON { response in
-                            if self.unitCode == 0 {
-                                self.updateStartEndTime(sharreID: sharreID)
-                            } else {
-                                self.performSegue(withIdentifier: "createdSharre", sender: sharreID)
-                            }
-                        }
-                    case .failure(_):
-                        print("Upload Profile Photo API failed")
+           encodingCompletion: { encodingResult in
+            switch encodingResult {
+            case .success(let upload, _, _):
+                upload.responseJSON { response in
+                    if self.unitCode == 0 {
+                        self.updateStartEndTime(sharreID: sharreID)
+                    } else {
+                        self.navigationController?.popViewController(animated: true)
                     }
-                    self.dismiss(animated: true, completion: nil)
+                }
+            case .failure(_):
+                print("Update Sharre Photo API failed")
+            }
+            self.dismiss(animated: true, completion: nil)
         })
     }
     
@@ -369,24 +432,16 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
                 if let data = (response.result.value as? Dictionary<String, Any>) {
                     if let statusCode = data["status"] as? Int {
                         if statusCode == 1 {
-                            self.performSegue(withIdentifier: "createdSharre", sender: sharreID)
+                            self.navigationController?.popViewController(animated: true)
                         }
                     }
                 }
                 break
             case .failure(_):
-                print("Create Sharre API failed")
+                print("Update Sharre Start/End Time failed")
                 break
             }
         }
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "createdSharre" {
-            if let sharresCreationVC = segue.destination as? SharresCreationVC {
-                sharresCreationVC.sharreTitle = sharreName.text
-                sharresCreationVC.sharreID = Int(sender as! String)
-            }
-        }
-    }
 }
+
