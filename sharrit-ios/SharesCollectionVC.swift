@@ -37,8 +37,6 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getSharesForCategory()
-        
         searchBar = UISearchBar()
         searchBar.placeholder = setPlaceHolder(placeholder: "Search " + currentCategory);
         self.navigationItem.titleView = searchBar
@@ -56,6 +54,11 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
         filterDropDown.isHidden = true
         let filterTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(filterBtnTapped(tapGestureRecognizer:)))
         filterTabView.addGestureRecognizer(filterTapGestureRecognizer)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getSharesForCategory()
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

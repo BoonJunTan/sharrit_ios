@@ -47,13 +47,16 @@ class BusinessSharesVC: UIViewController, UICollectionViewDataSource, UICollecti
             break
         }
         
-        getSharesForBusiness()
-        
         let navBarBubble = UIBarButtonItem(image: #imageLiteral(resourceName: "chat"),
                                            style: .plain ,
                                            target: self, action: #selector(goToMessages))
         
         self.navigationItem.rightBarButtonItem = navBarBubble
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getSharesForBusiness()
     }
     
     // Set up Collection View
