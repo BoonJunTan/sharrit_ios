@@ -10,6 +10,7 @@ import UIKit
 import FSCalendar
 import Alamofire
 import SwiftyJSON
+import DropDown
 
 class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegate, FSCalendarDelegateAppearance, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
@@ -20,9 +21,14 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
     var sharreStartTime: String!
     var sharreEndTime: String!
     
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var unitRequire: UITextField!
+    
     @IBOutlet weak var calendar: FSCalendar!
+    @IBOutlet weak var calendarView: UIView!
+    
     var timeCollection: [TimeSlot]! = [] // Operating Hours
+    var selectedTimeSlot: [Int]! = []
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var timeSlotView: UIView!
     @IBOutlet weak var timeSlotHeight: NSLayoutConstraint!
     
@@ -45,9 +51,11 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
         
         title = sharreTitle
         
-        // The check is depends on if the Sharre is Time-usage based or Appointment based
-        // If Time-usage then there is no calendar, else there is
+        unitRequire.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        
         setUpCalendar()
+        collectionView.allowsMultipleSelection = true
+        calendarView.isHidden = true
         timeSlotView.isHidden = true
         costView.isHidden = true
     }
@@ -55,6 +63,18 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func textFieldDidChange(_ textField: UITextField) {
+        if !(textField.text?.isEmpty)! {
+            if appointmentType == .DayAppointment {
+                getAvailableSlot()
+            } else {
+                calendarView.isHidden = false
+            }
+        } else {
+            calendarView.isHidden = true
+        }
     }
     
     // Setup Calendar - For Appointment Based
@@ -74,7 +94,6 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
         if appointmentType == .HrAppointment {
             getAvailableSlot()
         } else {
-            self.view.layoutIfNeeded()
             costView.isHidden = false
         }
     }
@@ -93,6 +112,7 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
         
         timeCell.tickImage.isHidden = true
         timeCell.timeLabel.text = FormatDate().generateTimeHrMin(rangeStart: timeCollection[indexPath.item].timeStart, rangeEnd: timeCollection[indexPath.item].timeEnd)
+        timeCell.unitLabel.text = "(" + String(describing: timeCollection[indexPath.item].quantity) + ") left"
         
         return timeCell
     }
@@ -127,10 +147,47 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        costView.isHidden = false
-        
-        let timeCell = collectionView.cellForItem(at: indexPath) as! TimeCollectionViewCell
-        timeCell.tickImage.isHidden = !timeCell.tickImage.isHidden
+        if !selectedTimeSlot.isEmpty {
+            if selectedTimeSlot.contains(indexPath.item-1) || selectedTimeSlot.contains(indexPath.item+1) {
+                selectedTimeSlot.append(indexPath.item)
+                let timeCell = collectionView.cellForItem(at: indexPath) as! TimeCollectionViewCell
+                timeCell.tickImage.isHidden = !timeCell.tickImage.isHidden
+                
+                costView.isHidden = false
+            } else {
+                let alert = UIAlertController(title: "Error Occured!", message: "You must select consecutive time-slot", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Back", style: .cancel, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+        } else {
+            selectedTimeSlot.append(indexPath.item)
+            let timeCell = collectionView.cellForItem(at: indexPath) as! TimeCollectionViewCell
+            timeCell.tickImage.isHidden = !timeCell.tickImage.isHidden
+            
+            costView.isHidden = false
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,didDeselectItemAt indexPath: IndexPath) {
+        if selectedTimeSlot.count != 1 {
+            if selectedTimeSlot.contains(indexPath.item-1) && selectedTimeSlot.contains(indexPath.item+1) {
+                let alert = UIAlertController(title: "Error Occured!", message: "You cannot remove a center time-slot", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Back", style: .cancel, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            } else {
+                if let index = selectedTimeSlot.index(of: indexPath.item) {
+                    selectedTimeSlot.remove(at: index)
+                    let timeCell = collectionView.cellForItem(at: indexPath) as! TimeCollectionViewCell
+                    timeCell.tickImage.isHidden = !timeCell.tickImage.isHidden
+                }
+            }
+        } else {
+            if let index = selectedTimeSlot.index(of: indexPath.item) {
+                selectedTimeSlot.remove(at: index)
+                let timeCell = collectionView.cellForItem(at: indexPath) as! TimeCollectionViewCell
+                timeCell.tickImage.isHidden = !timeCell.tickImage.isHidden
+            }
+        }
     }
     
     func getAvailableSlot() {
@@ -167,6 +224,10 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
         }
     }
 
+    @IBAction func bookBtnPressed(_ sender: SharritButton) {
+        
+    }
+    
     /*
     // MARK: - Navigation
 

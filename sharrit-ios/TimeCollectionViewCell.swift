@@ -11,4 +11,5 @@ import UIKit
 class TimeCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var tickImage: UIImageView!
+    @IBOutlet weak var unitLabel: UILabel!
 }
