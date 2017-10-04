@@ -8,6 +8,8 @@
 
 import UIKit
 import FSCalendar
+import Alamofire
+import SwiftyJSON
 
 class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegate, FSCalendarDelegateAppearance, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
@@ -15,14 +17,18 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
     var sharreID: Int!
     var sharreTitle: String!
     var appointmentType: SharresType!
+    var sharreStartTime: String!
+    var sharreEndTime: String!
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var calendar: FSCalendar!
-    var timeCollection: [String]! = [] // Operating Hours
+    var timeCollection: [TimeSlot]! = [] // Operating Hours
     @IBOutlet weak var timeSlotView: UIView!
     @IBOutlet weak var timeSlotHeight: NSLayoutConstraint!
     
     @IBOutlet weak var costView: UIView!
+    
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     fileprivate let formatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -66,9 +72,8 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         print("Did select date \(self.formatter.string(from: date))")
         if appointmentType == .HrAppointment {
-            timeSlotView.isHidden = false 
+            getAvailableSlot()
         } else {
-            timeSlotHeight.constant = 0
             self.view.layoutIfNeeded()
             costView.isHidden = false
         }
@@ -80,14 +85,15 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
     
     // MARK: - Setup Collection View
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 7//timeCollection.count
+        return timeCollection.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let timeCell = collectionView.dequeueReusableCell(withReuseIdentifier: "timeCell", for: indexPath as IndexPath) as! TimeCollectionViewCell
         
         timeCell.tickImage.isHidden = true
-        //timeCell.timeLabel = "
+        timeCell.timeLabel.text = FormatDate().generateTimeHrMin(rangeStart: timeCollection[indexPath.item].timeStart, rangeEnd: timeCollection[indexPath.item].timeEnd)
+        
         return timeCell
     }
     
@@ -125,6 +131,40 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
         
         let timeCell = collectionView.cellForItem(at: indexPath) as! TimeCollectionViewCell
         timeCell.tickImage.isHidden = !timeCell.tickImage.isHidden
+    }
+    
+    func getAvailableSlot() {
+        let url = SharritURL.devURL + "sharre/avail/schedule/" + String(describing: sharreID!)
+        
+        let timestamp = NSDate().timeIntervalSince1970
+        
+        let filterData: [String: Any] = ["timeStart": timestamp]
+        
+        Alamofire.request(url, method: .post, parameters: filterData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+            response in
+            switch response.result {
+            case .success(_):
+                if let data = response.result.value {
+                    if self.appointmentType == .HrAppointment {
+                        self.timeCollection = []
+                        for (_, subJson) in JSON(data)["content"] {
+                            let rangeStart = subJson["rangeStart"].description
+                            let rangeEnd = subJson["rangeEnd"].description
+                            let quantity = subJson["qty"].int!
+                            let timeSlot = TimeSlot(timeStart: rangeStart, timeEnd: rangeEnd, quantity: quantity)
+                            
+                            self.timeCollection.append(timeSlot)
+                        }
+                        self.timeSlotView.isHidden = false
+                        self.collectionView.reloadData()
+                    }
+                }
+                break
+            case .failure(_):
+                print("Get Time Slot Info API failed")
+                break
+            }
+        }
     }
 
     /*

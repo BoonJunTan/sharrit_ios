@@ -13,10 +13,10 @@ target 'sharrit-ios' do
   pod 'ImageSlideshow'
   pod 'SwiftyJSON'
   pod 'CountryPickerSwift'
-  pod 'MFCard'
   pod 'FSCalendar'
   pod 'Stripe'
   pod 'CardIO'
   pod 'SVProgressHUD'
+  pod 'DropDown'
 
 end

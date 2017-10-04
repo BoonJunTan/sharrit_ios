@@ -43,6 +43,8 @@
 		277764601F6A5D2D0023CDCA /* ConversationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2777645F1F6A5D2D0023CDCA /* ConversationVC.swift */; };
 		277DD7191F72238C005B7752 /* SharesInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277DD7181F72238C005B7752 /* SharesInfoVC.swift */; };
 		277DD71B1F723F3F005B7752 /* SharritURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277DD71A1F723F3F005B7752 /* SharritURL.swift */; };
+		2786DD621F84C20300E4D7D6 /* TimeSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2786DD611F84C20300E4D7D6 /* TimeSlot.swift */; };
+		2786DD641F84C40600E4D7D6 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2786DD631F84C40600E4D7D6 /* Time.swift */; };
 		279497CA1F7DED8B00522999 /* SharreTimeUsageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279497C91F7DED8B00522999 /* SharreTimeUsageVC.swift */; };
 		279497CC1F7E258F00522999 /* TimeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279497CB1F7E258F00522999 /* TimeCollectionViewCell.swift */; };
 		27ABAE811F670D81007F6CDB /* LoginAndSignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27ABAE801F670D81007F6CDB /* LoginAndSignUp.storyboard */; };
@@ -120,6 +122,8 @@
 		2777645F1F6A5D2D0023CDCA /* ConversationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationVC.swift; sourceTree = "<group>"; };
 		277DD7181F72238C005B7752 /* SharesInfoVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharesInfoVC.swift; sourceTree = "<group>"; };
 		277DD71A1F723F3F005B7752 /* SharritURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharritURL.swift; sourceTree = "<group>"; };
+		2786DD611F84C20300E4D7D6 /* TimeSlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSlot.swift; sourceTree = "<group>"; };
+		2786DD631F84C40600E4D7D6 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		279497C91F7DED8B00522999 /* SharreTimeUsageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharreTimeUsageVC.swift; sourceTree = "<group>"; };
 		279497CB1F7E258F00522999 /* TimeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCollectionViewCell.swift; sourceTree = "<group>"; };
 		27ABAE801F670D81007F6CDB /* LoginAndSignUp.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LoginAndSignUp.storyboard; sourceTree = "<group>"; };
@@ -187,6 +191,7 @@
 				276D1B8F1F7BA25700A3EAF3 /* Shares.swift */,
 				2770E2BD1F83D9FF00199B61 /* Transaction.swift */,
 				27C0B03F1F6BDBC4009E69CA /* User.swift */,
+				2786DD611F84C20300E4D7D6 /* TimeSlot.swift */,
 			);
 			name = Entity;
 			sourceTree = "<group>";
@@ -253,6 +258,7 @@
 				275E00701F80C8E5005E6010 /* FormatDate.swift */,
 				27BFFC271F8275F6009FF404 /* ImageResize.swift */,
 				2770E2BF1F83FA2E00199B61 /* DecimalConverter.swift */,
+				2786DD631F84C40600E4D7D6 /* Time.swift */,
 			);
 			name = General;
 			sourceTree = "<group>";
@@ -619,6 +625,7 @@
 				27C114841F717B5900CD9FB9 /* SharesCollectionVC.swift in Sources */,
 				275E00711F80C8E5005E6010 /* FormatDate.swift in Sources */,
 				277764601F6A5D2D0023CDCA /* ConversationVC.swift in Sources */,
+				2786DD621F84C20300E4D7D6 /* TimeSlot.swift in Sources */,
 				276D1B8A1F7B8A0500A3EAF3 /* ReviewTableViewCell.swift in Sources */,
 				276D1B861F7B89A400A3EAF3 /* DescriptionTableViewCell.swift in Sources */,
 				275FA0E61F7A5E9D008EF252 /* ImageDownloader.swift in Sources */,
@@ -639,6 +646,7 @@
 				27FCB7D61F67753F008E973C /* HomeVC.swift in Sources */,
 				27C0B0401F6BDBC4009E69CA /* User.swift in Sources */,
 				27FCB7F01F679857008E973C /* SharritButton.swift in Sources */,
+				2786DD641F84C40600E4D7D6 /* Time.swift in Sources */,
 				275C05071F7BE7AF00E78E06 /* SharesInfoTableViewCell.swift in Sources */,
 				27C114881F718CCE00CD9FB9 /* SharesCollectionViewCell.swift in Sources */,
 				27C114861F718C9100CD9FB9 /* TabCollectionViewCell.swift in Sources */,

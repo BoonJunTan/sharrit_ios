@@ -261,6 +261,8 @@ class ViewSharreVC: UIViewController {
                 sharreBookingVC.sharreID = sharreID
                 sharreBookingVC.sharreTitle = sharreTitle.text!
                 sharreBookingVC.appointmentType = sharreTypeData
+                sharreBookingVC.sharreStartTime = sharreStartTime.text!
+                sharreBookingVC.sharreEndTime = sharreEndTime.text!
             }
         } else if segue.identifier == "timeAppointment" {
             if let sharreTimeUsageVC = segue.destination as? SharreTimeUsageVC {
