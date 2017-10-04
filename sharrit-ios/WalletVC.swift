@@ -13,11 +13,14 @@ import SwiftyJSON
 class WalletVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var walletView: UIView!
-    @IBOutlet weak var walletAmtLabel: UILabel!
+    @IBOutlet weak var walletAmt: UILabel!
     
     var btnIcon = [#imageLiteral(resourceName: "transaction"),#imageLiteral(resourceName: "deposit"),#imageLiteral(resourceName: "smart_card"), #imageLiteral(resourceName: "withdrawl")]
     var btnLabel = ["History", "Top Up", "Smart Card", "Cash Out"]
+    
     @IBOutlet weak var btnCollectionView: UICollectionView!
+    
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +36,29 @@ class WalletVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        let url = SharritURL.devURL + "wallet/user/" + String(describing: appDelegate.user!.userID)
+        
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+            response in
+            switch response.result {
+            case .success(_):
+                if let data = response.result.value {
+                    let json = JSON(data)
+                    var amount = json["content"]["amount"].description
+                    if amount.characters.count > 2 {
+                        amount.insert(".", at: (amount.index((amount.endIndex), offsetBy: -2)))
+                    } else {
+                        amount = amount + ".00"
+                    }
+                    self.walletAmt.text = amount
+                }
+                break
+            case .failure(_):
+                print("Retrieve Wallet API failed")
+                break
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -75,7 +101,6 @@ class WalletVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch btnLabel[indexPath.item] {
-        // Must TODO : 2nd System Release
         case "Top Up", "Cash Out":
             performSegue(withIdentifier: "walletTopUp", sender: btnLabel[indexPath.item])
             break

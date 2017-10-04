@@ -14,20 +14,22 @@ class TopUpTransactionVC: UIViewController {
     @IBOutlet weak var topUpAmount: UILabel!
     @IBOutlet weak var transactionLabel: UILabel!
     
-    var walletManagement: WalletManagement! {
-        didSet {
-            if walletManagement == .TopUp {
-                title = "Top Up Transactipn"
-                transactionLabel.text = "Top Up Successfully. Cheers!"
-            } else {
-                title = "Cash Out Transaction"
-                transactionLabel.text = "Cash Out Successfully. Cheers!"
-            }
-        }
-    }
+    var walletManagement: WalletManagement!
+    var amount: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        topUpAmount.text = "$" + amount
+        
+        if walletManagement == .TopUp {
+            title = "Top Up Transactipn"
+            transactionLabel.text = "Top Up Successfully. Cheers!"
+        } else {
+            title = "Cash Out Transaction"
+            transactionLabel.text = "Cash Out Successfully. Cheers!"
+        }
+        
         let when = DispatchTime.now() + 4
         DispatchQueue.main.asyncAfter(deadline: when) {
             let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]

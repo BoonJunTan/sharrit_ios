@@ -667,7 +667,7 @@ Cheers!</string>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fmc-xD-ovx" userLabel="Completed Btn" customClass="SharritButton" customModule="sharrit_ios" customModuleProvider="target">
                                         <rect key="frame" x="250" y="0.0" width="125" height="33.5"/>
-                                        <state key="normal" title="HISTORY"/>
+                                        <state key="normal" title="COMPLETED"/>
                                         <connections>
                                             <action selector="historyBtnPressed:" destination="XZx-pB-VQa" eventType="touchUpInside" id="ZS4-sy-F2k"/>
                                         </connections>
@@ -1028,10 +1028,10 @@ Cheers!</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vpU-Ft-f6k">
-                                <rect key="frame" x="0.0" y="104" width="375" height="514"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n1a-Vs-HY7">
-                                        <rect key="frame" x="56.5" y="205.5" width="262.5" height="103"/>
+                                        <rect key="frame" x="56.5" y="221.5" width="262.5" height="111"/>
                                         <string key="text">Your account password have been successfully updated. 
 Cheers!</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
