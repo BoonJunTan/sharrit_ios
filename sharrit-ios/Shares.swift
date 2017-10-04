@@ -8,6 +8,12 @@
 
 import Foundation
 
+enum SharresType {
+    case HrAppointment
+    case DayAppointment
+    case TimeUsage
+}
+
 class Shares {
     var sharreId: Int
     var name: String
@@ -45,6 +51,18 @@ class Shares {
         self.ownerType = ownerType
         self.ownerId = ownerId
         self.isActive = isActive
+    }
+    
+    func getSharresType() -> SharresType {
+        if type == 0 {
+            if unit == 0 {
+                return .HrAppointment
+            } else {
+                return .DayAppointment
+            }
+        } else {
+            return .TimeUsage
+        }
     }
     
 }

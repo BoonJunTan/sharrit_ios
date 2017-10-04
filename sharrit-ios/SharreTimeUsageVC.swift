@@ -10,6 +10,9 @@ import UIKit
 
 class SharreTimeUsageVC: UIViewController {
 
+    // Pass Over Data
+    var sharreID: Int!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

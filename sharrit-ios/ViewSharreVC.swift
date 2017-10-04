@@ -34,6 +34,8 @@ class ViewSharreVC: UIViewController {
     @IBOutlet weak var chatSharreStackView: UIStackView!
     @IBOutlet weak var sharreItBtn: SharritButton!
     
+    var sharreTypeData: SharresType!
+    
     var sharreStatusBool: Bool!
     var photoArraySource = [ImageSource]()
     
@@ -46,7 +48,7 @@ class ViewSharreVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-     getSharesInfo()
+        getSharesInfo()
     }
     
     func getSharesInfo() {
@@ -98,12 +100,15 @@ class ViewSharreVC: UIViewController {
                         if json["content"]["unit"].int! == 0 {
                             self.sharreType.text = "Appointment Based - 30 mins Interval"
                             self.sharreCharging.text = "Pay/hr: $" + String(describing: json["content"]["price"].int!)
+                            self.sharreTypeData = .HrAppointment
                         } else {
                             self.sharreCharging.text = "Pay/day: $" + String(describing: json["content"]["price"].int!)
                             self.sharreType.text = "Appointment Based - Daily"
+                            self.sharreTypeData = .DayAppointment
                         }
                     } else {
                         self.sharreType.text = "Time-Usage Based"
+                        self.sharreTypeData = .TimeUsage
                     }
                     
                     self.sharreStartTime.text = "Start Time: " + json["content"]["activeStart"].string!
@@ -174,9 +179,11 @@ class ViewSharreVC: UIViewController {
     }
     
     @IBAction func sharreITBtnPressed(_ sender: SharritButton) {
-        // Check Appointment or Time-usage based
-        performSegue(withIdentifier: "viewAppointment", sender: nil)
-        //performSegue(withIdentifier: "viewTimeUsage", sender: nil)
+        if sharreTypeData == .TimeUsage {
+            performSegue(withIdentifier: "viewTimeUsage", sender: nil)
+        } else {
+            performSegue(withIdentifier: "viewAppointment", sender: nil)
+        }
     }
     
     // Deactivate Sharre
@@ -248,6 +255,14 @@ class ViewSharreVC: UIViewController {
         if segue.identifier == "editSharre" {
             if let editSharreVC = segue.destination as? EditSharreVC {
                 editSharreVC.sharreId = sharreID
+            }
+        } else if segue.identifier == "viewAppointment" {
+            if let sharreBookingVC = segue.destination as? SharreBookingVC {
+                sharreBookingVC.sharreID = sharreID
+            }
+        } else if segue.identifier == "timeAppointment" {
+            if let sharreTimeUsageVC = segue.destination as? SharreTimeUsageVC {
+                sharreTimeUsageVC.sharreID = sharreID
             }
         }
     }

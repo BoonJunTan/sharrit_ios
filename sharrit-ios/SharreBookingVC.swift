@@ -11,6 +11,9 @@ import FSCalendar
 
 class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegate, FSCalendarDelegateAppearance, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
+    // Pass Over Data
+    var sharreID: Int!
+    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var calendar: FSCalendar!
     var timeCollection: [String]! = [] // Operating Hours
