@@ -262,6 +262,7 @@
 			children = (
 				27DA99561F7D4894006E415C /* SharreBookingVC.swift */,
 				279497C91F7DED8B00522999 /* SharreTimeUsageVC.swift */,
+				279497CB1F7E258F00522999 /* TimeCollectionViewCell.swift */,
 			);
 			name = "Book Sharre";
 			sourceTree = "<group>";
@@ -289,7 +290,6 @@
 				27C114831F717B5800CD9FB9 /* SharesCollectionVC.swift */,
 				27C114851F718C9100CD9FB9 /* TabCollectionViewCell.swift */,
 				27C114871F718CCE00CD9FB9 /* SharesCollectionViewCell.swift */,
-				279497CB1F7E258F00522999 /* TimeCollectionViewCell.swift */,
 			);
 			name = "Business (Category)";
 			sourceTree = "<group>";

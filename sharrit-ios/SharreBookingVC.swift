@@ -13,10 +13,16 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
 
     // Pass Over Data
     var sharreID: Int!
+    var sharreTitle: String!
+    var appointmentType: SharresType!
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var calendar: FSCalendar!
     var timeCollection: [String]! = [] // Operating Hours
+    @IBOutlet weak var timeSlotView: UIView!
+    @IBOutlet weak var timeSlotHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var costView: UIView!
     
     fileprivate let formatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -31,9 +37,13 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        title = sharreTitle
+        
         // The check is depends on if the Sharre is Time-usage based or Appointment based
         // If Time-usage then there is no calendar, else there is
         setUpCalendar()
+        timeSlotView.isHidden = true
+        costView.isHidden = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,14 +53,25 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
     
     // Setup Calendar - For Appointment Based
     func setUpCalendar() {
-        // If by Day Appointment, else both false
-        calendar.swipeToChooseGesture.isEnabled = true // Swipe-To-Choose
-        calendar.allowsMultipleSelection = false
+        if appointmentType == .DayAppointment {
+            calendar.swipeToChooseGesture.isEnabled = true
+            calendar.allowsMultipleSelection = true
+        } else {
+            calendar.swipeToChooseGesture.isEnabled = false
+            calendar.allowsMultipleSelection = false
+        }
     }
     
     // FSCalendar Delegate Method
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         print("Did select date \(self.formatter.string(from: date))")
+        if appointmentType == .HrAppointment {
+            timeSlotView.isHidden = false 
+        } else {
+            timeSlotHeight.constant = 0
+            self.view.layoutIfNeeded()
+            costView.isHidden = false
+        }
     }
     
     func calendar(_ calendar: FSCalendar, didDeselect date: Date) {
@@ -59,20 +80,22 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
     
     // MARK: - Setup Collection View
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5//timeCollection.count
+        return 7//timeCollection.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let timeCell = collectionView.dequeueReusableCell(withReuseIdentifier: "timeCell", for: indexPath as IndexPath) as! TimeCollectionViewCell
         
+        timeCell.tickImage.isHidden = true
+        //timeCell.timeLabel = "
         return timeCell
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.layer.frame.width/3,
-                      height: collectionView.layer.frame.height/2)
+        return CGSize(width: collectionView.layer.frame.width/3 - 10,
+                      height: collectionView.layer.frame.height/3 - 5)
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -89,7 +112,7 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
-        let totalCellWidth = collectionView.layer.frame.width/2 * 2 - 10
+        let totalCellWidth = collectionView.layer.frame.width - 5
         
         let leftInset = (collectionView.layer.frame.width - CGFloat(totalCellWidth)) / 2
         let rightInset = leftInset
@@ -98,7 +121,10 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // performSegue(withIdentifier: "viewSharesInfo", sender: sharesCollection[indexPath.item])
+        costView.isHidden = false
+        
+        let timeCell = collectionView.cellForItem(at: indexPath) as! TimeCollectionViewCell
+        timeCell.tickImage.isHidden = !timeCell.tickImage.isHidden
     }
 
     /*

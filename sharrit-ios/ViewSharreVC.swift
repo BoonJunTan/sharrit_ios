@@ -259,10 +259,13 @@ class ViewSharreVC: UIViewController {
         } else if segue.identifier == "viewAppointment" {
             if let sharreBookingVC = segue.destination as? SharreBookingVC {
                 sharreBookingVC.sharreID = sharreID
+                sharreBookingVC.sharreTitle = sharreTitle.text!
+                sharreBookingVC.appointmentType = sharreTypeData
             }
         } else if segue.identifier == "timeAppointment" {
             if let sharreTimeUsageVC = segue.destination as? SharreTimeUsageVC {
                 sharreTimeUsageVC.sharreID = sharreID
+                sharreTimeUsageVC.sharreTitle = sharreTitle.text!
             }
         }
     }

@@ -12,11 +12,14 @@ class SharreTimeUsageVC: UIViewController {
 
     // Pass Over Data
     var sharreID: Int!
+    var sharreTitle: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        title = sharreTitle
     }
 
     override func didReceiveMemoryWarning() {
