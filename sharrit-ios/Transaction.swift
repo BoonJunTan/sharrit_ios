@@ -39,6 +39,7 @@ class Transaction {
     var sharreId: Int?
     var qty: Int
     var deposit: Double
+    var sharreName: String?
     
     init(transactionId: Int, dateCreated: String, payeeId: Int, payeeType: Int, payerId: Int, payerType: Int, amount: Int, promoId: Int, timeStart: String, timeEnd: String, status: Int, qty: Int, deposit: Double) {
         self.transactionId = transactionId

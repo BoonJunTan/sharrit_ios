@@ -42,6 +42,7 @@
 		2777645E1F6A594A0023CDCA /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2777645D1F6A594A0023CDCA /* MessageTableViewCell.swift */; };
 		277764601F6A5D2D0023CDCA /* ConversationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2777645F1F6A5D2D0023CDCA /* ConversationVC.swift */; };
 		277CAA641F86324500F1FF6E /* SuccessfulBookingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277CAA631F86324500F1FF6E /* SuccessfulBookingVC.swift */; };
+		277CAA661F8673CF00F1FF6E /* DateSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277CAA651F8673CF00F1FF6E /* DateSlot.swift */; };
 		277DD7191F72238C005B7752 /* SharesInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277DD7181F72238C005B7752 /* SharesInfoVC.swift */; };
 		277DD71B1F723F3F005B7752 /* SharritURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277DD71A1F723F3F005B7752 /* SharritURL.swift */; };
 		2786DD621F84C20300E4D7D6 /* TimeSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2786DD611F84C20300E4D7D6 /* TimeSlot.swift */; };
@@ -122,6 +123,7 @@
 		2777645D1F6A594A0023CDCA /* MessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		2777645F1F6A5D2D0023CDCA /* ConversationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationVC.swift; sourceTree = "<group>"; };
 		277CAA631F86324500F1FF6E /* SuccessfulBookingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessfulBookingVC.swift; sourceTree = "<group>"; };
+		277CAA651F8673CF00F1FF6E /* DateSlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSlot.swift; sourceTree = "<group>"; };
 		277DD7181F72238C005B7752 /* SharesInfoVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharesInfoVC.swift; sourceTree = "<group>"; };
 		277DD71A1F723F3F005B7752 /* SharritURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharritURL.swift; sourceTree = "<group>"; };
 		2786DD611F84C20300E4D7D6 /* TimeSlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSlot.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				2770E2BD1F83D9FF00199B61 /* Transaction.swift */,
 				27C0B03F1F6BDBC4009E69CA /* User.swift */,
 				2786DD611F84C20300E4D7D6 /* TimeSlot.swift */,
+				277CAA651F8673CF00F1FF6E /* DateSlot.swift */,
 			);
 			name = Entity;
 			sourceTree = "<group>";
@@ -649,6 +652,7 @@
 				272508C81F7BAE9500A93BE3 /* ShowSBVC.swift in Sources */,
 				276D1B8E1F7BA11800A3EAF3 /* SharesInfoCollectionViewCell.swift in Sources */,
 				27FCB7E71F677AB3008E973C /* LoginVC.swift in Sources */,
+				277CAA661F8673CF00F1FF6E /* DateSlot.swift in Sources */,
 				27FCB7D61F67753F008E973C /* HomeVC.swift in Sources */,
 				27C0B0401F6BDBC4009E69CA /* User.swift in Sources */,
 				27FCB7F01F679857008E973C /* SharritButton.swift in Sources */,

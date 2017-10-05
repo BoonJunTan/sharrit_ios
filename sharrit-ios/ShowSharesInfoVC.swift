@@ -58,7 +58,7 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "sharesInfoCell") as! SharesInfoTableViewCell
         
-        cell.sharesTitle.text = String(describing: tableViewItems[indexPath.row].transactionId)
+        cell.sharesTitle.text = String(describing: tableViewItems[indexPath.row].sharreName!)
         cell.sharesDeposit.text = "Deposit: $" + DecimalConverter().convertIntWithString(amount: String(describing: tableViewItems[indexPath.row].deposit))
         cell.sharesUsage.text = "Usage: $" + DecimalConverter().convertIntWithString(amount: String(describing: tableViewItems[indexPath.row].amount))
         cell.sharesDate.text = "Duration: " + FormatDate().compareTwoDays(dateStart: tableViewItems[indexPath.row].timeStart, dateEnd: tableViewItems[indexPath.row].timeEnd)
@@ -179,6 +179,8 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                         if let sharreId = subJson["sharreId"].int {
                             transaction.sharreId = sharreId
                         }
+                        
+                        transaction.sharreName = subJson["name"].description
                         
                         self.tableViewItems.append(transaction)
                     }

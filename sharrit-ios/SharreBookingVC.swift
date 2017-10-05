@@ -27,6 +27,10 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var calendarView: UIView!
     var dateSelected: String!
+    var dateCollection: [DateSlot]! = [] // Operating Date
+    var currentSelectedMonth = Date()
+    var selectedDateSlot: [Int]! = []
+    var selectedDateSlotObject: [Date]! = []
     
     var timeCollection: [TimeSlot]! = [] // Operating Hours
     var selectedTimeSlot: [Int]! = []
@@ -87,15 +91,6 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
     
     // Setup Calendar - For Appointment Based
     func setUpCalendar() {
-        /*
-        let dates = [
-            self.gregorian.date(byAdding: .day, value: -1, to: Date()),
-            Date(),
-            self.gregorian.date(byAdding: .day, value: 1, to: Date())
-        ]
-        dates.forEach { (date) in
-            self.calendar.select(date, scrollToDate: false)
-        }*/
         if appointmentType == .DayAppointment {
             calendar.swipeToChooseGesture.isEnabled = true
             calendar.allowsMultipleSelection = true
@@ -121,6 +116,68 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
         if date < ytd! {
             return false
         }
+        
+        // Additional for Day Appointment
+        if appointmentType == .DayAppointment {
+            let calendar = Calendar.current
+            let correctDate = calendar.date(byAdding: .hour, value: 8, to: date)
+            for dateObject in dateCollection {
+                if Calendar.current.isDate(correctDate!, inSameDayAs: FormatDate().formatDateTimeToLocal2(date: dateObject.dateStart)) {
+                    if dateObject.quantity < Int(unitRequire.text!)! {
+                        return false
+                    }
+                }
+            }
+            
+            if !selectedDateSlotObject.isEmpty {
+                for currentDate in selectedDateSlotObject {
+                    let date1 = calendar.startOfDay(for: currentDate)
+                    let date2 = calendar.startOfDay(for: date)
+                    
+                    let components = calendar.dateComponents([.day], from: date1, to: date2)
+                    let components2 = calendar.dateComponents([.day], from: date2, to: date1)
+                    
+                    if components.day == 1 || components2.day == 1 {
+                        selectedDateSlotObject.append(date)
+                        return true
+                    }
+                }
+                
+                let alert = UIAlertController(title: "Error Occured!", message: "You must select consecutive time-slot", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Back", style: .cancel, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                return false
+            } else {
+                selectedDateSlotObject.append(date)
+            }
+            getTotalCost()
+        }
+        return true
+    }
+    
+    func calendar(_ calendar: FSCalendar, shouldDeselect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool {
+        if appointmentType == .DayAppointment {
+            if selectedDateSlotObject.count != 1 {
+                let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: date)
+                let dayBefore = Calendar.current.date(byAdding: .day, value: -1, to: date)
+                
+                if selectedDateSlotObject.contains(tomorrow!) && selectedDateSlotObject.contains(dayBefore!) {
+                    let alert = UIAlertController(title: "Error Occured!", message: "You cannot remove a center time-slot", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Back", style: .cancel, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                    return false
+                }
+                
+                if let index = selectedDateSlotObject.index(of: date) {
+                    selectedDateSlotObject.remove(at: index)
+                }
+            } else {
+                if let index = selectedDateSlotObject.index(of: date) {
+                    selectedDateSlotObject.remove(at: index)
+                }
+            }
+            getTotalCost()
+        }
         return true
     }
     
@@ -133,11 +190,31 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
         if date < ytd! {
             return UIColor.lightGray
         }
+        
+        // Additional for Day Appointment
+        if appointmentType == .DayAppointment {
+            let calendar = Calendar.current
+            let correctDate = calendar.date(byAdding: .hour, value: 8, to: date)
+            for dateObject in dateCollection {
+                if Calendar.current.isDate(correctDate!, inSameDayAs: FormatDate().formatDateTimeToLocal2(date: dateObject.dateStart)) {
+                    if dateObject.quantity < Int(unitRequire.text!)! {
+                        return UIColor.lightGray
+                    }
+                }
+            }
+        }
         return UIColor.black
     }
     
     func calendar(_ calendar: FSCalendar, didDeselect date: Date) {
         print("Did deselect date \(self.formatter.string(from: date))")
+    }
+    
+    func calendarCurrentMonthDidChange(_ calendar: FSCalendar) {
+        let calendarType = Calendar.current
+        let correctMonth = calendarType.date(byAdding: .hour, value: 8, to: calendar.currentPage)
+        currentSelectedMonth = correctMonth!
+        getAvailableSlot()
     }
     
     // MARK: - Setup Collection View
@@ -258,9 +335,14 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
         
         let url = SharritURL.devURL + "sharre/avail/schedule/" + String(describing: sharreID!)
         
-        let timestamp = FormatDate().formatDateTimeToLocal(date: dateSelected).timeIntervalSince1970
-        
-        let filterData: [String: Any] = ["timeStart": timestamp]
+        var filterData: [String: Any] = [:]
+        if appointmentType == .HrAppointment {
+            let timestamp = FormatDate().formatDateTimeToLocal(date: dateSelected).timeIntervalSince1970
+            filterData["timeStart"] = timestamp
+        } else {
+            let timestamp = currentSelectedMonth.timeIntervalSince1970
+            filterData["timeStart"] = timestamp
+        }
         
         Alamofire.request(url, method: .post, parameters: filterData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in
@@ -281,6 +363,18 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
                         }
                         self.timeSlotView.isHidden = false
                         self.collectionView.reloadData()
+                    } else {
+                        self.dateCollection = []
+                        for (_, subJson) in JSON(data)["content"] {
+                            let rangeStart = subJson["rangeStart"].description
+                            let quantity = subJson["qty"].int!
+                            let dateSlot = DateSlot(dateStart: rangeStart, quantity: quantity)
+                            
+                            self.dateCollection.append(dateSlot)
+                            
+                        }
+                        self.calendarView.isHidden = false
+                        self.calendar.reloadData()
                     }
                 }
                 break
@@ -292,7 +386,7 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
     }
     
     func getTotalCost() {
-        if selectedTimeSlot.isEmpty {
+        if (selectedTimeSlot.isEmpty && appointmentType == .HrAppointment) || (selectedDateSlotObject.isEmpty && appointmentType == .DayAppointment) {
             deposit.text = "Deposit: $" + sharreDeposit
             usage.text = "Usage: $0"
             total.text = "Total: $" + sharreDeposit
@@ -301,10 +395,18 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
         } else {
             let url = SharritURL.devURL + "transaction/pricing/" + String(describing: sharreID!)
             
-            selectedTimeSlot.sort {$0 < $1}
+            let timeStart:Double
+            let timeEnd:Double
             
-            let timeStart = FormatDate().formatDateTimeToLocal2(date: selectedTimeSlotObject[0].timeStart).timeIntervalSince1970
-            let timeEnd = FormatDate().formatDateTimeToLocal2(date: selectedTimeSlotObject[selectedTimeSlotObject.count - 1].timeEnd).timeIntervalSince1970
+            if appointmentType == .HrAppointment {
+                selectedTimeSlot.sort {$0 < $1}
+                
+                timeStart = FormatDate().formatDateTimeToLocal2(date: selectedTimeSlotObject[0].timeStart).timeIntervalSince1970
+                timeEnd = FormatDate().formatDateTimeToLocal2(date: selectedTimeSlotObject[selectedTimeSlotObject.count - 1].timeEnd).timeIntervalSince1970
+            } else {
+                timeStart = selectedDateSlotObject[0].timeIntervalSince1970
+                timeEnd = selectedDateSlotObject[selectedDateSlotObject.count - 1].timeIntervalSince1970
+            }
             
             let filterData: [String: Any] = ["qty": unitRequire.text!, "timeStart": timeStart, "timeEnd": timeEnd]
             
@@ -331,8 +433,8 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
     }
 
     @IBAction func bookBtnPressed(_ sender: SharritButton) {
-        var totalCost = total.text!.replacingOccurrences(of: "Total: $", with: "")
-        var depositCost = deposit.text!.replacingOccurrences(of: "Deposit: $", with: "")
+        let totalCost = total.text!.replacingOccurrences(of: "Total: $", with: "")
+        let depositCost = deposit.text!.replacingOccurrences(of: "Deposit: $", with: "")
         
         let url = SharritURL.devURL + "transaction/" + String(describing: sharreID!)
         
