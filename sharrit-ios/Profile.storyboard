@@ -639,7 +639,7 @@ Cheers!</string>
         <!--Show Shares InfoVC-->
         <scene sceneID="K7M-Xi-nSl">
             <objects>
-                <viewController id="XZx-pB-VQa" customClass="ShowSharesInfoVC" customModule="sharrit_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="sharresTransaction" id="XZx-pB-VQa" customClass="ShowSharesInfoVC" customModule="sharrit_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ak3-2K-8V0"/>
                         <viewControllerLayoutGuide type="bottom" id="nem-aa-Suy"/>

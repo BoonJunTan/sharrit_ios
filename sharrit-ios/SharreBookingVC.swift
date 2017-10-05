@@ -20,19 +20,26 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
     var appointmentType: SharresType!
     var sharreStartTime: String!
     var sharreEndTime: String!
+    var sharreDeposit: String!
     
     @IBOutlet weak var unitRequire: UITextField!
     
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var calendarView: UIView!
+    var dateSelected: String!
     
     var timeCollection: [TimeSlot]! = [] // Operating Hours
     var selectedTimeSlot: [Int]! = []
+    var selectedTimeSlotObject: [TimeSlot]! = []
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var timeSlotView: UIView!
     @IBOutlet weak var timeSlotHeight: NSLayoutConstraint!
     
     @IBOutlet weak var costView: UIView!
+    @IBOutlet weak var deposit: UILabel!
+    @IBOutlet weak var usage: UILabel!
+    @IBOutlet weak var total: UILabel!
+    @IBOutlet weak var bookBtn: SharritButton!
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
@@ -50,6 +57,7 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
         // Do any additional setup after loading the view.
         
         title = sharreTitle
+        deposit.text = "Deposit: $" + sharreDeposit
         
         unitRequire.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
@@ -79,6 +87,15 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
     
     // Setup Calendar - For Appointment Based
     func setUpCalendar() {
+        /*
+        let dates = [
+            self.gregorian.date(byAdding: .day, value: -1, to: Date()),
+            Date(),
+            self.gregorian.date(byAdding: .day, value: 1, to: Date())
+        ]
+        dates.forEach { (date) in
+            self.calendar.select(date, scrollToDate: false)
+        }*/
         if appointmentType == .DayAppointment {
             calendar.swipeToChooseGesture.isEnabled = true
             calendar.allowsMultipleSelection = true
@@ -90,12 +107,16 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
     
     // FSCalendar Delegate Method
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        print("Did select date \(self.formatter.string(from: date))")
+        dateSelected = formatter.string(from: date)
         if appointmentType == .HrAppointment {
             getAvailableSlot()
         } else {
             costView.isHidden = false
         }
+    }
+    
+    func calendar(_ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool {
+        return true
     }
     
     func calendar(_ calendar: FSCalendar, didDeselect date: Date) {
@@ -107,12 +128,29 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
         return timeCollection.count
     }
     
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        if timeCollection[indexPath.item].quantity < Int(unitRequire.text!)! {
+            let timeCell = collectionView.cellForItem(at: indexPath) as! TimeCollectionViewCell
+            timeCell.isUserInteractionEnabled = false
+            let alert = UIAlertController(title: "Error Occured!", message: "Not Enough Quantity", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Back", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            return false
+        }
+        return true
+    }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let timeCell = collectionView.dequeueReusableCell(withReuseIdentifier: "timeCell", for: indexPath as IndexPath) as! TimeCollectionViewCell
         
-        timeCell.tickImage.isHidden = true
         timeCell.timeLabel.text = FormatDate().generateTimeHrMin(rangeStart: timeCollection[indexPath.item].timeStart, rangeEnd: timeCollection[indexPath.item].timeEnd)
         timeCell.unitLabel.text = "(" + String(describing: timeCollection[indexPath.item].quantity) + ") left"
+        
+        if selectedTimeSlot.contains(indexPath.item) {
+            timeCell.tickImage.isHidden = false
+        } else {
+            timeCell.tickImage.isHidden = true
+        }
         
         return timeCell
     }
@@ -147,53 +185,63 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let timeCell = collectionView.cellForItem(at: indexPath) as! TimeCollectionViewCell
         if !selectedTimeSlot.isEmpty {
             if selectedTimeSlot.contains(indexPath.item-1) || selectedTimeSlot.contains(indexPath.item+1) {
                 selectedTimeSlot.append(indexPath.item)
-                let timeCell = collectionView.cellForItem(at: indexPath) as! TimeCollectionViewCell
+                selectedTimeSlotObject.append(timeCollection[indexPath.item])
                 timeCell.tickImage.isHidden = !timeCell.tickImage.isHidden
-                
-                costView.isHidden = false
             } else {
                 let alert = UIAlertController(title: "Error Occured!", message: "You must select consecutive time-slot", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Back", style: .cancel, handler: nil))
+                alert.addAction(UIAlertAction(title: "Back", style: .cancel, handler: { (_) in
+                    timeCell.isSelected = false
+                }))
                 self.present(alert, animated: true, completion: nil)
             }
         } else {
             selectedTimeSlot.append(indexPath.item)
-            let timeCell = collectionView.cellForItem(at: indexPath) as! TimeCollectionViewCell
+            selectedTimeSlotObject.append(timeCollection[indexPath.item])
             timeCell.tickImage.isHidden = !timeCell.tickImage.isHidden
-            
-            costView.isHidden = false
+            timeCell.isSelected = true
         }
+        getTotalCost()
     }
     
     func collectionView(_ collectionView: UICollectionView,didDeselectItemAt indexPath: IndexPath) {
+        let timeCell = collectionView.cellForItem(at: indexPath) as! TimeCollectionViewCell
         if selectedTimeSlot.count != 1 {
             if selectedTimeSlot.contains(indexPath.item-1) && selectedTimeSlot.contains(indexPath.item+1) {
                 let alert = UIAlertController(title: "Error Occured!", message: "You cannot remove a center time-slot", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Back", style: .cancel, handler: nil))
+                alert.addAction(UIAlertAction(title: "Back", style: .cancel, handler: { (_) in
+                    timeCell.isSelected = true
+                }))
                 self.present(alert, animated: true, completion: nil)
             } else {
                 if let index = selectedTimeSlot.index(of: indexPath.item) {
                     selectedTimeSlot.remove(at: index)
-                    let timeCell = collectionView.cellForItem(at: indexPath) as! TimeCollectionViewCell
+                    selectedTimeSlotObject.remove(at: index)
                     timeCell.tickImage.isHidden = !timeCell.tickImage.isHidden
+                    timeCell.isSelected = false
                 }
             }
         } else {
             if let index = selectedTimeSlot.index(of: indexPath.item) {
                 selectedTimeSlot.remove(at: index)
-                let timeCell = collectionView.cellForItem(at: indexPath) as! TimeCollectionViewCell
+                selectedTimeSlotObject.remove(at: index)
                 timeCell.tickImage.isHidden = !timeCell.tickImage.isHidden
+                timeCell.isSelected = false
             }
         }
+        getTotalCost()
     }
     
     func getAvailableSlot() {
+        usage.text = "Usage: $0"
+        total.text = "Total: $" + sharreDeposit
+        
         let url = SharritURL.devURL + "sharre/avail/schedule/" + String(describing: sharreID!)
         
-        let timestamp = NSDate().timeIntervalSince1970
+        let timestamp = FormatDate().formatDateTimeToLocal(date: dateSelected).timeIntervalSince1970
         
         let filterData: [String: Any] = ["timeStart": timestamp]
         
@@ -204,6 +252,8 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
                 if let data = response.result.value {
                     if self.appointmentType == .HrAppointment {
                         self.timeCollection = []
+                        self.selectedTimeSlot = []
+                        self.selectedTimeSlotObject = []
                         for (_, subJson) in JSON(data)["content"] {
                             let rangeStart = subJson["rangeStart"].description
                             let rangeEnd = subJson["rangeEnd"].description
@@ -223,9 +273,82 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
             }
         }
     }
+    
+    func getTotalCost() {
+        if selectedTimeSlot.isEmpty {
+            deposit.text = "Deposit: $" + sharreDeposit
+            usage.text = "Usage: $0"
+            total.text = "Total: $" + sharreDeposit
+            costView.isHidden = false
+            bookBtn.isEnabled = false
+        } else {
+            let url = SharritURL.devURL + "transaction/pricing/" + String(describing: sharreID!)
+            
+            selectedTimeSlot.sort {$0 < $1}
+            
+            let timeStart = FormatDate().formatDateTimeToLocal2(date: selectedTimeSlotObject[0].timeStart).timeIntervalSince1970
+            let timeEnd = FormatDate().formatDateTimeToLocal2(date: selectedTimeSlotObject[selectedTimeSlotObject.count - 1].timeEnd).timeIntervalSince1970
+            
+            let filterData: [String: Any] = ["qty": unitRequire.text!, "timeStart": timeStart, "timeEnd": timeEnd]
+            
+            Alamofire.request(url, method: .post, parameters: filterData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+                response in
+                switch response.result {
+                case .success(_):
+                    if let data = response.result.value {
+                        if self.appointmentType == .HrAppointment {
+                            for (_, subJson) in JSON(data)["content"] {
+                                self.usage.text = "Total: $" + subJson.description
+                                self.total.text = "Total: $" + String(describing: Int(self.sharreDeposit!)! + subJson.int!)
+                            }
+                        }
+                        self.costView.isHidden = false
+                    }
+                    break
+                case .failure(_):
+                    print("Get Total Cost Info API failed")
+                    break
+                }
+            }
+        }
+    }
 
     @IBAction func bookBtnPressed(_ sender: SharritButton) {
+        let totalCost = total.text!.replacingOccurrences(of: "Total: $", with: "")
+        let depositCost = deposit.text!.replacingOccurrences(of: "Deposit: $", with: "")
         
+        let url = SharritURL.devURL + "transaction/" + String(describing: sharreID!)
+        
+        selectedTimeSlot.sort {$0 < $1}
+        
+        let timeStart = FormatDate().formatDateTimeToLocal2(date: selectedTimeSlotObject[0].timeStart).timeIntervalSince1970
+        let timeEnd = FormatDate().formatDateTimeToLocal2(date: selectedTimeSlotObject[selectedTimeSlotObject.count - 1].timeEnd).timeIntervalSince1970
+        
+        let filterData: [String: Any] = ["payerId": appDelegate.user!.userID, "payerType": 0, "amount": totalCost, "deposit": depositCost, "timeStart": timeStart, "timeEnd": timeEnd, "qty": unitRequire.text!]
+        
+        Alamofire.request(url, method: .post, parameters: filterData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+            response in
+            switch response.result {
+            case .success(_):
+                if let data = response.result.value {
+                    var json = JSON(data)
+                    if json["content"]["transactionStatus"] == 1 {
+                        self.performSegue(withIdentifier: "viewSuccessful", sender: nil)
+                    } else {
+                        let alert = UIAlertController(title: "Error Occured!", message: "You do not have enough money in Wallet", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Back", style: .cancel, handler: nil))
+                        alert.addAction(UIAlertAction(title: "Wallet", style: .default, handler: { (_) in
+                            self.tabBarController?.selectedIndex = 1
+                        }))
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                }
+                break
+            case .failure(_):
+                print("Transaction Submission API failed")
+                break
+            }
+        }
     }
     
     /*

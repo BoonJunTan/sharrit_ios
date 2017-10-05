@@ -28,6 +28,20 @@ struct FormatDate {
         return formatter.string(from: endDate!, to: todayDate!)!
     }
     
+    func formatDateTimeToLocal(date: String) -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = NSTimeZone(abbreviation: "GMT+08")! as TimeZone
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return dateFormatter.date(from: date + " 08:00:00")!
+    }
+    
+    func formatDateTimeToLocal2(date: String) -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = NSTimeZone(abbreviation: "GMT+08")! as TimeZone
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        return dateFormatter.date(from: date)!
+    }
+    
     func generateTimeHrMin(rangeStart: String, rangeEnd:String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"

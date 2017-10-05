@@ -13,6 +13,7 @@ class SharreTimeUsageVC: UIViewController {
     // Pass Over Data
     var sharreID: Int!
     var sharreTitle: String!
+    var sharreDeposit: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()

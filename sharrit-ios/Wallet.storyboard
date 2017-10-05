@@ -34,7 +34,7 @@
         <!--My Wallet-->
         <scene sceneID="DvP-a3-Z8h">
             <objects>
-                <viewController id="5ke-V9-NYf" customClass="WalletVC" customModule="sharrit_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="walletSummary" id="5ke-V9-NYf" customClass="WalletVC" customModule="sharrit_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="beI-I7-NfY"/>
                         <viewControllerLayoutGuide type="bottom" id="snx-PN-yuE"/>
