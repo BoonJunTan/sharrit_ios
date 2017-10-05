@@ -139,6 +139,7 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
                     
                     if components.day == 1 || components2.day == 1 {
                         selectedDateSlotObject.append(date)
+                        getTotalCost()
                         return true
                     }
                 }
@@ -405,7 +406,8 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
                 timeEnd = FormatDate().formatDateTimeToLocal2(date: selectedTimeSlotObject[selectedTimeSlotObject.count - 1].timeEnd).timeIntervalSince1970
             } else {
                 timeStart = selectedDateSlotObject[0].timeIntervalSince1970
-                timeEnd = selectedDateSlotObject[selectedDateSlotObject.count - 1].timeIntervalSince1970
+                let timeEndTomorrow = Calendar.current.date(byAdding: .day, value: 1, to: selectedDateSlotObject[selectedDateSlotObject.count - 1])
+                timeEnd = timeEndTomorrow!.timeIntervalSince1970
             }
             
             let filterData: [String: Any] = ["qty": unitRequire.text!, "timeStart": timeStart, "timeEnd": timeEnd]
@@ -415,11 +417,9 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
                 switch response.result {
                 case .success(_):
                     if let data = response.result.value {
-                        if self.appointmentType == .HrAppointment {
-                            for (_, subJson) in JSON(data)["content"] {
-                                self.usage.text = "Total: $" + subJson.description
-                                self.total.text = "Total: $" + String(describing: Double(self.sharreDeposit!)! + subJson.double!)
-                            }
+                        for (_, subJson) in JSON(data)["content"] {
+                            self.usage.text = "Total: $" + subJson.description
+                            self.total.text = "Total: $" + String(describing: Double(self.sharreDeposit!)! + subJson.double!)
                         }
                         self.costView.isHidden = false
                     }
@@ -438,10 +438,19 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
         
         let url = SharritURL.devURL + "transaction/" + String(describing: sharreID!)
         
-        selectedTimeSlot.sort {$0 < $1}
+        let timeStart:Double
+        let timeEnd:Double
         
-        let timeStart = FormatDate().formatDateTimeToLocal2(date: selectedTimeSlotObject[0].timeStart).timeIntervalSince1970
-        let timeEnd = FormatDate().formatDateTimeToLocal2(date: selectedTimeSlotObject[selectedTimeSlotObject.count - 1].timeEnd).timeIntervalSince1970
+        if appointmentType == .HrAppointment {
+            selectedTimeSlot.sort {$0 < $1}
+            
+            timeStart = FormatDate().formatDateTimeToLocal2(date: selectedTimeSlotObject[0].timeStart).timeIntervalSince1970
+            timeEnd = FormatDate().formatDateTimeToLocal2(date: selectedTimeSlotObject[selectedTimeSlotObject.count - 1].timeEnd).timeIntervalSince1970
+        } else {
+            timeStart = selectedDateSlotObject[0].timeIntervalSince1970
+            let timeEndTomorrow = Calendar.current.date(byAdding: .day, value: 1, to: selectedDateSlotObject[selectedDateSlotObject.count - 1])
+            timeEnd = timeEndTomorrow!.timeIntervalSince1970
+        }
         
         let filterData: [String: Any] = ["payerId": appDelegate.user!.userID, "payerType": 0, "amount": totalCost, "deposit": depositCost, "timeStart": timeStart, "timeEnd": timeEnd, "qty": unitRequire.text!]
         
