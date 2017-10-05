@@ -41,8 +41,12 @@
 		2770E2C01F83FA2E00199B61 /* DecimalConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2770E2BF1F83FA2E00199B61 /* DecimalConverter.swift */; };
 		2777645E1F6A594A0023CDCA /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2777645D1F6A594A0023CDCA /* MessageTableViewCell.swift */; };
 		277764601F6A5D2D0023CDCA /* ConversationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2777645F1F6A5D2D0023CDCA /* ConversationVC.swift */; };
+		277CAA641F86324500F1FF6E /* SuccessfulBookingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277CAA631F86324500F1FF6E /* SuccessfulBookingVC.swift */; };
+		277CAA661F8673CF00F1FF6E /* DateSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277CAA651F8673CF00F1FF6E /* DateSlot.swift */; };
 		277DD7191F72238C005B7752 /* SharesInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277DD7181F72238C005B7752 /* SharesInfoVC.swift */; };
 		277DD71B1F723F3F005B7752 /* SharritURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277DD71A1F723F3F005B7752 /* SharritURL.swift */; };
+		2786DD621F84C20300E4D7D6 /* TimeSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2786DD611F84C20300E4D7D6 /* TimeSlot.swift */; };
+		2786DD641F84C40600E4D7D6 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2786DD631F84C40600E4D7D6 /* Time.swift */; };
 		279497CA1F7DED8B00522999 /* SharreTimeUsageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279497C91F7DED8B00522999 /* SharreTimeUsageVC.swift */; };
 		279497CC1F7E258F00522999 /* TimeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279497CB1F7E258F00522999 /* TimeCollectionViewCell.swift */; };
 		27ABAE811F670D81007F6CDB /* LoginAndSignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27ABAE801F670D81007F6CDB /* LoginAndSignUp.storyboard */; };
@@ -62,7 +66,7 @@
 		27DA99571F7D4894006E415C /* SharreBookingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DA99561F7D4894006E415C /* SharreBookingVC.swift */; };
 		27F256421F6AA1C6006B1697 /* ButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F256411F6AA1C6006B1697 /* ButtonCollectionViewCell.swift */; };
 		27F256441F6ACE8D006B1697 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F256431F6ACE8D006B1697 /* NotificationTableViewCell.swift */; };
-		27FCB7D41F677533008E973C /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27FCB7D31F677533008E973C /* Home.storyboard */; };
+		27FCB7D41F677533008E973C /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27FCB7D31F677533008E973C /* Home.storyboard */; settings = {ASSET_TAGS = ("Succesful!", ); }; };
 		27FCB7D61F67753F008E973C /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FCB7D51F67753F008E973C /* HomeVC.swift */; };
 		27FCB7DB1F677680008E973C /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27FCB7DA1F677680008E973C /* Profile.storyboard */; };
 		27FCB7DD1F67768C008E973C /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FCB7DC1F67768C008E973C /* ProfileVC.swift */; };
@@ -118,8 +122,12 @@
 		2770E2BF1F83FA2E00199B61 /* DecimalConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecimalConverter.swift; sourceTree = "<group>"; };
 		2777645D1F6A594A0023CDCA /* MessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		2777645F1F6A5D2D0023CDCA /* ConversationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationVC.swift; sourceTree = "<group>"; };
+		277CAA631F86324500F1FF6E /* SuccessfulBookingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessfulBookingVC.swift; sourceTree = "<group>"; };
+		277CAA651F8673CF00F1FF6E /* DateSlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSlot.swift; sourceTree = "<group>"; };
 		277DD7181F72238C005B7752 /* SharesInfoVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharesInfoVC.swift; sourceTree = "<group>"; };
 		277DD71A1F723F3F005B7752 /* SharritURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharritURL.swift; sourceTree = "<group>"; };
+		2786DD611F84C20300E4D7D6 /* TimeSlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSlot.swift; sourceTree = "<group>"; };
+		2786DD631F84C40600E4D7D6 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		279497C91F7DED8B00522999 /* SharreTimeUsageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharreTimeUsageVC.swift; sourceTree = "<group>"; };
 		279497CB1F7E258F00522999 /* TimeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCollectionViewCell.swift; sourceTree = "<group>"; };
 		27ABAE801F670D81007F6CDB /* LoginAndSignUp.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LoginAndSignUp.storyboard; sourceTree = "<group>"; };
@@ -187,6 +195,8 @@
 				276D1B8F1F7BA25700A3EAF3 /* Shares.swift */,
 				2770E2BD1F83D9FF00199B61 /* Transaction.swift */,
 				27C0B03F1F6BDBC4009E69CA /* User.swift */,
+				2786DD611F84C20300E4D7D6 /* TimeSlot.swift */,
+				277CAA651F8673CF00F1FF6E /* DateSlot.swift */,
 			);
 			name = Entity;
 			sourceTree = "<group>";
@@ -253,6 +263,7 @@
 				275E00701F80C8E5005E6010 /* FormatDate.swift */,
 				27BFFC271F8275F6009FF404 /* ImageResize.swift */,
 				2770E2BF1F83FA2E00199B61 /* DecimalConverter.swift */,
+				2786DD631F84C40600E4D7D6 /* Time.swift */,
 			);
 			name = General;
 			sourceTree = "<group>";
@@ -262,6 +273,8 @@
 			children = (
 				27DA99561F7D4894006E415C /* SharreBookingVC.swift */,
 				279497C91F7DED8B00522999 /* SharreTimeUsageVC.swift */,
+				279497CB1F7E258F00522999 /* TimeCollectionViewCell.swift */,
+				277CAA631F86324500F1FF6E /* SuccessfulBookingVC.swift */,
 			);
 			name = "Book Sharre";
 			sourceTree = "<group>";
@@ -289,7 +302,6 @@
 				27C114831F717B5800CD9FB9 /* SharesCollectionVC.swift */,
 				27C114851F718C9100CD9FB9 /* TabCollectionViewCell.swift */,
 				27C114871F718CCE00CD9FB9 /* SharesCollectionViewCell.swift */,
-				279497CB1F7E258F00522999 /* TimeCollectionViewCell.swift */,
 			);
 			name = "Business (Category)";
 			sourceTree = "<group>";
@@ -451,6 +463,9 @@
 		872D31561F6705520069381A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					"Succesful!",
+				);
 				LastSwiftUpdateCheck = 0830;
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = thepoppingone;
@@ -534,12 +549,12 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Cosmos/Cosmos.framework",
 				"${BUILT_PRODUCTS_DIR}/CountryPickerSwift/CountryPicker.framework",
+				"${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework",
 				"${BUILT_PRODUCTS_DIR}/FSCalendar/FSCalendar.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/ImageSlideshow/ImageSlideshow.framework",
 				"${BUILT_PRODUCTS_DIR}/JSQMessagesViewController/JSQMessagesViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/JSQSystemSoundPlayer/JSQSystemSoundPlayer.framework",
-				"${BUILT_PRODUCTS_DIR}/MFCard/MFCard.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/Stripe/Stripe.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
@@ -549,12 +564,12 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cosmos.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CountryPicker.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DropDown.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSCalendar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImageSlideshow.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQMessagesViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQSystemSoundPlayer.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MFCard.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Stripe.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
@@ -619,6 +634,7 @@
 				27C114841F717B5900CD9FB9 /* SharesCollectionVC.swift in Sources */,
 				275E00711F80C8E5005E6010 /* FormatDate.swift in Sources */,
 				277764601F6A5D2D0023CDCA /* ConversationVC.swift in Sources */,
+				2786DD621F84C20300E4D7D6 /* TimeSlot.swift in Sources */,
 				276D1B8A1F7B8A0500A3EAF3 /* ReviewTableViewCell.swift in Sources */,
 				276D1B861F7B89A400A3EAF3 /* DescriptionTableViewCell.swift in Sources */,
 				275FA0E61F7A5E9D008EF252 /* ImageDownloader.swift in Sources */,
@@ -636,11 +652,14 @@
 				272508C81F7BAE9500A93BE3 /* ShowSBVC.swift in Sources */,
 				276D1B8E1F7BA11800A3EAF3 /* SharesInfoCollectionViewCell.swift in Sources */,
 				27FCB7E71F677AB3008E973C /* LoginVC.swift in Sources */,
+				277CAA661F8673CF00F1FF6E /* DateSlot.swift in Sources */,
 				27FCB7D61F67753F008E973C /* HomeVC.swift in Sources */,
 				27C0B0401F6BDBC4009E69CA /* User.swift in Sources */,
 				27FCB7F01F679857008E973C /* SharritButton.swift in Sources */,
+				2786DD641F84C40600E4D7D6 /* Time.swift in Sources */,
 				275C05071F7BE7AF00E78E06 /* SharesInfoTableViewCell.swift in Sources */,
 				27C114881F718CCE00CD9FB9 /* SharesCollectionViewCell.swift in Sources */,
+				277CAA641F86324500F1FF6E /* SuccessfulBookingVC.swift in Sources */,
 				27C114861F718C9100CD9FB9 /* TabCollectionViewCell.swift in Sources */,
 				27F256421F6AA1C6006B1697 /* ButtonCollectionViewCell.swift in Sources */,
 				2764C47D1F726FDD00DB7199 /* SharrorFormVC.swift in Sources */,

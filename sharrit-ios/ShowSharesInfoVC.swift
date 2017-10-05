@@ -27,7 +27,7 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     @IBOutlet weak var historyBtn: UIButton!
     
     @IBOutlet weak var tableView: UITableView!
-    var tableViewItems:[Shares] = []
+    var tableViewItems:[Transaction] = []
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
@@ -52,12 +52,25 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 7 //tableViewItems.count
+        return tableViewItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "sharesInfoCell") as! SharesInfoTableViewCell
-//        cell.sharesImage.image = tableViewItems[indexPath.row].
+        
+        cell.sharesTitle.text = String(describing: tableViewItems[indexPath.row].sharreName!)
+        cell.sharesDeposit.text = "Deposit: $" + DecimalConverter().convertIntWithString(amount: String(describing: tableViewItems[indexPath.row].deposit))
+        cell.sharesUsage.text = "Usage: $" + DecimalConverter().convertIntWithString(amount: String(describing: tableViewItems[indexPath.row].amount))
+        cell.sharesDate.text = "Duration: " + FormatDate().compareTwoDays(dateStart: tableViewItems[indexPath.row].timeStart, dateEnd: tableViewItems[indexPath.row].timeEnd)
+        
+        if sharreStatus == .Completed {
+            cell.sharesImage.image = #imageLiteral(resourceName: "completed")
+        } else if sharreStatus == .Ongoing {
+            cell.sharesImage.image = #imageLiteral(resourceName: "on-going")
+            cell.sharesUsage.text = cell.sharesUsage.text! + " +++"
+        } else {
+            cell.sharesImage.image = #imageLiteral(resourceName: "upcoming")
+        }
         return cell
     }
     
@@ -140,8 +153,6 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
             "Accept": "application/json" // Need this?
         ]
         
-        print(url)
-        
         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON {
             response in
             switch response.result {
@@ -149,7 +160,29 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                 self.tableViewItems = []
                 if let data = response.result.value {
                     for (_, subJson) in JSON(data)["content"] {
+                        let id = subJson["transactionId"].int!
+                        let dateCreated = subJson["dateCreated"].description
+                        let payeeId = subJson["payeeId"].int!
+                        let payeeType = subJson["payeeType"].int!
+                        let payerId = subJson["payerId"].int!
+                        let payerType = subJson["payerType"].int!
+                        let amount = subJson["amount"].int!
+                        let promoId = subJson["promoId"].int!
+                        let timeStart = subJson["timeStart"].description
+                        let timeEnd = subJson["timeEnd"].description
+                        let status = subJson["status"].int!
+                        let qty = subJson["qty"].int!
+                        let deposit = subJson["deposit"].double!
                         
+                        let transaction = Transaction(transactionId: id, dateCreated: dateCreated, payeeId: payeeId, payeeType: payeeType, payerId: payerId, payerType: payerType, amount: amount, promoId: promoId, timeStart: timeStart, timeEnd: timeEnd, status: status, qty: qty, deposit: deposit)
+                        
+                        if let sharreId = subJson["sharreId"].int {
+                            transaction.sharreId = sharreId
+                        }
+                        
+                        transaction.sharreName = subJson["name"].description
+                        
+                        self.tableViewItems.append(transaction)
                     }
                     self.tableView.reloadData()
                 }

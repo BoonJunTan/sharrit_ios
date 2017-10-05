@@ -27,4 +27,59 @@ struct FormatDate {
         formatter.unitsStyle = .full
         return formatter.string(from: endDate!, to: todayDate!)!
     }
+    
+    func compareTwoDays(dateStart: String, dateEnd: String) -> String {
+        let dateFormatter = DateFormatter()
+        if dateStart.contains(".") {
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
+        } else {
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        }
+        
+        let startDate = dateFormatter.date(from: dateStart)
+        
+        if dateEnd.contains(".") {
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
+        } else {
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        }
+        
+        let endDate = dateFormatter.date(from: dateEnd)
+        
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.minute, .hour, .day]
+        formatter.unitsStyle = .full
+        return formatter.string(from: startDate!, to: endDate!)!
+    }
+    
+    func formatDateTimeToLocal(date: String) -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = NSTimeZone(abbreviation: "GMT+08")! as TimeZone
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return dateFormatter.date(from: date + " 08:00:00")!
+    }
+    
+    func formatDateTimeToLocal2(date: String) -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = NSTimeZone(abbreviation: "GMT+08")! as TimeZone
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        return dateFormatter.date(from: date)!
+    }
+    
+    func generateTimeHrMin(rangeStart: String, rangeEnd:String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        
+        let startTime = dateFormatter.date(from: rangeStart)
+        let endTime = dateFormatter.date(from: rangeEnd)
+        
+        let calendar = Calendar.current
+        let startTimeFormat = calendar.dateComponents([.hour, .minute], from: startTime!)
+        let endTimeFormat = calendar.dateComponents([.hour, .minute], from: endTime!)
+        
+        let startTimeString = String(format: "%0.2d:%0.2d", startTimeFormat.hour!, startTimeFormat.minute!)
+        let endTimeString = String(format: "%0.2d:%0.2d", endTimeFormat.hour!, endTimeFormat.minute!)
+        
+        return startTimeString + " - " + endTimeString
+    }
 }
