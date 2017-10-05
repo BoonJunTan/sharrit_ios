@@ -116,7 +116,24 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
     }
     
     func calendar(_ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool {
+        let today = Date()
+        let ytd = Calendar.current.date(byAdding: .day, value: -1, to: today)
+        if date < ytd! {
+            return false
+        }
         return true
+    }
+    
+    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
+        let today = Date()
+        let ytd = Calendar.current.date(byAdding: .day, value: -1, to: today)
+        if self.gregorian.isDateInToday(date) {
+            return UIColor.white
+        }
+        if date < ytd! {
+            return UIColor.lightGray
+        }
+        return UIColor.black
     }
     
     func calendar(_ calendar: FSCalendar, didDeselect date: Date) {
@@ -299,7 +316,7 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
                         if self.appointmentType == .HrAppointment {
                             for (_, subJson) in JSON(data)["content"] {
                                 self.usage.text = "Total: $" + subJson.description
-                                self.total.text = "Total: $" + String(describing: Int(self.sharreDeposit!)! + subJson.int!)
+                                self.total.text = "Total: $" + String(describing: Double(self.sharreDeposit!)! + subJson.double!)
                             }
                         }
                         self.costView.isHidden = false
@@ -314,8 +331,8 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
     }
 
     @IBAction func bookBtnPressed(_ sender: SharritButton) {
-        let totalCost = total.text!.replacingOccurrences(of: "Total: $", with: "")
-        let depositCost = deposit.text!.replacingOccurrences(of: "Deposit: $", with: "")
+        var totalCost = total.text!.replacingOccurrences(of: "Total: $", with: "")
+        var depositCost = deposit.text!.replacingOccurrences(of: "Deposit: $", with: "")
         
         let url = SharritURL.devURL + "transaction/" + String(describing: sharreID!)
         

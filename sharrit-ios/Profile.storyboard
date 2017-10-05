@@ -704,14 +704,8 @@ Cheers!</string>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lT2-7F-azp">
                                                             <rect key="frame" x="0.0" y="0.0" width="294" height="22"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transaction:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2WC-bZ-qdp">
-                                                                    <rect key="frame" x="-0.5" y="2.5" width="89" height="18"/>
-                                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E31-R0-JNZ">
-                                                                    <rect key="frame" x="93.5" y="2.5" width="200.5" height="18"/>
+                                                                    <rect key="frame" x="0.0" y="2.5" width="294" height="18"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -720,23 +714,15 @@ Cheers!</string>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="trailing" secondItem="E31-R0-JNZ" secondAttribute="trailing" id="5NZ-Ii-8xW"/>
-                                                                <constraint firstItem="2WC-bZ-qdp" firstAttribute="centerY" secondItem="lT2-7F-azp" secondAttribute="centerY" id="A4d-q8-zDw"/>
-                                                                <constraint firstItem="E31-R0-JNZ" firstAttribute="leading" secondItem="2WC-bZ-qdp" secondAttribute="trailing" constant="5" id="Erb-h2-cu8"/>
-                                                                <constraint firstItem="2WC-bZ-qdp" firstAttribute="leading" secondItem="lT2-7F-azp" secondAttribute="leading" id="k2R-pr-tG3"/>
+                                                                <constraint firstItem="E31-R0-JNZ" firstAttribute="leading" secondItem="lT2-7F-azp" secondAttribute="leading" id="S2s-G6-A0K"/>
                                                                 <constraint firstItem="E31-R0-JNZ" firstAttribute="centerY" secondItem="lT2-7F-azp" secondAttribute="centerY" id="luK-WK-IdG"/>
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q03-o7-QoI">
                                                             <rect key="frame" x="0.0" y="27" width="294" height="22.5"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tAJ-8M-RVX">
-                                                                    <rect key="frame" x="-0.5" y="2.5" width="38.5" height="18"/>
-                                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r2b-u1-RcO">
-                                                                    <rect key="frame" x="43" y="3" width="251" height="18"/>
+                                                                    <rect key="frame" x="0.0" y="3" width="294" height="18"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -745,9 +731,7 @@ Cheers!</string>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
                                                                 <constraint firstItem="r2b-u1-RcO" firstAttribute="centerY" secondItem="q03-o7-QoI" secondAttribute="centerY" id="RnQ-8F-zMG"/>
-                                                                <constraint firstItem="tAJ-8M-RVX" firstAttribute="leading" secondItem="q03-o7-QoI" secondAttribute="leading" id="ZIB-bk-mIc"/>
-                                                                <constraint firstItem="tAJ-8M-RVX" firstAttribute="centerY" secondItem="q03-o7-QoI" secondAttribute="centerY" id="adq-Za-fz4"/>
-                                                                <constraint firstItem="r2b-u1-RcO" firstAttribute="leading" secondItem="tAJ-8M-RVX" secondAttribute="trailing" constant="5" id="tJ5-FB-BhU"/>
+                                                                <constraint firstItem="r2b-u1-RcO" firstAttribute="leading" secondItem="q03-o7-QoI" secondAttribute="leading" id="i0z-8R-5sK"/>
                                                                 <constraint firstAttribute="trailing" secondItem="r2b-u1-RcO" secondAttribute="trailing" id="yFE-5B-8ai"/>
                                                             </constraints>
                                                         </view>
@@ -757,24 +741,16 @@ Cheers!</string>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="heK-f3-T1O">
                                                                     <rect key="frame" x="0.0" y="0.0" width="144.5" height="22"/>
                                                                     <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deposit:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nbt-km-Dlt">
-                                                                            <rect key="frame" x="-0.5" y="2" width="60" height="18"/>
-                                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                                                            <nil key="textColor"/>
-                                                                            <nil key="highlightedColor"/>
-                                                                        </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3PT-P9-Msw">
-                                                                            <rect key="frame" x="64.5" y="2" width="80" height="18"/>
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                            <rect key="frame" x="0.0" y="2.5" width="144.5" height="17"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                     </subviews>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <constraints>
-                                                                        <constraint firstItem="3PT-P9-Msw" firstAttribute="leading" secondItem="nbt-km-Dlt" secondAttribute="trailing" constant="5" id="CgK-sB-Tp5"/>
-                                                                        <constraint firstItem="nbt-km-Dlt" firstAttribute="leading" secondItem="heK-f3-T1O" secondAttribute="leading" id="UnK-Gz-xP9"/>
-                                                                        <constraint firstItem="nbt-km-Dlt" firstAttribute="centerY" secondItem="heK-f3-T1O" secondAttribute="centerY" id="ZbX-ph-8Av"/>
+                                                                        <constraint firstItem="3PT-P9-Msw" firstAttribute="leading" secondItem="heK-f3-T1O" secondAttribute="leading" id="Moq-LX-AgA"/>
                                                                         <constraint firstItem="3PT-P9-Msw" firstAttribute="centerY" secondItem="heK-f3-T1O" secondAttribute="centerY" id="cxC-B7-WNu"/>
                                                                         <constraint firstAttribute="trailing" secondItem="3PT-P9-Msw" secondAttribute="trailing" id="pAq-PZ-wb2"/>
                                                                     </constraints>
@@ -782,15 +758,9 @@ Cheers!</string>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="14y-Jz-5cw">
                                                                     <rect key="frame" x="149.5" y="0.0" width="144.5" height="22"/>
                                                                     <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Charging:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="seu-yg-w1I">
-                                                                            <rect key="frame" x="0.0" y="2" width="70.5" height="18"/>
-                                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                                                            <nil key="textColor"/>
-                                                                            <nil key="highlightedColor"/>
-                                                                        </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bgm-ho-MpN">
-                                                                            <rect key="frame" x="75.5" y="2" width="69" height="18"/>
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                            <rect key="frame" x="0.0" y="2.5" width="144.5" height="17"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
@@ -799,9 +769,7 @@ Cheers!</string>
                                                                     <constraints>
                                                                         <constraint firstAttribute="trailing" secondItem="Bgm-ho-MpN" secondAttribute="trailing" id="1kH-B3-ltA"/>
                                                                         <constraint firstItem="Bgm-ho-MpN" firstAttribute="centerY" secondItem="14y-Jz-5cw" secondAttribute="centerY" id="C8H-fD-l2N"/>
-                                                                        <constraint firstItem="seu-yg-w1I" firstAttribute="centerY" secondItem="14y-Jz-5cw" secondAttribute="centerY" id="Rs3-F3-F2h"/>
-                                                                        <constraint firstItem="seu-yg-w1I" firstAttribute="leading" secondItem="14y-Jz-5cw" secondAttribute="leading" id="eIh-bN-jLo"/>
-                                                                        <constraint firstItem="Bgm-ho-MpN" firstAttribute="leading" secondItem="seu-yg-w1I" secondAttribute="trailing" constant="5" id="ekV-AY-FN6"/>
+                                                                        <constraint firstItem="Bgm-ho-MpN" firstAttribute="leading" secondItem="14y-Jz-5cw" secondAttribute="leading" id="MFq-eF-ZA6"/>
                                                                     </constraints>
                                                                 </view>
                                                             </subviews>

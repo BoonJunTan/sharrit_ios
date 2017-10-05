@@ -88,7 +88,7 @@ class ViewSharreVC: UIViewController {
                         }
                     }
                     
-                    self.sharreDeposit.text = "Deposit: $" + String(describing: json["content"]["deposit"].int!)
+                    self.sharreDeposit.text = "Deposit: $" + String(describing: json["content"]["deposit"].double!)
                     
                     self.getAllPhoto(jsonData: json["content"]["photos"], completion: { photoArray in
                         self.sharreImages.setImageInputs(Array(photoArray.prefix(4)))
@@ -99,10 +99,10 @@ class ViewSharreVC: UIViewController {
                     if json["content"]["type"].int! == 0 {
                         if json["content"]["unit"].int! == 0 {
                             self.sharreType.text = "Appointment Based - 30 mins Interval"
-                            self.sharreCharging.text = "Pay/hr: $" + String(describing: json["content"]["price"].int!)
+                            self.sharreCharging.text = "Pay/hr: $" + String(describing: json["content"]["price"].double!)
                             self.sharreTypeData = .HrAppointment
                         } else {
-                            self.sharreCharging.text = "Pay/day: $" + String(describing: json["content"]["price"].int!)
+                            self.sharreCharging.text = "Pay/day: $" + String(describing: json["content"]["price"].double!)
                             self.sharreType.text = "Appointment Based - Daily"
                             self.sharreTypeData = .DayAppointment
                         }

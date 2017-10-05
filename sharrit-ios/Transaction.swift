@@ -77,5 +77,4 @@ class Transaction {
             return .Refunded
         }
     }
-
 }
