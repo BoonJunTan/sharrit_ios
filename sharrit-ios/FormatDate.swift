@@ -28,6 +28,25 @@ struct FormatDate {
         return formatter.string(from: endDate!, to: todayDate!)!
     }
     
+    func compareDaysCreated2(dateCreated: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = NSTimeZone(abbreviation: "GMT+08")! as TimeZone
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+        let currentDate = Date()
+        let currentDateString = dateFormatter.string(from: currentDate)
+        let todayDate = dateFormatter.date(from: currentDateString)
+        
+        let dateFormatter2 = DateFormatter()
+        dateFormatter2.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
+        let endDate = dateFormatter2.date(from: dateCreated)
+        
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.minute]
+        formatter.unitsStyle = .full
+        return formatter.string(from: endDate!, to: todayDate!)!
+    }
+    
     func compareTwoDays(dateStart: String, dateEnd: String) -> String {
         let dateFormatter = DateFormatter()
         if dateStart.contains(".") {

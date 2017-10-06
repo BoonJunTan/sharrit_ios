@@ -59,15 +59,28 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         let cell = tableView.dequeueReusableCell(withIdentifier: "sharesInfoCell") as! SharesInfoTableViewCell
         
         cell.sharesTitle.text = String(describing: tableViewItems[indexPath.row].sharreName!)
-        cell.sharesDeposit.text = "Deposit: $" + DecimalConverter().convertIntWithString(amount: String(describing: tableViewItems[indexPath.row].deposit))
-        cell.sharesUsage.text = "Usage: $" + DecimalConverter().convertIntWithString(amount: String(describing: tableViewItems[indexPath.row].amount))
-        cell.sharesDate.text = "Duration: " + FormatDate().compareTwoDays(dateStart: tableViewItems[indexPath.row].timeStart, dateEnd: tableViewItems[indexPath.row].timeEnd)
+        cell.sharesDeposit.text = "Deposit: $" + tableViewItems[indexPath.row].deposit
+        cell.sharesUsage.text = "Usage: $" + tableViewItems[indexPath.row].amount
+        
+        if tableViewItems[indexPath.row].getTransactionStatus() == .Ongoing {
+            if tableViewItems[indexPath.row].hasStarted! {
+                let timeString = FormatDate().compareDaysCreated2(dateCreated: tableViewItems[indexPath.row].timeStart)
+                cell.sharesDate.text = "Duration: " + timeString
+                let time = timeString.replacingOccurrences(of: " minutes", with: "")
+                let calculatePrice = tableViewItems[indexPath.row].sharreOnGoingPrice! / 60.0 * Double(time)!
+                cell.sharesUsage.text = "Usage: " + String(format: "%.2f", calculatePrice) + "+++"
+            } else {
+                cell.sharesDate.text = "Duration: Not Started Yet"
+                cell.sharesUsage.text = "Usage: $0"
+            }
+        } else {
+            cell.sharesDate.text = "Duration: " + FormatDate().compareTwoDays(dateStart: tableViewItems[indexPath.row].timeStart, dateEnd: tableViewItems[indexPath.row].timeEnd)
+        }
         
         if sharreStatus == .Completed {
             cell.sharesImage.image = #imageLiteral(resourceName: "completed")
         } else if sharreStatus == .Ongoing {
             cell.sharesImage.image = #imageLiteral(resourceName: "on-going")
-            cell.sharesUsage.text = cell.sharesUsage.text! + " +++"
         } else {
             cell.sharesImage.image = #imageLiteral(resourceName: "upcoming")
         }
@@ -75,7 +88,46 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //performSegue(withIdentifier: "viewSharesInfo", sender: sharesCollection[indexPath.item])
+        if tableViewItems[indexPath.row].hasStarted != nil  && userRole == .Sharror {
+            let optionMenu = UIAlertController(title: nil, message: "What would you like to do?", preferredStyle: .actionSheet)
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action -> Void in
+                
+            }
+            
+            var nextActionTitle: String!
+            tableViewItems[indexPath.row].hasStarted! ? (nextActionTitle = "End Sharre") : (nextActionTitle = "Start Sharre")
+            
+            let nextAction = UIAlertAction(title: nextActionTitle, style: .default) { action -> Void in
+                self.startEndShares(boolean: self.tableViewItems[indexPath.row].hasStarted!, transactionID: self.tableViewItems[indexPath.row].transactionId)
+            }
+            
+            optionMenu.addAction(nextAction)
+            optionMenu.addAction(cancelAction)
+            self.present(optionMenu, animated: true, completion: nil)
+        }
+    }
+    
+    func startEndShares(boolean: Bool, transactionID: Int) {
+        var url: String!
+        
+        if !boolean {
+            url = SharritURL.devURL + "transaction/start/" + String(describing: transactionID)
+        } else {
+            url = SharritURL.devURL + "transaction/end/" + String(describing: transactionID)
+        }
+        
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+            response in
+            switch response.result {
+            case .success(_):
+                self.retrieveShares()
+                break
+            case .failure(_):
+                print("Start/End Service API failed")
+                break
+            }
+        }
     }
     
     func goToMessages() {
@@ -166,18 +218,26 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                         let payeeType = subJson["payeeType"].int!
                         let payerId = subJson["payerId"].int!
                         let payerType = subJson["payerType"].int!
-                        let amount = subJson["amount"].int!
+                        let amount = subJson["amount"].description
                         let promoId = subJson["promoId"].int!
                         let timeStart = subJson["timeStart"].description
                         let timeEnd = subJson["timeEnd"].description
                         let status = subJson["status"].int!
                         let qty = subJson["qty"].int!
-                        let deposit = subJson["deposit"].double!
+                        let deposit = subJson["deposit"].description
                         
                         let transaction = Transaction(transactionId: id, dateCreated: dateCreated, payeeId: payeeId, payeeType: payeeType, payerId: payerId, payerType: payerType, amount: amount, promoId: promoId, timeStart: timeStart, timeEnd: timeEnd, status: status, qty: qty, deposit: deposit)
                         
                         if let sharreId = subJson["sharreId"].int {
                             transaction.sharreId = sharreId
+                        }
+                        
+                        if let sharreHasStarted = subJson["hasStarted"].bool {
+                            transaction.hasStarted = sharreHasStarted
+                        }
+                        
+                        if let sharrePrice = subJson["price"].double {
+                            transaction.sharreOnGoingPrice = sharrePrice
                         }
                         
                         transaction.sharreName = subJson["name"].description

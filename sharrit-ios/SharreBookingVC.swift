@@ -420,7 +420,7 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
                     if let data = response.result.value {
                         for (_, subJson) in JSON(data)["content"] {
                             self.usage.text = "Total: $" + subJson.description
-                            self.total.text = "Total: $" + String(describing: Double(self.sharreDeposit!)! + subJson.double!)
+                            self.total.text = "Total: $" + String(describing: Double(self.sharreDeposit!)! + Double(subJson.description)!)
                         }
                         self.costView.isHidden = false
                     }

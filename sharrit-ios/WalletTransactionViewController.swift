@@ -64,8 +64,8 @@ class WalletTransactionViewController: UITableViewController {
         } else {
             cell.transactionTitle.text = "Sharre Service"
             cell.transactionImage.image = #imageLiteral(resourceName: "service")
-            cell.transactionDeposit.text = "Deposit: $" + DecimalConverter().convertIntWithString(amount: String(describing: transactionCollection[indexPath.row].deposit))
-            cell.transactionUsage.text = "Usage: $" + DecimalConverter().convertIntWithString(amount: String(describing: transactionCollection[indexPath.row].amount))
+            cell.transactionDeposit.text = "Deposit: $" +  transactionCollection[indexPath.row].deposit
+            cell.transactionUsage.text = "Usage: $" + transactionCollection[indexPath.row].amount
         }
         
         let transactionStatus = transactionCollection[indexPath.row].getTransactionStatus()
@@ -109,13 +109,13 @@ class WalletTransactionViewController: UITableViewController {
                         let payeeType = subJson["payeeType"].int!
                         let payerId = subJson["payerId"].int!
                         let payerType = subJson["payerType"].int!
-                        let amount = subJson["amount"].int!
+                        let amount = subJson["amount"].description
                         let promoId = subJson["promoId"].int!
                         let timeStart = subJson["timeStart"].description
                         let timeEnd = subJson["timeEnd"].description
                         let status = subJson["status"].int!
                         let qty = subJson["qty"].int!
-                        let deposit = subJson["deposit"].double!
+                        let deposit = subJson["deposit"].description
                         
                         let transaction = Transaction(transactionId: id, dateCreated: dateCreated, payeeId: payeeId, payeeType: payeeType, payerId: payerId, payerType: payerType, amount: amount, promoId: promoId, timeStart: timeStart, timeEnd: timeEnd, status: status, qty: qty, deposit: deposit)
                         
