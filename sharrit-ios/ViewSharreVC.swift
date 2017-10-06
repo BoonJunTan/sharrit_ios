@@ -266,12 +266,14 @@ class ViewSharreVC: UIViewController {
                 let deposit = sharreDeposit.text!
                 sharreBookingVC.sharreDeposit = deposit.replacingOccurrences(of: "Deposit: $", with: "")
             }
-        } else if segue.identifier == "timeAppointment" {
+        } else if segue.identifier == "viewTimeUsage" {
             if let sharreTimeUsageVC = segue.destination as? SharreTimeUsageVC {
                 sharreTimeUsageVC.sharreID = sharreID
                 sharreTimeUsageVC.sharreTitle = sharreTitle.text!
-                let deposit = sharreDeposit.text!
-                sharreTimeUsageVC.sharreDeposit = deposit.replacingOccurrences(of: "Deposit: $", with: "")
+                sharreTimeUsageVC.sharreDeposit = sharreDeposit.text!
+                sharreTimeUsageVC.sharreUsageFee = sharreCharging.text!
+                let quantity = sharreQuantity.text!
+                sharreTimeUsageVC.sharreUnit = quantity.replacingOccurrences(of: " units left", with: "")
             }
         }
     }

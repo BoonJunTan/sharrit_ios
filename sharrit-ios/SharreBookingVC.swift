@@ -63,6 +63,7 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
         title = sharreTitle
         deposit.text = "Deposit: $" + sharreDeposit
         
+        unitRequire.keyboardType = .numberPad
         unitRequire.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
         setUpCalendar()
@@ -460,7 +461,7 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
             case .success(_):
                 if let data = response.result.value {
                     var json = JSON(data)
-                    if json["content"]["transactionStatus"] == 1 {
+                    if json["status"] == 1 {
                         self.performSegue(withIdentifier: "viewSuccessful", sender: nil)
                     } else {
                         let alert = UIAlertController(title: "Error Occured!", message: "You do not have enough money in Wallet", preferredStyle: .alert)
