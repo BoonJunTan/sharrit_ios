@@ -43,6 +43,7 @@ class Transaction {
     var hasStarted: Bool?
     var sharreOnGoingPrice: Double?
     var isHoldingDeposit: Bool?
+    var isWaitingRefund: Bool?
     
     init(transactionId: Int, dateCreated: String, payeeId: Int, payeeType: Int, payerId: Int, payerType: Int, amount: String, promoId: Int, timeStart: String, timeEnd: String, status: Int, qty: Int, deposit: String) {
         self.transactionId = transactionId

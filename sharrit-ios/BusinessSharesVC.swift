@@ -34,11 +34,9 @@ class BusinessSharesVC: UIViewController, UICollectionViewDataSource, UICollecti
         
         switch arriveFrom {
         case .Sharror:
-            // MUST TODO:
             title = "Offered Sharres"
             break
         case .Sharrie:
-            // MUST TODO:
             title = "Requested Sharres"
             break
         case .SharingBusiness:

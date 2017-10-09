@@ -115,7 +115,6 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch tableViewItems[indexPath.section][indexPath.row] {
-        // Must TODO : 2nd System Release
         case "Reputation":
             break
         case "Sharres Offered":

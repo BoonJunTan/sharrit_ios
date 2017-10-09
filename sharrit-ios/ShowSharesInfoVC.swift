@@ -47,7 +47,10 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         self.navigationItem.rightBarButtonItem = navBarBubble
         
         tableView.tableFooterView = UIView() // For Hiding away empty cell
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         retrieveShares()
     }
     
@@ -80,6 +83,7 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         }
         
         cell.depositStatusView.isHidden = true
+        cell.refundStatusView.isHidden = true
         
         if sharreStatus == .Completed {
             cell.sharesImage.image = #imageLiteral(resourceName: "completed")
@@ -93,6 +97,18 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                     cell.depositStatusView.backgroundColor = UIColor.green
                 }
             }
+            
+            if let isWaitingRefund = tableViewItems[indexPath.row].isWaitingRefund {
+                if isWaitingRefund {
+                    cell.refundStatusView.isHidden = false
+                    cell.refundStatusLabel.text = "Refunding"
+                    cell.refundStatusView.backgroundColor = UIColor.orange
+                }
+            } else if tableViewItems[indexPath.row].getTransactionStatus() == .Refunded {
+                cell.refundStatusView.isHidden = false
+                cell.refundStatusLabel.text = "Refunded!"
+                cell.refundStatusView.backgroundColor = UIColor.green
+            } // Rejected
         } else if sharreStatus == .Ongoing {
             cell.sharesImage.image = #imageLiteral(resourceName: "on-going")
         } else {
@@ -133,6 +149,13 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                 self.returnDepositForShares(boolean: self.tableViewItems[indexPath.row].isHoldingDeposit!, transactionID: self.tableViewItems[indexPath.row].transactionId)
             }
             
+            if tableViewItems[indexPath.row].isWaitingRefund! {
+                let viewRefundAction = UIAlertAction(title: "View Refund Details", style: .default) { action -> Void in
+                    self.performSegue(withIdentifier: "viewRefund", sender: self.tableViewItems[indexPath.row])
+                }
+                optionMenu.addAction(viewRefundAction)
+            }
+            
             optionMenu.addAction(holdReturnDepositAction)
             optionMenu.addAction(cancelAction)
             self.present(optionMenu, animated: true, completion: nil)
@@ -143,15 +166,20 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                 
             }
             
-            let refundAction = UIAlertAction(title: "Request for Refund", style: .default) { action -> Void in
-                //
+            if let isWaitingRefund = tableViewItems[indexPath.row].isWaitingRefund {
+                if !isWaitingRefund {
+                    let refundAction = UIAlertAction(title: "Request for Refund", style: .default) { action -> Void in
+                        let sharresDetail: [String:Any] = ["TransactionID": self.tableViewItems[indexPath.row].transactionId, "SharreName": self.tableViewItems[indexPath.row].sharreName!]
+                        self.performSegue(withIdentifier: "requestRefund", sender: sharresDetail)
+                    }
+                    optionMenu.addAction(refundAction)
+                }
             }
             
             let reviewAction = UIAlertAction(title: "Review Sharres", style: .default) { action -> Void in
                 //
             }
             
-            optionMenu.addAction(refundAction)
             optionMenu.addAction(reviewAction)
             optionMenu.addAction(cancelAction)
             self.present(optionMenu, animated: true, completion: nil)
@@ -310,6 +338,10 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                         if let isHoldingDeposit = subJson["isHoldingDeposit"].bool {
                             transaction.isHoldingDeposit = isHoldingDeposit
                         }
+                        
+                        if let isWaitingRefund = subJson["isWaitingRefund"].bool {
+                            transaction.isWaitingRefund = isWaitingRefund
+                        }
 
                         if let sharrePrice = subJson["price"].double {
                             transaction.sharreOnGoingPrice = sharrePrice
@@ -325,6 +357,19 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
             case .failure(_):
                 print("Retrieve User Sharres Transaction API failed")
                 break
+            }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "requestRefund" {
+            if let requestRefundVC = segue.destination as? RequestRefundVC, let details = sender as? [String: Any] {
+                requestRefundVC.transactionID = details["TransactionID"] as! Int
+                requestRefundVC.sharreTitle = details["SharreName"] as! String
+            }
+        } else if segue.identifier == "viewRefund" {
+            if let viewRefundVC = segue.destination as? ViewRefundVC {
+                viewRefundVC.transaction = sender as! Transaction
             }
         }
     }
