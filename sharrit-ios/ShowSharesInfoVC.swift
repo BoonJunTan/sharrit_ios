@@ -66,7 +66,8 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
             if tableViewItems[indexPath.row].hasStarted! {
                 let timeString = FormatDate().compareDaysCreated2(dateCreated: tableViewItems[indexPath.row].timeStart)
                 cell.sharesDate.text = "Duration: " + timeString
-                let time = timeString.replacingOccurrences(of: " minutes", with: "")
+                var time = timeString.replacingOccurrences(of: " minutes", with: "")
+                time = time.replacingOccurrences(of: ",", with: "")
                 let calculatePrice = tableViewItems[indexPath.row].sharreOnGoingPrice! / 60.0 * Double(time)!
                 cell.sharesUsage.text = "Usage: " + String(format: "%.2f", calculatePrice) + "+++"
             } else {
@@ -105,6 +106,25 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
             optionMenu.addAction(nextAction)
             optionMenu.addAction(cancelAction)
             self.present(optionMenu, animated: true, completion: nil)
+        } else if userRole == .Sharror && sharreStatus == .Completed {
+            let optionMenu = UIAlertController(title: nil, message: "What would you like to do?", preferredStyle: .actionSheet)
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action -> Void in
+                
+            }
+            
+            let returnAction = UIAlertAction(title: "Return Deposit", style: .default) { action -> Void in
+                self.returnDepositForShares(transactionID: self.tableViewItems[indexPath.row].transactionId)
+            }
+            
+            let holdAction = UIAlertAction(title: "Hold Deposit", style: .default) { action -> Void in
+                self.holdDepositForShares(transactionID: self.tableViewItems[indexPath.row].transactionId)
+            }
+            
+            optionMenu.addAction(returnAction)
+            optionMenu.addAction(holdAction)
+            optionMenu.addAction(cancelAction)
+            self.present(optionMenu, animated: true, completion: nil)
         }
     }
     
@@ -116,6 +136,38 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         } else {
             url = SharritURL.devURL + "transaction/end/" + String(describing: transactionID)
         }
+        
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+            response in
+            switch response.result {
+            case .success(_):
+                self.retrieveShares()
+                break
+            case .failure(_):
+                print("Start/End Service API failed")
+                break
+            }
+        }
+    }
+    
+    func returnDepositForShares(transactionID: Int) {
+        let url = SharritURL.devURL + "transaction/deposit/return/" + String(describing: transactionID)
+        
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+            response in
+            switch response.result {
+            case .success(_):
+                self.retrieveShares()
+                break
+            case .failure(_):
+                print("Start/End Service API failed")
+                break
+            }
+        }
+    }
+    
+    func holdDepositForShares(transactionID: Int) {
+        let url = SharritURL.devURL + "transaction/deposit/keep/" + String(describing: transactionID)
         
         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in
