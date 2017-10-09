@@ -142,7 +142,7 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         // Format Date
         let dateFormatter2 = DateFormatter()
         dateFormatter2.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
-        let messageDate = dateFormatter2.date(from: chats[indexPath.row].lastestMessageDate)
+        let messageDate = dateFormatter2.date(from: chats[indexPath.row].lastestMessageDate!)
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd MMM, h:mm a"
@@ -187,7 +187,7 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         super.prepare(for: segue, sender: sender)
         if let chat = sender as? Conversation {
             let chatVC = segue.destination as! ConversationVC
-            
+            chatVC.comingFrom = .Messages
             chatVC.senderDisplayName = chat.conversationPartner
             chatVC.chat = chat
         }

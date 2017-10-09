@@ -21,6 +21,9 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
     var sharreStartTime: String!
     var sharreEndTime: String!
     var sharreDeposit: String!
+    var ownerName: String!
+    var ownerID: Int!
+    var ownerType: Int!
     
     @IBOutlet weak var unitRequire: UITextField!
     
@@ -480,14 +483,15 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
         }
     }
     
-    /*
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "viewSuccessful" {
+            if let successfulBookingVC = segue.destination as? SuccessfulBookingVC {
+                successfulBookingVC.receiverName = ownerName
+                successfulBookingVC.sharreTitle = sharreTitle
+                successfulBookingVC.receiverID = ownerID
+                successfulBookingVC.receiverType = ownerType
+            }
+        }
     }
-    */
-
 }

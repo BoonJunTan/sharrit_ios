@@ -20,6 +20,9 @@ class SharreTimeUsageVC: UIViewController {
     var sharreDeposit: String!
     var sharreUnit: String!
     var sharreUsageFee: String!
+    var ownerName: String!
+    var ownerID: Int!
+    var ownerType: Int!
     
     @IBOutlet weak var unitsAvailable: UILabel!
     @IBOutlet weak var unitsRequire: UITextField!
@@ -91,6 +94,9 @@ class SharreTimeUsageVC: UIViewController {
     }
     
     @IBAction func bookBtnPressed(_ sender: SharritButton) {
+        self.performSegue(withIdentifier: "viewSuccessful", sender: nil)
+        
+        /*
         let deposit = depositLabel.text!.replacingOccurrences(of: "Deposit: $", with: "")
         
         let url = SharritURL.devURL + "transaction/" + String(describing: sharreID!)
@@ -120,16 +126,19 @@ class SharreTimeUsageVC: UIViewController {
                 break
             }
         }
+         */
     }
     
-    /*
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "viewSuccessful" {
+            if let successfulBookingVC = segue.destination as? SuccessfulBookingVC {
+                successfulBookingVC.receiverName = ownerName
+                successfulBookingVC.sharreTitle = sharreTitle
+                successfulBookingVC.receiverID = ownerID
+                successfulBookingVC.receiverType = ownerType
+            }
+        }
     }
-    */
 
 }

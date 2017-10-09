@@ -196,11 +196,12 @@
 			isa = PBXGroup;
 			children = (
 				2764C47A1F725E2D00DB7199 /* Business.swift */,
+				2764A4BE1F6A73250014CCF3 /* Conversation.swift */,
+				277CAA651F8673CF00F1FF6E /* DateSlot.swift */,
 				276D1B8F1F7BA25700A3EAF3 /* Shares.swift */,
+				2786DD611F84C20300E4D7D6 /* TimeSlot.swift */,
 				2770E2BD1F83D9FF00199B61 /* Transaction.swift */,
 				27C0B03F1F6BDBC4009E69CA /* User.swift */,
-				2786DD611F84C20300E4D7D6 /* TimeSlot.swift */,
-				277CAA651F8673CF00F1FF6E /* DateSlot.swift */,
 			);
 			name = Entity;
 			sourceTree = "<group>";
@@ -236,7 +237,6 @@
 				27702CDA1F6962F900A1C652 /* MessagesVC.swift */,
 				2777645D1F6A594A0023CDCA /* MessageTableViewCell.swift */,
 				2777645F1F6A5D2D0023CDCA /* ConversationVC.swift */,
-				2764A4BE1F6A73250014CCF3 /* Conversation.swift */,
 			);
 			name = Messages;
 			sourceTree = "<group>";

@@ -16,6 +16,9 @@ class ViewSharreVC: UIViewController {
     // Pass Over Data
     var sharreID: Int!
     
+    var ownerID: Int!
+    var ownerType: Int!
+    
     @IBOutlet weak var sharreImages: ImageSlideshow!
     @IBOutlet weak var sharreTitle: UILabel!
     @IBOutlet weak var sharreDate: UILabel!
@@ -68,6 +71,8 @@ class ViewSharreVC: UIViewController {
                     self.sharreTitle.text = json["content"]["name"].string!
                     self.sharreDate.text = FormatDate().compareDaysCreated(dateCreated: json["content"]["dateCreated"].string!) + " ago by"
                     
+                    self.ownerID = json["content"]["ownerId"].int!
+                    self.ownerType = json["content"]["ownerType"].int!
                     self.sharreOwner.text = json["content"]["ownerName"].string!
                     if (self.appDelegate.user!.firstName + " " + self.appDelegate.user!.lastName) == self.sharreOwner.text {
                         self.chatSharreStackView.isHidden = true
@@ -263,6 +268,9 @@ class ViewSharreVC: UIViewController {
                 sharreBookingVC.appointmentType = sharreTypeData
                 sharreBookingVC.sharreStartTime = sharreStartTime.text!
                 sharreBookingVC.sharreEndTime = sharreEndTime.text!
+                sharreBookingVC.ownerID = ownerID
+                sharreBookingVC.ownerName = sharreOwner.text!
+                sharreBookingVC.ownerType = ownerType
                 let deposit = sharreDeposit.text!
                 sharreBookingVC.sharreDeposit = deposit.replacingOccurrences(of: "Deposit: $", with: "")
             }
@@ -272,6 +280,9 @@ class ViewSharreVC: UIViewController {
                 sharreTimeUsageVC.sharreTitle = sharreTitle.text!
                 sharreTimeUsageVC.sharreDeposit = sharreDeposit.text!
                 sharreTimeUsageVC.sharreUsageFee = sharreCharging.text!
+                sharreTimeUsageVC.ownerID = ownerID
+                sharreTimeUsageVC.ownerName = sharreOwner.text!
+                sharreTimeUsageVC.ownerType = ownerType
                 let quantity = sharreQuantity.text!
                 sharreTimeUsageVC.sharreUnit = quantity.replacingOccurrences(of: " units left", with: "")
             }

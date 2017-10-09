@@ -11,6 +11,11 @@ import JSQMessagesViewController
 import Alamofire
 import SwiftyJSON
 
+enum ComingFrom {
+    case Messages
+    case Sharre
+}
+
 final class ConversationVC: JSQMessagesViewController {
     
     var messages = [JSQMessage]()
@@ -25,6 +30,11 @@ final class ConversationVC: JSQMessagesViewController {
     var latitudeToSend: CLLocationDegrees?
     var longitudeToSend: CLLocationDegrees?
     
+    // Pass Over Data
+    var comingFrom: ComingFrom!
+    var receiverID: Int?
+    var receiverType: Int?
+    
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     // Setup for Conversation - Details
@@ -34,7 +44,6 @@ final class ConversationVC: JSQMessagesViewController {
             senderId = (appDelegate.user!.firstName + " " + appDelegate.user!.lastName)
             senderDisplayName = (appDelegate.user!.firstName + " " + appDelegate.user!.lastName)
             
-            // Must TODO: Get and Change Avatar
             senderAvatar = JSQMessagesAvatarImageFactory.avatarImage(withPlaceholder: #imageLiteral(resourceName: "star"), diameter: 20)!
             receiverAvatar = JSQMessagesAvatarImageFactory.avatarImage(withPlaceholder: #imageLiteral(resourceName: "profile2"), diameter: 20)!
         }
@@ -58,7 +67,11 @@ final class ConversationVC: JSQMessagesViewController {
         self.collectionView?.reloadData()
         self.collectionView?.layoutIfNeeded()
         
-        getMessages()
+        if comingFrom == .Messages {
+            getMessages()
+        } else {
+            
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -188,30 +201,30 @@ final class ConversationVC: JSQMessagesViewController {
         messages.append(message)
         finishSendingMessage(animated: true)
         
-        let url = SharritURL.devURL + "message/" + String(describing: chat!.id)
-        
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer " + appDelegate.user!.accessToken,
-            "Accept": "application/json" // Need this?
-        ]
-        
-        let messageData: [String: Any] = ["body": text, "senderName": senderId]
-        
-        Alamofire.request(url, method: .post, parameters: messageData, encoding: JSONEncoding.default, headers: headers).responseJSON {
-            response in
-            switch response.result {
-            case .success(_):
-                break
-            case .failure(_):
-                print("Write new message API failed")
-                break
+        if chat!.id != nil {
+            let url = SharritURL.devURL + "message/" + String(describing: chat!.id!)
+            
+            let messageData: [String: Any] = ["body": text, "senderName": senderId]
+            
+            Alamofire.request(url, method: .post, parameters: messageData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+                response in
+                switch response.result {
+                case .success(_):
+                    break
+                case .failure(_):
+                    print("Write new message API failed")
+                    break
+                }
             }
+        } else {
+            print("Create new conversation first")
+            print(String(describing: receiverID!) + " of Type: " + String(describing: receiverType!))
         }
     }
     
     // MARK: Observer for messages
     private func getMessages() {
-        let url = SharritURL.devURL + "message/" + String(describing: chat!.id)
+        let url = SharritURL.devURL + "message/" + String(describing: chat!.id!)
         
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + appDelegate.user!.accessToken,

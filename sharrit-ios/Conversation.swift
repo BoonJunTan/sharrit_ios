@@ -10,13 +10,13 @@ import UIKit
 
 class Conversation {
     
-    var id: Int
+    var id: Int?
     var conversationPartner: String!
     //var conversationPartnerImage: UIImage!
-    var latestMessage: String!
+    var latestMessage: String?
     var subjectTitle: String!
     var sharreImage: UIImage?
-    var lastestMessageDate: String!
+    var lastestMessageDate: String?
     
     init(id: Int, conversationPartner: String, latestMessage: String, subjectTitle: String, lastestMessageDate: String) {
         self.id = id
@@ -24,5 +24,10 @@ class Conversation {
         self.latestMessage = latestMessage
         self.subjectTitle = subjectTitle
         self.lastestMessageDate = lastestMessageDate
+    }
+    
+    init(conversationPartner: String, subjectTitle: String) {
+        self.conversationPartner = conversationPartner
+        self.subjectTitle = subjectTitle
     }
 }

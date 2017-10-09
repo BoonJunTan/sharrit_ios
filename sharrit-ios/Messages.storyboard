@@ -181,7 +181,7 @@
         <!--Conversation-->
         <scene sceneID="qSy-SQ-u0c">
             <objects>
-                <viewController title="Conversation" id="ndI-9w-RQs" customClass="ConversationVC" customModule="sharrit_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="conversation" title="Conversation" hidesBottomBarWhenPushed="YES" id="ndI-9w-RQs" customClass="ConversationVC" customModule="sharrit_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rSS-dT-tKI"/>
                         <viewControllerLayoutGuide type="bottom" id="f19-4M-tf6"/>
