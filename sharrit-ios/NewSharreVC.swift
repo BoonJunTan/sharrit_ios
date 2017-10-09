@@ -143,16 +143,26 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         currentSelectedCell = collectionView.cellForItem(at: indexPath) as! SharrePhotoCollectionViewCell
         currentSelectedCellIndex = indexPath.row
-        // Call Image Picker
-        PHPhotoLibrary.requestAuthorization { status in
-            switch status {
+        let optionMenu = UIAlertController(title: nil, message: "How would you like to attach a photo?", preferredStyle: .actionSheet)
+        
+        // Cancel Button
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action -> Void in
+            
+        }
+        
+        // Camera Button
+        let cameraAction = UIAlertAction(title: "Take New Photo", style: .default) { action -> Void in
+            let authStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
+            switch authStatus {
             case .authorized:
-                self.imagePicker.allowsEditing = true
-                self.imagePicker.sourceType = .photoLibrary
-                self.present(self.imagePicker, animated: true, completion: nil)
+                let imagePicker = UIImagePickerController()
+                imagePicker.delegate = self
+                imagePicker.sourceType = .camera;
+                imagePicker.allowsEditing = false
+                self.present(imagePicker, animated: true, completion: nil)
                 break
             case .denied, .restricted:
-                let alert = UIAlertController(title: "Error", message: "Sharrit has no access to your photo album. Please allow access in order to change your profile photo. Cheers!", preferredStyle: .alert)
+                let alert = UIAlertController(title: "Error", message: "Sharrit has no access to your photo album. Please allow access in order to add/change photo. Cheers!", preferredStyle: .alert)
                 
                 alert.addAction(UIAlertAction(title: "Setting", style: .default, handler: { (_) in
                     DispatchQueue.main.async {
@@ -168,6 +178,41 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
                 break
             }
         }
+        
+        // Photo Library Button
+        let photoLibraryAction = UIAlertAction(title: "From Photo Library", style: .default) { action -> Void in
+            
+            // Call Image Picker
+            PHPhotoLibrary.requestAuthorization { status in
+                switch status {
+                case .authorized:
+                    self.imagePicker.allowsEditing = false
+                    self.imagePicker.sourceType = .photoLibrary
+                    self.present(self.imagePicker, animated: true, completion: nil)
+                    break
+                case .denied, .restricted:
+                    let alert = UIAlertController(title: "Error", message: "Sharrit has no access to your photo album. Please allow access in order to add/change photo. Cheers!", preferredStyle: .alert)
+                    
+                    alert.addAction(UIAlertAction(title: "Setting", style: .default, handler: { (_) in
+                        DispatchQueue.main.async {
+                            if let settingsURL = URL(string: UIApplicationOpenSettingsURLString) {
+                                UIApplication.shared.openURL(settingsURL)
+                            }
+                        }
+                    }))
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                    break
+                default:
+                    break
+                }
+            }
+        }
+        
+        optionMenu.addAction(cameraAction)
+        optionMenu.addAction(photoLibraryAction)
+        optionMenu.addAction(cancelAction)
+        self.present(optionMenu, animated: true, completion: nil)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {

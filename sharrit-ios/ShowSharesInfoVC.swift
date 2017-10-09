@@ -79,8 +79,20 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
             cell.sharesDate.text = "Duration: " + FormatDate().compareTwoDays(dateStart: tableViewItems[indexPath.row].timeStart, dateEnd: tableViewItems[indexPath.row].timeEnd)
         }
         
+        cell.depositStatusView.isHidden = true
+        
         if sharreStatus == .Completed {
             cell.sharesImage.image = #imageLiteral(resourceName: "completed")
+            cell.depositStatusView.isHidden = false
+            if let depositOnHold = tableViewItems[indexPath.row].isHoldingDeposit {
+                if depositOnHold {
+                    cell.depositStatusLabel.text = "On Hold"
+                    cell.depositStatusView.backgroundColor = UIColor.orange
+                } else {
+                    cell.depositStatusLabel.text = "Returned"
+                    cell.depositStatusView.backgroundColor = UIColor.green
+                }
+            }
         } else if sharreStatus == .Ongoing {
             cell.sharesImage.image = #imageLiteral(resourceName: "on-going")
         } else {
@@ -114,16 +126,14 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                 
             }
             
-            let returnAction = UIAlertAction(title: "Return Deposit", style: .default) { action -> Void in
-                self.returnDepositForShares(transactionID: self.tableViewItems[indexPath.row].transactionId)
+            var nextActionTitle: String!
+            tableViewItems[indexPath.row].isHoldingDeposit! ? (nextActionTitle = "Return Deposit") : (nextActionTitle = "Hold Deposit")
+            
+            let holdReturnDepositAction = UIAlertAction(title: nextActionTitle, style: .default) { action -> Void in
+                self.returnDepositForShares(boolean: self.tableViewItems[indexPath.row].isHoldingDeposit!, transactionID: self.tableViewItems[indexPath.row].transactionId)
             }
             
-            let holdAction = UIAlertAction(title: "Hold Deposit", style: .default) { action -> Void in
-                self.holdDepositForShares(transactionID: self.tableViewItems[indexPath.row].transactionId)
-            }
-            
-            optionMenu.addAction(returnAction)
-            optionMenu.addAction(holdAction)
+            optionMenu.addAction(holdReturnDepositAction)
             optionMenu.addAction(cancelAction)
             self.present(optionMenu, animated: true, completion: nil)
         } else if userRole == .Sharrie && sharreStatus == .Completed {
@@ -170,24 +180,14 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         }
     }
     
-    func returnDepositForShares(transactionID: Int) {
-        let url = SharritURL.devURL + "transaction/deposit/return/" + String(describing: transactionID)
+    func returnDepositForShares(boolean: Bool, transactionID: Int) {
+        var url: String!
         
-        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
-            response in
-            switch response.result {
-            case .success(_):
-                self.retrieveShares()
-                break
-            case .failure(_):
-                print("Return Deposit API failed")
-                break
-            }
+        if boolean {
+            url = SharritURL.devURL + "transaction/deposit/return/" + String(describing: transactionID)
+        } else {
+            url = SharritURL.devURL + "transaction/deposit/hold/" + String(describing: transactionID)
         }
-    }
-    
-    func holdDepositForShares(transactionID: Int) {
-        let url = SharritURL.devURL + "transaction/deposit/keep/" + String(describing: transactionID)
         
         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in
@@ -196,7 +196,7 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                 self.retrieveShares()
                 break
             case .failure(_):
-                print("Keep Deposit API failed")
+                print("Return/Hold Deposit API failed")
                 break
             }
         }
@@ -297,7 +297,6 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                         let status = subJson["status"].int!
                         let qty = subJson["qty"].int!
                         let deposit = subJson["deposit"].description
-                        
                         let transaction = Transaction(transactionId: id, dateCreated: dateCreated, payeeId: payeeId, payeeType: payeeType, payerId: payerId, payerType: payerType, amount: amount, promoId: promoId, timeStart: timeStart, timeEnd: timeEnd, status: status, qty: qty, deposit: deposit)
                         
                         if let sharreId = subJson["sharreId"].int {
@@ -308,6 +307,10 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                             transaction.hasStarted = sharreHasStarted
                         }
                         
+                        if let isHoldingDeposit = subJson["isHoldingDeposit"].bool {
+                            transaction.isHoldingDeposit = isHoldingDeposit
+                        }
+
                         if let sharrePrice = subJson["price"].double {
                             transaction.sharreOnGoingPrice = sharrePrice
                         }
