@@ -68,6 +68,7 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                 cell.sharesDate.text = "Duration: " + timeString
                 var time = timeString.replacingOccurrences(of: " minutes", with: "")
                 time = time.replacingOccurrences(of: ",", with: "")
+                time = time.replacingOccurrences(of: " minute", with: "")
                 let calculatePrice = tableViewItems[indexPath.row].sharreOnGoingPrice! / 60.0 * Double(time)!
                 cell.sharesUsage.text = "Usage: " + String(format: "%.2f", calculatePrice) + "+++"
             } else {
@@ -125,6 +126,25 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
             optionMenu.addAction(holdAction)
             optionMenu.addAction(cancelAction)
             self.present(optionMenu, animated: true, completion: nil)
+        } else if userRole == .Sharrie && sharreStatus == .Completed {
+            let optionMenu = UIAlertController(title: nil, message: "What would you like to do?", preferredStyle: .actionSheet)
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action -> Void in
+                
+            }
+            
+            let refundAction = UIAlertAction(title: "Request for Refund", style: .default) { action -> Void in
+                //
+            }
+            
+            let reviewAction = UIAlertAction(title: "Review Sharres", style: .default) { action -> Void in
+                //
+            }
+            
+            optionMenu.addAction(refundAction)
+            optionMenu.addAction(reviewAction)
+            optionMenu.addAction(cancelAction)
+            self.present(optionMenu, animated: true, completion: nil)
         }
     }
     
@@ -160,7 +180,7 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                 self.retrieveShares()
                 break
             case .failure(_):
-                print("Start/End Service API failed")
+                print("Return Deposit API failed")
                 break
             }
         }
@@ -176,7 +196,7 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                 self.retrieveShares()
                 break
             case .failure(_):
-                print("Start/End Service API failed")
+                print("Keep Deposit API failed")
                 break
             }
         }

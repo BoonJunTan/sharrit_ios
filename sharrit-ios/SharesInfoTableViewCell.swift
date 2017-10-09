@@ -16,6 +16,9 @@ class SharesInfoTableViewCell: UITableViewCell {
     @IBOutlet weak var sharesDeposit: UILabel!
     @IBOutlet weak var sharesUsage: UILabel!
     
+    @IBOutlet weak var depositStatusView: UIView!
+    @IBOutlet weak var depositStatusLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
