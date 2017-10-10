@@ -105,19 +105,23 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             break
         }
         
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer " + appDelegate.user!.accessToken,
-            "Accept": "application/json" // Need this?
-        ]
-        
-        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON {
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in
             switch response.result {
             case .success(_):
                 if let data = response.result.value {
                     self.chats.removeAll()
                     for (_, subJson) in JSON(data) {
-                        self.chats.append(Conversation(id: Int(subJson["conversationId"].description)!, conversationPartner: subJson["senderName"].description, latestMessage: subJson["body"].description, subjectTitle: subJson["subject"].description, lastestMessageDate: subJson["dateCreated"].description))
+                        let newConvo = Conversation(id: Int(subJson["conversationId"].description)!, conversationPartner: subJson["senderName"].description, latestMessage: subJson["body"].description, subjectTitle: subJson["subject"].description, lastestMessageDate: subJson["dateCreated"].description)
+                        
+                        if !subJson["sharre"].isEmpty {
+                            newConvo.sharreID = subJson["sharre"]["sharreId"].int
+                            newConvo.sharreTitle = subJson["sharre"]["name"].description
+                            newConvo.sharreImageURL = subJson["sharre"]["photos"]["fileName"].description
+                            newConvo.sharreDescription = subJson["sharre"]["description"].description
+                        }
+                        
+                        self.chats.append(newConvo)
                     }
                     self.tableView.reloadData()
                 }

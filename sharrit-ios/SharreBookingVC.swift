@@ -385,6 +385,7 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
                 break
             case .failure(_):
                 print("Get Time Slot Info API failed")
+                self.calendarView.isHidden = true
                 break
             }
         }
@@ -421,11 +422,12 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
                 switch response.result {
                 case .success(_):
                     if let data = response.result.value {
-                        for (_, subJson) in JSON(data)["content"] {
-                            self.usage.text = "Total: $" + subJson.description
-                            self.total.text = "Total: $" + String(describing: Double(self.sharreDeposit!)! + Double(subJson.description)!)
-                        }
+                        let json = JSON(data)["content"]
+                        self.usage.text = "Usage: $" + json["totalAmount"].description
+                        self.deposit.text = "Deposit: $" + json["totalDeposit"].description
+                        self.total.text = "Total: $" + String(describing: Double(json["totalDeposit"].description)! + Double(json["totalAmount"].description)!)
                         self.costView.isHidden = false
+                        self.bookBtn.isEnabled = true
                     }
                     break
                 case .failure(_):
@@ -437,6 +439,8 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
     }
 
     @IBAction func bookBtnPressed(_ sender: SharritButton) {
+        self.performSegue(withIdentifier: "viewSuccessful", sender: nil)
+        /*
         let totalCost = total.text!.replacingOccurrences(of: "Total: $", with: "")
         let depositCost = deposit.text!.replacingOccurrences(of: "Deposit: $", with: "")
         
@@ -481,6 +485,7 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
                 break
             }
         }
+         */
     }
     
     // MARK: - Navigation

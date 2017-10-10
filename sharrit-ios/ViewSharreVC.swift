@@ -118,7 +118,7 @@ class ViewSharreVC: UIViewController {
                     
                     self.sharreStartTime.text = "Start Time: " + json["content"]["activeStart"].string!
                     self.sharreEndTime.text = "End Time: " + json["content"]["activeEnd"].string!
-                    self.sharreQuantity.text = String(describing: json["content"]["qty"].int!) + " units left"
+                    self.sharreQuantity.text = String(describing: json["content"]["qty"].int!) + " units"
                     self.sharreCategory.text = json["content"]["categoryName"].string!
                     self.sharreLocation.text = json["content"]["location"].string!
                     self.sharreDescription.text = json["content"]["description"].string!
@@ -284,7 +284,7 @@ class ViewSharreVC: UIViewController {
                 sharreTimeUsageVC.ownerName = sharreOwner.text!
                 sharreTimeUsageVC.ownerType = ownerType
                 let quantity = sharreQuantity.text!
-                sharreTimeUsageVC.sharreUnit = quantity.replacingOccurrences(of: " units left", with: "")
+                sharreTimeUsageVC.sharreUnit = quantity.replacingOccurrences(of: " units", with: "")
             }
         }
     }

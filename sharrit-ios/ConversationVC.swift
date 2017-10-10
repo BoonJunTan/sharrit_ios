@@ -18,6 +18,12 @@ enum ComingFrom {
 
 final class ConversationVC: JSQMessagesViewController {
     
+    // If there is Sharre for Convo
+    @IBOutlet weak var sharreInfoView: UIView!
+    @IBOutlet weak var sharreTitle: UILabel!
+    @IBOutlet weak var sharreDescription: UILabel!
+    @IBOutlet weak var sharreImage: UIImageView!
+    
     var messages = [JSQMessage]()
     var outgoingBubbleImageView: JSQMessagesBubbleImage!
     var incomingBubbleImageView: JSQMessagesBubbleImage!
@@ -67,6 +73,18 @@ final class ConversationVC: JSQMessagesViewController {
         self.collectionView?.reloadData()
         self.collectionView?.layoutIfNeeded()
         
+        if chat?.sharreID != nil {
+            sharreTitle.text = chat!.sharreTitle!
+            sharreDescription.text = chat!.sharreDescription!
+            ImageDownloader().imageFromServerURL(urlString: chat!.sharreImageURL!, imageView: sharreImage)
+            
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(goToSharre))
+            sharreInfoView.addGestureRecognizer(tapGesture)
+            sharreInfoView.isHidden = false
+        } else {
+            sharreInfoView.isHidden = true
+        }
+        
         if comingFrom == .Messages {
             getMessages()
         } else {
@@ -82,6 +100,10 @@ final class ConversationVC: JSQMessagesViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func goToSharre(sender: UITapGestureRecognizer? = nil) {
+        performSegue(withIdentifier: "viewSharre", sender: nil)
     }
     
     override func didPressAccessoryButton(_ sender: UIButton) {
@@ -217,8 +239,28 @@ final class ConversationVC: JSQMessagesViewController {
                 }
             }
         } else {
-            print("Create new conversation first")
-            print(String(describing: receiverID!) + " of Type: " + String(describing: receiverType!))
+            // Create New Message first - Sharrie
+            let messageData: [String: Any] = ["subject": chat!.subjectTitle!, "senderId": appDelegate.user!.userID, "senderType": 0, "receiverType": receiverType!, "receiverId": receiverID!, "senderName": appDelegate.user!.firstName + " " + appDelegate.user!.lastName, "sharreId": chat!.sharreID!, "body" :text]
+            
+            let url = SharritURL.devURL + "conversation"
+            
+            Alamofire.request(url, method: .post, parameters: messageData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+                response in
+                switch response.result {
+                case .success(_):
+                    if let data = response.result.value {
+                        // Retrieve chat ID
+                        // Retrieve message based on chat ID
+                        // Reload view here
+                        let details = JSON(data)["content"]
+                        self.chat!.id = details["conversationId"].int!
+                    }
+                    break
+                case .failure(_):
+                    print("Create conversation for New Sharre API failed")
+                    break
+                }
+            }
         }
     }
     
@@ -264,6 +306,14 @@ final class ConversationVC: JSQMessagesViewController {
         let message = JSQMessage(senderId: senderId, displayName: senderDisplayName, media: media)!
         messages.append(message)
         finishSendingMessage(animated: true)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "viewSharre" {
+            if let viewSharreVC = segue.destination as? ViewSharreVC {
+                viewSharreVC.sharreID = chat?.sharreID
+            }
+        }
     }
     
 }

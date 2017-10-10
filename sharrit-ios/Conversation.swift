@@ -14,9 +14,14 @@ class Conversation {
     var conversationPartner: String!
     //var conversationPartnerImage: UIImage!
     var latestMessage: String?
-    var subjectTitle: String!
-    var sharreImage: UIImage?
+    var subjectTitle: String?
     var lastestMessageDate: String?
+    
+    // For Sharres
+    var sharreID: Int?
+    var sharreTitle: String?
+    var sharreDescription: String?
+    var sharreImageURL: String?
     
     init(id: Int, conversationPartner: String, latestMessage: String, subjectTitle: String, lastestMessageDate: String) {
         self.id = id
