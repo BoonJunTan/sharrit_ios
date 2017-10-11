@@ -41,6 +41,7 @@ class ViewSharreVC: UIViewController {
     
     var sharreStatusBool: Bool!
     var photoArraySource = [ImageSource]()
+    var photoArrayURLString: String!
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
@@ -94,6 +95,9 @@ class ViewSharreVC: UIViewController {
                     }
                     
                     self.sharreDeposit.text = "Deposit: $" + String(describing: json["content"]["deposit"].double!)
+                    
+                    let photoURLStringArray = json["content"]["photos"].array
+                    self.photoArrayURLString = photoURLStringArray![photoURLStringArray!.count-1]["fileName"].description
                     
                     self.getAllPhoto(jsonData: json["content"]["photos"], completion: { photoArray in
                         self.sharreImages.setImageInputs(Array(photoArray.prefix(4)))
@@ -265,6 +269,8 @@ class ViewSharreVC: UIViewController {
             if let sharreBookingVC = segue.destination as? SharreBookingVC {
                 sharreBookingVC.sharreID = sharreID
                 sharreBookingVC.sharreTitle = sharreTitle.text!
+                sharreBookingVC.sharreDescription = sharreDescription.text!
+                sharreBookingVC.sharreImageURL = photoArrayURLString
                 sharreBookingVC.appointmentType = sharreTypeData
                 sharreBookingVC.sharreStartTime = sharreStartTime.text!
                 sharreBookingVC.sharreEndTime = sharreEndTime.text!
@@ -278,6 +284,8 @@ class ViewSharreVC: UIViewController {
             if let sharreTimeUsageVC = segue.destination as? SharreTimeUsageVC {
                 sharreTimeUsageVC.sharreID = sharreID
                 sharreTimeUsageVC.sharreTitle = sharreTitle.text!
+                sharreTimeUsageVC.sharreDescription = sharreDescription.text!
+                sharreTimeUsageVC.sharreImageURL = photoArrayURLString
                 sharreTimeUsageVC.sharreDeposit = sharreDeposit.text!
                 sharreTimeUsageVC.sharreUsageFee = sharreCharging.text!
                 sharreTimeUsageVC.ownerID = ownerID

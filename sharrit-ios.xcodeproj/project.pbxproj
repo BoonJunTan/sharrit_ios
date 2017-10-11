@@ -47,6 +47,7 @@
 		277DD71B1F723F3F005B7752 /* SharritURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277DD71A1F723F3F005B7752 /* SharritURL.swift */; };
 		2786DD621F84C20300E4D7D6 /* TimeSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2786DD611F84C20300E4D7D6 /* TimeSlot.swift */; };
 		2786DD641F84C40600E4D7D6 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2786DD631F84C40600E4D7D6 /* Time.swift */; };
+		2791B33B1F8E1D0900AC937D /* FormatNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2791B33A1F8E1D0900AC937D /* FormatNumber.swift */; };
 		279497CA1F7DED8B00522999 /* SharreTimeUsageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279497C91F7DED8B00522999 /* SharreTimeUsageVC.swift */; };
 		279497CC1F7E258F00522999 /* TimeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279497CB1F7E258F00522999 /* TimeCollectionViewCell.swift */; };
 		2799CDD71F8B6C6800DD4C22 /* RequestRefundVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2799CDD61F8B6C6800DD4C22 /* RequestRefundVC.swift */; };
@@ -130,6 +131,7 @@
 		277DD71A1F723F3F005B7752 /* SharritURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharritURL.swift; sourceTree = "<group>"; };
 		2786DD611F84C20300E4D7D6 /* TimeSlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSlot.swift; sourceTree = "<group>"; };
 		2786DD631F84C40600E4D7D6 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
+		2791B33A1F8E1D0900AC937D /* FormatNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatNumber.swift; sourceTree = "<group>"; };
 		279497C91F7DED8B00522999 /* SharreTimeUsageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharreTimeUsageVC.swift; sourceTree = "<group>"; };
 		279497CB1F7E258F00522999 /* TimeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCollectionViewCell.swift; sourceTree = "<group>"; };
 		2799CDD61F8B6C6800DD4C22 /* RequestRefundVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestRefundVC.swift; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 			children = (
 				27D0186B1F7407CA00D5B798 /* RegexCheck.swift */,
 				275E00701F80C8E5005E6010 /* FormatDate.swift */,
+				2791B33A1F8E1D0900AC937D /* FormatNumber.swift */,
 				27BFFC271F8275F6009FF404 /* ImageResize.swift */,
 				2770E2BF1F83FA2E00199B61 /* DecimalConverter.swift */,
 				2786DD631F84C40600E4D7D6 /* Time.swift */,
@@ -629,6 +632,7 @@
 				275C050E1F7C014C00E78E06 /* NewSharreVC.swift in Sources */,
 				2770E2C01F83FA2E00199B61 /* DecimalConverter.swift in Sources */,
 				2764C4871F72ECB700DB7199 /* Notification.swift in Sources */,
+				2791B33B1F8E1D0900AC937D /* FormatNumber.swift in Sources */,
 				27DA994A1F7CCEC7006E415C /* WalletTopUpVC.swift in Sources */,
 				2764C4811F7271AB00DB7199 /* SharrorFormCollectionViewCell.swift in Sources */,
 				27BFFC281F8275F6009FF404 /* ImageResize.swift in Sources */,

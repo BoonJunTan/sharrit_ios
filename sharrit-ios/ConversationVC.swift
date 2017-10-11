@@ -74,13 +74,17 @@ final class ConversationVC: JSQMessagesViewController {
         self.collectionView?.layoutIfNeeded()
         
         if chat?.sharreID != nil {
-            sharreTitle.text = chat!.sharreTitle!
-            sharreDescription.text = chat!.sharreDescription!
-            ImageDownloader().imageFromServerURL(urlString: chat!.sharreImageURL!, imageView: sharreImage)
+            //sharreTitle.text = chat!.sharreTitle!
+            //sharreDescription.text = chat!.sharreDescription!
+            //ImageDownloader().imageFromServerURL(urlString: chat!.sharreImageURL!, imageView: sharreImage)
+            
             
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(goToSharre))
             sharreInfoView.addGestureRecognizer(tapGesture)
             sharreInfoView.isHidden = false
+            
+            let rightButtonItem = UIBarButtonItem(title: "View Sharre", style: .done, target: self, action: #selector(goToSharre))
+            self.navigationItem.rightBarButtonItem = rightButtonItem
         } else {
             sharreInfoView.isHidden = true
         }
@@ -90,6 +94,28 @@ final class ConversationVC: JSQMessagesViewController {
         } else {
             
         }
+    }
+    
+    func addViewOnTop() {
+        self.collectionView?.collectionViewLayout.sectionInset = UIEdgeInsets(top: 80, left: 0, bottom: 0, right: 0)
+        
+        let selectableView = UIView(frame: CGRect(x: 0, y: 60, width: self.view.bounds.width, height: 80))
+        selectableView.backgroundColor = .red
+        
+        let imageView = UIImageView(frame: CGRect(x: 20, y: selectableView.layer.frame.height - 40 / 2, width: 40, height: 40))
+        imageView.image = #imageLiteral(resourceName: "empty")
+        
+        let randomViewLabel = UILabel(frame: CGRect(x: 80, y: 10, width: 150, height: 20))
+        randomViewLabel.text = "Sharre Title"
+        
+        let randomViewLabel2 = UILabel(frame: CGRect(x: 80, y: 35, width: 150, height: 40))
+        randomViewLabel.text = "Sharre Description"
+        
+        selectableView.addSubview(imageView)
+        selectableView.addSubview(randomViewLabel)
+        selectableView.addSubview(randomViewLabel2)
+        
+        view.addSubview(selectableView)
     }
     
     override func viewDidAppear(_ animated: Bool) {

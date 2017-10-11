@@ -97,7 +97,7 @@ class WalletTopUpVC: UIViewController, STPPaymentCardTextFieldDelegate {
         let params: [String: Any] = ["token": token.tokenId,
                                      "amount": Int(amount) ?? 0 ]
         
-        let url = SharritURL.devURL + "wallet/charge/" + String(describing: appDelegate.user!.userID)
+        let url = SharritURL.devURL + "wallet/charge/0/" + String(describing: appDelegate.user!.userID)
         
         Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in

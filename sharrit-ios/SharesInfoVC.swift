@@ -75,6 +75,9 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         joinSharrorBtn.isHidden = true
         pendingApprovalBtn.isHidden = true
         
+        // Get Latest Pending/Join Business
+        getLatestBusinessInfo()
+        
         // First check - 3rd Party Business
         if businessInfo.businessType == 1 {
             // Second check - If User already joined business or pending
@@ -133,6 +136,47 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.reloadData()
+    }
+    
+    func getLatestBusinessInfo() {
+        let url = SharritURL.devURL + "user/" + String(describing: appDelegate.user!.userID)
+        
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+            response in
+            switch response.result {
+            case .success(_):
+                if let data = response.result.value {
+                    for (_, subJson) in JSON(data)["content"] {
+                        let joinedBusinessList = subJson["bizList"].arrayObject! as! [Int]
+                        let pendingBusinessList = subJson["pendingList"].arrayObject! as! [Int]
+                        
+                        // This is to save to user preference
+                        var userInfoDict = UserDefaults.standard.object(forKey: "userInfo") as? [String: Any]
+                        
+                        for (key, _):(String, JSON) in subJson {
+                            if key == "bizList" {
+                                userInfoDict!["key"] = joinedBusinessList
+                            } else if key == "pendingList" {
+                                userInfoDict!["key"] = pendingBusinessList
+                            } else {
+                                userInfoDict!["key"] = subJson.stringValue
+                            }
+                        }
+                        
+                        UserDefaults.standard.set(userInfoDict, forKey: "userInfo")
+                        UserDefaults.standard.synchronize()
+                        
+                        // This is to save to appDelegate
+                        self.appDelegate.user!.joinedSBList = joinedBusinessList
+                        self.appDelegate.user!.pendingSBList = pendingBusinessList
+                    }
+                }
+                break
+            case .failure(_):
+                print("Get User Info API failed")
+                break
+            }
+        }
     }
     
     // Quit Business

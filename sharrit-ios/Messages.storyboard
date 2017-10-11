@@ -218,7 +218,7 @@
                                         </constraints>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="H3X-x9-Spm" firstAttribute="top" secondItem="uZu-iT-XS2" secondAttribute="bottom" constant="5" id="7Ys-7B-n0c"/>
                                     <constraint firstAttribute="height" constant="75" id="7xO-Rd-pTI"/>
@@ -235,6 +235,11 @@
                                     <constraint firstItem="Jyz-vG-CSa" firstAttribute="centerY" secondItem="0Yb-S8-9T9" secondAttribute="centerY" id="srJ-wj-9Zb"/>
                                     <constraint firstItem="a9u-XJ-bbx" firstAttribute="leading" secondItem="0Yb-S8-9T9" secondAttribute="leading" constant="15" id="yJK-Aq-vot"/>
                                 </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UJ1-z9-XtW" customClass="JSQMessagesCollectionView">
+                                <rect key="frame" x="119" y="539" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

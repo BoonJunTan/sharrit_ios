@@ -321,6 +321,7 @@
                                     <outlet property="transactionStatus" destination="efh-tI-CnK" id="6aB-Tf-uVF"/>
                                     <outlet property="transactionTitle" destination="bRT-wP-fRc" id="BKC-6b-kTz"/>
                                     <outlet property="transactionUsage" destination="fVu-7w-gMR" id="BtW-Ds-Aem"/>
+                                    <outlet property="transactionUsageView" destination="Pqy-A7-Qwz" id="zJH-rS-3gG"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -627,7 +628,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v4m-Je-CBW">
-                                <rect key="frame" x="15" y="94" width="176.5" height="24"/>
+                                <rect key="frame" x="15" y="134" width="176.5" height="24"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Credit Card Details ">
                                         <attributes>
@@ -647,7 +648,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qCq-ZZ-6QH">
-                                <rect key="frame" x="15" y="198" width="81.5" height="24"/>
+                                <rect key="frame" x="15" y="238" width="81.5" height="24"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Amount ">
                                         <attributes>
@@ -667,7 +668,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Amount ($)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2sT-NK-Mfr">
-                                <rect key="frame" x="15" y="232" width="345" height="40"/>
+                                <rect key="frame" x="15" y="272" width="345" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="vvq-W8-jKD"/>
                                 </constraints>
@@ -676,20 +677,20 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Card Information Invalid!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0nY-Jn-6ML">
-                                <rect key="frame" x="15" y="302" width="345" height="20.5"/>
+                                <rect key="frame" x="15" y="342" width="345" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bgc-0f-prR">
-                                <rect key="frame" x="15" y="128" width="345" height="40"/>
+                                <rect key="frame" x="15" y="168" width="345" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="oFW-hA-O66"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NEr-CA-Whx" customClass="SharritButton" customModule="sharrit_ios" customModuleProvider="target">
-                                <rect key="frame" x="15" y="352.5" width="345" height="36"/>
+                                <rect key="frame" x="15" y="392.5" width="345" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Proceed"/>
                                 <userDefinedRuntimeAttributes>

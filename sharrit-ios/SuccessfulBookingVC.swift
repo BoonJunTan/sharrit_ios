@@ -15,6 +15,9 @@ class SuccessfulBookingVC: UIViewController {
     var receiverName: String!
     var receiverType: Int!
     var sharreTitle: String!
+    var sharreID: Int!
+    var sharreDescription: String!
+    var sharreImageURL: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +35,12 @@ class SuccessfulBookingVC: UIViewController {
                 chatVC.senderDisplayName = receiverName
                 chatVC.receiverID = receiverID
                 chatVC.receiverType = receiverType
-                chatVC.chat = Conversation(conversationPartner: receiverName, subjectTitle: sharreTitle)
+                let chat = Conversation(conversationPartner: receiverName, subjectTitle: sharreTitle)
+                chat.sharreID = sharreID
+                chat.sharreTitle = sharreTitle
+                chat.sharreImageURL = sharreImageURL
+                chat.sharreDescription = sharreDescription
+                chatVC.chat = chat
             }
         }
     }
