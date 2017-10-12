@@ -42,6 +42,8 @@ class Transaction {
     var sharreName: String?
     var hasStarted: Bool?
     var sharreOnGoingPrice: Double?
+    var sharreType: Int?
+    var sharreUnit: Int?
     var isHoldingDeposit: Bool?
     var isWaitingRefund: Bool?
     
@@ -80,6 +82,18 @@ class Transaction {
             return .Completed
         } else {
             return .Refunded
+        }
+    }
+    
+    func getSharreServiceType() -> SharresType {
+        if sharreType == 1 {
+            return .TimeUsage
+        } else {
+            if sharreUnit == 1 {
+                return .DayAppointment
+            } else {
+                return .HrAppointment
+            }
         }
     }
 }

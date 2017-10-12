@@ -80,6 +80,7 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         // First check - 3rd Party Business
         if businessInfo.businessType == 1 {
+            self.navigationItem.rightBarButtonItem = nil
             // Second check - If User already joined business or pending
             if (appDelegate.user?.joinedSBList.contains(businessInfo.businessId))! {
                 createSharreBtn.isHidden = false
@@ -186,12 +187,7 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         alert.addAction(UIAlertAction(title: "I'm sure", style: .default, handler: { (_) in
             let url = SharritURL.devURL + "sharror/withdraw/" + String(describing: self.businessInfo.businessId!) + "/" + String(describing: self.appDelegate.user!.userID)
             
-            let headers: HTTPHeaders = [
-                "Authorization": "Bearer " + self.appDelegate.user!.accessToken,
-                "Accept": "application/json" // Need this?
-            ]
-            
-            Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON {
+            Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
                 response in
                 switch response.result {
                 case .success(_):

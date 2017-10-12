@@ -10,6 +10,12 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
+enum CompanyList {
+    case All
+    case FirstParty
+    case ThirdParty
+}
+
 class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     var allCategories: [String]!
@@ -19,6 +25,8 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
     var searchBar:UISearchBar!
     
     var sharesCollection: [Business]! = []
+    
+    var viewCompanyBy: CompanyList = .All
     
     // Future Implementation - Location, View & Filter
     // View
@@ -200,7 +208,15 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
     
     @IBAction func viewChoiceBtnTapped(_ sender: UIButton) {
         viewChoiceLabel.text = sender.titleLabel?.text
+        if sender.titleLabel!.text!.contains("All") {
+            viewCompanyBy = .All
+        } else if sender.titleLabel!.text!.contains("1st") {
+            viewCompanyBy = .FirstParty
+        } else {
+            viewCompanyBy = .ThirdParty
+        }
         viewDropDown.isHidden = true
+        getSharesForCategory()
     }
     
     // Filter by functions
@@ -215,7 +231,15 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
     
     // Retrieve Business based on category
     func getSharesForCategory() {
-        let url = SharritURL.devURL + "business/category/" + String(describing: currentCategoryID!)
+        var url: String!
+        
+        if viewCompanyBy == .All {
+            url = SharritURL.devURL + "business/category/" + String(describing: currentCategoryID!)
+        } else if viewCompanyBy == .FirstParty {
+            url = SharritURL.devURL + "business/ios/first/" + String(describing: currentCategoryID!)
+        } else {
+            url = SharritURL.devURL + "business/ios/third/" + String(describing: currentCategoryID!)
+        }
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
@@ -241,8 +265,7 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
                         let dateCreated = subJson["dateCreated"].description
                         let business = Business(businessId: businessId, businessName: businessName, description: description, businessType: businessType, logoURL: logo, bannerURL: banner, commissionRate: comRate, dateCreated: dateCreated)
                         
-                        let requestFormID = subJson["requestFormId"].int!
-                        if requestFormID != -1 { business.requestFormID = requestFormID }
+                        business.requestFormID = subJson["requestFormId"].int! 
                         
                         self.sharesCollection.append(business)
                     }

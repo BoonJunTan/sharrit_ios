@@ -443,7 +443,7 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
     }
 
     @IBAction func bookBtnPressed(_ sender: SharritButton) {
-        let totalCost = total.text!.replacingOccurrences(of: "Total: $", with: "")
+        let usageCost = usage.text!.replacingOccurrences(of: "Usage: $", with: "")
         let depositCost = deposit.text!.replacingOccurrences(of: "Deposit: $", with: "")
         
         let url = SharritURL.devURL + "transaction/" + String(describing: sharreID!)
@@ -462,7 +462,7 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
             timeEnd = timeEndTomorrow!.timeIntervalSince1970
         }
         
-        let filterData: [String: Any] = ["payerId": appDelegate.user!.userID, "payerType": 0, "amount": totalCost, "deposit": depositCost, "timeStart": Int64(timeStart), "timeEnd": Int64(timeEnd), "qty": unitRequire.text!]
+        let filterData: [String: Any] = ["payerId": appDelegate.user!.userID, "payerType": 0, "amount": usageCost, "deposit": depositCost, "timeStart": Int64(timeStart), "timeEnd": Int64(timeEnd), "qty": unitRequire.text!]
         
         Alamofire.request(url, method: .post, parameters: filterData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in

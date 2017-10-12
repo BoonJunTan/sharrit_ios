@@ -65,7 +65,7 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         cell.sharesDeposit.text = "Deposit: $" + tableViewItems[indexPath.row].deposit
         cell.sharesUsage.text = "Usage: $" + tableViewItems[indexPath.row].amount
         
-        if tableViewItems[indexPath.row].getTransactionStatus() == .Ongoing {
+        if tableViewItems[indexPath.row].getSharreServiceType() == .TimeUsage {
             if tableViewItems[indexPath.row].hasStarted! {
                 let timeString = FormatDate().compareDaysCreated2(dateCreated: tableViewItems[indexPath.row].timeStart)
                 cell.sharesDate.text = "Duration: " + timeString
@@ -78,8 +78,10 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                 cell.sharesDate.text = "Duration: Not Started Yet"
                 cell.sharesUsage.text = "Usage: $0"
             }
+        } else if tableViewItems[indexPath.row].getSharreServiceType() == .DayAppointment {
+            cell.sharesDate.text = FormatDate().formatDateStringForDayAppointment(dateStart: tableViewItems[indexPath.row].timeStart, dateEnd: tableViewItems[indexPath.row].timeEnd)
         } else {
-            cell.sharesDate.text = "Duration: " + FormatDate().compareTwoDays(dateStart: tableViewItems[indexPath.row].timeStart, dateEnd: tableViewItems[indexPath.row].timeEnd)
+            cell.sharesDate.text = FormatDate().formatDateStringForMinuteAppointment(dateStart: tableViewItems[indexPath.row].timeStart, dateEnd: tableViewItems[indexPath.row].timeEnd)
         }
         
         cell.depositStatusView.isHidden = true
@@ -345,6 +347,14 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
 
                         if let sharrePrice = subJson["price"].double {
                             transaction.sharreOnGoingPrice = sharrePrice
+                        }
+                        
+                        if let sharreUnit = subJson["unit"].int {
+                            transaction.sharreUnit = sharreUnit
+                        }
+                        
+                        if let sharreType = subJson["type"].int {
+                            transaction.sharreType = sharreType
                         }
                         
                         transaction.sharreName = subJson["name"].description

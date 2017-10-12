@@ -143,6 +143,12 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         cell.profileName.text = chats[indexPath.row].conversationPartner
         cell.messageLabel.text = chats[indexPath.row].latestMessage
         
+        if let urlString = chats[indexPath.row].sharreImageURL {
+            ImageDownloader().imageFromServerURL(urlString: urlString, imageView: cell.imageView!)
+        } else {
+            cell.imageView?.isHidden = true
+        }
+        
         // Format Date
         let dateFormatter2 = DateFormatter()
         dateFormatter2.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
