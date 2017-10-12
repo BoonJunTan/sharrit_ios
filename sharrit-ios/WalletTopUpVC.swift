@@ -16,7 +16,7 @@ enum WalletManagement {
     case CashOut
 }
 
-class WalletTopUpVC: UIViewController, STPPaymentCardTextFieldDelegate {
+class WalletTopUpVC: UIViewController, STPPaymentCardTextFieldDelegate, CardIOPaymentViewControllerDelegate {
     
     @IBOutlet weak var topUpAmount: UITextField!
     
@@ -42,11 +42,9 @@ class WalletTopUpVC: UIViewController, STPPaymentCardTextFieldDelegate {
         }
     }
     
-    let loadingSpinner = LoadingSpinner(text: "Topping Up")
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        CardIOUtilities.preload()
         topUpAmount.keyboardType = .decimalPad
         
         paymentTextField = STPPaymentCardTextField(frame: CGRect(x: 0, y: 0, width: creditCardView.frame.size.width, height: creditCardView.frame.size.height))
@@ -65,9 +63,6 @@ class WalletTopUpVC: UIViewController, STPPaymentCardTextFieldDelegate {
             payButton.setTitle("Proceed to Cash Out", for: .normal)
             break
         }
-        
-        loadingSpinner.hide()
-        self.view.addSubview(loadingSpinner)
     }
     
     @IBAction func payButtonTapped(_ sender: Any) {
@@ -75,12 +70,16 @@ class WalletTopUpVC: UIViewController, STPPaymentCardTextFieldDelegate {
             errorLabel.text = "Please enter an amount"
             errorLabel.isHidden = false
         } else {
-            loadingSpinner.show()
-            payButton.isEnabled = false
             let card = paymentTextField.cardParams
             //send card information to stripe to get back a token
             getStripeToken(card: card)
         }
+    }
+    
+    @IBAction func scanCardTapped(_ sender: Any) {
+        let cardIOVC = CardIOPaymentViewController(paymentDelegate: self)
+        cardIOVC?.modalPresentationStyle = .formSheet
+        present(cardIOVC!, animated: true, completion: nil)
     }
     
     func getStripeToken(card:STPCardParams) {
@@ -104,11 +103,10 @@ class WalletTopUpVC: UIViewController, STPPaymentCardTextFieldDelegate {
         let params: [String: Any] = ["token": token.tokenId,
                                      "amount": Int(amount) ?? 0 ]
         
-        let url = SharritURL.devURL + "wallet/charge/0/" + String(describing: appDelegate.user!.userID)
+        let url = SharritURL.devURL + "wallet/charge/" + String(describing: appDelegate.user!.userID)
         
         Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in
-            self.loadingSpinner.hide()
             switch response.result {
                 case .success(_):
                      if let data = (response.result.value as? Dictionary<String, Any>) {
@@ -123,6 +121,7 @@ class WalletTopUpVC: UIViewController, STPPaymentCardTextFieldDelegate {
                     print("Update Wallet API failure")
                     self.errorLabel.text = "Please enter valid credit card details"
                     self.errorLabel.isHidden = false
+                    break
             }
         }
     }
@@ -134,8 +133,36 @@ class WalletTopUpVC: UIViewController, STPPaymentCardTextFieldDelegate {
         }
     }
     
-    var activityIndicator = UIActivityIndicatorView()
-    var strLabel = UILabel()
+    /// This method will be called when there is a successful scan (or manual entry). You MUST dismiss paymentViewController.
+    /// @param cardInfo The results of the scan.
+    /// @param paymentViewController The active CardIOPaymentViewController.
+    public func userDidProvide(_ cardInfo: CardIOCreditCardInfo!, in paymentViewController: CardIOPaymentViewController!) {
+        if let info = cardInfo {
+            let str = NSString(format: "Received card info.\n Number: %@\n expiry: %02lu/%lu\n cvv: %@.", info.redactedCardNumber, info.expiryMonth, info.expiryYear, info.cvv)
+            print(str)
+            
+            //dismiss scanning controller
+            paymentViewController?.dismiss(animated: true, completion: nil)
+            
+            //create Stripe card
+            let card: STPCardParams = STPCardParams()
+            card.number = info.cardNumber
+            card.expMonth = info.expiryMonth
+            card.expYear = info.expiryYear
+            card.cvc = info.cvv
+            print(card.number ?? "none")
+            //Send to Stripe
+            getStripeToken(card: card)
+
+        }
+    }
+    
+    /// This method will be called if the user cancels the scan. You MUST dismiss paymentViewController.
+    /// @param paymentViewController The active CardIOPaymentViewController.
+    public func userDidCancel(_ paymentViewController: CardIOPaymentViewController!) {
+        print("user canceled")
+        paymentViewController?.dismiss(animated: true, completion: nil)
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToTransaction" {
