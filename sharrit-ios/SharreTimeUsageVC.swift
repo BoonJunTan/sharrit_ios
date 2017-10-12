@@ -18,7 +18,7 @@ class SharreTimeUsageVC: UIViewController {
     var sharreID: Int!
     var sharreTitle: String!
     var sharreDescription: String!
-    var sharreImageURL: String!
+    var sharreImageURL: String?
     var sharreDeposit: String!
     var sharreUnit: String!
     var sharreUsageFee: String!

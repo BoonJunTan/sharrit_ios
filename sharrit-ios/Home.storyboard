@@ -1010,14 +1010,14 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timer" translatesAutoresizingMaskIntoConstraints="NO" id="1Ab-13-nfo">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timer2" translatesAutoresizingMaskIntoConstraints="NO" id="1Ab-13-nfo">
                                                 <rect key="frame" x="20" y="303" width="20" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="20" id="WM0-O6-i2Y"/>
                                                     <constraint firstAttribute="width" secondItem="1Ab-13-nfo" secondAttribute="height" multiplier="1:1" id="v43-hv-j3y"/>
                                                 </constraints>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty" translatesAutoresizingMaskIntoConstraints="NO" id="qlO-o3-f8Y">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sharrit_Logo" translatesAutoresizingMaskIntoConstraints="NO" id="qlO-o3-f8Y">
                                                 <rect key="frame" x="20" y="333" width="20" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="qlO-o3-f8Y" secondAttribute="height" multiplier="1:1" id="oX1-sa-zmZ"/>
@@ -1031,28 +1031,28 @@
                                                     <constraint firstAttribute="width" secondItem="MFY-MY-lPf" secondAttribute="height" multiplier="1:1" id="zOV-NK-deS"/>
                                                 </constraints>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty" translatesAutoresizingMaskIntoConstraints="NO" id="KtH-HD-zCT">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="service2" translatesAutoresizingMaskIntoConstraints="NO" id="KtH-HD-zCT">
                                                 <rect key="frame" x="20" y="393" width="20" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="KtH-HD-zCT" secondAttribute="height" multiplier="1:1" id="4Z1-yN-lbl"/>
                                                     <constraint firstAttribute="width" constant="20" id="aLE-Yd-P9q"/>
                                                 </constraints>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty" translatesAutoresizingMaskIntoConstraints="NO" id="9YY-hM-A8M">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sand_timer" translatesAutoresizingMaskIntoConstraints="NO" id="9YY-hM-A8M">
                                                 <rect key="frame" x="20" y="423" width="20" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="20" id="jH4-d2-WEf"/>
                                                     <constraint firstAttribute="width" secondItem="9YY-hM-A8M" secondAttribute="height" multiplier="1:1" id="x4C-6I-8Uh"/>
                                                 </constraints>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty" translatesAutoresizingMaskIntoConstraints="NO" id="EuF-mo-OvX">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unit" translatesAutoresizingMaskIntoConstraints="NO" id="EuF-mo-OvX">
                                                 <rect key="frame" x="111.5" y="333" width="20" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="EuF-mo-OvX" secondAttribute="height" multiplier="1:1" id="2se-SA-CBI"/>
                                                     <constraint firstAttribute="width" constant="20" id="cwc-9u-6qt"/>
                                                 </constraints>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty" translatesAutoresizingMaskIntoConstraints="NO" id="Sah-vo-gka">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="category" translatesAutoresizingMaskIntoConstraints="NO" id="Sah-vo-gka">
                                                 <rect key="frame" x="20" y="453" width="20" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="20" id="mah-9O-Li3"/>
@@ -1132,14 +1132,14 @@
                                                 <color key="textColor" red="0.26529417560000002" green="0.69572879050000003" blue="0.99636000390000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty" translatesAutoresizingMaskIntoConstraints="NO" id="Z5j-rs-Cw4">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location2" translatesAutoresizingMaskIntoConstraints="NO" id="Z5j-rs-Cw4">
                                                 <rect key="frame" x="20" y="483" width="20" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="Z5j-rs-Cw4" secondAttribute="height" multiplier="1:1" id="Lep-zq-wCy"/>
                                                     <constraint firstAttribute="width" constant="20" id="vX3-uc-Od5"/>
                                                 </constraints>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty" translatesAutoresizingMaskIntoConstraints="NO" id="1v9-0R-5zs">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="description" translatesAutoresizingMaskIntoConstraints="NO" id="1v9-0R-5zs">
                                                 <rect key="frame" x="20" y="513" width="20" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="20" id="7U2-z4-plX"/>
@@ -1153,7 +1153,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty" translatesAutoresizingMaskIntoConstraints="NO" id="cCj-67-6Oa">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sand_timer" translatesAutoresizingMaskIntoConstraints="NO" id="cCj-67-6Oa">
                                                 <rect key="frame" x="137.5" y="423" width="20" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="20" id="Cq7-Dd-JW3"/>
@@ -3708,8 +3708,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Sharrit_Logo" width="461" height="611"/>
+        <image name="category" width="50" height="50"/>
         <image name="cross" width="50" height="50"/>
         <image name="deposit2" width="26" height="26"/>
+        <image name="description" width="48" height="48"/>
         <image name="dollar" width="40" height="40"/>
         <image name="down" width="26" height="26"/>
         <image name="empty" width="450" height="313"/>
@@ -3717,13 +3720,18 @@
         <image name="filter" width="26" height="26"/>
         <image name="home" width="25" height="25"/>
         <image name="location" width="48" height="48"/>
+        <image name="location2" width="26" height="26"/>
         <image name="reorder" width="50" height="50"/>
+        <image name="sand_timer" width="50" height="50"/>
+        <image name="service2" width="50" height="50"/>
         <image name="tick" width="50" height="50"/>
         <image name="timer" width="50" height="50"/>
+        <image name="timer2" width="50" height="50"/>
+        <image name="unit" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="vcD-lC-BM6"/>
         <segue reference="KsR-4B-NmF"/>
-        <segue reference="EdK-t1-FNT"/>
+        <segue reference="lzh-8e-8Bb"/>
     </inferredMetricsTieBreakers>
 </document>

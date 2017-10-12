@@ -18,7 +18,7 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
     var sharreID: Int!
     var sharreTitle: String!
     var sharreDescription: String!
-    var sharreImageURL: String!
+    var sharreImageURL: String?
     var appointmentType: SharresType!
     var sharreStartTime: String!
     var sharreEndTime: String!

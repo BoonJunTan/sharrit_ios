@@ -19,6 +19,7 @@ class SharresCreationVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        navigationItem.hidesBackButton = true
         sharreLabel.text = sharreTitle
         let when = DispatchTime.now() + 4
         DispatchQueue.main.asyncAfter(deadline: when) {

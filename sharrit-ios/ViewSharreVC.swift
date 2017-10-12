@@ -96,14 +96,15 @@ class ViewSharreVC: UIViewController {
                     
                     self.sharreDeposit.text = "Deposit: $" + String(describing: json["content"]["deposit"].double!)
                     
-                    let photoURLStringArray = json["content"]["photos"].array
-                    self.photoArrayURLString = photoURLStringArray![photoURLStringArray!.count-1]["fileName"].description
-                    
-                    self.getAllPhoto(jsonData: json["content"]["photos"], completion: { photoArray in
-                        self.sharreImages.setImageInputs(Array(photoArray.prefix(4)))
-                        self.sharreImages.contentScaleMode = .scaleToFill
-                        self.sharreImages.circular = false
-                    })
+                    if !json["content"]["photos"].isEmpty {
+                        let photoURLStringArray = json["content"]["photos"].array
+                        self.photoArrayURLString = photoURLStringArray![photoURLStringArray!.count-1]["fileName"].description
+                        self.getAllPhoto(jsonData: json["content"]["photos"], completion: { photoArray in
+                            self.sharreImages.setImageInputs(Array(photoArray.prefix(4)))
+                            self.sharreImages.contentScaleMode = .scaleToFill
+                            self.sharreImages.circular = false
+                        })
+                    }
                     
                     if json["content"]["type"].int! == 0 {
                         if json["content"]["unit"].int! == 0 {

@@ -42,6 +42,8 @@ class WalletTopUpVC: UIViewController, STPPaymentCardTextFieldDelegate {
         }
     }
     
+    let loadingSpinner = LoadingSpinner(text: "Topping Up")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -63,6 +65,9 @@ class WalletTopUpVC: UIViewController, STPPaymentCardTextFieldDelegate {
             payButton.setTitle("Proceed to Cash Out", for: .normal)
             break
         }
+        
+        loadingSpinner.hide()
+        self.view.addSubview(loadingSpinner)
     }
     
     @IBAction func payButtonTapped(_ sender: Any) {
@@ -70,6 +75,8 @@ class WalletTopUpVC: UIViewController, STPPaymentCardTextFieldDelegate {
             errorLabel.text = "Please enter an amount"
             errorLabel.isHidden = false
         } else {
+            loadingSpinner.show()
+            payButton.isEnabled = false
             let card = paymentTextField.cardParams
             //send card information to stripe to get back a token
             getStripeToken(card: card)
@@ -101,6 +108,7 @@ class WalletTopUpVC: UIViewController, STPPaymentCardTextFieldDelegate {
         
         Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in
+            self.loadingSpinner.hide()
             switch response.result {
                 case .success(_):
                      if let data = (response.result.value as? Dictionary<String, Any>) {
@@ -115,7 +123,6 @@ class WalletTopUpVC: UIViewController, STPPaymentCardTextFieldDelegate {
                     print("Update Wallet API failure")
                     self.errorLabel.text = "Please enter valid credit card details"
                     self.errorLabel.isHidden = false
-                    break
             }
         }
     }
@@ -126,6 +133,9 @@ class WalletTopUpVC: UIViewController, STPPaymentCardTextFieldDelegate {
             payButton.backgroundColor = Colours.Blue.sharritBlue
         }
     }
+    
+    var activityIndicator = UIActivityIndicatorView()
+    var strLabel = UILabel()
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToTransaction" {

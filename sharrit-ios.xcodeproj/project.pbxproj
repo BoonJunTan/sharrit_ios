@@ -50,6 +50,7 @@
 		2791B33B1F8E1D0900AC937D /* FormatNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2791B33A1F8E1D0900AC937D /* FormatNumber.swift */; };
 		279497CA1F7DED8B00522999 /* SharreTimeUsageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279497C91F7DED8B00522999 /* SharreTimeUsageVC.swift */; };
 		279497CC1F7E258F00522999 /* TimeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279497CB1F7E258F00522999 /* TimeCollectionViewCell.swift */; };
+		2796C1EF1F8F630A008DA8D1 /* LoadingSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2796C1EE1F8F630A008DA8D1 /* LoadingSpinner.swift */; };
 		2799CDD71F8B6C6800DD4C22 /* RequestRefundVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2799CDD61F8B6C6800DD4C22 /* RequestRefundVC.swift */; };
 		2799CDD91F8B79CD00DD4C22 /* ViewRefundVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2799CDD81F8B79CD00DD4C22 /* ViewRefundVC.swift */; };
 		27ABAE811F670D81007F6CDB /* LoginAndSignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27ABAE801F670D81007F6CDB /* LoginAndSignUp.storyboard */; };
@@ -134,6 +135,7 @@
 		2791B33A1F8E1D0900AC937D /* FormatNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatNumber.swift; sourceTree = "<group>"; };
 		279497C91F7DED8B00522999 /* SharreTimeUsageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharreTimeUsageVC.swift; sourceTree = "<group>"; };
 		279497CB1F7E258F00522999 /* TimeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCollectionViewCell.swift; sourceTree = "<group>"; };
+		2796C1EE1F8F630A008DA8D1 /* LoadingSpinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingSpinner.swift; sourceTree = "<group>"; };
 		2799CDD61F8B6C6800DD4C22 /* RequestRefundVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestRefundVC.swift; sourceTree = "<group>"; };
 		2799CDD81F8B79CD00DD4C22 /* ViewRefundVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRefundVC.swift; sourceTree = "<group>"; };
 		27ABAE801F670D81007F6CDB /* LoginAndSignUp.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LoginAndSignUp.storyboard; sourceTree = "<group>"; };
@@ -390,6 +392,7 @@
 				27FCB7EF1F679857008E973C /* SharritButton.swift */,
 				27FCB7EB1F678FD1008E973C /* Colours.swift */,
 				274A36841F700F2100FD5E3C /* UIViewWithBorder.swift */,
+				2796C1EE1F8F630A008DA8D1 /* LoadingSpinner.swift */,
 			);
 			name = UIComponent;
 			sourceTree = "<group>";
@@ -672,6 +675,7 @@
 				275C05071F7BE7AF00E78E06 /* SharesInfoTableViewCell.swift in Sources */,
 				27C114881F718CCE00CD9FB9 /* SharesCollectionViewCell.swift in Sources */,
 				277CAA641F86324500F1FF6E /* SuccessfulBookingVC.swift in Sources */,
+				2796C1EF1F8F630A008DA8D1 /* LoadingSpinner.swift in Sources */,
 				27C114861F718C9100CD9FB9 /* TabCollectionViewCell.swift in Sources */,
 				27F256421F6AA1C6006B1697 /* ButtonCollectionViewCell.swift in Sources */,
 				2764C47D1F726FDD00DB7199 /* SharrorFormVC.swift in Sources */,
