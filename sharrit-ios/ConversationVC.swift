@@ -19,7 +19,7 @@ enum ComingFrom {
 final class ConversationVC: JSQMessagesViewController {
     
     // If there is Sharre for Convo
-    @IBOutlet weak var sharreInfoView: UIView!
+    let sharreView = SharreInfo()
     
     var messages = [JSQMessage]()
     var outgoingBubbleImageView: JSQMessagesBubbleImage!
@@ -75,17 +75,25 @@ final class ConversationVC: JSQMessagesViewController {
             //sharreDescription.text = chat!.sharreDescription!
             //ImageDownloader().imageFromServerURL(urlString: chat!.sharreImageURL!, imageView: sharreImage)
             
-            let sharreView = SharreInfo()
+            if let customView = Bundle.main.loadNibNamed("SharreInfo", owner: self, options: nil)?.first as? SharreInfo {
+                customView.frame.size = CGSize(width: self.view.bounds.width, height: 80)
+                customView.frame.origin = CGPoint(x: 0, y: 0)
+                customView.sharreDescription.text = chat!.sharreDescription!
+                customView.title.text = chat!.sharreTitle!
+                if chat!.sharreImageURL! == "null" {
+                    customView.imageView.image = #imageLiteral(resourceName: "empty")
+                } else {
+                    ImageDownloader().imageFromServerURL(urlString: SharritURL.devPhotoURL + chat!.sharreImageURL!, imageView: customView.imageView)
+                }
+                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(goToSharre))
+                customView.addGestureRecognizer(tapGesture)
+                collectionView.addSubview(customView)
+            }
             
-            //sharreView.imageView.image = #imageLiteral(resourceName: "empty")
-            //sharreView.sharreDescription.text = "HAHAHHHAHHA"
-            //sharreView.backgroundColor = Colours.Blue.sharritBlue
-            view.addSubview(sharreView!)
+            self.collectionView?.collectionViewLayout.sectionInset = UIEdgeInsets(top: 80, left: 0, bottom: 0, right: 0)
             
             let rightButtonItem = UIBarButtonItem(title: "View Sharre", style: .done, target: self, action: #selector(goToSharre))
             self.navigationItem.rightBarButtonItem = rightButtonItem
-        } else {
-            sharreInfoView.isHidden = true
         }
         
         if comingFrom == .Messages {
@@ -93,28 +101,6 @@ final class ConversationVC: JSQMessagesViewController {
         } else {
             
         }
-    }
-    
-    func addViewOnTop() {
-        self.collectionView?.collectionViewLayout.sectionInset = UIEdgeInsets(top: 80, left: 0, bottom: 0, right: 0)
-        
-        let selectableView = UIView(frame: CGRect(x: 0, y: 60, width: self.view.bounds.width, height: 80))
-        selectableView.backgroundColor = .red
-        
-        let imageView = UIImageView(frame: CGRect(x: 20, y: selectableView.layer.frame.height - 40 / 2, width: 40, height: 40))
-        imageView.image = #imageLiteral(resourceName: "empty")
-        
-        let randomViewLabel = UILabel(frame: CGRect(x: 80, y: 10, width: 150, height: 20))
-        randomViewLabel.text = "Sharre Title"
-        
-        let randomViewLabel2 = UILabel(frame: CGRect(x: 80, y: 35, width: 150, height: 40))
-        randomViewLabel.text = "Sharre Description"
-        
-        selectableView.addSubview(imageView)
-        selectableView.addSubview(randomViewLabel)
-        selectableView.addSubview(randomViewLabel2)
-        
-        view.addSubview(selectableView)
     }
     
     override func viewDidAppear(_ animated: Bool) {

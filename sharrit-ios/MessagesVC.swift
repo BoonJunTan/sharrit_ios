@@ -117,7 +117,7 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                         if !subJson["sharre"].isEmpty {
                             newConvo.sharreID = subJson["sharre"]["sharreId"].int
                             newConvo.sharreTitle = subJson["sharre"]["name"].description
-                            newConvo.sharreImageURL = subJson["sharre"]["photos"]["fileName"].description
+                            newConvo.sharreImageURL = subJson["sharre"]["photos"].array?.last!["fileName"].description
                             newConvo.sharreDescription = subJson["sharre"]["description"].description
                         }
                         
@@ -144,7 +144,7 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         cell.messageLabel.text = chats[indexPath.row].latestMessage
         
         if let urlString = chats[indexPath.row].sharreImageURL {
-            ImageDownloader().imageFromServerURL(urlString: urlString, imageView: cell.imageView!)
+            ImageDownloader().imageFromServerURL(urlString: SharritURL.devPhotoURL + urlString, imageView: cell.itemIV)
         } else {
             cell.imageView?.isHidden = true
         }

@@ -14,13 +14,4 @@ class SharreInfo: UIView {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var sharreDescription: UILabel!
     
-    override init(frame: CGrect) {
-        super.init(frame: frame)
-        let xibView = UINib(nibName: "SharreInfo", bundle: nil).instantiate(withOwner: nil, options:nil)[0] as! UIView
-        self.addSubview(xibView)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
 }
