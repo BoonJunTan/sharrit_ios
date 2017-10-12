@@ -77,7 +77,7 @@ final class ConversationVC: JSQMessagesViewController {
             
             if let customView = Bundle.main.loadNibNamed("SharreInfo", owner: self, options: nil)?.first as? SharreInfo {
                 customView.frame.size = CGSize(width: self.view.bounds.width, height: 80)
-                customView.frame.origin = CGPoint(x: 0, y: 0)
+                customView.frame.origin = CGPoint(x: 0, y: 60)
                 customView.sharreDescription.text = chat!.sharreDescription!
                 customView.title.text = chat!.sharreTitle!
                 if chat!.sharreImageURL! == "null" {
