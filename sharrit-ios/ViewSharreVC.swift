@@ -162,7 +162,7 @@ class ViewSharreVC: UIViewController {
         }
         
         var deactivateOrNotTitle: String!
-        if sharreStatusBool {
+        if sharreStatusBool! {
             deactivateOrNotTitle = "Deactivate Sharre"
         } else {
             deactivateOrNotTitle = "Activate Sharre"
@@ -194,7 +194,7 @@ class ViewSharreVC: UIViewController {
     // Deactivate Sharre
     func deactivateSharre() {
         var deactivateOrNotTitle: String!
-        if sharreStatusBool {
+        if sharreStatusBool! {
             deactivateOrNotTitle = "Deactivating Sharre"
         } else {
             deactivateOrNotTitle = "Activating Sharre"
@@ -204,7 +204,7 @@ class ViewSharreVC: UIViewController {
         alert.addAction(UIAlertAction(title: "I'm sure", style: .default, handler: { (_) in
             
             let url:String!
-            if self.sharreStatusBool {
+            if self.sharreStatusBool! {
                 url = SharritURL.devURL + "sharre/status/" + String(describing: self.sharreID!) + "/false"
             } else {
                 url = SharritURL.devURL + "sharre/status/" + String(describing: self.sharreID!) + "/true"
