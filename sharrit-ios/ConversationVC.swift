@@ -20,9 +20,6 @@ final class ConversationVC: JSQMessagesViewController {
     
     // If there is Sharre for Convo
     @IBOutlet weak var sharreInfoView: UIView!
-    @IBOutlet weak var sharreTitle: UILabel!
-    @IBOutlet weak var sharreDescription: UILabel!
-    @IBOutlet weak var sharreImage: UIImageView!
     
     var messages = [JSQMessage]()
     var outgoingBubbleImageView: JSQMessagesBubbleImage!
@@ -78,10 +75,12 @@ final class ConversationVC: JSQMessagesViewController {
             //sharreDescription.text = chat!.sharreDescription!
             //ImageDownloader().imageFromServerURL(urlString: chat!.sharreImageURL!, imageView: sharreImage)
             
+            let sharreView = SharreInfo()
             
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(goToSharre))
-            sharreInfoView.addGestureRecognizer(tapGesture)
-            sharreInfoView.isHidden = false
+            //sharreView.imageView.image = #imageLiteral(resourceName: "empty")
+            //sharreView.sharreDescription.text = "HAHAHHHAHHA"
+            //sharreView.backgroundColor = Colours.Blue.sharritBlue
+            view.addSubview(sharreView!)
             
             let rightButtonItem = UIBarButtonItem(title: "View Sharre", style: .done, target: self, action: #selector(goToSharre))
             self.navigationItem.rightBarButtonItem = rightButtonItem
