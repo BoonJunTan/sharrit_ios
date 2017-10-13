@@ -72,8 +72,12 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                 var time = timeString.replacingOccurrences(of: " minutes", with: "")
                 time = time.replacingOccurrences(of: ",", with: "")
                 time = time.replacingOccurrences(of: " minute", with: "")
-                let calculatePrice = tableViewItems[indexPath.row].sharreOnGoingPrice! / 60.0 * Double(time)!
-                cell.sharesUsage.text = "Usage: " + String(format: "%.2f", calculatePrice) + "+++"
+                if let onGoingPrice = tableViewItems[indexPath.row].sharreOnGoingPrice {
+                    let calculatePrice = onGoingPrice / 60.0 * Double(time)!
+                    cell.sharesUsage.text = "Usage: " + String(format: "%.2f", calculatePrice) + "+++"
+                } else {
+                    cell.sharesUsage.text = "Usage: " + tableViewItems[indexPath.row].amount
+                }
             } else {
                 cell.sharesDate.text = "Duration: Not Started Yet"
                 cell.sharesUsage.text = "Usage: $0"

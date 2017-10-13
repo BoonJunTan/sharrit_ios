@@ -703,10 +703,22 @@
                                     <action selector="payButtonTapped:" destination="0g8-Yo-Zxh" eventType="touchUpInside" id="1nb-lb-YNY"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ml3-pn-ooa">
-                                <rect key="frame" x="170" y="433" width="35" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Scan"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EM8-Bc-sr6">
+                                <rect key="frame" x="15" y="408.5" width="345" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ml3-pn-ooa" customClass="SharritButton" customModule="sharrit_ios" customModuleProvider="target">
+                                <rect key="frame" x="15" y="448" width="345" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Scan With Card"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isRounded" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="scanCardTapped:" destination="0g8-Yo-Zxh" eventType="touchUpInside" id="tSM-ed-D0B"/>
                                 </connections>
@@ -717,18 +729,24 @@
                             <constraint firstAttribute="trailing" secondItem="2sT-NK-Mfr" secondAttribute="trailing" constant="15" id="4lX-55-bF4"/>
                             <constraint firstAttribute="trailing" secondItem="NEr-CA-Whx" secondAttribute="trailing" constant="15" id="5Kx-vq-BW8"/>
                             <constraint firstItem="v4m-Je-CBW" firstAttribute="top" secondItem="bf1-ZO-THs" secondAttribute="bottom" constant="30" id="BpS-bW-zUJ"/>
+                            <constraint firstItem="Ml3-pn-ooa" firstAttribute="top" secondItem="EM8-Bc-sr6" secondAttribute="bottom" constant="18.5" id="Ia0-Ko-gIv"/>
                             <constraint firstItem="0nY-Jn-6ML" firstAttribute="leading" secondItem="xN4-0W-1Dp" secondAttribute="leading" constant="15" id="Jgr-Fl-oIu"/>
                             <constraint firstItem="qCq-ZZ-6QH" firstAttribute="top" secondItem="bgc-0f-prR" secondAttribute="bottom" constant="30" id="K6Y-Eu-Kbj"/>
                             <constraint firstItem="bgc-0f-prR" firstAttribute="top" secondItem="v4m-Je-CBW" secondAttribute="bottom" constant="10" id="YOi-9f-d55"/>
                             <constraint firstItem="NEr-CA-Whx" firstAttribute="leading" secondItem="xN4-0W-1Dp" secondAttribute="leading" constant="15" id="aoa-qy-Wrl"/>
+                            <constraint firstItem="Ml3-pn-ooa" firstAttribute="trailing" secondItem="EM8-Bc-sr6" secondAttribute="trailing" id="b1U-e9-jQz"/>
                             <constraint firstItem="bgc-0f-prR" firstAttribute="leading" secondItem="xN4-0W-1Dp" secondAttribute="leading" constant="15" id="c6Q-wM-NcL"/>
                             <constraint firstItem="v4m-Je-CBW" firstAttribute="leading" secondItem="xN4-0W-1Dp" secondAttribute="leading" constant="15" id="jT5-Y2-9QG"/>
                             <constraint firstItem="0nY-Jn-6ML" firstAttribute="top" secondItem="2sT-NK-Mfr" secondAttribute="bottom" constant="30" id="jtt-BC-O6h"/>
                             <constraint firstItem="2sT-NK-Mfr" firstAttribute="top" secondItem="qCq-ZZ-6QH" secondAttribute="bottom" constant="10" id="lSa-Bq-KS1"/>
                             <constraint firstItem="qCq-ZZ-6QH" firstAttribute="leading" secondItem="xN4-0W-1Dp" secondAttribute="leading" constant="15" id="nXY-su-7oq"/>
                             <constraint firstItem="2sT-NK-Mfr" firstAttribute="leading" secondItem="xN4-0W-1Dp" secondAttribute="leading" constant="15" id="qLf-xX-tIz"/>
+                            <constraint firstItem="EM8-Bc-sr6" firstAttribute="leading" secondItem="NEr-CA-Whx" secondAttribute="leading" id="sqg-BP-Kqa"/>
+                            <constraint firstItem="EM8-Bc-sr6" firstAttribute="top" secondItem="NEr-CA-Whx" secondAttribute="bottom" constant="20" id="uaB-38-cdH"/>
+                            <constraint firstItem="Ml3-pn-ooa" firstAttribute="leading" secondItem="EM8-Bc-sr6" secondAttribute="leading" id="us0-kt-t24"/>
                             <constraint firstAttribute="trailing" secondItem="bgc-0f-prR" secondAttribute="trailing" constant="15" id="v8P-jX-DVg"/>
                             <constraint firstItem="NEr-CA-Whx" firstAttribute="top" secondItem="0nY-Jn-6ML" secondAttribute="bottom" constant="30" id="xRb-MM-bv7"/>
+                            <constraint firstItem="EM8-Bc-sr6" firstAttribute="trailing" secondItem="NEr-CA-Whx" secondAttribute="trailing" id="yhx-RX-KSA"/>
                             <constraint firstAttribute="trailing" secondItem="0nY-Jn-6ML" secondAttribute="trailing" constant="15" id="ykB-8r-pKB"/>
                         </constraints>
                     </view>
