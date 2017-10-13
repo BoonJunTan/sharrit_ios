@@ -137,8 +137,8 @@ class BusinessSharesVC: UIViewController, UICollectionViewDataSource, UICollecti
                         let sharreType = subJson["type"].int!
                         let sharreQty = subJson["qty"].int!
                         let sharreUnit = subJson["unit"].int!
-                        let sharrePrice = subJson["price"].double!
-                        let sharreDeposit = subJson["deposit"].double!
+                        let sharrePrice = subJson["price"].description
+                        let sharreDeposit = subJson["deposit"].description
                         let sharreLocation = subJson["name"].description
                         
                         var photoArray = [String]()

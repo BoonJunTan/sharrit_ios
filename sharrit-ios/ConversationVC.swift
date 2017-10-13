@@ -92,8 +92,8 @@ final class ConversationVC: JSQMessagesViewController {
             
             self.collectionView?.collectionViewLayout.sectionInset = UIEdgeInsets(top: 80, left: 0, bottom: 0, right: 0)
             
-            let rightButtonItem = UIBarButtonItem(title: "View Sharre", style: .done, target: self, action: #selector(goToSharre))
-            self.navigationItem.rightBarButtonItem = rightButtonItem
+            let navBarClose = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(closeMessages))
+            self.navigationItem.leftBarButtonItem = navBarClose
         }
         
         if comingFrom == .Messages {
@@ -115,6 +115,11 @@ final class ConversationVC: JSQMessagesViewController {
     
     func goToSharre(sender: UITapGestureRecognizer? = nil) {
         performSegue(withIdentifier: "viewSharre", sender: nil)
+    }
+    
+    func closeMessages() {
+        self.modalTransitionStyle = .coverVertical
+        self.dismiss(animated: true, completion: nil)
     }
     
     override func didPressAccessoryButton(_ sender: UIButton) {

@@ -77,26 +77,6 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         // Get Latest Pending/Join Business
         getLatestBusinessInfo()
-        
-        // First check - 3rd Party Business
-        if businessInfo.businessType == 1 {
-            self.navigationItem.rightBarButtonItem = nil
-            // Second check - If User already joined business or pending
-            if (appDelegate.user?.joinedSBList.contains(businessInfo.businessId))! {
-                createSharreBtn.isHidden = false
-                
-                let navBarQuit = UIBarButtonItem(title: "Quit", style: .plain, target: self, action: #selector(quitBusiness))
-                
-                self.navigationItem.rightBarButtonItem = navBarQuit
-            } else if (appDelegate.user?.pendingSBList.contains(businessInfo.businessId))! {
-                pendingApprovalBtn.isHidden = false
-            } else {
-                // Third check - If there is a request form
-                if businessInfo.requestFormID != -1 {
-                    joinSharrorBtn.isHidden = false
-                }
-            }
-        }
     }
     
     // Set up Table View - Description and Reviews
@@ -170,6 +150,26 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                         // This is to save to appDelegate
                         self.appDelegate.user!.joinedSBList = joinedBusinessList
                         self.appDelegate.user!.pendingSBList = pendingBusinessList
+                        
+                        // First check - 3rd Party Business
+                        if self.businessInfo.businessType == 1 {
+                            self.navigationItem.rightBarButtonItem = nil
+                            // Second check - If User already joined business or pending
+                            if (self.appDelegate.user?.joinedSBList.contains(self.businessInfo.businessId))! {
+                                self.createSharreBtn.isHidden = false
+                                
+                                let navBarQuit = UIBarButtonItem(title: "Quit", style: .plain, target: self, action: #selector(self.quitBusiness))
+                                
+                                self.navigationItem.rightBarButtonItem = navBarQuit
+                            } else if (self.appDelegate.user?.pendingSBList.contains(self.businessInfo.businessId))! {
+                                self.pendingApprovalBtn.isHidden = false
+                            } else {
+                                // Third check - If there is a request form
+                                if self.businessInfo.requestFormID != -1 {
+                                    self.joinSharrorBtn.isHidden = false
+                                }
+                            }
+                        }
                     }
                 }
                 break

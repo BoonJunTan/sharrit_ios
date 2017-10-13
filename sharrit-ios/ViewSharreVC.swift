@@ -94,7 +94,7 @@ class ViewSharreVC: UIViewController {
                         }
                     }
                     
-                    self.sharreDeposit.text = "Deposit: $" + String(describing: json["content"]["deposit"].double!)
+                    self.sharreDeposit.text = "Deposit: $" + json["content"]["depositIos"].description
                     
                     if !json["content"]["photos"].isEmpty {
                         let photoURLStringArray = json["content"]["photos"].array

@@ -263,20 +263,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sharrit_Logo" translatesAutoresizingMaskIntoConstraints="NO" id="87O-HZ-sRj">
-                                <rect key="frame" x="120.5" y="154" width="133" height="133.5"/>
+                                <rect key="frame" x="120.5" y="114" width="133" height="133.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="87O-HZ-sRj" secondAttribute="height" multiplier="1:1" id="S6i-oO-9xb"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zbJ-om-985">
-                                <rect key="frame" x="19" y="312.5" width="337.5" height="267"/>
+                                <rect key="frame" x="19" y="272.5" width="337.5" height="267"/>
                                 <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iD7-vp-K7U" customClass="SharritButton" customModule="sharrit_ios" customModuleProvider="target">
-                                <rect key="frame" x="37.5" y="604.5" width="300" height="30"/>
+                                <rect key="frame" x="37.5" y="564.5" width="300" height="30"/>
                                 <state key="normal" title="Contact Us!"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isRounded" value="YES"/>
@@ -780,7 +780,7 @@ Cheers!</string>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xiz-dh-8EH" userLabel="Ongoing Btn" customClass="SharritButton" customModule="sharrit_ios" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="125" height="33.5"/>
-                                        <state key="normal" title="ON-GOING"/>
+                                        <state key="normal" title="ONGOING"/>
                                         <connections>
                                             <action selector="ongoingBtnPressed:" destination="XZx-pB-VQa" eventType="touchUpInside" id="s9h-jf-1wZ"/>
                                         </connections>
