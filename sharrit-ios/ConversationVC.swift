@@ -87,7 +87,7 @@ final class ConversationVC: JSQMessagesViewController {
                 }
                 let tapGesture = UITapGestureRecognizer(target: self, action: #selector(goToSharre))
                 customView.addGestureRecognizer(tapGesture)
-                collectionView.addSubview(customView)
+                view.addSubview(customView)
             }
             
             self.collectionView?.collectionViewLayout.sectionInset = UIEdgeInsets(top: 80, left: 0, bottom: 0, right: 0)
