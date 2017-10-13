@@ -96,8 +96,6 @@ class SharreTimeUsageVC: UIViewController {
     }
     
     @IBAction func bookBtnPressed(_ sender: SharritButton) {
-        self.performSegue(withIdentifier: "viewSuccessful", sender: nil)
-        
         let deposit = depositLabel.text!.replacingOccurrences(of: "Deposit: $", with: "")
         
         let url = SharritURL.devURL + "transaction/" + String(describing: sharreID!)
