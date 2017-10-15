@@ -61,7 +61,7 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "sharesInfoCell") as! SharesInfoTableViewCell
         
-        cell.sharesTitle.text = String(describing: tableViewItems[indexPath.row].sharreName!)
+        cell.sharesTitle.text = String(describing: tableViewItems[indexPath.row].transactionId) + ". " + String(describing: tableViewItems[indexPath.row].sharreName!)
         cell.sharesDeposit.text = "Deposit: $" + tableViewItems[indexPath.row].deposit
         cell.sharesUsage.text = "Usage: $" + tableViewItems[indexPath.row].amount
         
@@ -125,46 +125,50 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableViewItems[indexPath.row].hasStarted != nil  && userRole == .Sharror {
-            let optionMenu = UIAlertController(title: nil, message: "What would you like to do?", preferredStyle: .actionSheet)
-            
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action -> Void in
+            if sharreStatus == .Completed {
+                let optionMenu = UIAlertController(title: nil, message: "What would you like to do?", preferredStyle: .actionSheet)
                 
-            }
-            
-            var nextActionTitle: String!
-            tableViewItems[indexPath.row].hasStarted! ? (nextActionTitle = "End Sharre") : (nextActionTitle = "Start Sharre")
-            
-            let nextAction = UIAlertAction(title: nextActionTitle, style: .default) { action -> Void in
-                self.startEndShares(boolean: self.tableViewItems[indexPath.row].hasStarted!, transactionID: self.tableViewItems[indexPath.row].transactionId)
-            }
-            
-            optionMenu.addAction(nextAction)
-            optionMenu.addAction(cancelAction)
-            self.present(optionMenu, animated: true, completion: nil)
-        } else if userRole == .Sharror && sharreStatus == .Completed {
-            let optionMenu = UIAlertController(title: nil, message: "What would you like to do?", preferredStyle: .actionSheet)
-            
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action -> Void in
-                
-            }
-            
-            var nextActionTitle: String!
-            tableViewItems[indexPath.row].isHoldingDeposit! ? (nextActionTitle = "Return Deposit") : (nextActionTitle = "Hold Deposit")
-            
-            let holdReturnDepositAction = UIAlertAction(title: nextActionTitle, style: .default) { action -> Void in
-                self.returnDepositForShares(boolean: self.tableViewItems[indexPath.row].isHoldingDeposit!, transactionID: self.tableViewItems[indexPath.row].transactionId)
-            }
-            
-            if tableViewItems[indexPath.row].isWaitingRefund! {
-                let viewRefundAction = UIAlertAction(title: "View Refund Details", style: .default) { action -> Void in
-                    self.performSegue(withIdentifier: "viewRefund", sender: self.tableViewItems[indexPath.row])
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action -> Void in
+                    
                 }
-                optionMenu.addAction(viewRefundAction)
+                
+                let holdDepositAction = UIAlertAction(title: "Hold Deposit", style: .default) { action -> Void in
+                    self.returnDepositForShares(boolean: false, transactionID: self.tableViewItems[indexPath.row].transactionId)
+                }
+                
+                let returnDepositAction = UIAlertAction(title: "Return Deposit", style: .default) { action -> Void in
+                    self.returnDepositForShares(boolean: true, transactionID: self.tableViewItems[indexPath.row].transactionId)
+                }
+                
+                if tableViewItems[indexPath.row].isWaitingRefund! {
+                    let viewRefundAction = UIAlertAction(title: "View Refund Details", style: .default) { action -> Void in
+                        self.performSegue(withIdentifier: "viewRefund", sender: self.tableViewItems[indexPath.row])
+                    }
+                    optionMenu.addAction(viewRefundAction)
+                }
+                
+                optionMenu.addAction(holdDepositAction)
+                optionMenu.addAction(returnDepositAction)
+                optionMenu.addAction(cancelAction)
+                self.present(optionMenu, animated: true, completion: nil)
+            } else {
+                let optionMenu = UIAlertController(title: nil, message: "What would you like to do?", preferredStyle: .actionSheet)
+                
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action -> Void in
+                    
+                }
+                
+                var nextActionTitle: String!
+                tableViewItems[indexPath.row].hasStarted! ? (nextActionTitle = "End Sharre") : (nextActionTitle = "Start Sharre")
+                
+                let nextAction = UIAlertAction(title: nextActionTitle, style: .default) { action -> Void in
+                    self.startEndShares(boolean: self.tableViewItems[indexPath.row].hasStarted!, transactionID: self.tableViewItems[indexPath.row].transactionId)
+                }
+                
+                optionMenu.addAction(nextAction)
+                optionMenu.addAction(cancelAction)
+                self.present(optionMenu, animated: true, completion: nil)
             }
-            
-            optionMenu.addAction(holdReturnDepositAction)
-            optionMenu.addAction(cancelAction)
-            self.present(optionMenu, animated: true, completion: nil)
         } else if userRole == .Sharrie && sharreStatus == .Completed {
             let optionMenu = UIAlertController(title: nil, message: "What would you like to do?", preferredStyle: .actionSheet)
             
@@ -220,7 +224,7 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         if boolean {
             url = SharritURL.devURL + "transaction/deposit/return/" + String(describing: transactionID)
         } else {
-            url = SharritURL.devURL + "transaction/deposit/hold/" + String(describing: transactionID)
+            url = SharritURL.devURL + "transaction/deposit/keep/" + String(describing: transactionID)
         }
         
         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
