@@ -75,24 +75,8 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         joinSharrorBtn.isHidden = true
         pendingApprovalBtn.isHidden = true
         
-        // First check - 3rd Party Business
-        if businessInfo.businessType == 1 {
-            // Second check - If User already joined business or pending
-            if (appDelegate.user?.joinedSBList.contains(businessInfo.businessId))! {
-                createSharreBtn.isHidden = false
-                
-                let navBarQuit = UIBarButtonItem(title: "Quit", style: .plain, target: self, action: #selector(quitBusiness))
-                
-                self.navigationItem.rightBarButtonItem = navBarQuit
-            } else if (appDelegate.user?.pendingSBList.contains(businessInfo.businessId))! {
-                pendingApprovalBtn.isHidden = false
-            } else {
-                // Third check - If there is a request form
-                if businessInfo.requestFormID != -1 {
-                    joinSharrorBtn.isHidden = false
-                }
-            }
-        }
+        // Get Latest Pending/Join Business
+        getLatestBusinessInfo()
     }
     
     // Set up Table View - Description and Reviews
@@ -135,6 +119,67 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         tableView.reloadData()
     }
     
+    func getLatestBusinessInfo() {
+        let url = SharritURL.devURL + "user/" + String(describing: appDelegate.user!.userID)
+        
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+            response in
+            switch response.result {
+            case .success(_):
+                if let data = response.result.value {
+                    for (_, subJson) in JSON(data)["content"] {
+                        let joinedBusinessList = subJson["bizList"].arrayObject! as! [Int]
+                        let pendingBusinessList = subJson["pendingList"].arrayObject! as! [Int]
+                        
+                        // This is to save to user preference
+                        var userInfoDict = UserDefaults.standard.object(forKey: "userInfo") as? [String: Any]
+                        
+                        for (key, _):(String, JSON) in subJson {
+                            if key == "bizList" {
+                                userInfoDict!["key"] = joinedBusinessList
+                            } else if key == "pendingList" {
+                                userInfoDict!["key"] = pendingBusinessList
+                            } else {
+                                userInfoDict!["key"] = subJson.stringValue
+                            }
+                        }
+                        
+                        UserDefaults.standard.set(userInfoDict, forKey: "userInfo")
+                        UserDefaults.standard.synchronize()
+                        
+                        // This is to save to appDelegate
+                        self.appDelegate.user!.joinedSBList = joinedBusinessList
+                        self.appDelegate.user!.pendingSBList = pendingBusinessList
+                        
+                        // First check - 3rd Party Business
+                        if self.businessInfo.businessType == 1 {
+                            self.navigationItem.rightBarButtonItem = nil
+                            // Second check - If User already joined business or pending
+                            if (self.appDelegate.user?.joinedSBList.contains(self.businessInfo.businessId))! {
+                                self.createSharreBtn.isHidden = false
+                                
+                                let navBarQuit = UIBarButtonItem(title: "Quit", style: .plain, target: self, action: #selector(self.quitBusiness))
+                                
+                                self.navigationItem.rightBarButtonItem = navBarQuit
+                            } else if (self.appDelegate.user?.pendingSBList.contains(self.businessInfo.businessId))! {
+                                self.pendingApprovalBtn.isHidden = false
+                            } else {
+                                // Third check - If there is a request form
+                                if self.businessInfo.requestFormID != -1 {
+                                    self.joinSharrorBtn.isHidden = false
+                                }
+                            }
+                        }
+                    }
+                }
+                break
+            case .failure(_):
+                print("Get User Info API failed")
+                break
+            }
+        }
+    }
+    
     // Quit Business
     func quitBusiness() {
         let alert = UIAlertController(title: "Quiting Business...", message: "Are you sure about this?", preferredStyle: .alert)
@@ -142,12 +187,7 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         alert.addAction(UIAlertAction(title: "I'm sure", style: .default, handler: { (_) in
             let url = SharritURL.devURL + "sharror/withdraw/" + String(describing: self.businessInfo.businessId!) + "/" + String(describing: self.appDelegate.user!.userID)
             
-            let headers: HTTPHeaders = [
-                "Authorization": "Bearer " + self.appDelegate.user!.accessToken,
-                "Accept": "application/json" // Need this?
-            ]
-            
-            Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON {
+            Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
                 response in
                 switch response.result {
                 case .success(_):

@@ -15,9 +15,9 @@ import SwiftyJSON
 class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
-    let tableViewSection = ["COMMON", "SHARRIE", "SHARROR", "SETTINGS"]
-    var tableViewIcons = [[#imageLiteral(resourceName: "reputation")], [#imageLiteral(resourceName: "transaction")], [#imageLiteral(resourceName: "Sharrit_Logo"), #imageLiteral(resourceName: "business"), #imageLiteral(resourceName: "business"), #imageLiteral(resourceName: "transaction")], [#imageLiteral(resourceName: "profile2"), #imageLiteral(resourceName: "help"), #imageLiteral(resourceName: "logout")]]
-    var tableViewItems = [["Reputation"], ["Sharres Status OvervieW"], ["Sharres Offered", "Sharing Business (Joined)", "Sharing Business (Pending)", "Sharres Status Overview"], ["Profile Settings", "Help Centre", "Logout"]]
+    let tableViewSection = ["General", "AS A SHARRIE", "AS A SHARROR", "SETTINGS"]
+    var tableViewIcons = [[#imageLiteral(resourceName: "reputation")], [#imageLiteral(resourceName: "transaction")], [#imageLiteral(resourceName: "Sharrit_Logo"), #imageLiteral(resourceName: "business"), #imageLiteral(resourceName: "sand_timer"), #imageLiteral(resourceName: "transaction")], [#imageLiteral(resourceName: "profile2"), #imageLiteral(resourceName: "help"), #imageLiteral(resourceName: "logout")]]
+    var tableViewItems = [["Reputation"], ["Sharres Status OvervieW"], ["Sharres Offered", "Sharing Business", "Pending Join Requests", "Sharres Status Overview"], ["Profile Settings", "Help Centre", "Logout"]]
 
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var profileLabe: UILabel!
@@ -122,10 +122,10 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
         case "Sharres Status OvervieW", "Sharres Status Overview":
             self.performSegue(withIdentifier: "showShares", sender: tableViewItems[indexPath.section][indexPath.row])
             break
-        case "Sharing Business (Joined)":
+        case "Sharing Business":
             self.performSegue(withIdentifier: "showSB", sender: "Joined")
             break
-        case "Sharing Business (Pending)":
+        case "Pending Join Requests":
             self.performSegue(withIdentifier: "showSB", sender: "Pending")
             break
         case "Profile Settings":
@@ -208,15 +208,10 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
 
             let url = SharritURL.devURL + "user/upload/" + String(describing: appDelegate.user!.userID)
             
-            let headers: HTTPHeaders = [
-                "Authorization": "Bearer " + appDelegate.user!.accessToken,
-                "Accept": "application/json" // Need this?
-            ]
-            
             Alamofire.upload(multipartFormData: { multipartFormData in
                 if let imageData = UIImageJPEGRepresentation(pickedImage, 0.5) {
                     multipartFormData.append(imageData, withName: "file", fileName: "userID" + String(describing: appDelegate.user!.userID) + ".png", mimeType: "image/png")
-                }}, to: url, method: .post, headers: headers,
+                }}, to: url, method: .post, headers: [:],
                     encodingCompletion: { encodingResult in
                         switch encodingResult {
                         case .success(let upload, _, _):

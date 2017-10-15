@@ -41,6 +41,7 @@ class ViewSharreVC: UIViewController {
     
     var sharreStatusBool: Bool!
     var photoArraySource = [ImageSource]()
+    var photoArrayURLString: String!
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
@@ -93,13 +94,17 @@ class ViewSharreVC: UIViewController {
                         }
                     }
                     
-                    self.sharreDeposit.text = "Deposit: $" + String(describing: json["content"]["deposit"].double!)
+                    self.sharreDeposit.text = "Deposit: $" + json["content"]["depositIos"].description
                     
-                    self.getAllPhoto(jsonData: json["content"]["photos"], completion: { photoArray in
-                        self.sharreImages.setImageInputs(Array(photoArray.prefix(4)))
-                        self.sharreImages.contentScaleMode = .scaleToFill
-                        self.sharreImages.circular = false
-                    })
+                    if !json["content"]["photos"].isEmpty {
+                        let photoURLStringArray = json["content"]["photos"].array
+                        self.photoArrayURLString = photoURLStringArray![photoURLStringArray!.count-1]["fileName"].description
+                        self.getAllPhoto(jsonData: json["content"]["photos"], completion: { photoArray in
+                            self.sharreImages.setImageInputs(Array(photoArray.prefix(4)))
+                            self.sharreImages.contentScaleMode = .scaleToFill
+                            self.sharreImages.circular = false
+                        })
+                    }
                     
                     if json["content"]["type"].int! == 0 {
                         if json["content"]["unit"].int! == 0 {
@@ -162,7 +167,7 @@ class ViewSharreVC: UIViewController {
         }
         
         var deactivateOrNotTitle: String!
-        if sharreStatusBool {
+        if sharreStatusBool! {
             deactivateOrNotTitle = "Deactivate Sharre"
         } else {
             deactivateOrNotTitle = "Activate Sharre"
@@ -194,7 +199,7 @@ class ViewSharreVC: UIViewController {
     // Deactivate Sharre
     func deactivateSharre() {
         var deactivateOrNotTitle: String!
-        if sharreStatusBool {
+        if sharreStatusBool! {
             deactivateOrNotTitle = "Deactivating Sharre"
         } else {
             deactivateOrNotTitle = "Activating Sharre"
@@ -204,7 +209,7 @@ class ViewSharreVC: UIViewController {
         alert.addAction(UIAlertAction(title: "I'm sure", style: .default, handler: { (_) in
             
             let url:String!
-            if self.sharreStatusBool {
+            if self.sharreStatusBool! {
                 url = SharritURL.devURL + "sharre/status/" + String(describing: self.sharreID!) + "/false"
             } else {
                 url = SharritURL.devURL + "sharre/status/" + String(describing: self.sharreID!) + "/true"
@@ -265,6 +270,8 @@ class ViewSharreVC: UIViewController {
             if let sharreBookingVC = segue.destination as? SharreBookingVC {
                 sharreBookingVC.sharreID = sharreID
                 sharreBookingVC.sharreTitle = sharreTitle.text!
+                sharreBookingVC.sharreDescription = sharreDescription.text!
+                sharreBookingVC.sharreImageURL = photoArrayURLString
                 sharreBookingVC.appointmentType = sharreTypeData
                 sharreBookingVC.sharreStartTime = sharreStartTime.text!
                 sharreBookingVC.sharreEndTime = sharreEndTime.text!
@@ -278,6 +285,8 @@ class ViewSharreVC: UIViewController {
             if let sharreTimeUsageVC = segue.destination as? SharreTimeUsageVC {
                 sharreTimeUsageVC.sharreID = sharreID
                 sharreTimeUsageVC.sharreTitle = sharreTitle.text!
+                sharreTimeUsageVC.sharreDescription = sharreDescription.text!
+                sharreTimeUsageVC.sharreImageURL = photoArrayURLString
                 sharreTimeUsageVC.sharreDeposit = sharreDeposit.text!
                 sharreTimeUsageVC.sharreUsageFee = sharreCharging.text!
                 sharreTimeUsageVC.ownerID = ownerID

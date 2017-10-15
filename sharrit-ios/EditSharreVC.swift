@@ -55,11 +55,9 @@ class EditSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVi
         
         imagePicker.delegate = self
         
-        sharreStartTime.keyboardType = .numberPad
-        sharreEndTime.keyboardType = .numberPad
         sharreQuantity.keyboardType = .numberPad
-        sharreChargingPrice.keyboardType = .numbersAndPunctuation
-        sharreDeposit.keyboardType = .numbersAndPunctuation
+        sharreChargingPrice.keyboardType = .decimalPad
+        sharreDeposit.keyboardType = .decimalPad
         
         sharreScheduleBtn.addTarget(self, action: #selector(scheduleBtnPressed), for: .touchUpInside)
         sharreTimeBtn.addTarget(self, action: #selector(timeBtnPressed), for: .touchUpInside)

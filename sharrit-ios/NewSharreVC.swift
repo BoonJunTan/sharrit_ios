@@ -69,11 +69,9 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
         businessLabel.text = businessName
         categoryLabel.text = categoryName
         
-        sharreStartTime.keyboardType = .numberPad
-        sharreEndTime.keyboardType = .numberPad
         sharreQuantity.keyboardType = .numberPad
-        sharreChargingPrice.keyboardType = .numbersAndPunctuation
-        sharreDeposit.keyboardType = .numbersAndPunctuation
+        sharreChargingPrice.keyboardType = .decimalPad
+        sharreDeposit.keyboardType = .decimalPad
         
         defaultChargeMethodBtnUI()
         currentBtnSelected(btn: sharreScheduleBtn)
@@ -152,30 +150,34 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
         
         // Camera Button
         let cameraAction = UIAlertAction(title: "Take New Photo", style: .default) { action -> Void in
-            let authStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
-            switch authStatus {
-            case .authorized:
+            if AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo) ==  AVAuthorizationStatus.authorized {
                 let imagePicker = UIImagePickerController()
                 imagePicker.delegate = self
                 imagePicker.sourceType = .camera;
                 imagePicker.allowsEditing = false
                 self.present(imagePicker, animated: true, completion: nil)
-                break
-            case .denied, .restricted:
-                let alert = UIAlertController(title: "Error", message: "Sharrit has no access to your photo album. Please allow access in order to add/change photo. Cheers!", preferredStyle: .alert)
-                
-                alert.addAction(UIAlertAction(title: "Setting", style: .default, handler: { (_) in
-                    DispatchQueue.main.async {
-                        if let settingsURL = URL(string: UIApplicationOpenSettingsURLString) {
-                            UIApplication.shared.openURL(settingsURL)
-                        }
+            } else {
+                AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo, completionHandler: { (granted: Bool) -> Void in
+                    if granted == true {
+                        let imagePicker = UIImagePickerController()
+                        imagePicker.delegate = self
+                        imagePicker.sourceType = .camera;
+                        imagePicker.allowsEditing = false
+                        self.present(imagePicker, animated: true, completion: nil)
+                    } else {
+                        let alert = UIAlertController(title: "Error", message: "Sharrit has no access to your photo album. Please allow access in order to add/change photo. Cheers!", preferredStyle: .alert)
+                        
+                        alert.addAction(UIAlertAction(title: "Setting", style: .default, handler: { (_) in
+                            DispatchQueue.main.async {
+                                if let settingsURL = URL(string: UIApplicationOpenSettingsURLString) {
+                                    UIApplication.shared.openURL(settingsURL)
+                                }
+                            }
+                        }))
+                        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
                     }
-                }))
-                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                self.present(alert, animated: true, completion: nil)
-                break
-            default:
-                break
+                })
             }
         }
         

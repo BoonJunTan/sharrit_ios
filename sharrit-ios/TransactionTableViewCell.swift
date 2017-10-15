@@ -15,6 +15,7 @@ class TransactionTableViewCell: UITableViewCell {
     @IBOutlet weak var transactionDate: UILabel!
     @IBOutlet weak var transactionDeposit: UILabel!
     @IBOutlet weak var transactionUsage: UILabel!
+    @IBOutlet weak var transactionUsageView: UIView!
     @IBOutlet weak var transactionStatus: UILabel!
     
     override func awakeFromNib() {

@@ -49,18 +49,18 @@ class WalletTransactionViewController: UITableViewController {
         if transactionType == .Topup {
             cell.transactionTitle.text = "Account Top Up"
             cell.transactionImage.image = #imageLiteral(resourceName: "increase")
-            cell.transactionDeposit.text = "Amount: $" + DecimalConverter().convertIntWithString(amount: String(describing: transactionCollection[indexPath.row].amount))
-            cell.transactionUsage.isHidden = true
+            cell.transactionDeposit.text = "Amount: $" + String(describing: transactionCollection[indexPath.row].amount)
+            cell.transactionUsageView.isHidden = true
         } else if transactionType == .Cashout {
             cell.transactionTitle.text = "Account Cash Out"
             cell.transactionImage.image = #imageLiteral(resourceName: "decrease")
-            cell.transactionDeposit.text = "Amount: $" + DecimalConverter().convertIntWithString(amount: String(describing: transactionCollection[indexPath.row].amount))
-            cell.transactionUsage.isHidden = true
+            cell.transactionDeposit.text = "Amount: $" + String(describing: transactionCollection[indexPath.row].amount)
+            cell.transactionUsageView.isHidden = true
         } else if transactionType == .Refund {
             cell.transactionTitle.text = "Sharre Refund"
             cell.transactionImage.image = #imageLiteral(resourceName: "refund")
-            cell.transactionDeposit.text = "Amount: $" + DecimalConverter().convertIntWithString(amount: String(describing: transactionCollection[indexPath.row].amount))
-            cell.transactionUsage.isHidden = true
+            cell.transactionDeposit.text = "Amount: $" + String(describing: transactionCollection[indexPath.row].amount)
+            cell.transactionUsageView.isHidden = true
         } else {
             cell.transactionTitle.text = "Sharre Service"
             cell.transactionImage.image = #imageLiteral(resourceName: "service")
@@ -85,18 +85,12 @@ class WalletTransactionViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "viewTransaction", sender: nil)
-        // performSegue(withIdentifier: "viewTransaction", sender: business[indexPath.item])
     }
     
     func getTransaction() {
         let url = SharritURL.devURL + "user/history/all/" + String(describing: appDelegate.user!.userID)
         
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer " + appDelegate.user!.accessToken,
-            "Accept": "application/json" // Need this?
-        ]
-        
-        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON {
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in
             switch response.result {
             case .success(_):

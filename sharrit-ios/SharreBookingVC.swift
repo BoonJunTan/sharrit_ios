@@ -17,6 +17,8 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
     // Pass Over Data
     var sharreID: Int!
     var sharreTitle: String!
+    var sharreDescription: String!
+    var sharreImageURL: String?
     var appointmentType: SharresType!
     var sharreStartTime: String!
     var sharreEndTime: String!
@@ -343,10 +345,10 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
         var filterData: [String: Any] = [:]
         if appointmentType == .HrAppointment {
             let timestamp = FormatDate().formatDateTimeToLocal(date: dateSelected).timeIntervalSince1970
-            filterData["timeStart"] = timestamp
+            filterData["timeStart"] = Int64(timestamp)
         } else {
             let timestamp = currentSelectedMonth.timeIntervalSince1970
-            filterData["timeStart"] = timestamp
+            filterData["timeStart"] = Int64(timestamp)
         }
         
         Alamofire.request(url, method: .post, parameters: filterData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
@@ -415,7 +417,7 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
                 timeEnd = timeEndTomorrow!.timeIntervalSince1970
             }
             
-            let filterData: [String: Any] = ["qty": unitRequire.text!, "timeStart": timeStart, "timeEnd": timeEnd]
+            let filterData: [String: Any] = ["qty": unitRequire.text!, "timeStart": Int64(timeStart), "timeEnd": Int64(timeEnd)]
             
             Alamofire.request(url, method: .post, parameters: filterData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
                 response in
@@ -425,7 +427,9 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
                         let json = JSON(data)["content"]
                         self.usage.text = "Usage: $" + json["totalAmount"].description
                         self.deposit.text = "Deposit: $" + json["totalDeposit"].description
-                        self.total.text = "Total: $" + String(describing: Double(json["totalDeposit"].description)! + Double(json["totalAmount"].description)!)
+                        let totalCostDouble = Double(json["totalDeposit"].description)! + Double(json["totalAmount"].description)!
+                        let totalCost = FormatNumber().giveTwoDP(number: NSNumber(value: totalCostDouble))
+                        self.total.text = "Total: $" + totalCost
                         self.costView.isHidden = false
                         self.bookBtn.isEnabled = true
                     }
@@ -439,9 +443,7 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
     }
 
     @IBAction func bookBtnPressed(_ sender: SharritButton) {
-        self.performSegue(withIdentifier: "viewSuccessful", sender: nil)
-        /*
-        let totalCost = total.text!.replacingOccurrences(of: "Total: $", with: "")
+        let usageCost = usage.text!.replacingOccurrences(of: "Usage: $", with: "")
         let depositCost = deposit.text!.replacingOccurrences(of: "Deposit: $", with: "")
         
         let url = SharritURL.devURL + "transaction/" + String(describing: sharreID!)
@@ -460,7 +462,7 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
             timeEnd = timeEndTomorrow!.timeIntervalSince1970
         }
         
-        let filterData: [String: Any] = ["payerId": appDelegate.user!.userID, "payerType": 0, "amount": totalCost, "deposit": depositCost, "timeStart": timeStart, "timeEnd": timeEnd, "qty": unitRequire.text!]
+        let filterData: [String: Any] = ["payerId": appDelegate.user!.userID, "payerType": 0, "amount": usageCost, "deposit": depositCost, "timeStart": Int64(timeStart), "timeEnd": Int64(timeEnd), "qty": unitRequire.text!]
         
         Alamofire.request(url, method: .post, parameters: filterData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in
@@ -485,7 +487,6 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
                 break
             }
         }
-         */
     }
     
     // MARK: - Navigation
@@ -493,9 +494,12 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
         if segue.identifier == "viewSuccessful" {
             if let successfulBookingVC = segue.destination as? SuccessfulBookingVC {
                 successfulBookingVC.receiverName = ownerName
-                successfulBookingVC.sharreTitle = sharreTitle
                 successfulBookingVC.receiverID = ownerID
                 successfulBookingVC.receiverType = ownerType
+                successfulBookingVC.sharreTitle = sharreTitle
+                successfulBookingVC.sharreID = sharreID
+                successfulBookingVC.sharreDescription = sharreDescription
+                successfulBookingVC.sharreImageURL = sharreImageURL
             }
         }
     }

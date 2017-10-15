@@ -19,10 +19,7 @@ enum ComingFrom {
 final class ConversationVC: JSQMessagesViewController {
     
     // If there is Sharre for Convo
-    @IBOutlet weak var sharreInfoView: UIView!
-    @IBOutlet weak var sharreTitle: UILabel!
-    @IBOutlet weak var sharreDescription: UILabel!
-    @IBOutlet weak var sharreImage: UIImageView!
+    let sharreView = SharreInfo()
     
     var messages = [JSQMessage]()
     var outgoingBubbleImageView: JSQMessagesBubbleImage!
@@ -74,15 +71,29 @@ final class ConversationVC: JSQMessagesViewController {
         self.collectionView?.layoutIfNeeded()
         
         if chat?.sharreID != nil {
-            sharreTitle.text = chat!.sharreTitle!
-            sharreDescription.text = chat!.sharreDescription!
-            ImageDownloader().imageFromServerURL(urlString: chat!.sharreImageURL!, imageView: sharreImage)
+            //sharreTitle.text = chat!.sharreTitle!
+            //sharreDescription.text = chat!.sharreDescription!
+            //ImageDownloader().imageFromServerURL(urlString: chat!.sharreImageURL!, imageView: sharreImage)
             
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(goToSharre))
-            sharreInfoView.addGestureRecognizer(tapGesture)
-            sharreInfoView.isHidden = false
-        } else {
-            sharreInfoView.isHidden = true
+            if let customView = Bundle.main.loadNibNamed("SharreInfo", owner: self, options: nil)?.first as? SharreInfo {
+                customView.frame.size = CGSize(width: self.view.bounds.width, height: 80)
+                customView.frame.origin = CGPoint(x: 0, y: 60)
+                customView.sharreDescription.text = chat!.sharreDescription!
+                customView.title.text = chat!.sharreTitle!
+                if chat!.sharreImageURL! == "null" {
+                    customView.imageView.image = #imageLiteral(resourceName: "empty")
+                } else {
+                    ImageDownloader().imageFromServerURL(urlString: SharritURL.devPhotoURL + chat!.sharreImageURL!, imageView: customView.imageView)
+                }
+                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(goToSharre))
+                customView.addGestureRecognizer(tapGesture)
+                view.addSubview(customView)
+            }
+            
+            self.collectionView?.collectionViewLayout.sectionInset = UIEdgeInsets(top: 80, left: 0, bottom: 0, right: 0)
+            
+            let navBarClose = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(closeMessages))
+            self.navigationItem.leftBarButtonItem = navBarClose
         }
         
         if comingFrom == .Messages {
@@ -104,6 +115,11 @@ final class ConversationVC: JSQMessagesViewController {
     
     func goToSharre(sender: UITapGestureRecognizer? = nil) {
         performSegue(withIdentifier: "viewSharre", sender: nil)
+    }
+    
+    func closeMessages() {
+        self.modalTransitionStyle = .coverVertical
+        self.dismiss(animated: true, completion: nil)
     }
     
     override func didPressAccessoryButton(_ sender: UIButton) {

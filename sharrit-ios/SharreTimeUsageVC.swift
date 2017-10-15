@@ -17,6 +17,8 @@ class SharreTimeUsageVC: UIViewController {
     // Pass Over Data
     var sharreID: Int!
     var sharreTitle: String!
+    var sharreDescription: String!
+    var sharreImageURL: String?
     var sharreDeposit: String!
     var sharreUnit: String!
     var sharreUsageFee: String!
@@ -94,8 +96,6 @@ class SharreTimeUsageVC: UIViewController {
     }
     
     @IBAction func bookBtnPressed(_ sender: SharritButton) {
-        self.performSegue(withIdentifier: "viewSuccessful", sender: nil)
-        
         let deposit = depositLabel.text!.replacingOccurrences(of: "Deposit: $", with: "")
         
         let url = SharritURL.devURL + "transaction/" + String(describing: sharreID!)
@@ -132,9 +132,12 @@ class SharreTimeUsageVC: UIViewController {
         if segue.identifier == "viewSuccessful" {
             if let successfulBookingVC = segue.destination as? SuccessfulBookingVC {
                 successfulBookingVC.receiverName = ownerName
-                successfulBookingVC.sharreTitle = sharreTitle
                 successfulBookingVC.receiverID = ownerID
                 successfulBookingVC.receiverType = ownerType
+                successfulBookingVC.sharreTitle = sharreTitle
+                successfulBookingVC.sharreID = sharreID
+                successfulBookingVC.sharreDescription = sharreDescription
+                successfulBookingVC.sharreImageURL = sharreImageURL
             }
         }
     }

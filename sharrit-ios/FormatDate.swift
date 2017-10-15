@@ -85,6 +85,37 @@ struct FormatDate {
         return dateFormatter.date(from: date)!
     }
     
+    func formatDateStringForDayAppointment(dateStart: String, dateEnd: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = NSTimeZone(abbreviation: "GMT+08")! as TimeZone
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        
+        let dateStart = dateFormatter.date(from: dateStart)
+        let dateEnd = dateFormatter.date(from: dateEnd)
+        
+        let dateFormatter2 = DateFormatter()
+        dateFormatter2.dateFormat = "dd-MM-yyyy"
+        
+        return (dateFormatter2.string(from: dateStart!) + " to " + dateFormatter2.string(from: dateEnd!))
+    }
+    
+    func formatDateStringForMinuteAppointment(dateStart: String, dateEnd: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = NSTimeZone(abbreviation: "GMT+08")! as TimeZone
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        
+        let dateStart = dateFormatter.date(from: dateStart)
+        let dateEnd = dateFormatter.date(from: dateEnd)
+        
+        let dateFormatter2 = DateFormatter()
+        dateFormatter2.dateFormat = "dd-MM-yyyy"
+        
+        let dateFormatter3 = DateFormatter()
+        dateFormatter3.dateFormat = "HH:mm"
+        
+        return (dateFormatter2.string(from: dateStart!) + " - " + dateFormatter3.string(from: dateStart!) + " to " + dateFormatter3.string(from: dateEnd!))
+    }
+    
     func generateTimeHrMin(rangeStart: String, rangeEnd:String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
