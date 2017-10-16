@@ -70,12 +70,7 @@ final class ConversationVC: JSQMessagesViewController {
         self.collectionView?.reloadData()
         self.collectionView?.layoutIfNeeded()
         
-        if chat?.sharreID != nil {
-            //sharreTitle.text = chat!.sharreTitle!
-            //sharreDescription.text = chat!.sharreDescription!
-            //ImageDownloader().imageFromServerURL(urlString: chat!.sharreImageURL!, imageView: sharreImage)
-            
-            if let customView = Bundle.main.loadNibNamed("SharreInfo", owner: self, options: nil)?.first as? SharreInfo {
+        if chat?.sharreID != nil {if let customView = Bundle.main.loadNibNamed("SharreInfo", owner: self, options: nil)?.first as? SharreInfo {
                 customView.frame.size = CGSize(width: self.view.bounds.width, height: 80)
                 customView.frame.origin = CGPoint(x: 0, y: 60)
                 customView.sharreDescription.text = chat!.sharreDescription!
@@ -265,9 +260,6 @@ final class ConversationVC: JSQMessagesViewController {
                 switch response.result {
                 case .success(_):
                     if let data = response.result.value {
-                        // Retrieve chat ID
-                        // Retrieve message based on chat ID
-                        // Reload view here
                         let details = JSON(data)["content"]
                         self.chat!.id = details["conversationId"].int!
                     }
@@ -284,12 +276,7 @@ final class ConversationVC: JSQMessagesViewController {
     private func getMessages() {
         let url = SharritURL.devURL + "message/" + String(describing: chat!.id!)
         
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer " + appDelegate.user!.accessToken,
-            "Accept": "application/json" // Need this?
-        ]
-        
-        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON {
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in
             switch response.result {
             case .success(_):
