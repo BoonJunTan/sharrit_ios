@@ -75,14 +75,22 @@ class ViewSharreVC: UIViewController {
                     self.ownerID = json["content"]["ownerId"].int!
                     self.ownerType = json["content"]["ownerType"].int!
                     self.sharreOwner.text = json["content"]["ownerName"].string!
+                    
+                    var rightBarItem = [UIBarButtonItem]()
+                    let reputationBtn = UIBarButtonItem(image: ImageResize().resizeImageWith(image: #imageLiteral(resourceName: "star-white"), newWidth: 20),
+                                                       style: .plain ,
+                                                       target: self, action: #selector(self.reputationAction))
+                    rightBarItem.append(reputationBtn)
                     if (self.appDelegate.user!.firstName + " " + self.appDelegate.user!.lastName) == self.sharreOwner.text {
                         self.chatSharreStackView.isHidden = true
                         let navBarBubble = UIBarButtonItem(image: ImageResize().resizeImageWith(image: #imageLiteral(resourceName: "edit"), newWidth: 20),
                                                            style: .plain ,
                                                            target: self, action: #selector(self.sharreAction))
                         
-                        self.navigationItem.rightBarButtonItem = navBarBubble
+                        rightBarItem.append(navBarBubble)
                     }
+                    
+                    self.navigationItem.rightBarButtonItems = rightBarItem
                     
                     if let activeStatus = json["content"]["isActive"].bool {
                         self.sharreStatusBool = activeStatus
@@ -186,6 +194,11 @@ class ViewSharreVC: UIViewController {
         optionMenu.addAction(deleteAction)
         optionMenu.addAction(cancelAction)
         self.present(optionMenu, animated: true, completion: nil)
+    }
+    
+    // Reputation Action
+    func reputationAction() {
+        performSegue(withIdentifier: "viewAllReputation", sender: nil)
     }
     
     @IBAction func sharreITBtnPressed(_ sender: SharritButton) {
@@ -294,6 +307,10 @@ class ViewSharreVC: UIViewController {
                 sharreTimeUsageVC.ownerType = ownerType
                 let quantity = sharreQuantity.text!
                 sharreTimeUsageVC.sharreUnit = quantity.replacingOccurrences(of: " units", with: "")
+            }
+        } else if segue.identifier == "viewAllReputation" {
+            if let viewAllReputationVC = segue.destination as? ViewAllReputationVC {
+                viewAllReputationVC.sharreID = sharreID
             }
         }
     }

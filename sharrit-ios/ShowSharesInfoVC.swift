@@ -147,8 +147,16 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                     optionMenu.addAction(viewRefundAction)
                 }
                 
-                let reviewAction = UIAlertAction(title: "Review Sharres", style: .default) { action -> Void in
-                    self.performSegue(withIdentifier: "viewRating", sender: self.tableViewItems[indexPath.row])
+                let reviewAction: UIAlertAction!
+                
+                if self.tableViewItems[indexPath.row].sharrieRatingID != nil {
+                    reviewAction = UIAlertAction(title: "View Review", style: .default) { action -> Void in
+                        self.performSegue(withIdentifier: "viewRating", sender: self.tableViewItems[indexPath.row])
+                    }
+                } else {
+                    reviewAction = UIAlertAction(title: "Review Sharres", style: .default) { action -> Void in
+                        self.performSegue(withIdentifier: "createRating", sender: self.tableViewItems[indexPath.row])
+                    }
                 }
                 
                 optionMenu.addAction(holdDepositAction)
@@ -191,8 +199,16 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                 }
             }
             
-            let reviewAction = UIAlertAction(title: "Review Sharres", style: .default) { action -> Void in
-                self.performSegue(withIdentifier: "viewRating", sender: self.tableViewItems[indexPath.row])
+            var reviewAction: UIAlertAction!
+            
+            if self.tableViewItems[indexPath.row].sharrieRatingID != nil {
+                reviewAction = UIAlertAction(title: "View Review", style: .default) { action -> Void in
+                    self.performSegue(withIdentifier: "viewRating", sender: self.tableViewItems[indexPath.row])
+                }
+            } else {
+                reviewAction = UIAlertAction(title: "Review Sharres", style: .default) { action -> Void in
+                    self.performSegue(withIdentifier: "createRating", sender: self.tableViewItems[indexPath.row])
+                }
             }
             
             optionMenu.addAction(reviewAction)
@@ -370,6 +386,14 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                             transaction.sharreType = sharreType
                         }
                         
+                        if let userRatingID = subJson["userRatingId"].int {
+                            transaction.sharrieRatingID = userRatingID
+                        }
+                        
+                        if let ownerRatingID = subJson["ownerRatingId"].int {
+                            transaction.ownerRatingID = ownerRatingID
+                        }
+                        
                         transaction.sharreName = subJson["name"].description
                         
                         self.tableViewItems.append(transaction)
@@ -394,10 +418,15 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
             if let viewRefundVC = segue.destination as? ViewRefundVC {
                 viewRefundVC.transaction = sender as! Transaction
             }
-        } else if segue.identifier == "viewRating" {
+        } else if segue.identifier == "createRating" {
             if let ratingVC = segue.destination as? RatingVC {
                 ratingVC.transaction = sender as! Transaction
                 ratingVC.userRole = userRole
+            }
+        } else if segue.identifier == "viewRating" {
+            if let viewRatingVC = segue.destination as? ViewRatingVC {
+                viewRatingVC.transaction = sender as! Transaction
+                viewRatingVC.userRole = userRole
             }
         }
     }

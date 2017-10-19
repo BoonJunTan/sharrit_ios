@@ -29,6 +29,7 @@ class RatingVC: UIViewController {
         sharreTitleLabel.text = transaction.sharreName
         
         reviewTV.text = ""
+        ratingView.settings.fillMode = .half
     }
     
     override func didReceiveMemoryWarning() {
@@ -62,20 +63,20 @@ class RatingVC: UIViewController {
         
         // If Sharrie = Give Rating to Sharror
         if userRole == .Sharrie {
-            url = SharritURL.devURL + "reputation/owner/" + String(describing: self.transaction.payeeId)
+            url = SharritURL.devURL + "reputation/owner/" + String(describing: self.transaction.transactionId)
         } else {
-            url = SharritURL.devURL + "reputation/user/" + String(describing: self.transaction.payerId)
+            url = SharritURL.devURL + "reputation/user/" + String(describing: self.transaction.transactionId)
         }
         
         var ratingData = [String: Any]()
             
         if reviewAvailable {
-            ratingData = ["ratingValue": ratingView.rating, "message": reviewTV.text]
+            ratingData = ["ratingValue": ratingView.rating, "message": reviewTV.text!]
         } else {
             ratingData = ["ratingValue": ratingView.rating]
         }
         
-        Alamofire.request(url, method: .post, parameters: ratingData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+        Alamofire.request(url!, method: .post, parameters: ratingData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in
             switch response.result {
             case .success(_):
