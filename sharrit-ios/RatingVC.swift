@@ -63,9 +63,9 @@ class RatingVC: UIViewController {
         
         // If Sharrie = Give Rating to Sharror
         if userRole == .Sharrie {
-            url = SharritURL.devURL + "reputation/owner/" + String(describing: self.transaction.transactionId)
-        } else {
             url = SharritURL.devURL + "reputation/user/" + String(describing: self.transaction.transactionId)
+        } else {
+            url = SharritURL.devURL + "reputation/owner/" + String(describing: self.transaction.transactionId)
         }
         
         var ratingData = [String: Any]()

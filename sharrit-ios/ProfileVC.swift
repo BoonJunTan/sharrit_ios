@@ -90,6 +90,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
         
         starRating.rating = fakeRatingDouble
         starRating.settings.fillMode = .half
+        getUserRating()
         
         // Get user profile creation date
         let dateFormatter = DateFormatter()
@@ -312,11 +313,11 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
         var url: String!
         
         if ratingFilterText == .Overall {
-            url = SharritURL.devURL + "reputation/user/overall/" + String(describing: appDelegate.user!.userID)
+            url = SharritURL.devURL + "reputation/current/overall/" + String(describing: appDelegate.user!.userID)
         } else if ratingFilterText == .Sharrie {
-            url = SharritURL.devURL + "reputation/user/sharrie/" + String(describing: appDelegate.user!.userID)
+            url = SharritURL.devURL + "reputation/current/sharrie/" + String(describing: appDelegate.user!.userID)
         } else {
-            url = SharritURL.devURL + "reputation/user/sharror/" + String(describing: appDelegate.user!.userID)
+            url = SharritURL.devURL + "reputation/current/sharror/" + String(describing: appDelegate.user!.userID)
         }
         
         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
@@ -324,10 +325,17 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
             switch response.result {
             case .success(_):
                 // MUST TODO: Waiting for Joe
-                self.starRating.rating = 3
+                if let data = response.result.value {
+                    if JSON(data)["status"] == -6 {
+                        self.starRating.rating = 0
+                    } else {
+                        self.starRating.rating = Double(JSON(data)["content"].description)!
+                    }
+                }
                 break
             case .failure(_):
-                print("Get User Rating API failed")
+                self.starRating.rating = 0
+                print("Get User Combined Rating API failed")
                 break
             }
         }

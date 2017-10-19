@@ -77,15 +77,15 @@ class ViewReputationVC: UIViewController, UITableViewDataSource, UITableViewDele
         switch reputationType {
         case .All:
             // MUST TODO: Waiting for Joe
-            url = SharritURL.devURL + "conversation/user/" + String(describing: appDelegate.user!.userID)
+            url = SharritURL.devURL + "reputation/current/overall/" + String(describing: appDelegate.user!.userID)
             break
         case .Sharrie:
             // Get All Reputation for Me (Sharrie) by other Sharror/Sharing Business
-            url = SharritURL.devURL + "reputation/sharrie/other/" + String(describing: appDelegate.user!.userID)
+            url = SharritURL.devURL + "reputation/current/sharrie/" + String(describing: appDelegate.user!.userID)
             break
         case .Sharror:
             // Get All Reputation for Me (Sharror) by other Sharrie
-            url = SharritURL.devURL + "reputation/sharror/other/" + String(describing: appDelegate.user!.userID)
+            url = SharritURL.devURL + "reputation/current/sharror/" + String(describing: appDelegate.user!.userID)
             break
         }
         

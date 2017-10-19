@@ -201,7 +201,7 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
             
             var reviewAction: UIAlertAction!
             
-            if self.tableViewItems[indexPath.row].sharrieRatingID != nil {
+            if self.tableViewItems[indexPath.row].ownerRatingID != nil {
                 reviewAction = UIAlertAction(title: "View Review", style: .default) { action -> Void in
                     self.performSegue(withIdentifier: "viewRating", sender: self.tableViewItems[indexPath.row])
                 }
