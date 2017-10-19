@@ -78,6 +78,7 @@ class BusinessSharesVC: UIViewController, UICollectionViewDataSource, UICollecti
             sharesCell.sharesPrice.text = "Cost/Hr: " + String(describing:sharesCollection[indexPath.item].price)
         }
         
+        // MUST TODO: WAITING FOR JOE
         sharesCell.sharesRating.rating = 4.5
         
         return sharesCell

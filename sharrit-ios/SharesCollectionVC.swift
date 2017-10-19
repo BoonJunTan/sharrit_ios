@@ -107,6 +107,9 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
             
             ImageDownloader().imageFromServerURL(urlString: SharritURL.devPhotoURL + sharesCollection[indexPath.item].logoURL, imageView: sharesCell.sharesImage)
             
+            // MUST TODO: Waiting for Joe
+            sharesCell.sharreRating.rating = 3.25
+            
             return sharesCell
         }
         
