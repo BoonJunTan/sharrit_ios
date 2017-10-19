@@ -76,16 +76,15 @@ class ViewReputationVC: UIViewController, UITableViewDataSource, UITableViewDele
         
         switch reputationType {
         case .All:
-            // MUST TODO: Waiting for Joe
-            url = SharritURL.devURL + "reputation/current/overall/" + String(describing: appDelegate.user!.userID)
+            url = SharritURL.devURL + "reputation/user/other/" + String(describing: appDelegate.user!.userID)
             break
         case .Sharrie:
             // Get All Reputation for Me (Sharrie) by other Sharror/Sharing Business
-            url = SharritURL.devURL + "reputation/current/sharrie/" + String(describing: appDelegate.user!.userID)
+            url = SharritURL.devURL + "reputation/sharrie/other/" + String(describing: appDelegate.user!.userID)
             break
         case .Sharror:
             // Get All Reputation for Me (Sharror) by other Sharrie
-            url = SharritURL.devURL + "reputation/current/sharror/" + String(describing: appDelegate.user!.userID)
+            url = SharritURL.devURL + "reputation/sharror/other/" + String(describing: appDelegate.user!.userID)
             break
         }
         
@@ -95,8 +94,17 @@ class ViewReputationVC: UIViewController, UITableViewDataSource, UITableViewDele
             case .success(_):
                 if let data = response.result.value {
                     self.reputation.removeAll()
-                    for (_, subJson) in JSON(data) {
+                    for (_, subJson) in JSON(data)["content"] {
+                        let currentReputation = Reputation(reputationID: subJson["reviewId"].int!, userName: "WHO GIVE ME", rating: Double(subJson["ratingValue"].description))
                         
+                        currentReputation.sharreName = "Sharre Title"
+                        
+                        if let reviewMessage = subJson["review"]["message"].description as? String {
+                            currentReputation.review = reviewMessage
+                        } else {
+                            currentReputation.review = "No Review Available"
+                        }
+                        self.reputation.append(currentReputation)
                     }
                     self.tableView.reloadData()
                 }
@@ -113,7 +121,12 @@ class ViewReputationVC: UIViewController, UITableViewDataSource, UITableViewDele
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "messageCell") as! MessageTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ReputationCell") as! ReputationTableViewCell
+        
+        cell.profileName.text = reputation[indexPath.row].userName
+        cell.transactionRating.rating = reputation[indexPath.row].rating
+        cell.transactionReview.text = reputation[indexPath.row].review
+        cell.transactionTitle.text = reputation[indexPath.row].sharreName
         
         return cell
     }

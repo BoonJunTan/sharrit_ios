@@ -17,7 +17,8 @@ class ReputationTableViewCell: UITableViewCell {
     @IBOutlet weak var transactionTitle: UILabel!
     @IBOutlet weak var transactionReview: UILabel!
     @IBOutlet weak var transactionRating: CosmosView!
-    
+    @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var profileName: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
