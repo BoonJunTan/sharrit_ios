@@ -30,6 +30,7 @@
 		2764C4831F72DE1400DB7199 /* ContactUsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2764C4821F72DE1400DB7199 /* ContactUsVC.swift */; };
 		2764C4851F72E4B500DB7199 /* ContactBusinessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2764C4841F72E4B500DB7199 /* ContactBusinessVC.swift */; };
 		2764C4871F72ECB700DB7199 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2764C4861F72ECB700DB7199 /* Notification.swift */; };
+		2764FEE31F984D1E00FA5D55 /* RatingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2764FEE21F984D1E00FA5D55 /* RatingVC.swift */; };
 		276D1B861F7B89A400A3EAF3 /* DescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276D1B851F7B89A400A3EAF3 /* DescriptionTableViewCell.swift */; };
 		276D1B8A1F7B8A0500A3EAF3 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276D1B891F7B8A0500A3EAF3 /* ReviewTableViewCell.swift */; };
 		276D1B8C1F7B9E7000A3EAF3 /* BusinessSharesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276D1B8B1F7B9E6F00A3EAF3 /* BusinessSharesVC.swift */; };
@@ -117,6 +118,7 @@
 		2764C4821F72DE1400DB7199 /* ContactUsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactUsVC.swift; sourceTree = "<group>"; };
 		2764C4841F72E4B500DB7199 /* ContactBusinessVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactBusinessVC.swift; sourceTree = "<group>"; };
 		2764C4861F72ECB700DB7199 /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		2764FEE21F984D1E00FA5D55 /* RatingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingVC.swift; sourceTree = "<group>"; };
 		276D1B851F7B89A400A3EAF3 /* DescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionTableViewCell.swift; sourceTree = "<group>"; };
 		276D1B891F7B8A0500A3EAF3 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
 		276D1B8B1F7B9E6F00A3EAF3 /* BusinessSharesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessSharesVC.swift; sourceTree = "<group>"; };
@@ -387,6 +389,7 @@
 				275C05081F7BE83800E78E06 /* ShowSharesInfoVC.swift */,
 				2799CDD61F8B6C6800DD4C22 /* RequestRefundVC.swift */,
 				2799CDD81F8B79CD00DD4C22 /* ViewRefundVC.swift */,
+				2764FEE21F984D1E00FA5D55 /* RatingVC.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -625,6 +628,7 @@
 			files = (
 				27FCB7DD1F67768C008E973C /* ProfileVC.swift in Sources */,
 				27DA99501F7CF794006E415C /* TransactionTableViewCell.swift in Sources */,
+				2764FEE31F984D1E00FA5D55 /* RatingVC.swift in Sources */,
 				2764C4831F72DE1400DB7199 /* ContactUsVC.swift in Sources */,
 				27D0186C1F7407CA00D5B798 /* RegexCheck.swift in Sources */,
 				2799CDD71F8B6C6800DD4C22 /* RequestRefundVC.swift in Sources */,

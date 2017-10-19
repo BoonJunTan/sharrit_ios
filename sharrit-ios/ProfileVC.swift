@@ -16,7 +16,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
     
     @IBOutlet weak var tableView: UITableView!
     let tableViewSection = ["General", "AS A SHARRIE", "AS A SHARROR", "SETTINGS"]
-    var tableViewIcons = [[#imageLiteral(resourceName: "reputation")], [#imageLiteral(resourceName: "transaction")], [#imageLiteral(resourceName: "Sharrit_Logo"), #imageLiteral(resourceName: "business"), #imageLiteral(resourceName: "sand_timer"), #imageLiteral(resourceName: "transaction")], [#imageLiteral(resourceName: "profile2"), #imageLiteral(resourceName: "help"), #imageLiteral(resourceName: "logout")]]
+    var tableViewIcons = [[#imageLiteral(resourceName: "reputation")], [#imageLiteral(resourceName: "transaction2")], [#imageLiteral(resourceName: "Sharrit_Logo"), #imageLiteral(resourceName: "business"), #imageLiteral(resourceName: "sand_timer"), #imageLiteral(resourceName: "transaction2")], [#imageLiteral(resourceName: "profile2"), #imageLiteral(resourceName: "help"), #imageLiteral(resourceName: "logout")]]
     var tableViewItems = [["Reputation"], ["Sharres Status OvervieW"], ["Sharres Offered", "Sharing Business", "Pending Join Requests", "Sharres Status Overview"], ["Profile Settings", "Help Centre", "Logout"]]
 
     @IBOutlet weak var profileImage: UIImageView!
