@@ -25,6 +25,8 @@ class Business {
     var bannerURL: String
     var requestFormID: Int?
     var commissionRate: Double?
+    var rating: Double!
+    var ratingList: String?
     
     init(businessId: Int, businessName: String, description: String, businessType: Int, logoURL: String, bannerURL: String, commissionRate: Double, dateCreated: String) {
         self.businessId = businessId

@@ -35,6 +35,7 @@ class Shares {
     var isActive: Bool
     // var dateDeleted
     //var isDeleted:
+    var rating: Double?
     
     init(sharreId: Int, name: String, description: String, type: Int, qty: Int, unit: Int, price: String, deposit: String, location: String, photos: [String], dateCreated: String, ownerType: Int, ownerId: Int, isActive: Bool) {
         self.sharreId = sharreId

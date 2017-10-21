@@ -95,11 +95,13 @@ class ViewReputationVC: UIViewController, UITableViewDataSource, UITableViewDele
                 if let data = response.result.value {
                     self.reputation.removeAll()
                     for (_, subJson) in JSON(data)["content"] {
-                        let currentReputation = Reputation(reputationID: subJson["reviewId"].int!, userName: "WHO GIVE ME", rating: Double(subJson["ratingValue"].description))
+                        let currentReputation = Reputation(reputationID: subJson["rating"]["reviewId"].int!, userName: subJson["userName"]["firstName"].description + " " + subJson["userName"]["lastName"].description, rating: Double(subJson["rating"]["ratingValue"].description))
                         
-                        currentReputation.sharreName = "Sharre Title"
+                        currentReputation.userPhoto = subJson["userName"]["photos"]["fileName"].description
+                        currentReputation.sharreName = subJson["sharre"]["name"].description
+                        currentReputation.sharrePhoto = subJson["sharre"]["photos"]["fileName"].description
                         
-                        if let reviewMessage = subJson["review"]["message"].description as? String {
+                        if let reviewMessage = subJson["rating"]["review"]["message"].description as? String {
                             currentReputation.review = reviewMessage
                         } else {
                             currentReputation.review = "No Review Available"
@@ -124,6 +126,9 @@ class ViewReputationVC: UIViewController, UITableViewDataSource, UITableViewDele
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReputationCell") as! ReputationTableViewCell
         
         cell.profileName.text = reputation[indexPath.row].userName
+        ImageDownloader().imageFromServerURL(urlString: (SharritURL.devPhotoURL + reputation[indexPath.row].userPhoto!), imageView: cell.profileImage)
+        ImageDownloader().imageFromServerURL(urlString: (SharritURL.devPhotoURL + reputation[indexPath.row].sharrePhoto!), imageView: cell.sharreImage)
+        
         cell.transactionRating.rating = reputation[indexPath.row].rating
         cell.transactionReview.text = reputation[indexPath.row].review
         cell.transactionTitle.text = reputation[indexPath.row].sharreName

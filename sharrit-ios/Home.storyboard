@@ -3110,6 +3110,7 @@
                         <outlet property="businessBanner" destination="BWb-fx-Rdm" id="fFD-tI-A2j"/>
                         <outlet property="businessLogo" destination="GOr-3z-A4A" id="1kP-YN-rbA"/>
                         <outlet property="businessName" destination="fxG-83-v5k" id="b9w-jZ-aIX"/>
+                        <outlet property="businessRating" destination="BAN-vR-XOG" id="xX2-aY-Lu0"/>
                         <outlet property="businessStartDate" destination="shc-dl-Jht" id="VoO-vB-dwP"/>
                         <outlet property="createSharreBtn" destination="o2h-EW-h6d" id="qKW-to-OgJ"/>
                         <outlet property="joinSharrorBtn" destination="8h8-SQ-I98" id="PNP-Ga-SWq"/>

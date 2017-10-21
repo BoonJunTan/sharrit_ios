@@ -42,6 +42,7 @@ class ViewAllReputationVC: UITableViewController {
         cell.userName.text = reputation[indexPath.row].userName
         cell.rating.rating = reputation[indexPath.row].rating
         cell.review.text = reputation[indexPath.row].review
+        ImageDownloader().imageFromServerURL(urlString: (SharritURL.devPhotoURL + reputation[indexPath.row].userPhoto!), imageView: cell.userProfile)
 
         return cell
     }
@@ -57,12 +58,14 @@ class ViewAllReputationVC: UITableViewController {
                     self.reputation.removeAll()
                     // MUST TODO: Possible to get Profile Name and Picture?
                     for (_, subJson) in JSON(data)["content"] {
-                        let currentReputation = Reputation(reputationID: subJson["reviewId"].int, userName: "Not Given Yet", rating: subJson["ratingValue"].double)
-                        if let reviewExist = subJson["review"]["message"].description as? String {
+                        let currentReputation = Reputation(reputationID: subJson["rating"]["reviewId"].int, userName: "Not Given Yet", rating: subJson["rating"]["ratingValue"].double)
+                        if let reviewExist = subJson["rating"]["review"]["message"].description as? String {
                             currentReputation.review = reviewExist
                         } else {
                             currentReputation.review = "No Review Given"
                         }
+                        currentReputation.userName = subJson["userName"]["firstName"].description + " " + subJson["userName"]["lastName"].description
+                        currentReputation.userPhoto = subJson["userName"]["photos"][0]["fileName"].description
                         self.reputation.append(currentReputation)
                     }
                     self.tableView.reloadData()

@@ -107,8 +107,14 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
             
             ImageDownloader().imageFromServerURL(urlString: SharritURL.devPhotoURL + sharesCollection[indexPath.item].logoURL, imageView: sharesCell.sharesImage)
             
-            // MUST TODO: Waiting for Joe
-            sharesCell.sharreRating.rating = 3.25
+            let rating = sharesCollection[indexPath.item].rating
+            if rating != -1 {
+                sharesCell.sharreRating.rating = sharesCollection[indexPath.item].rating
+            } else {
+                sharesCell.sharreRating.rating = 1
+                sharesCell.sharreRating.settings.totalStars = 1
+                sharesCell.sharreRating.text = "No Ratings Yet"
+            }
             
             return sharesCell
         }
@@ -246,29 +252,25 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer " + appDelegate.user!.accessToken,
-            "Accept": "application/json" // Need this?
-        ]
-        
-        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON {
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in
             switch response.result {
             case .success(_):
                 self.sharesCollection = []
                 if let data = response.result.value {
                     for (_, subJson) in JSON(data)["content"] {
-                        let businessId = subJson["businessId"].int!
-                        let businessName = subJson["name"].description
-                        let description = subJson["description"].description
-                        let businessType = subJson["type"].int!
-                        let logo = subJson["logo"]["fileName"].description
-                        let banner = subJson["banner"]["fileName"].description
-                        let comRate = subJson["comissionRate"].double!
-                        let dateCreated = subJson["dateCreated"].description
+                        let businessId = subJson["business"]["businessId"].int!
+                        let businessName = subJson["business"]["name"].description
+                        let description = subJson["business"]["description"].description
+                        let businessType = subJson["business"]["type"].int!
+                        let logo = subJson["business"]["logo"]["fileName"].description
+                        let banner = subJson["business"]["banner"]["fileName"].description
+                        let comRate = subJson["business"]["comissionRate"].double!
+                        let dateCreated = subJson["business"]["dateCreated"].description
                         let business = Business(businessId: businessId, businessName: businessName, description: description, businessType: businessType, logoURL: logo, bannerURL: banner, commissionRate: comRate, dateCreated: dateCreated)
                         
-                        business.requestFormID = subJson["requestFormId"].int! 
+                        business.requestFormID = subJson["business"]["requestFormId"].int!
+                        business.rating = subJson["rating"]["currentRating"].double!
                         
                         self.sharesCollection.append(business)
                     }

@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import Cosmos
 
 class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -20,6 +21,7 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     @IBOutlet weak var businessBanner: UIImageView!
     @IBOutlet weak var businessLogo: UIImageView!
     @IBOutlet weak var businessName: UILabel!
+    @IBOutlet weak var businessRating: CosmosView!
     @IBOutlet weak var businessStartDate: UILabel!
     @IBOutlet weak var joinSharrorBtn: SharritButton!
     @IBOutlet weak var pendingApprovalBtn: SharritButton!
@@ -43,6 +45,20 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         businessName.text = businessInfo.businessName
         
+        if businessInfo.rating != -1 {
+            businessRating.rating = businessInfo.rating
+            // MUST TODO: WAITING FOR JOE
+            /*
+            review.append("Review Test Data 1")
+            review.append("Review Test Data 2")
+            tableViewItems.append(review)
+             */
+        } else {
+            businessRating.rating = 1
+            businessRating.settings.totalStars = 1
+            businessRating.text = "No Ratings Yet"
+        }
+        
         // Get Business profile creation date
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = NSTimeZone(abbreviation: "GMT+08")! as TimeZone
@@ -62,11 +78,6 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         businessStartDate.text = formatter.string(from: endDate!, to: todayDate!)
 
         tableViewItems.append([businessInfo.description!])
-        
-        // Setup some test data
-        review.append("Review Test Data 1")
-        review.append("Review Test Data 2")
-        tableViewItems.append(review)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -97,7 +108,11 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableViewItems[section].count
+        if section == 1 && review.count == 0 {
+            return 0
+        } else {
+            return tableViewItems[section].count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
