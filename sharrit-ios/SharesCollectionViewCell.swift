@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import Cosmos
 
 class SharesCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var sharesImage: UIImageView!
     @IBOutlet weak var sharesTitle: UILabel!
     @IBOutlet weak var sharesCreatedDate: UILabel!
+    @IBOutlet weak var sharreRating: CosmosView!
     
 }

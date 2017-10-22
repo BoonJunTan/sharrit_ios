@@ -30,6 +30,13 @@
 		2764C4831F72DE1400DB7199 /* ContactUsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2764C4821F72DE1400DB7199 /* ContactUsVC.swift */; };
 		2764C4851F72E4B500DB7199 /* ContactBusinessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2764C4841F72E4B500DB7199 /* ContactBusinessVC.swift */; };
 		2764C4871F72ECB700DB7199 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2764C4861F72ECB700DB7199 /* Notification.swift */; };
+		2764FEE31F984D1E00FA5D55 /* RatingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2764FEE21F984D1E00FA5D55 /* RatingVC.swift */; };
+		2764FEE51F987F3900FA5D55 /* ReputationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2764FEE41F987F3900FA5D55 /* ReputationTableViewCell.swift */; };
+		2764FEE71F98838200FA5D55 /* ViewReputationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2764FEE61F98838200FA5D55 /* ViewReputationVC.swift */; };
+		2764FEE91F9884AB00FA5D55 /* Reputation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2764FEE81F9884AB00FA5D55 /* Reputation.swift */; };
+		2764FEEB1F98A41D00FA5D55 /* ViewRatingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2764FEEA1F98A41D00FA5D55 /* ViewRatingVC.swift */; };
+		2764FEED1F98AE2700FA5D55 /* ViewAllReputationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2764FEEC1F98AE2700FA5D55 /* ViewAllReputationVC.swift */; };
+		2764FEEF1F98B1CE00FA5D55 /* SingleSharreReputationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2764FEEE1F98B1CE00FA5D55 /* SingleSharreReputationTableViewCell.swift */; };
 		276D1B861F7B89A400A3EAF3 /* DescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276D1B851F7B89A400A3EAF3 /* DescriptionTableViewCell.swift */; };
 		276D1B8A1F7B8A0500A3EAF3 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276D1B891F7B8A0500A3EAF3 /* ReviewTableViewCell.swift */; };
 		276D1B8C1F7B9E7000A3EAF3 /* BusinessSharesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276D1B8B1F7B9E6F00A3EAF3 /* BusinessSharesVC.swift */; };
@@ -117,6 +124,13 @@
 		2764C4821F72DE1400DB7199 /* ContactUsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactUsVC.swift; sourceTree = "<group>"; };
 		2764C4841F72E4B500DB7199 /* ContactBusinessVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactBusinessVC.swift; sourceTree = "<group>"; };
 		2764C4861F72ECB700DB7199 /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		2764FEE21F984D1E00FA5D55 /* RatingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingVC.swift; sourceTree = "<group>"; };
+		2764FEE41F987F3900FA5D55 /* ReputationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReputationTableViewCell.swift; sourceTree = "<group>"; };
+		2764FEE61F98838200FA5D55 /* ViewReputationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewReputationVC.swift; sourceTree = "<group>"; };
+		2764FEE81F9884AB00FA5D55 /* Reputation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reputation.swift; sourceTree = "<group>"; };
+		2764FEEA1F98A41D00FA5D55 /* ViewRatingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRatingVC.swift; sourceTree = "<group>"; };
+		2764FEEC1F98AE2700FA5D55 /* ViewAllReputationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllReputationVC.swift; sourceTree = "<group>"; };
+		2764FEEE1F98B1CE00FA5D55 /* SingleSharreReputationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSharreReputationTableViewCell.swift; sourceTree = "<group>"; };
 		276D1B851F7B89A400A3EAF3 /* DescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionTableViewCell.swift; sourceTree = "<group>"; };
 		276D1B891F7B8A0500A3EAF3 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
 		276D1B8B1F7B9E6F00A3EAF3 /* BusinessSharesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessSharesVC.swift; sourceTree = "<group>"; };
@@ -210,6 +224,7 @@
 				2786DD611F84C20300E4D7D6 /* TimeSlot.swift */,
 				2770E2BD1F83D9FF00199B61 /* Transaction.swift */,
 				27C0B03F1F6BDBC4009E69CA /* User.swift */,
+				2764FEE81F9884AB00FA5D55 /* Reputation.swift */,
 			);
 			name = Entity;
 			sourceTree = "<group>";
@@ -298,6 +313,8 @@
 			isa = PBXGroup;
 			children = (
 				275C050F1F7C01BF00E78E06 /* ViewSharreVC.swift */,
+				2764FEEC1F98AE2700FA5D55 /* ViewAllReputationVC.swift */,
+				2764FEEE1F98B1CE00FA5D55 /* SingleSharreReputationTableViewCell.swift */,
 			);
 			name = "Shares Information";
 			sourceTree = "<group>";
@@ -387,6 +404,10 @@
 				275C05081F7BE83800E78E06 /* ShowSharesInfoVC.swift */,
 				2799CDD61F8B6C6800DD4C22 /* RequestRefundVC.swift */,
 				2799CDD81F8B79CD00DD4C22 /* ViewRefundVC.swift */,
+				2764FEE21F984D1E00FA5D55 /* RatingVC.swift */,
+				2764FEEA1F98A41D00FA5D55 /* ViewRatingVC.swift */,
+				2764FEE41F987F3900FA5D55 /* ReputationTableViewCell.swift */,
+				2764FEE61F98838200FA5D55 /* ViewReputationVC.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -625,6 +646,7 @@
 			files = (
 				27FCB7DD1F67768C008E973C /* ProfileVC.swift in Sources */,
 				27DA99501F7CF794006E415C /* TransactionTableViewCell.swift in Sources */,
+				2764FEE31F984D1E00FA5D55 /* RatingVC.swift in Sources */,
 				2764C4831F72DE1400DB7199 /* ContactUsVC.swift in Sources */,
 				27D0186C1F7407CA00D5B798 /* RegexCheck.swift in Sources */,
 				2799CDD71F8B6C6800DD4C22 /* RequestRefundVC.swift in Sources */,
@@ -638,11 +660,14 @@
 				27FCB7EC1F678FD1008E973C /* Colours.swift in Sources */,
 				274A36891F7024A000FD5E3C /* EditPasswordVC.swift in Sources */,
 				27FCB7DF1F6776A5008E973C /* NotificationVC.swift in Sources */,
+				2764FEE71F98838200FA5D55 /* ViewReputationVC.swift in Sources */,
 				2770E2BE1F83D9FF00199B61 /* Transaction.swift in Sources */,
 				275C050E1F7C014C00E78E06 /* NewSharreVC.swift in Sources */,
 				2770E2C01F83FA2E00199B61 /* DecimalConverter.swift in Sources */,
+				2764FEED1F98AE2700FA5D55 /* ViewAllReputationVC.swift in Sources */,
 				2764C4871F72ECB700DB7199 /* Notification.swift in Sources */,
 				2791B33B1F8E1D0900AC937D /* FormatNumber.swift in Sources */,
+				2764FEE91F9884AB00FA5D55 /* Reputation.swift in Sources */,
 				27DA994A1F7CCEC7006E415C /* WalletTopUpVC.swift in Sources */,
 				2764C4811F7271AB00DB7199 /* SharrorFormCollectionViewCell.swift in Sources */,
 				27BFFC281F8275F6009FF404 /* ImageResize.swift in Sources */,
@@ -661,6 +686,7 @@
 				276D1B8A1F7B8A0500A3EAF3 /* ReviewTableViewCell.swift in Sources */,
 				276D1B861F7B89A400A3EAF3 /* DescriptionTableViewCell.swift in Sources */,
 				275FA0E61F7A5E9D008EF252 /* ImageDownloader.swift in Sources */,
+				2764FEEF1F98B1CE00FA5D55 /* SingleSharreReputationTableViewCell.swift in Sources */,
 				279497CA1F7DED8B00522999 /* SharreTimeUsageVC.swift in Sources */,
 				274A36851F700F2100FD5E3C /* UIViewWithBorder.swift in Sources */,
 				277DD71B1F723F3F005B7752 /* SharritURL.swift in Sources */,
@@ -687,11 +713,13 @@
 				27C114861F718C9100CD9FB9 /* TabCollectionViewCell.swift in Sources */,
 				27F256421F6AA1C6006B1697 /* ButtonCollectionViewCell.swift in Sources */,
 				2764C47D1F726FDD00DB7199 /* SharrorFormVC.swift in Sources */,
+				2764FEEB1F98A41D00FA5D55 /* ViewRatingVC.swift in Sources */,
 				276D1B8C1F7B9E7000A3EAF3 /* BusinessSharesVC.swift in Sources */,
 				2764A4BF1F6A73250014CCF3 /* Conversation.swift in Sources */,
 				277DD7191F72238C005B7752 /* SharesInfoVC.swift in Sources */,
 				279497CC1F7E258F00522999 /* TimeCollectionViewCell.swift in Sources */,
 				275C05101F7C01BF00E78E06 /* ViewSharreVC.swift in Sources */,
+				2764FEE51F987F3900FA5D55 /* ReputationTableViewCell.swift in Sources */,
 				274A368B1F70318200FD5E3C /* HelpInfoVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

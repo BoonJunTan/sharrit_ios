@@ -12,11 +12,17 @@ import Photos
 import Alamofire
 import SwiftyJSON
 
+enum RatingView {
+    case Overall
+    case Sharrie
+    case Sharror
+}
+
 class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     let tableViewSection = ["General", "AS A SHARRIE", "AS A SHARROR", "SETTINGS"]
-    var tableViewIcons = [[#imageLiteral(resourceName: "reputation")], [#imageLiteral(resourceName: "transaction")], [#imageLiteral(resourceName: "Sharrit_Logo"), #imageLiteral(resourceName: "business"), #imageLiteral(resourceName: "sand_timer"), #imageLiteral(resourceName: "transaction")], [#imageLiteral(resourceName: "profile2"), #imageLiteral(resourceName: "help"), #imageLiteral(resourceName: "logout")]]
+    var tableViewIcons = [[#imageLiteral(resourceName: "reputation")], [#imageLiteral(resourceName: "transaction2")], [#imageLiteral(resourceName: "Sharrit_Logo"), #imageLiteral(resourceName: "business"), #imageLiteral(resourceName: "sand_timer"), #imageLiteral(resourceName: "transaction2")], [#imageLiteral(resourceName: "profile2"), #imageLiteral(resourceName: "help"), #imageLiteral(resourceName: "logout")]]
     var tableViewItems = [["Reputation"], ["Sharres Status OvervieW"], ["Sharres Offered", "Sharing Business", "Pending Join Requests", "Sharres Status Overview"], ["Profile Settings", "Help Centre", "Logout"]]
 
     @IBOutlet weak var profileImage: UIImageView!
@@ -25,7 +31,24 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
     let fakeRatingDouble = 4.7
     @IBOutlet weak var profileDate: UILabel!
     
+    @IBOutlet weak var ratingFilter: UIStackView!
+    var ratingFilterText: RatingView! {
+        didSet {
+            if ratingFilterText == .Overall {
+                currentRatingFilter.text = "Overall"
+            } else if ratingFilterText == .Sharrie {
+                currentRatingFilter.text = "Sharrie"
+            } else {
+                currentRatingFilter.text = "Sharror"
+            }
+        }
+    }
+    @IBOutlet weak var currentRatingFilter: UILabel!
+    @IBOutlet weak var currentRatingView: UIView!
+    
     let imagePicker = UIImagePickerController()
+    
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +62,11 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView() // For Hiding away empty cell
+        
+        ratingFilter.isHidden = true
+        ratingFilterText = .Overall
+        let viewTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewBtnTapped(tapGestureRecognizer:)))
+        currentRatingView.addGestureRecognizer(viewTapGestureRecognizer)
     }
     
     override func didReceiveMemoryWarning() {
@@ -51,12 +79,18 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
         setupProfile()
     }
     
+    
+    func viewBtnTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+        ratingFilter.isHidden = !ratingFilter.isHidden
+    }
+    
     func setupProfile() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         profileLabe.text = (appDelegate.user?.firstName)! + " " + (appDelegate.user?.lastName)!
         
         starRating.rating = fakeRatingDouble
-        starRating.settings.fillMode = .precise
+        starRating.settings.fillMode = .half
+        getUserRating()
         
         // Get user profile creation date
         let dateFormatter = DateFormatter()
@@ -116,6 +150,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch tableViewItems[indexPath.section][indexPath.row] {
         case "Reputation":
+            self.performSegue(withIdentifier: "viewReputation", sender: self)
             break
         case "Sharres Offered":
             break
@@ -245,7 +280,6 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
     }
     
     func logoutPressed() {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.timerTest?.invalidate()
         appDelegate.timerTest = nil
         UserDefaults.standard.removeObject(forKey: "userInfo")
@@ -261,6 +295,50 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
                 }
             }
         })
+    }
+    
+    @IBAction func ratingFilterBtnPressed(_ sender: UIButton) {
+        if sender.titleLabel?.text == "Overall" {
+            ratingFilterText = .Overall
+        } else if sender.titleLabel?.text == "Sharrie" {
+            ratingFilterText = .Sharrie
+        } else {
+            ratingFilterText = .Sharror
+        }
+        ratingFilter.isHidden = true
+        getUserRating()
+    }
+    
+    func getUserRating() {
+        var url: String!
+        
+        if ratingFilterText == .Overall {
+            url = SharritURL.devURL + "reputation/current/overall/" + String(describing: appDelegate.user!.userID)
+        } else if ratingFilterText == .Sharrie {
+            url = SharritURL.devURL + "reputation/current/sharrie/" + String(describing: appDelegate.user!.userID)
+        } else {
+            url = SharritURL.devURL + "reputation/current/sharror/" + String(describing: appDelegate.user!.userID)
+        }
+        
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+            response in
+            switch response.result {
+            case .success(_):
+                // MUST TODO: Waiting for Joe
+                if let data = response.result.value {
+                    if JSON(data)["status"] == -6 {
+                        self.starRating.rating = 0
+                    } else {
+                        self.starRating.rating = Double(JSON(data)["content"].description)!
+                    }
+                }
+                break
+            case .failure(_):
+                self.starRating.rating = 0
+                print("Get User Combined Rating API failed")
+                break
+            }
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -78,7 +78,14 @@ class BusinessSharesVC: UIViewController, UICollectionViewDataSource, UICollecti
             sharesCell.sharesPrice.text = "Cost/Hr: " + String(describing:sharesCollection[indexPath.item].price)
         }
         
-        sharesCell.sharesRating.rating = 4.5
+        let rating = sharesCollection[indexPath.item].rating!
+        sharesCell.sharesRating.rating = 1
+        sharesCell.sharesRating.settings.totalStars = 1
+        if rating != -1 {
+            sharesCell.sharesRating.text = String(format: "%.2f", arguments: [rating])
+        } else {
+            sharesCell.sharesRating.text = "No Ratings Yet"
+        }
         
         return sharesCell
     }
@@ -118,48 +125,44 @@ class BusinessSharesVC: UIViewController, UICollectionViewDataSource, UICollecti
     
     // Get Shares for Business
     func getSharesForBusiness() {
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer " + appDelegate.user!.accessToken,
-            "Accept": "application/json" // Need this?
-        ]
-        
-        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON {
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in
             switch response.result {
             case .success(_):
                 self.sharesCollection = []
                 if let data = response.result.value {
-                    let json = JSON(data)
-                    for (_, subJson) in json["content"] {
-                        let sharreId = subJson["sharreId"].int!
-                        let sharreName = subJson["name"].description
-                        let sharreDescription = subJson["description"].description
-                        let sharreType = subJson["type"].int!
-                        let sharreQty = subJson["qty"].int!
-                        let sharreUnit = subJson["unit"].int!
-                        let sharrePrice = subJson["price"].description
-                        let sharreDeposit = subJson["deposit"].description
-                        let sharreLocation = subJson["name"].description
+                    for (_, subJson) in JSON(data)["content"] {
+                        let sharreId = subJson["sharre"]["sharreId"].int!
+                        let sharreName = subJson["sharre"]["name"].description
+                        let sharreDescription = subJson["sharre"]["description"].description
+                        let sharreType = subJson["sharre"]["type"].int!
+                        let sharreQty = subJson["sharre"]["qty"].int!
+                        let sharreUnit = subJson["sharre"]["unit"].int!
+                        let sharrePrice = subJson["sharre"]["price"].description
+                        let sharreDeposit = subJson["sharre"]["deposit"].description
+                        let sharreLocation = subJson["sharre"]["name"].description
                         
                         var photoArray = [String]()
-                        for (_, photoPath) in subJson["photos"] {
+                        for (_, photoPath) in subJson["sharre"]["photos"] {
                             photoArray.append(photoPath["fileName"].description)
                         }
                         
-                        let sharreDateCreated = subJson["name"].description
-                        let sharreOwnerType = subJson["ownerType"].int!
-                        let sharreOwnerId = subJson["ownerId"].int!
-                        let sharreIsActive = subJson["isActive"].boolValue
+                        let sharreDateCreated = subJson["sharre"]["name"].description
+                        let sharreOwnerType = subJson["sharre"]["ownerType"].int!
+                        let sharreOwnerId = subJson["sharre"]["ownerId"].int!
+                        let sharreIsActive = subJson["sharre"]["isActive"].boolValue
                         
                         let sharre = Shares(sharreId: sharreId, name: sharreName, description: sharreDescription, type: sharreType, qty: sharreQty, unit: sharreUnit, price: sharrePrice, deposit: sharreDeposit, location: sharreLocation, photos: photoArray, dateCreated: sharreDateCreated, ownerType: sharreOwnerType, ownerId: sharreOwnerId, isActive: sharreIsActive)
                         
-                        let sharreActiveStart = subJson["activeStart"].description
-                        let sharreActiveEnd = subJson["activeEnd"].description
+                        let sharreActiveStart = subJson["sharre"]["activeStart"].description
+                        let sharreActiveEnd = subJson["sharre"]["activeEnd"].description
                         
                         if sharreActiveStart != "00:00:00" && sharreActiveEnd != "00:00:00" {
                             sharre.activeStart = sharreActiveStart
                             sharre.activeEnd = sharreActiveEnd
                         }
+                        
+                        sharre.rating = subJson["currentRating"].double!
                         
                         self.sharesCollection.append(sharre)
                     }

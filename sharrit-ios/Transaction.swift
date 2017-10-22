@@ -46,6 +46,8 @@ class Transaction {
     var sharreUnit: Int?
     var isHoldingDeposit: Bool?
     var isWaitingRefund: Bool?
+    var ownerRatingID: Int?
+    var sharrieRatingID: Int?
     
     init(transactionId: Int, dateCreated: String, payeeId: Int, payeeType: Int, payerId: Int, payerType: Int, amount: String, promoId: Int, timeStart: String, timeEnd: String, status: Int, qty: Int, deposit: String) {
         self.transactionId = transactionId
