@@ -326,10 +326,12 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
             case .success(_):
                 // MUST TODO: Waiting for Joe
                 if let data = response.result.value {
+                    self.starRating.rating = 1
+                    self.starRating.settings.totalStars = 1
                     if JSON(data)["status"] == -6 {
-                        self.starRating.rating = 0
+                        self.starRating.text = "No Rating Yet"
                     } else {
-                        self.starRating.rating = Double(JSON(data)["content"].description)!
+                        self.starRating.text = String(format: "%.2f", arguments: [Double(JSON(data)["content"].description)!])
                     }
                 }
                 break
