@@ -40,7 +40,6 @@ class ViewRatingVC: UIViewController {
     func getRating() {
         let url: String!
         
-        // MUST TODO: Waiting for Joe
         if userRole == .Sharrie {
             // Get Specific Reputation given by Me (Sharrie)
             url = SharritURL.devURL + "reputation/user/" + String(describing: transaction.transactionId)
@@ -65,4 +64,9 @@ class ViewRatingVC: UIViewController {
             }
         }
     }
+    
+    @IBAction func deleteRating(_ sender: SharritButton) {
+        
+    }
+    
 }

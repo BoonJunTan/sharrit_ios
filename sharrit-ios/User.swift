@@ -24,6 +24,11 @@ class User {
     var createDate: String
     var joinedSBList: [Int]
     var pendingSBList: [Int]
+    var bankOwnerName: String?
+    var bankName: String?
+    var bankBranch: String?
+    var bankAccount: String?
+    var bankType: Int?
     
     init(userID: Int, firstName: String, lastName: String, password: String, mobile: String, profilePhoto: String, accessToken: String, createDate: String, joinedSBList: [Int], pendingSBList: [Int]) {
         self.userID = userID

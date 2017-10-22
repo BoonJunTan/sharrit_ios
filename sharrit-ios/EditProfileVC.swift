@@ -40,12 +40,7 @@ class EditProfileVC: UIViewController {
         
         let url = SharritURL.devURL + "user/" + String(describing: appDelegate.user!.userID)
         
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer " + appDelegate.user!.accessToken,
-            "Accept": "application/json" // Need this?
-        ]
-        
-        Alamofire.request(url, method: .put, parameters: signUpData, encoding: JSONEncoding.default, headers: headers).responseJSON {
+        Alamofire.request(url, method: .put, parameters: signUpData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in
             switch response.result {
                 

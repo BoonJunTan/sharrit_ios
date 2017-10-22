@@ -343,58 +343,58 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                 self.tableViewItems = []
                 if let data = response.result.value {
                     for (_, subJson) in JSON(data)["content"] {
-                        let id = subJson["transactionId"].int!
-                        let dateCreated = subJson["dateCreated"].description
-                        let payeeId = subJson["payeeId"].int!
-                        let payeeType = subJson["payeeType"].int!
-                        let payerId = subJson["payerId"].int!
-                        let payerType = subJson["payerType"].int!
-                        let amount = subJson["amount"].description
-                        let promoId = subJson["promoId"].int!
-                        let timeStart = subJson["timeStart"].description
-                        let timeEnd = subJson["timeEnd"].description
-                        let status = subJson["status"].int!
-                        let qty = subJson["qty"].int!
-                        let deposit = subJson["deposit"].description
+                        let id = subJson["transaction"]["transactionId"].int!
+                        let dateCreated = subJson["transaction"]["dateCreated"].description
+                        let payeeId = subJson["transaction"]["payeeId"].int!
+                        let payeeType = subJson["transaction"]["payeeType"].int!
+                        let payerId = subJson["transaction"]["payerId"].int!
+                        let payerType = subJson["transaction"]["payerType"].int!
+                        let amount = subJson["transaction"]["amount"].description
+                        let promoId = subJson["transaction"]["promoId"].int!
+                        let timeStart = subJson["transaction"]["timeStart"].description
+                        let timeEnd = subJson["transaction"]["timeEnd"].description
+                        let status = subJson["transaction"]["status"].int!
+                        let qty = subJson["transaction"]["qty"].int!
+                        let deposit = subJson["transaction"]["deposit"].description
                         let transaction = Transaction(transactionId: id, dateCreated: dateCreated, payeeId: payeeId, payeeType: payeeType, payerId: payerId, payerType: payerType, amount: amount, promoId: promoId, timeStart: timeStart, timeEnd: timeEnd, status: status, qty: qty, deposit: deposit)
                         
-                        if let sharreId = subJson["sharreId"].int {
+                        if let sharreId = subJson["transaction"]["sharreId"].int {
                             transaction.sharreId = sharreId
                         }
                         
-                        if let sharreHasStarted = subJson["hasStarted"].bool {
+                        if let sharreHasStarted = subJson["transaction"]["hasStarted"].bool {
                             transaction.hasStarted = sharreHasStarted
                         }
                         
-                        if let isHoldingDeposit = subJson["isHoldingDeposit"].bool {
+                        if let isHoldingDeposit = subJson["transaction"]["isHoldingDeposit"].bool {
                             transaction.isHoldingDeposit = isHoldingDeposit
                         }
                         
-                        if let isWaitingRefund = subJson["isWaitingRefund"].bool {
+                        if let isWaitingRefund = subJson["transaction"]["isWaitingRefund"].bool {
                             transaction.isWaitingRefund = isWaitingRefund
                         }
 
-                        if let sharrePrice = subJson["price"].double {
+                        if let sharrePrice = subJson["transaction"]["price"].double {
                             transaction.sharreOnGoingPrice = sharrePrice
                         }
                         
-                        if let sharreUnit = subJson["unit"].int {
+                        if let sharreUnit = subJson["transaction"]["unit"].int {
                             transaction.sharreUnit = sharreUnit
                         }
                         
-                        if let sharreType = subJson["type"].int {
+                        if let sharreType = subJson["transaction"]["type"].int {
                             transaction.sharreType = sharreType
                         }
                         
-                        if let userRatingID = subJson["userRatingId"].int {
+                        if let userRatingID = subJson["transaction"]["userRatingId"].int {
                             transaction.sharrieRatingID = userRatingID
                         }
                         
-                        if let ownerRatingID = subJson["ownerRatingId"].int {
+                        if let ownerRatingID = subJson["transaction"]["ownerRatingId"].int {
                             transaction.ownerRatingID = ownerRatingID
                         }
                         
-                        transaction.sharreName = subJson["name"].description
+                        transaction.sharreName = subJson["transaction"]["name"].description
                         
                         self.tableViewItems.append(transaction)
                     }

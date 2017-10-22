@@ -10,7 +10,6 @@ import UIKit
 import FSCalendar
 import Alamofire
 import SwiftyJSON
-import DropDown
 
 class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegate, FSCalendarDelegateAppearance, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 

@@ -11,7 +11,6 @@ import IQKeyboardManagerSwift
 import Alamofire
 import SwiftyJSON
 import Stripe
-import DropDown
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -33,8 +32,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().tintColor = UIColor.white
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white]
         Stripe.setDefaultPublishableKey("pk_test_6TItuTqG2YD93VdFGA3E2jpe")
-        
-        DropDown.startListeningToKeyboard()
         
         return true
     }

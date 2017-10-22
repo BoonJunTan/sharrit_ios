@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2713ECEA1F9CBE15004D1D89 /* WalletCashOutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2713ECE91F9CBE15004D1D89 /* WalletCashOutVC.swift */; };
+		2713ECEC1F9CC230004D1D89 /* BankDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2713ECEB1F9CC230004D1D89 /* BankDetailVC.swift */; };
 		272508C81F7BAE9500A93BE3 /* ShowSBVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272508C71F7BAE9500A93BE3 /* ShowSBVC.swift */; };
 		2734E12B1F7C846500543F88 /* SharrePhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2734E12A1F7C846500543F88 /* SharrePhotoCollectionViewCell.swift */; };
 		273928FC1F8FD943007B0744 /* SharreInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 273928FB1F8FD943007B0744 /* SharreInfo.xib */; };
@@ -101,6 +103,8 @@
 /* Begin PBXFileReference section */
 		0C9F59F22649F3203E5DA86B /* Pods_sharrit_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sharrit_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		161ADFA0709DEF88BC30DC81 /* Pods-sharrit-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sharrit-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-sharrit-ios/Pods-sharrit-ios.release.xcconfig"; sourceTree = "<group>"; };
+		2713ECE91F9CBE15004D1D89 /* WalletCashOutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCashOutVC.swift; sourceTree = "<group>"; };
+		2713ECEB1F9CC230004D1D89 /* BankDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankDetailVC.swift; sourceTree = "<group>"; };
 		272508C71F7BAE9500A93BE3 /* ShowSBVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowSBVC.swift; sourceTree = "<group>"; };
 		2734E12A1F7C846500543F88 /* SharrePhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharrePhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		273928FB1F8FD943007B0744 /* SharreInfo.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SharreInfo.xib; sourceTree = "<group>"; };
@@ -369,6 +373,7 @@
 				27FCB7E01F6776B6008E973C /* WalletVC.swift */,
 				27F256411F6AA1C6006B1697 /* ButtonCollectionViewCell.swift */,
 				27DA99491F7CCEC7006E415C /* WalletTopUpVC.swift */,
+				2713ECE91F9CBE15004D1D89 /* WalletCashOutVC.swift */,
 				27DA994B1F7CE8F3006E415C /* TopUpTransactionVC.swift */,
 				27DA994D1F7CF6F0006E415C /* WalletTransactionViewController.swift */,
 				27DA994F1F7CF794006E415C /* TransactionTableViewCell.swift */,
@@ -396,6 +401,7 @@
 				27702CD41F69531900A1C652 /* ProfileTableViewCell.swift */,
 				27B37F921F6EC2E200565AA8 /* EditProfileVC.swift */,
 				274A36881F7024A000FD5E3C /* EditPasswordVC.swift */,
+				2713ECEB1F9CC230004D1D89 /* BankDetailVC.swift */,
 				274A368A1F70318200FD5E3C /* HelpInfoVC.swift */,
 				2764C4821F72DE1400DB7199 /* ContactUsVC.swift */,
 				275C050A1F7BF40B00E78E06 /* BusinessInfoCollectionViewCell.swift */,
@@ -589,7 +595,6 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Cosmos/Cosmos.framework",
 				"${BUILT_PRODUCTS_DIR}/CountryPickerSwift/CountryPicker.framework",
-				"${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework",
 				"${BUILT_PRODUCTS_DIR}/FSCalendar/FSCalendar.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/ImageSlideshow/ImageSlideshow.framework",
@@ -604,7 +609,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cosmos.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CountryPicker.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DropDown.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSCalendar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImageSlideshow.framework",
@@ -626,7 +630,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-sharrit-ios/Pods-sharrit-ios-resources.sh",
-				$PODS_CONFIGURATION_BUILD_DIR/ImageSlideshow/ImageSlideshow.bundle,
+				"$PODS_CONFIGURATION_BUILD_DIR/ImageSlideshow/ImageSlideshow.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -663,6 +667,7 @@
 				2764FEE71F98838200FA5D55 /* ViewReputationVC.swift in Sources */,
 				2770E2BE1F83D9FF00199B61 /* Transaction.swift in Sources */,
 				275C050E1F7C014C00E78E06 /* NewSharreVC.swift in Sources */,
+				2713ECEA1F9CBE15004D1D89 /* WalletCashOutVC.swift in Sources */,
 				2770E2C01F83FA2E00199B61 /* DecimalConverter.swift in Sources */,
 				2764FEED1F98AE2700FA5D55 /* ViewAllReputationVC.swift in Sources */,
 				2764C4871F72ECB700DB7199 /* Notification.swift in Sources */,
@@ -715,6 +720,7 @@
 				2764C47D1F726FDD00DB7199 /* SharrorFormVC.swift in Sources */,
 				2764FEEB1F98A41D00FA5D55 /* ViewRatingVC.swift in Sources */,
 				276D1B8C1F7B9E7000A3EAF3 /* BusinessSharesVC.swift in Sources */,
+				2713ECEC1F9CC230004D1D89 /* BankDetailVC.swift in Sources */,
 				2764A4BF1F6A73250014CCF3 /* Conversation.swift in Sources */,
 				277DD7191F72238C005B7752 /* SharesInfoVC.swift in Sources */,
 				279497CC1F7E258F00522999 /* TimeCollectionViewCell.swift in Sources */,

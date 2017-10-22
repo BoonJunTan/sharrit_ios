@@ -17,6 +17,5 @@ target 'sharrit-ios' do
   pod 'Stripe'
   pod 'CardIO'
   pod 'SVProgressHUD'
-  pod 'DropDown'
 
 end
