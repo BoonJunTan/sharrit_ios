@@ -45,20 +45,6 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         businessName.text = businessInfo.businessName
         
-        if businessInfo.rating != -1 {
-            businessRating.rating = businessInfo.rating
-            // MUST TODO: WAITING FOR JOE
-            /*
-            review.append("Review Test Data 1")
-            review.append("Review Test Data 2")
-            tableViewItems.append(review)
-             */
-        } else {
-            businessRating.rating = 1
-            businessRating.settings.totalStars = 1
-            businessRating.text = "No Ratings Yet"
-        }
-        
         // Get Business profile creation date
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = NSTimeZone(abbreviation: "GMT+08")! as TimeZone
@@ -78,6 +64,19 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         businessStartDate.text = formatter.string(from: endDate!, to: todayDate!)
 
         tableViewItems.append([businessInfo.description!])
+        
+        businessRating.rating = 1
+        businessRating.settings.totalStars = 1
+        if businessInfo.rating != -1 {
+            businessRating.text = String(format: "%.2f", arguments: [businessInfo.rating])
+            for (_, subJson) in JSON(businessInfo.ratingList) {
+                review.append(subJson[
+                    "review"]["message"].description)
+            }
+            tableViewItems.append(review)
+        } else {
+            businessRating.text = "No Ratings Yet"
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -122,10 +121,14 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "reviewCell") as! ReviewTableViewCell
+            // MUST TODO: GET REVIEWER's Name and Image STRING
             cell.profileImage.image = #imageLiteral(resourceName: "empty")
             cell.profileName.text = "Test Profile Name"
+            
+            cell.ratingView.rating = 1
+            cell.ratingView.settings.totalStars = 1
+            cell.ratingView.text = String(format: "%.2f", arguments: [JSON(businessInfo.ratingList)[indexPath.item]["ratingValue"].double!])
             cell.ratingLabel.text = review[indexPath.item]
-            cell.ratingView.rating = 4.5
             return cell
         }
     }

@@ -40,7 +40,11 @@ class ViewAllReputationVC: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReputationCell", for: indexPath) as! SingleSharreReputationTableViewCell
 
         cell.userName.text = reputation[indexPath.row].userName
-        cell.rating.rating = reputation[indexPath.row].rating
+        
+        cell.rating.rating = 1
+        cell.rating.settings.totalStars = 1
+        cell.rating.text = String(format: "%.2f", arguments: [reputation[indexPath.row].rating])
+        
         cell.review.text = reputation[indexPath.row].review
         ImageDownloader().imageFromServerURL(urlString: (SharritURL.devPhotoURL + reputation[indexPath.row].userPhoto!), imageView: cell.userProfile)
 

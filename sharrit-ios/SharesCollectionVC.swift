@@ -108,11 +108,12 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
             ImageDownloader().imageFromServerURL(urlString: SharritURL.devPhotoURL + sharesCollection[indexPath.item].logoURL, imageView: sharesCell.sharesImage)
             
             let rating = sharesCollection[indexPath.item].rating
+            
+            sharesCell.sharreRating.rating = 1
+            sharesCell.sharreRating.settings.totalStars = 1
             if rating != -1 {
-                sharesCell.sharreRating.rating = sharesCollection[indexPath.item].rating
+                sharesCell.sharreRating.text = String(format: "%.2f", arguments: [sharesCollection[indexPath.item].rating])
             } else {
-                sharesCell.sharreRating.rating = 1
-                sharesCell.sharreRating.settings.totalStars = 1
                 sharesCell.sharreRating.text = "No Ratings Yet"
             }
             
@@ -271,6 +272,7 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
                         
                         business.requestFormID = subJson["business"]["requestFormId"].int!
                         business.rating = subJson["rating"]["currentRating"].double!
+                        business.ratingList = subJson["rating"]["allRating"].array!
                         
                         self.sharesCollection.append(business)
                     }

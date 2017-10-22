@@ -95,9 +95,9 @@ class ViewReputationVC: UIViewController, UITableViewDataSource, UITableViewDele
                 if let data = response.result.value {
                     self.reputation.removeAll()
                     for (_, subJson) in JSON(data)["content"] {
-                        let currentReputation = Reputation(reputationID: subJson["rating"]["reviewId"].int!, userName: subJson["userName"]["firstName"].description + " " + subJson["userName"]["lastName"].description, rating: Double(subJson["rating"]["ratingValue"].description))
+                        let currentReputation = Reputation(reputationID: subJson["rating"]["reviewId"].int!, userName: subJson["reviewerInfo"]["firstName"].description + " " + subJson["reviewerInfo"]["lastName"].description, rating: Double(subJson["rating"]["ratingValue"].description))
                         
-                        currentReputation.userPhoto = subJson["userName"]["photos"]["fileName"].description
+                        currentReputation.userPhoto = subJson["reviewerInfo"]["photos"]["fileName"].description
                         currentReputation.sharreName = subJson["sharre"]["name"].description
                         currentReputation.sharrePhoto = subJson["sharre"]["photos"]["fileName"].description
                         
@@ -129,7 +129,13 @@ class ViewReputationVC: UIViewController, UITableViewDataSource, UITableViewDele
         ImageDownloader().imageFromServerURL(urlString: (SharritURL.devPhotoURL + reputation[indexPath.row].userPhoto!), imageView: cell.profileImage)
         ImageDownloader().imageFromServerURL(urlString: (SharritURL.devPhotoURL + reputation[indexPath.row].sharrePhoto!), imageView: cell.sharreImage)
         
-        cell.transactionRating.rating = reputation[indexPath.row].rating
+        cell.profileImage.layer.borderColor = UIColor.black.cgColor
+        cell.profileImage.layer.borderWidth = 1
+        
+        cell.transactionRating.rating = 1
+        cell.transactionRating.settings.totalStars = 1
+        cell.transactionRating.text = String(format: "%.2f", arguments: [reputation[indexPath.row].rating])
+        
         cell.transactionReview.text = reputation[indexPath.row].review
         cell.transactionTitle.text = reputation[indexPath.row].sharreName
         

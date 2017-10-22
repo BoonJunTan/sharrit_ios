@@ -79,11 +79,11 @@ class BusinessSharesVC: UIViewController, UICollectionViewDataSource, UICollecti
         }
         
         let rating = sharesCollection[indexPath.item].rating!
+        sharesCell.sharesRating.rating = 1
+        sharesCell.sharesRating.settings.totalStars = 1
         if rating != -1 {
-            sharesCell.sharesRating.rating = rating
+            sharesCell.sharesRating.text = String(format: "%.2f", arguments: [rating])
         } else {
-            sharesCell.sharesRating.rating = 1
-            sharesCell.sharesRating.settings.totalStars = 1
             sharesCell.sharesRating.text = "No Ratings Yet"
         }
         
