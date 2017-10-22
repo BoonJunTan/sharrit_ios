@@ -13,20 +13,22 @@ class EditProfileVC: UIViewController {
     
     @IBOutlet weak var userFirstName: UITextField!
     @IBOutlet weak var userLastName: UITextField!
+    @IBOutlet weak var userAddress: UITextField!
     @IBOutlet weak var succesfulUpdateView: UIView!
     
     // Not available at the moment
-    @IBOutlet weak var emailView: UIView!
     @IBOutlet weak var userEmail: UITextField!
+    @IBOutlet weak var userAge: UITextField!
+    @IBOutlet weak var userGender: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        emailView.isHidden = true
         succesfulUpdateView.isHidden = true
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         userFirstName.text = appDelegate.user?.firstName
         userLastName.text = appDelegate.user?.lastName
+        userAddress.text = appDelegate.user?.address
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,7 +38,7 @@ class EditProfileVC: UIViewController {
     @IBAction func saveBtnTapped(_ sender: SharritButton) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
-        let signUpData: [String: Any] = ["firstName": userFirstName.text!, "lastName": userLastName.text!]
+        let signUpData: [String: Any] = ["firstName": userFirstName.text!, "lastName": userLastName.text!, "address": userAddress.text!]
         
         let url = SharritURL.devURL + "user/" + String(describing: appDelegate.user!.userID)
         
@@ -48,11 +50,13 @@ class EditProfileVC: UIViewController {
                 // Change App Delegate
                 appDelegate.user?.firstName = self.userFirstName.text!
                 appDelegate.user?.lastName = self.userLastName.text!
+                appDelegate.user?.address = self.userAddress.text!
                 
                 // Change User Default
                 if var userInfo = UserDefaults.standard.object(forKey: "userInfo") as? [String: Any] {
                     userInfo["firstName"] = self.userFirstName.text!
                     userInfo["lastName"] = self.userLastName.text!
+                    userInfo["address"] = self.userAddress.text!
                     UserDefaults.standard.set(userInfo, forKey: "userInfo")
                     UserDefaults.standard.synchronize()
                 }
