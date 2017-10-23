@@ -54,7 +54,7 @@ class ShowSBVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
         
         businessCell.businessTitle.text = businessCollection[indexPath.item].businessName
         
-        businessCell.businessRating.rating = 4.7 // Must TODO: In Future
+        businessCell.businessRating.rating = 4.7 // Must TODO: NEED ASK JOE
         
         // Get Company Creation Date and Format it
         let dateFormatter = DateFormatter()

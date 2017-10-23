@@ -99,7 +99,7 @@ class ViewReputationVC: UIViewController, UITableViewDataSource, UITableViewDele
                         
                         currentReputation.userPhoto = subJson["reviewerInfo"]["photos"]["fileName"].description
                         currentReputation.sharreName = subJson["sharre"]["name"].description
-                        currentReputation.sharrePhoto = subJson["sharre"]["photos"]["fileName"].description
+                        currentReputation.sharrePhoto = subJson["sharre"]["photos"][0]["fileName"].description
                         
                         if let reviewMessage = subJson["rating"]["review"]["message"].description as? String {
                             currentReputation.review = reviewMessage
@@ -131,6 +131,7 @@ class ViewReputationVC: UIViewController, UITableViewDataSource, UITableViewDele
         
         cell.profileImage.layer.borderColor = UIColor.black.cgColor
         cell.profileImage.layer.borderWidth = 1
+        cell.profileImage.layer.masksToBounds = true
         
         cell.transactionRating.rating = 1
         cell.transactionRating.settings.totalStars = 1

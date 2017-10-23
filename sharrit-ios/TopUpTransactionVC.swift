@@ -27,7 +27,7 @@ class TopUpTransactionVC: UIViewController {
             transactionLabel.text = "Top Up Successfully. Cheers!"
         } else {
             title = "Cash Out Transaction"
-            transactionLabel.text = "Cash Out Successfully. Cheers!"
+            transactionLabel.text = "Cash Out Request Submitted. Please check transaction history for new update. Cheers!"
         }
         
         let when = DispatchTime.now() + 4

@@ -40,13 +40,12 @@ class ViewRatingVC: UIViewController {
     func getRating() {
         let url: String!
         
-        // MUST TODO: Waiting for Joe
         if userRole == .Sharrie {
             // Get Specific Reputation given by Me (Sharrie)
-            url = SharritURL.devURL + "reputation/user/" + String(describing: transaction.transactionId)
+            url = SharritURL.devURL + "reputation/user/one/" + String(describing: transaction.transactionId)
         } else {
             // Get Specific Reputation given by Me (Sharror)
-            url = SharritURL.devURL + "reputation/owner/" + String(describing: transaction.transactionId)
+            url = SharritURL.devURL + "reputation/owner/one/" + String(describing: transaction.transactionId)
         }
         
         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
@@ -54,8 +53,9 @@ class ViewRatingVC: UIViewController {
             switch response.result {
             case .success(_):
                 if let data = response.result.value {
-                    for (_, subJson) in JSON(data) {
-                        
+                    if let jsonData:JSON = JSON(data)["content"] {
+                        self.ratingView.rating = jsonData[0]["ratingValue"].double!
+                        self.reviewTV.text = jsonData[0]["review"]["message"].description
                     }
                 }
                 break
@@ -65,4 +65,29 @@ class ViewRatingVC: UIViewController {
             }
         }
     }
+    
+    @IBAction func deleteRating(_ sender: SharritButton) {
+        let url: String!
+        
+        if userRole == .Sharrie {
+            // Delete Specific Reputation given by Me (Sharrie)
+            url = SharritURL.devURL + "reputation/user/" + String(describing: transaction.transactionId)
+        } else {
+            // Delete Specific Reputation given by Me (Sharror)
+            url = SharritURL.devURL + "reputation/owner/" + String(describing: transaction.transactionId)
+        }
+        
+        Alamofire.request(url, method: .delete, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+            response in
+            switch response.result {
+            case .success(_):
+                self.navigationController?.popViewController(animated: true)
+                break
+            case .failure(_):
+                print("Delete Specific Reputation API failed")
+                break
+            }
+        }
+    }
+    
 }

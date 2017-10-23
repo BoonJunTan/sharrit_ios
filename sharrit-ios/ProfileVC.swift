@@ -22,8 +22,8 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
     
     @IBOutlet weak var tableView: UITableView!
     let tableViewSection = ["General", "AS A SHARRIE", "AS A SHARROR", "SETTINGS"]
-    var tableViewIcons = [[#imageLiteral(resourceName: "reputation")], [#imageLiteral(resourceName: "transaction2")], [#imageLiteral(resourceName: "Sharrit_Logo"), #imageLiteral(resourceName: "business"), #imageLiteral(resourceName: "sand_timer"), #imageLiteral(resourceName: "transaction2")], [#imageLiteral(resourceName: "profile2"), #imageLiteral(resourceName: "help"), #imageLiteral(resourceName: "logout")]]
-    var tableViewItems = [["Reputation"], ["Sharres Status OvervieW"], ["Sharres Offered", "Sharing Business", "Pending Join Requests", "Sharres Status Overview"], ["Profile Settings", "Help Centre", "Logout"]]
+    var tableViewIcons = [[#imageLiteral(resourceName: "reputation")], [#imageLiteral(resourceName: "transaction2")], [#imageLiteral(resourceName: "Sharrit_Logo"), #imageLiteral(resourceName: "business"), #imageLiteral(resourceName: "sand_timer"), #imageLiteral(resourceName: "transaction2")], [#imageLiteral(resourceName: "profile2"), #imageLiteral(resourceName: "bank"), #imageLiteral(resourceName: "help"), #imageLiteral(resourceName: "logout")]]
+    var tableViewItems = [["Reputation"], ["Sharres Status OvervieW"], ["Sharres Offered", "Sharing Business", "Pending Join Requests", "Sharres Status Overview"], ["Profile Settings", "Bank Details", "Help Centre", "Logout"]]
 
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var profileLabe: UILabel!
@@ -162,6 +162,9 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
             break
         case "Pending Join Requests":
             self.performSegue(withIdentifier: "showSB", sender: "Pending")
+            break
+        case "Bank Details":
+            self.performSegue(withIdentifier: "showBankDetails", sender: self)
             break
         case "Profile Settings":
             self.performSegue(withIdentifier: "editProfile", sender: self)
@@ -324,12 +327,13 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
             response in
             switch response.result {
             case .success(_):
-                // MUST TODO: Waiting for Joe
                 if let data = response.result.value {
+                    self.starRating.rating = 1
+                    self.starRating.settings.totalStars = 1
                     if JSON(data)["status"] == -6 {
-                        self.starRating.rating = 0
+                        self.starRating.text = "No Rating Yet"
                     } else {
-                        self.starRating.rating = Double(JSON(data)["content"].description)!
+                        self.starRating.text = String(format: "%.2f", arguments: [Double(JSON(data)["content"].description)!])
                     }
                 }
                 break

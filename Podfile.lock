@@ -3,7 +3,6 @@ PODS:
   - CardIO (5.4.1)
   - Cosmos (11.0.3)
   - CountryPickerSwift (1.4.4)
-  - DropDown (2)
   - FSCalendar (2.7.9)
   - ImageSlideshow (1.3.2):
     - ImageSlideshow/Core (= 1.3.2)
@@ -21,7 +20,6 @@ DEPENDENCIES:
   - CardIO
   - Cosmos (~> 11.0)
   - CountryPickerSwift
-  - DropDown
   - FSCalendar
   - ImageSlideshow
   - IQKeyboardManagerSwift
@@ -35,7 +33,6 @@ SPEC CHECKSUMS:
   CardIO: 56983b39b62f495fc6dae9ad7cf875143df06443
   Cosmos: eb506859929f4add2d2aec822a27efb2f718a95d
   CountryPickerSwift: e31e67f2b95eb1fa6ad230e9eb0b49b020526d99
-  DropDown: 744784d9c9aa505100e942c16acd05430cbb2f0a
   FSCalendar: a04b09f16f811bc92e82f3cf852a15225233b9d5
   ImageSlideshow: a68a76fc618ebd2b7481ce355ad67d7097203976
   IQKeyboardManagerSwift: fb399c4cddcd8d9bbcd2d0c7c81ed290b61c088e
@@ -45,6 +42,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: db27c54e6e18bc903341661fc9feb55e04905cc4
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 12c3c8e3c5f39628936c9192c448517e79409fd0
+PODFILE CHECKSUM: e408fd60bfa2a5dd7e9ebf4a934cc0311837785b
 
 COCOAPODS: 1.3.1

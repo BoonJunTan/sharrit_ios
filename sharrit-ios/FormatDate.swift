@@ -85,6 +85,19 @@ struct FormatDate {
         return dateFormatter.date(from: date)!
     }
     
+    func formatDateTimeToLocal3(date: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = NSTimeZone(abbreviation: "GMT+08")! as TimeZone
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
+        
+        let dateGiven = dateFormatter.date(from: date)
+        
+        let dateFormatter2 = DateFormatter()
+        dateFormatter2.dateFormat = "dd-MM-yyyy HH:mm"
+        
+        return dateFormatter2.string(from: dateGiven!)
+    }
+    
     func formatDateStringForDayAppointment(dateStart: String, dateEnd: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = NSTimeZone(abbreviation: "GMT+08")! as TimeZone

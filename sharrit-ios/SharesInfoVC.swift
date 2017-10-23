@@ -121,7 +121,7 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "reviewCell") as! ReviewTableViewCell
-            // MUST TODO: GET REVIEWER's Name and Image STRING
+            // MUST TODO: ASK JOE TO GET REVIEWER's Name and Image STRING
             cell.profileImage.image = #imageLiteral(resourceName: "empty")
             cell.profileName.text = "Test Profile Name"
             
