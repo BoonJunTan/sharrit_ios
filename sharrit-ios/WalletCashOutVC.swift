@@ -19,6 +19,7 @@ class WalletCashOutVC: UIViewController {
     @IBOutlet weak var bankAccountNumber: UILabel!
     @IBOutlet weak var bankAccountType: UILabel!
     @IBOutlet weak var errorLabel: UILabel!
+    @IBOutlet weak var proceedBtn: SharritButton!
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
@@ -53,6 +54,15 @@ class WalletCashOutVC: UIViewController {
                         self.bankAccountNumber.text = bankDetails["accountNumber"].description
                         
                         bankDetails["accountType"].int! == 0 ? (self.bankAccountType.text = "Saving Account") : (self.bankAccountType.text = "Edit Account")
+                        
+                        self.proceedBtn.isHidden = false
+                    } else {
+                        self.bankOwnerName.text = "Please fill up details @ Profile Page"
+                        self.bankName.text = "Please fill up details @ Profile Page"
+                        self.bankBranch.text = "Please fill up details @ Profile Page"
+                        self.bankAccountNumber.text = "Please fill up details @ Profile Page"
+                        self.bankAccountType.text = "Please fill up details @ Profile Page"
+                        self.proceedBtn.isHidden = true
                     }
                 }
                 break

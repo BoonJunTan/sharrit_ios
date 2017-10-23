@@ -887,6 +887,7 @@
                         <outlet property="bankOwnerName" destination="sSr-Cm-ylY" id="T5n-7h-2Jo"/>
                         <outlet property="cashOutAmount" destination="N7h-vb-8Hn" id="req-IO-2qK"/>
                         <outlet property="errorLabel" destination="LNn-Ar-sei" id="Vik-8V-0Dc"/>
+                        <outlet property="proceedBtn" destination="lg8-q9-I24" id="6Dm-ok-GwZ"/>
                         <segue destination="3Fg-RY-e2b" kind="show" identifier="goToTransaction" id="j92-a7-eme"/>
                     </connections>
                 </viewController>
@@ -1118,6 +1119,6 @@
         <image name="wallet" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ClB-pw-J8E"/>
+        <segue reference="j92-a7-eme"/>
     </inferredMetricsTieBreakers>
 </document>
