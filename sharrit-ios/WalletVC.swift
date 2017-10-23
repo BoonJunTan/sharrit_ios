@@ -101,6 +101,9 @@ class WalletVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch btnLabel[indexPath.item] {
+        case "Smart Card":
+            performSegue(withIdentifier: "showSmartCard", sender: nil)
+            break
         case "Cash Out":
             performSegue(withIdentifier: "walletCashOut", sender: nil)
             break

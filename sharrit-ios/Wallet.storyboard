@@ -10,6 +10,11 @@
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Navigation Controller-->
         <scene sceneID="vM2-kv-ZKG">
@@ -176,6 +181,7 @@
                         <segue destination="0g8-Yo-Zxh" kind="show" identifier="walletTopUp" id="xWO-wd-3fr"/>
                         <segue destination="Jth-sa-KFy" kind="show" identifier="viewAllTransaction" id="bQO-eq-WKf"/>
                         <segue destination="ogV-m2-4jw" kind="show" identifier="walletCashOut" id="mAw-JK-raf"/>
+                        <segue destination="Ohh-sf-sfV" kind="show" identifier="showSmartCard" id="nHI-z6-loK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UM9-nQ-iFe" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -616,10 +622,100 @@
             </objects>
             <point key="canvasLocation" x="1201" y="889"/>
         </scene>
+        <!--Smart Card-->
+        <scene sceneID="yHO-K4-Liv">
+            <objects>
+                <viewController title="Smart Card" id="Ohh-sf-sfV" customClass="SmartCardVC" customModule="sharrit_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cdb-hT-Rgw"/>
+                        <viewControllerLayoutGuide type="bottom" id="ALg-ax-gT6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4uV-ga-yHF">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zTd-Rs-PXK" customClass="SharritButton" customModule="sharrit_ios" customModuleProvider="target">
+                                <rect key="frame" x="37.5" y="371.5" width="300" height="30"/>
+                                <state key="normal" title="Request for Smart Card"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isRounded" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="requestBtnPressed:" destination="Ohh-sf-sfV" eventType="touchUpInside" id="mqn-at-bmg"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Card Request Status:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xas-oC-vEJ">
+                                <rect key="frame" x="20" y="159" width="335" height="26"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="21"/>
+                                <color key="textColor" red="0.2666666667" green="0.69411764710000001" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date Requested:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8bP-ha-BHt">
+                                <rect key="frame" x="20" y="265" width="335" height="26"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="21"/>
+                                <color key="textColor" red="0.2666666667" green="0.69411764710000001" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g7p-vY-WrQ">
+                                <rect key="frame" x="20" y="311" width="335" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Smart Card Details" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qci-3X-V7j">
+                                <rect key="frame" x="20" y="104" width="335" height="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
+                                <color key="textColor" red="0.2666666667" green="0.69411764710000001" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Your card is currently on delivering, please check your mailbox in 3-5 days time. Cheers!" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="RBu-JE-BTC">
+                                <rect key="frame" x="20" y="195" width="335" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="WXb-kb-Uyu"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="xas-oC-vEJ" firstAttribute="top" secondItem="qci-3X-V7j" secondAttribute="bottom" constant="25" id="3gJ-6S-9RZ"/>
+                            <constraint firstItem="8bP-ha-BHt" firstAttribute="leading" secondItem="4uV-ga-yHF" secondAttribute="leading" constant="20" id="3md-GJ-tDc"/>
+                            <constraint firstItem="g7p-vY-WrQ" firstAttribute="leading" secondItem="8bP-ha-BHt" secondAttribute="leading" id="6aG-Ws-gho"/>
+                            <constraint firstAttribute="trailing" secondItem="qci-3X-V7j" secondAttribute="trailing" constant="20" id="9n2-gi-53V"/>
+                            <constraint firstItem="zTd-Rs-PXK" firstAttribute="centerX" secondItem="4uV-ga-yHF" secondAttribute="centerX" id="Bvl-A0-aBD"/>
+                            <constraint firstItem="8bP-ha-BHt" firstAttribute="top" secondItem="RBu-JE-BTC" secondAttribute="bottom" constant="20" id="I2H-y3-YaE"/>
+                            <constraint firstItem="RBu-JE-BTC" firstAttribute="trailing" secondItem="xas-oC-vEJ" secondAttribute="trailing" id="JZQ-cV-05M"/>
+                            <constraint firstItem="g7p-vY-WrQ" firstAttribute="top" secondItem="8bP-ha-BHt" secondAttribute="bottom" constant="20" id="b4M-Wg-Sx1"/>
+                            <constraint firstItem="qci-3X-V7j" firstAttribute="leading" secondItem="4uV-ga-yHF" secondAttribute="leading" constant="20" id="c92-13-Pin"/>
+                            <constraint firstItem="xas-oC-vEJ" firstAttribute="leading" secondItem="4uV-ga-yHF" secondAttribute="leading" constant="20" id="eaJ-5L-i9e"/>
+                            <constraint firstItem="zTd-Rs-PXK" firstAttribute="width" secondItem="4uV-ga-yHF" secondAttribute="width" multiplier="0.8" id="f9q-gm-q8G"/>
+                            <constraint firstItem="qci-3X-V7j" firstAttribute="top" secondItem="cdb-hT-Rgw" secondAttribute="bottom" constant="40" id="gT6-ig-nvT"/>
+                            <constraint firstAttribute="trailing" secondItem="8bP-ha-BHt" secondAttribute="trailing" constant="20" id="hhU-Ze-AMC"/>
+                            <constraint firstItem="g7p-vY-WrQ" firstAttribute="trailing" secondItem="8bP-ha-BHt" secondAttribute="trailing" id="ip2-MP-DDn"/>
+                            <constraint firstItem="RBu-JE-BTC" firstAttribute="top" secondItem="xas-oC-vEJ" secondAttribute="bottom" constant="10" id="iwm-qq-33h"/>
+                            <constraint firstAttribute="trailing" secondItem="xas-oC-vEJ" secondAttribute="trailing" constant="20" id="jJV-sW-l0b"/>
+                            <constraint firstItem="RBu-JE-BTC" firstAttribute="leading" secondItem="xas-oC-vEJ" secondAttribute="leading" id="q33-Ln-oSv"/>
+                            <constraint firstItem="zTd-Rs-PXK" firstAttribute="top" secondItem="g7p-vY-WrQ" secondAttribute="bottom" constant="40" id="q68-HW-bpG"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="requestBtn" destination="zTd-Rs-PXK" id="Asm-yi-UsH"/>
+                        <outlet property="requestDate" destination="g7p-vY-WrQ" id="bP1-A0-xfB"/>
+                        <outlet property="requestStatus" destination="RBu-JE-BTC" id="LyA-Mf-8cl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="t74-OA-DO6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1200.8" y="-1540.4797601199402"/>
+        </scene>
         <!--Wallet Cash Out-->
         <scene sceneID="PHm-iv-Pp8">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="W8K-Uf-Wgu" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController title="Wallet Cash Out" id="ogV-m2-4jw" customClass="WalletCashOutVC" customModule="sharrit_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mFy-sj-bDy"/>
@@ -658,121 +754,22 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="id4-yA-00T">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bank Owner Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="id4-yA-00T">
                                 <rect key="frame" x="15" y="198" width="345" height="24"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="Bank Owner Name:">
-                                        <attributes>
-                                            <color key="NSColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                            <font key="NSFont" size="20" name=".AppleSystemUIFont"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="20"/>
+                                <color key="textColor" red="0.2666666667" green="0.69411764710000001" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KXa-OI-HsZ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bank Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KXa-OI-HsZ">
                                 <rect key="frame" x="15" y="266.5" width="345" height="24"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="Bank Name:">
-                                        <attributes>
-                                            <color key="NSColor" white="0.40782000000000002" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <font key="NSFont" size="20" name="HelveticaNeue"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
-                                                <tabStops>
-                                                    <textTab alignment="left" location="28">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="56">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="84">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="112">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="140">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="168">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="196">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="224">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="252">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="280">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="308">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="336">
-                                                        <options/>
-                                                    </textTab>
-                                                </tabStops>
-                                            </paragraphStyle>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                <color key="textColor" red="0.2666666667" green="0.69411764710000001" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kg5-Il-fMF">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bank Branch:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kg5-Il-fMF">
                                 <rect key="frame" x="15" y="335" width="345" height="24"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="Bank Branch:">
-                                        <attributes>
-                                            <color key="NSColor" white="0.40782000000000002" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <font key="NSFont" size="20" name="HelveticaNeue"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
-                                                <tabStops>
-                                                    <textTab alignment="left" location="28">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="56">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="84">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="112">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="140">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="168">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="196">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="224">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="252">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="280">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="308">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="336">
-                                                        <options/>
-                                                    </textTab>
-                                                </tabStops>
-                                            </paragraphStyle>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                <color key="textColor" red="0.2666666667" green="0.69411764710000001" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sSr-Cm-ylY">
@@ -793,56 +790,10 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fO9-3Y-QSa">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bank Account Number:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fO9-3Y-QSa">
                                 <rect key="frame" x="15" y="403.5" width="345" height="24"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="Bank Account Number:">
-                                        <attributes>
-                                            <color key="NSColor" white="0.40782000000000002" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <font key="NSFont" size="20" name="HelveticaNeue"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
-                                                <tabStops>
-                                                    <textTab alignment="left" location="28">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="56">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="84">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="112">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="140">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="168">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="196">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="224">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="252">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="280">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="308">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="336">
-                                                        <options/>
-                                                    </textTab>
-                                                </tabStops>
-                                            </paragraphStyle>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                <color key="textColor" red="0.2666666667" green="0.69411764710000001" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BZT-ut-CGO">
@@ -851,56 +802,10 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WKV-Hx-Rk8">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bank Account Type:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WKV-Hx-Rk8">
                                 <rect key="frame" x="15" y="472" width="345" height="24"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="Bank Account Type:">
-                                        <attributes>
-                                            <color key="NSColor" white="0.40782000000000002" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <font key="NSFont" size="20" name="HelveticaNeue"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
-                                                <tabStops>
-                                                    <textTab alignment="left" location="28">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="56">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="84">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="112">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="140">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="168">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="196">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="224">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="252">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="280">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="308">
-                                                        <options/>
-                                                    </textTab>
-                                                    <textTab alignment="left" location="336">
-                                                        <options/>
-                                                    </textTab>
-                                                </tabStops>
-                                            </paragraphStyle>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                <color key="textColor" red="0.2666666667" green="0.69411764710000001" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ODD-Tz-XAA">
@@ -985,6 +890,7 @@
                         <segue destination="3Fg-RY-e2b" kind="show" identifier="goToTransaction" id="j92-a7-eme"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W8K-Uf-Wgu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1201" y="-725"/>
         </scene>
@@ -1212,6 +1118,6 @@
         <image name="wallet" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="j92-a7-eme"/>
+        <segue reference="ClB-pw-J8E"/>
     </inferredMetricsTieBreakers>
 </document>

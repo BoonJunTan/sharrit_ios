@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		270D0C4D1F9D8ACC009AE0F1 /* SmartCardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270D0C4C1F9D8ACC009AE0F1 /* SmartCardVC.swift */; };
 		2713ECEA1F9CBE15004D1D89 /* WalletCashOutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2713ECE91F9CBE15004D1D89 /* WalletCashOutVC.swift */; };
 		2713ECEC1F9CC230004D1D89 /* BankDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2713ECEB1F9CC230004D1D89 /* BankDetailVC.swift */; };
 		272508C81F7BAE9500A93BE3 /* ShowSBVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272508C71F7BAE9500A93BE3 /* ShowSBVC.swift */; };
@@ -103,6 +104,7 @@
 /* Begin PBXFileReference section */
 		0C9F59F22649F3203E5DA86B /* Pods_sharrit_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sharrit_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		161ADFA0709DEF88BC30DC81 /* Pods-sharrit-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sharrit-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-sharrit-ios/Pods-sharrit-ios.release.xcconfig"; sourceTree = "<group>"; };
+		270D0C4C1F9D8ACC009AE0F1 /* SmartCardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartCardVC.swift; sourceTree = "<group>"; };
 		2713ECE91F9CBE15004D1D89 /* WalletCashOutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCashOutVC.swift; sourceTree = "<group>"; };
 		2713ECEB1F9CC230004D1D89 /* BankDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankDetailVC.swift; sourceTree = "<group>"; };
 		272508C71F7BAE9500A93BE3 /* ShowSBVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowSBVC.swift; sourceTree = "<group>"; };
@@ -378,6 +380,7 @@
 				27DA994D1F7CF6F0006E415C /* WalletTransactionViewController.swift */,
 				27DA994F1F7CF794006E415C /* TransactionTableViewCell.swift */,
 				27DA99511F7D08BE006E415C /* TransactionVC.swift */,
+				270D0C4C1F9D8ACC009AE0F1 /* SmartCardVC.swift */,
 			);
 			name = Wallet;
 			sourceTree = "<group>";
@@ -630,7 +633,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-sharrit-ios/Pods-sharrit-ios-resources.sh",
-				"$PODS_CONFIGURATION_BUILD_DIR/ImageSlideshow/ImageSlideshow.bundle",
+				$PODS_CONFIGURATION_BUILD_DIR/ImageSlideshow/ImageSlideshow.bundle,
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -702,6 +705,7 @@
 				27702CDB1F6962F900A1C652 /* MessagesVC.swift in Sources */,
 				27702CD51F69531900A1C652 /* ProfileTableViewCell.swift in Sources */,
 				27DA99541F7D175B006E415C /* SharresCreationVC.swift in Sources */,
+				270D0C4D1F9D8ACC009AE0F1 /* SmartCardVC.swift in Sources */,
 				27DA99571F7D4894006E415C /* SharreBookingVC.swift in Sources */,
 				272508C81F7BAE9500A93BE3 /* ShowSBVC.swift in Sources */,
 				276D1B8E1F7BA11800A3EAF3 /* SharesInfoCollectionViewCell.swift in Sources */,

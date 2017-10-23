@@ -42,20 +42,20 @@ class ViewRatingVC: UIViewController {
         
         if userRole == .Sharrie {
             // Get Specific Reputation given by Me (Sharrie)
-            url = SharritURL.devURL + "reputation/user/" + String(describing: transaction.transactionId)
+            url = SharritURL.devURL + "reputation/user/one/" + String(describing: transaction.transactionId)
         } else {
             // Get Specific Reputation given by Me (Sharror)
-            url = SharritURL.devURL + "reputation/owner/" + String(describing: transaction.transactionId)
+            url = SharritURL.devURL + "reputation/owner/one/" + String(describing: transaction.transactionId)
         }
         
         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in
             switch response.result {
             case .success(_):
-                // MUST TODO: WAITING FOR JOE
                 if let data = response.result.value {
-                    for (_, subJson) in JSON(data) {
-                        
+                    if let jsonData:JSON = JSON(data)["content"] {
+                        self.ratingView.rating = jsonData[0]["ratingValue"].double!
+                        self.reviewTV.text = jsonData[0]["review"]["message"].description
                     }
                 }
                 break

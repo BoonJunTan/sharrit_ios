@@ -144,6 +144,11 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     func checkIfUserLoggedIn() {
         if let userInfo = UserDefaults.standard.object(forKey: "userInfo") as? [String: Any] {
             let userAccount = User(userID: Int((userInfo["userId"] as? String)!)!, firstName: userInfo["firstName"] as! String, lastName: userInfo["lastName"] as! String, password: userInfo["password"] as! String, mobile: (userInfo["mobile"] as! String), profilePhoto: userInfo["imageSrc"] as! String, accessToken: userInfo["accessToken"] as! String, createDate: userInfo["dateCreated"] as! String, joinedSBList: userInfo["bizList"] as! [Int], pendingSBList: userInfo["pendingList"] as! [Int])
+            
+            if let address = userInfo["address"] as? String {
+                userAccount.address = address
+            }
+            
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             appDelegate.user = userAccount
             
