@@ -16,7 +16,16 @@ enum ReputationType {
     case Sharror
 }
 
+enum ViewReputationOf {
+    case Own
+    case Other
+}
+
 class ViewReputationVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    // Pass Over Data
+    var reputationOf: ViewReputationOf = .Own
+    var businessID: Int!
     
     @IBOutlet weak var tableView: UITableView!
     var reputation: [Reputation] = []
@@ -73,18 +82,28 @@ class ViewReputationVC: UIViewController, UITableViewDataSource, UITableViewDele
     
     func getAllReputation() {
         let url: String!
+        var userID: Int!
+        
+        switch reputationOf {
+        case .Own:
+            userID = appDelegate.user!.userID
+            break
+        case .Other:
+            userID = businessID
+            break
+        }
         
         switch reputationType {
         case .All:
-            url = SharritURL.devURL + "reputation/user/other/" + String(describing: appDelegate.user!.userID)
+            url = SharritURL.devURL + "reputation/user/other/" + String(describing: userID!)
             break
         case .Sharrie:
             // Get All Reputation for Me (Sharrie) by other Sharror/Sharing Business
-            url = SharritURL.devURL + "reputation/sharrie/other/" + String(describing: appDelegate.user!.userID)
+            url = SharritURL.devURL + "reputation/sharrie/other/" + String(describing: userID!)
             break
         case .Sharror:
             // Get All Reputation for Me (Sharror) by other Sharrie
-            url = SharritURL.devURL + "reputation/sharror/other/" + String(describing: appDelegate.user!.userID)
+            url = SharritURL.devURL + "reputation/sharror/other/" + String(describing: userID!)
             break
         }
         

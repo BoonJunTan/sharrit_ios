@@ -1144,7 +1144,7 @@
         <!--Reputation-->
         <scene sceneID="5jb-Sf-tQy">
             <objects>
-                <viewController title="Reputation" id="JA7-Q9-uO4" customClass="ViewReputationVC" customModule="sharrit_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="viewReputation" title="Reputation" id="JA7-Q9-uO4" customClass="ViewReputationVC" customModule="sharrit_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="T0H-04-uKY"/>
                         <viewControllerLayoutGuide type="bottom" id="vpY-eV-YbD"/>

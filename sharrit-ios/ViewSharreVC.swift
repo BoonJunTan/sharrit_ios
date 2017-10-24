@@ -76,6 +76,14 @@ class ViewSharreVC: UIViewController {
                     self.ownerType = json["content"]["ownerType"].int!
                     self.sharreOwner.text = json["content"]["ownerName"].string!
                     
+                    if self.ownerType != 2 {
+                        let sharreOwnerLabelGR = UITapGestureRecognizer(target: self, action: #selector(self.viewSBReputation(tapGestureRecognizer:)))
+                        self.sharreOwner.addGestureRecognizer(sharreOwnerLabelGR)
+                        self.sharreOwner.isUserInteractionEnabled = true
+                    } else {
+                        self.sharreOwner.textColor = UIColor.black
+                    }
+                    
                     var rightBarItem = [UIBarButtonItem]()
                     let reputationBtn = UIBarButtonItem(image: ImageResize().resizeImageWith(image: #imageLiteral(resourceName: "star-white"), newWidth: 20),
                                                        style: .plain ,
@@ -197,8 +205,13 @@ class ViewSharreVC: UIViewController {
     }
     
     // Reputation Action
-    func reputationAction() {
+    func reputationAction(tapGestureRecognizer: UITapGestureRecognizer) {
         performSegue(withIdentifier: "viewAllReputation", sender: nil)
+    }
+    
+    // View All SB Reputation
+    func viewSBReputation(tapGestureRecognizer: UITapGestureRecognizer) {
+        self.performSegue(withIdentifier: "viewReputation", sender: nil)
     }
     
     @IBAction func sharreITBtnPressed(_ sender: SharritButton) {
@@ -311,6 +324,11 @@ class ViewSharreVC: UIViewController {
         } else if segue.identifier == "viewAllReputation" {
             if let viewAllReputationVC = segue.destination as? ViewAllReputationVC {
                 viewAllReputationVC.sharreID = sharreID
+            }
+        } else if segue.identifier == "viewReputation" {
+            if let viewReputationVC = segue.destination as? ViewReputationVC {
+                viewReputationVC.businessID = ownerID
+                viewReputationVC.reputationOf = .Other
             }
         }
     }

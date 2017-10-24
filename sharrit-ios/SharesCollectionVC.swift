@@ -22,7 +22,6 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
     var allCategoriesImageStr: [String]!
     var currentCategory: String!
     var currentCategoryID: Int!
-    var searchBar:UISearchBar!
     
     var sharesCollection: [Business]! = []
     
@@ -45,9 +44,7 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        searchBar = UISearchBar()
-        searchBar.placeholder = setPlaceHolder(placeholder: "Search " + currentCategory);
-        self.navigationItem.titleView = searchBar
+        self.navigationItem.title = currentCategory
         
         let navBarBubble = UIBarButtonItem(image: #imageLiteral(resourceName: "chat"),
                                            style: .plain ,
@@ -166,8 +163,6 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == tabCollectionView {
-            currentCategoryID = (indexPath.item + 1)
-            searchBar.placeholder = setPlaceHolder(placeholder: "Search " + allCategories[indexPath.item]);
             getSharesForCategory()
         } else {
             performSegue(withIdentifier: "viewSharesInfo", sender: sharesCollection[indexPath.item])
@@ -189,26 +184,6 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
                 }
             }
         })
-    }
-    
-    // Setup Search Bar
-    func setPlaceHolder(placeholder: String) -> String {
-        var text = placeholder
-        if text.characters.last! != " " {
-            let maxSize = CGSize(width: UIScreen.main.bounds.size.width, height: 40)
-            let widthText = text.boundingRect( with: maxSize, options: .usesLineFragmentOrigin, attributes:nil, context:nil).size.width
-            let widthSpace = " ".boundingRect( with: maxSize, options: .usesLineFragmentOrigin, attributes:nil, context:nil).size.width
-            let spaces = floor((maxSize.width - widthText) / widthSpace) - 18
-            
-            let newText = text + ((Array(repeating: " ", count: Int(spaces)).joined(separator: "")))
-            
-            if newText != text {
-                return newText
-            }
-            
-        }
-        
-        return placeholder;
     }
     
     // View by functions
