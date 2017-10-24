@@ -31,6 +31,7 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     let tableViewSection = ["Description", "Reviews"]
     var review:[String] = []
     var tableViewItems:[[String]] = []
+    var reputationList:[Reputation] = []
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
@@ -85,8 +86,11 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         joinSharrorBtn.isHidden = true
         pendingApprovalBtn.isHidden = true
         
-        // Get Latest Pending/Join Business
-        getLatestBusinessInfo()
+        // Get Latest User's Pending/Join Business
+        getLatestUserInfo()
+        
+        // Get Latest SB's Info
+        getSBInfo()
     }
     
     // Set up Table View - Description and Reviews
@@ -107,7 +111,7 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 1 && review.count == 0 {
+        if section == 1 && reputationList.count == 0 {
             return 0
         } else {
             return tableViewItems[section].count
@@ -121,14 +125,13 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "reviewCell") as! ReviewTableViewCell
-            // MUST TODO: ASK JOE TO GET REVIEWER's Name and Image STRING
-            cell.profileImage.image = #imageLiteral(resourceName: "empty")
-            cell.profileName.text = "Test Profile Name"
+            ImageDownloader().imageFromServerURL(urlString: SharritURL.devPhotoURL + reputationList[indexPath.item].userPhoto!, imageView: cell.profileImage)
+            cell.profileName.text = reputationList[indexPath.item].userName
             
             cell.ratingView.rating = 1
             cell.ratingView.settings.totalStars = 1
-            cell.ratingView.text = String(format: "%.2f", arguments: [JSON(businessInfo.ratingList)[indexPath.item]["ratingValue"].double!])
-            cell.ratingLabel.text = review[indexPath.item]
+            cell.ratingView.text = String(format: "%.2f", arguments: [reputationList[indexPath.item].rating])
+            cell.ratingLabel.text = reputationList[indexPath.item].review
             return cell
         }
     }
@@ -137,7 +140,7 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         tableView.reloadData()
     }
     
-    func getLatestBusinessInfo() {
+    func getLatestUserInfo() {
         let url = SharritURL.devURL + "user/" + String(describing: appDelegate.user!.userID)
         
         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
@@ -193,6 +196,40 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 break
             case .failure(_):
                 print("Get User Info API failed")
+                break
+            }
+        }
+    }
+    
+    func getSBInfo() {
+        let url = SharritURL.devURL + "business/all/" + String(describing: businessInfo.businessId!)
+        
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+            response in
+            switch response.result {
+            case .success(_):
+                if let data = response.result.value {
+                    // Loop All Sharres
+                    for (_, subJson) in JSON(data)["content"]["sharres"] {
+                        // Loop All Rating
+                        for (_, ratingJSON) in subJson["allRating"] {
+                            let currentRep = Reputation(reputationID: ratingJSON["rating"]["ratingId"].int!, userName: ratingJSON["user"]["firstName"].description + " " + ratingJSON["user"]["lastName"].description, rating: ratingJSON["rating"]["ratingValue"].double!)
+                            
+                            currentRep.userPhoto = ratingJSON["user"]["photos"][0]["fileName"].description
+                            
+                            if let review = ratingJSON["rating"]["review"]["message"].description as? String {
+                                currentRep.review = review
+                            } else {
+                                currentRep.review = "No Review Available."
+                            }
+                            
+                            self.reputationList.append(currentRep)
+                        }
+                    }
+                    self.tableView.reloadData()
+                }
+            case .failure(_):
+                print("Get SB Info API failed")
                 break
             }
         }

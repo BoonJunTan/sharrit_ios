@@ -163,6 +163,8 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == tabCollectionView {
+            currentCategoryID = (indexPath.item + 1)
+            navigationItem.title = allCategories[indexPath.item];
             getSharesForCategory()
         } else {
             performSegue(withIdentifier: "viewSharesInfo", sender: sharesCollection[indexPath.item])
