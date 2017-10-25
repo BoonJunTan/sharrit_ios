@@ -114,7 +114,7 @@ class ViewReputationVC: UIViewController, UITableViewDataSource, UITableViewDele
                 if let data = response.result.value {
                     self.reputation.removeAll()
                     for (_, subJson) in JSON(data)["content"] {
-                        let currentReputation = Reputation(reputationID: subJson["rating"]["reviewId"].int!, userName: subJson["reviewerInfo"]["firstName"].description + " " + subJson["reviewerInfo"]["lastName"].description, rating: Double(subJson["rating"]["ratingValue"].description))
+                        let currentReputation = Reputation(reputationID: subJson["rating"]["ratingId"].int!, userName: subJson["reviewerInfo"]["firstName"].description + " " + subJson["reviewerInfo"]["lastName"].description, rating: Double(subJson["rating"]["ratingValue"].description))
                         
                         currentReputation.userPhoto = subJson["reviewerInfo"]["photos"]["fileName"].description
                         currentReputation.sharreName = subJson["sharre"]["name"].description
