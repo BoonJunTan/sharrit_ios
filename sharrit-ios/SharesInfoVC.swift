@@ -70,11 +70,6 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         businessRating.settings.totalStars = 1
         if businessInfo.rating != -1 {
             businessRating.text = String(format: "%.2f", arguments: [businessInfo.rating])
-            for (_, subJson) in JSON(businessInfo.ratingList) {
-                review.append(subJson[
-                    "review"]["message"].description)
-            }
-            tableViewItems.append(review)
         } else {
             businessRating.text = "No Ratings Yet"
         }
@@ -111,10 +106,10 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 1 && reputationList.count == 0 {
-            return 0
-        } else {
+        if section == 0 {
             return tableViewItems[section].count
+        } else {
+            return reputationList.count
         }
     }
     

@@ -28,6 +28,7 @@ class WalletCashOutVC: UIViewController {
         // Do any additional setup after loading the view.
         
         errorLabel.isHidden = true
+        cashOutAmount.keyboardType = .decimalPad
         
         checkForExistingBankDetails()
     }
@@ -77,7 +78,7 @@ class WalletCashOutVC: UIViewController {
         if (cashOutAmount.text?.isEmpty)! {
             errorLabel.isHidden = false
         } else {
-            let cashOutData: [String: Any] = ["amount": cashOutAmount.text!]
+            let cashOutData: [String: Any] = ["amount": String(format: "%.2f", Double(cashOutAmount.text!)!)]
             
             let url = SharritURL.devURL + "wallet/cashout/user/" + String(describing: appDelegate.user!.userID)
             

@@ -44,7 +44,7 @@ class SmartCardVC: UIViewController {
                         if JSON(data)["content"][0]["status"].int! == 0 {
                             self.requestStatus.text = "Your request is currently on pending, please check the status later again. Cheers!"
                         } else {
-                            self.requestStatus.text = "Your card is currently on delivering, please check your mailbox in 3-5 days time. Cheers!"
+                            self.requestStatus.text = "Your card is mailed, please check your mailbox in 3-5 days time. Cheers!"
                         }
                         self.requestDate.text = FormatDate().formatDateTimeToLocal3(date: JSON(data)["content"][0]["dateCreated"].description)
                         self.requestBtn.isHidden = true
