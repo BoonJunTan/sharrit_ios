@@ -67,7 +67,7 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         if tableViewItems[indexPath.row].getSharreServiceType() == .TimeUsage {
             if tableViewItems[indexPath.row].hasStarted! {
-                let timeString = FormatDate().compareDaysCreated2(dateCreated: tableViewItems[indexPath.row].timeStart)
+                let timeString = FormatDate().compareTwoDaysInMinute(dateStart: tableViewItems[indexPath.row].timeStart, dateEnd: tableViewItems[indexPath.row].timeEnd)
                 cell.sharesDate.text = "Duration: " + timeString
                 var time = timeString.replacingOccurrences(of: " minutes", with: "")
                 time = time.replacingOccurrences(of: ",", with: "")

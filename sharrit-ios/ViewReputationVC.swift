@@ -121,7 +121,11 @@ class ViewReputationVC: UIViewController, UITableViewDataSource, UITableViewDele
                         currentReputation.sharrePhoto = subJson["sharre"]["photos"][0]["fileName"].description
                         
                         if let reviewMessage = subJson["rating"]["review"]["message"].description as? String {
-                            currentReputation.review = reviewMessage
+                            if reviewMessage == "null" {
+                                currentReputation.review = "No Review Available"
+                            } else {
+                                currentReputation.review = reviewMessage
+                            }
                         } else {
                             currentReputation.review = "No Review Available"
                         }
