@@ -132,7 +132,7 @@ class BusinessSharesVC: UIViewController, UICollectionViewDataSource, UICollecti
                 self.sharesCollection = []
                 if let data = response.result.value {
                     for (_, subJson) in JSON(data)["content"] {
-                        if subJson["sharre"]["isDeleted"].bool! {
+                        if !subJson["sharre"]["isDeleted"].bool! {
                             let sharreId = subJson["sharre"]["sharreId"].int!
                             let sharreName = subJson["sharre"]["name"].description
                             let sharreDescription = subJson["sharre"]["description"].description
