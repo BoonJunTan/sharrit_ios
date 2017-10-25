@@ -203,6 +203,7 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             response in
             switch response.result {
             case .success(_):
+                self.reputationList.removeAll()
                 if let data = response.result.value {
                     // Loop All Sharres
                     for (_, subJson) in JSON(data)["content"]["sharres"] {
