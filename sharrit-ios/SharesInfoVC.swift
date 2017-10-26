@@ -213,8 +213,12 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                             
                             currentRep.userPhoto = ratingJSON["user"]["photos"][0]["fileName"].description
                             
-                            if let review = ratingJSON["rating"]["review"]["message"].description as? String {
-                                currentRep.review = review
+                            if let reviewMessage = subJson["rating"]["review"]["message"].description as? String {
+                                if reviewMessage == "null" {
+                                    currentRep.review = "No Review Available"
+                                } else {
+                                    currentRep.review = reviewMessage
+                                }
                             } else {
                                 currentRep.review = "No Review Available."
                             }
