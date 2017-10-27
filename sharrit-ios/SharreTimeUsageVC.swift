@@ -32,6 +32,9 @@ class SharreTimeUsageVC: UIViewController {
     @IBOutlet weak var depositLabel: UILabel!
     @IBOutlet weak var usageLabel: UILabel!
     
+    @IBOutlet weak var promoView: UIView!
+    @IBOutlet weak var promoLabel: UITextField!
+    
     @IBOutlet weak var costView: UIView!
     
     override func viewDidLoad() {
@@ -49,6 +52,7 @@ class SharreTimeUsageVC: UIViewController {
         unitsRequire.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
         costView.isHidden = true
+        promoView.isHidden = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,14 +65,17 @@ class SharreTimeUsageVC: UIViewController {
             if let units = Int(unitsAvailable.text!), let unitsWanted = Int(textField.text!) {
                 if units < unitsWanted {
                     costView.isHidden = true
+                    promoView.isHidden = true
                     let alert = UIAlertController(title: "Error Occured!", message: "Not enough items at the moment!", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Back", style: .cancel, handler: nil))
                     self.present(alert, animated: true, completion: nil)
                 } else {
                     costView.isHidden = false
+                    promoView.isHidden = false
                 }
             }
         } else {
+            promoView.isHidden = true
             costView.isHidden = true
         }
     }
@@ -90,6 +97,27 @@ class SharreTimeUsageVC: UIViewController {
                 break
             case .failure(_):
                 print("Get Available Unit Info API failed")
+                break
+            }
+        }
+    }
+    
+    @IBAction func enterPromoBtnPressed(_ sender: SharritButton) {
+        // MUST TODO: See if promo code exist,
+        let url = SharritURL.devURL + "transaction/" + String(describing: sharreID!)
+        
+        let filterData: [String: Any] = ["payerId": appDelegate.user!.userID]
+        
+        Alamofire.request(url, method: .post, parameters: filterData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+            response in
+            switch response.result {
+            case .success(_):
+                if let data = response.result.value {
+                    
+                }
+                break
+            case .failure(_):
+                print("Get Promo Code API failed")
                 break
             }
         }

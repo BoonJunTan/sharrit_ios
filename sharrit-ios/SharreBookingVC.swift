@@ -43,6 +43,9 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
     @IBOutlet weak var timeSlotView: UIView!
     @IBOutlet weak var timeSlotHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var promoView: UIView!
+    @IBOutlet weak var promoLabel: UITextField!
+    
     @IBOutlet weak var costView: UIView!
     @IBOutlet weak var deposit: UILabel!
     @IBOutlet weak var usage: UILabel!
@@ -74,6 +77,7 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
         collectionView.allowsMultipleSelection = true
         calendarView.isHidden = true
         timeSlotView.isHidden = true
+        promoView.isHidden = true
         costView.isHidden = true
     }
 
@@ -111,6 +115,7 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
         if appointmentType == .HrAppointment {
             getAvailableSlot()
         } else {
+            promoView.isHidden = false
             costView.isHidden = false
         }
     }
@@ -398,6 +403,7 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
             usage.text = "Usage: $0"
             total.text = "Total: $" + sharreDeposit
             costView.isHidden = false
+            promoView.isHidden = false
             bookBtn.isEnabled = false
         } else {
             let url = SharritURL.devURL + "transaction/pricing/" + String(describing: sharreID!)
@@ -430,6 +436,7 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
                         let totalCost = FormatNumber().giveTwoDP(number: NSNumber(value: totalCostDouble))
                         self.total.text = "Total: $" + totalCost
                         self.costView.isHidden = false
+                        self.promoView.isHidden = false
                         self.bookBtn.isEnabled = true
                     }
                     break
@@ -437,6 +444,27 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
                     print("Get Total Cost Info API failed")
                     break
                 }
+            }
+        }
+    }
+    
+    @IBAction func enterPromoBtnPressed(_ sender: SharritButton) {
+        // MUST TODO: See if promo code exist,
+        let url = SharritURL.devURL + "transaction/" + String(describing: sharreID!)
+        
+        let filterData: [String: Any] = ["payerId": appDelegate.user!.userID]
+        
+        Alamofire.request(url, method: .post, parameters: filterData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+            response in
+            switch response.result {
+            case .success(_):
+                if let data = response.result.value {
+                    // If true, get totalCost
+                }
+                break
+            case .failure(_):
+                print("Get Promo Code API failed")
+                break
             }
         }
     }
