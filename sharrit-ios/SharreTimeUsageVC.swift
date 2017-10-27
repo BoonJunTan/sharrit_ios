@@ -103,12 +103,10 @@ class SharreTimeUsageVC: UIViewController {
     }
     
     @IBAction func enterPromoBtnPressed(_ sender: SharritButton) {
-        // MUST TODO: See if promo code exist,
-        let url = SharritURL.devURL + "transaction/" + String(describing: sharreID!)
+        // MUST TODO: See if promo code exist
+        let url = SharritURL.devURL + "promo/check/" + promoLabel.text!
         
-        let filterData: [String: Any] = ["payerId": appDelegate.user!.userID]
-        
-        Alamofire.request(url, method: .post, parameters: filterData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in
             switch response.result {
             case .success(_):
@@ -128,9 +126,13 @@ class SharreTimeUsageVC: UIViewController {
         
         let url = SharritURL.devURL + "transaction/" + String(describing: sharreID!)
         
-        let filterData: [String: Any] = ["payerId": appDelegate.user!.userID, "payerType": 0, "amount": 0, "deposit": deposit, "qty": unitsRequire.text!]
+        var transactionData: [String: Any] = ["payerId": appDelegate.user!.userID, "payerType": 0, "amount": 0, "deposit": deposit, "qty": unitsRequire.text!]
         
-        Alamofire.request(url, method: .post, parameters: filterData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+        if !(promoLabel.text?.isEmpty)! {
+            transactionData["promo"] = promoLabel.text!
+        }
+        
+        Alamofire.request(url, method: .post, parameters: transactionData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in
             switch response.result {
             case .success(_):

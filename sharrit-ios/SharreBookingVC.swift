@@ -450,11 +450,9 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
     
     @IBAction func enterPromoBtnPressed(_ sender: SharritButton) {
         // MUST TODO: See if promo code exist,
-        let url = SharritURL.devURL + "transaction/" + String(describing: sharreID!)
+        let url = SharritURL.devURL + "promo/check/" + promoLabel.text!
         
-        let filterData: [String: Any] = ["payerId": appDelegate.user!.userID]
-        
-        Alamofire.request(url, method: .post, parameters: filterData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+        Alamofire.request(url, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in
             switch response.result {
             case .success(_):
@@ -489,9 +487,13 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
             timeEnd = timeEndTomorrow!.timeIntervalSince1970
         }
         
-        let filterData: [String: Any] = ["payerId": appDelegate.user!.userID, "payerType": 0, "amount": usageCost, "deposit": depositCost, "timeStart": Int64(timeStart), "timeEnd": Int64(timeEnd), "qty": unitRequire.text!]
+        var transactionData: [String: Any] = ["payerId": appDelegate.user!.userID, "payerType": 0, "amount": usageCost, "deposit": depositCost, "timeStart": Int64(timeStart), "timeEnd": Int64(timeEnd), "qty": unitRequire.text!]
         
-        Alamofire.request(url, method: .post, parameters: filterData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+        if !(promoLabel.text?.isEmpty)! {
+            transactionData["promo"] = promoLabel.text!
+        }
+        
+        Alamofire.request(url, method: .post, parameters: transactionData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in
             switch response.result {
             case .success(_):
