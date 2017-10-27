@@ -725,6 +725,14 @@
             </objects>
             <point key="canvasLocation" x="-615" y="1624"/>
         </scene>
+        <!--viewSharreInfo-->
+        <scene sceneID="rBh-Ml-vrE">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Home" referencedIdentifier="viewSharreInfo" id="HXD-Pb-kVd" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b0W-mk-MNm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="276" y="1263"/>
+        </scene>
         <!--Messages-->
         <scene sceneID="rzm-4k-5JL">
             <objects>
@@ -1323,6 +1331,7 @@
                         <outlet property="sharrieBtn" destination="h0M-MP-KI8" id="8WW-08-XqG"/>
                         <outlet property="sharrorBtn" destination="172-NH-Ohx" id="Jht-ep-Ff1"/>
                         <outlet property="tableView" destination="4Jj-co-Guu" id="04R-EM-L4e"/>
+                        <segue destination="HXD-Pb-kVd" kind="show" identifier="viewSharreInfo" id="WXN-hw-mb3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NdV-ic-pug" userLabel="First Responder" sceneMemberID="firstResponder"/>

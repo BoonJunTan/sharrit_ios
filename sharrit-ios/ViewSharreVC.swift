@@ -16,9 +16,6 @@ class ViewSharreVC: UIViewController {
     // Pass Over Data
     var sharreID: Int!
     
-    var ownerID: Int!
-    var ownerType: Int!
-    
     @IBOutlet weak var sharreImages: ImageSlideshow!
     @IBOutlet weak var sharreTitle: UILabel!
     @IBOutlet weak var sharreDate: UILabel!
@@ -36,6 +33,9 @@ class ViewSharreVC: UIViewController {
     
     @IBOutlet weak var chatSharreStackView: UIStackView!
     @IBOutlet weak var sharreItBtn: SharritButton!
+    
+    var ownerID: Int!
+    var ownerType: Int!
     
     var sharreTypeData: SharresType!
     
@@ -58,12 +58,7 @@ class ViewSharreVC: UIViewController {
     func getSharesInfo() {
         let url = SharritURL.devURL + "sharre/" + String(describing: sharreID!)
         
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer " + appDelegate.user!.accessToken,
-            "Accept": "application/json" // Need this?
-        ]
-        
-        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON {
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in
             switch response.result {
             case .success(_):
