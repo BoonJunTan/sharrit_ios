@@ -126,7 +126,11 @@ class SharreTimeUsageVC: UIViewController {
                         alert.addAction(UIAlertAction(title: "Back", style: .cancel, handler: nil))
                         self.present(alert, animated: true, completion: nil)
                     } else {
-                        self.promoAppliedLabel.isHidden = false
+                        if !(self.promoLabel.text?.isEmpty)! {
+                            self.promoAppliedLabel.isHidden = false
+                        } else {
+                            self.promoAppliedLabel.isHidden = true
+                        }
                     }
                 }
                 break

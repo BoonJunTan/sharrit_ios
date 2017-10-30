@@ -78,6 +78,7 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
         collectionView.allowsMultipleSelection = true
         calendarView.isHidden = true
         timeSlotView.isHidden = true
+        promoAppliedLabel.isHidden = true
         promoView.isHidden = true
         costView.isHidden = true
     }
@@ -423,22 +424,40 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
                 timeEnd = timeEndTomorrow!.timeIntervalSince1970
             }
             
-            let filterData: [String: Any] = ["qty": unitRequire.text!, "timeStart": Int64(timeStart), "timeEnd": Int64(timeEnd)]
+            var totalCostRequest: [String: Any] = ["qty": unitRequire.text!, "timeStart": Int64(timeStart), "timeEnd": Int64(timeEnd)]
             
-            Alamofire.request(url, method: .post, parameters: filterData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+            if !(promoLabel.text?.isEmpty)! {
+                totalCostRequest["promoCode"] = promoLabel.text!
+            }
+            
+            Alamofire.request(url, method: .post, parameters: totalCostRequest, encoding: JSONEncoding.default, headers: [:]).responseJSON {
                 response in
                 switch response.result {
                 case .success(_):
                     if let data = response.result.value {
-                        let json = JSON(data)["content"]
-                        self.usage.text = "Usage: $" + json["totalAmount"].description
-                        self.deposit.text = "Deposit: $" + json["totalDeposit"].description
-                        let totalCostDouble = Double(json["totalDeposit"].description)! + Double(json["totalAmount"].description)!
-                        let totalCost = FormatNumber().giveTwoDP(number: NSNumber(value: totalCostDouble))
-                        self.total.text = "Total: $" + totalCost
-                        self.costView.isHidden = false
-                        self.promoView.isHidden = false
-                        self.bookBtn.isEnabled = true
+                        if JSON(data)["status"].int! == -1 {
+                            self.promoAppliedLabel.isHidden = true
+                            let alert = UIAlertController(title: "Error Occured!", message: "Promo Code don't exist", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "Back", style: .cancel, handler: nil))
+                            self.present(alert, animated: true, completion: nil)
+                        } else {
+                            let json = JSON(data)["content"]
+                            self.usage.text = "Usage: $" + json["totalAmount"].description
+                            self.deposit.text = "Deposit: $" + json["totalDeposit"].description
+                            let totalCostDouble = Double(json["totalDeposit"].description)! + Double(json["totalAmount"].description)!
+                            let totalCost = FormatNumber().giveTwoDP(number: NSNumber(value: totalCostDouble))
+                            self.total.text = "Total: $" + totalCost
+                            
+                            if !(self.promoLabel.text?.isEmpty)! {
+                                self.promoAppliedLabel.isHidden = false
+                            } else {
+                                self.promoAppliedLabel.isHidden = true
+                            }
+                            
+                            self.costView.isHidden = false
+                            self.promoView.isHidden = false
+                            self.bookBtn.isEnabled = true
+                        }
                     }
                     break
                 case .failure(_):
@@ -450,22 +469,7 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
     }
     
     @IBAction func enterPromoBtnPressed(_ sender: SharritButton) {
-        // MUST TODO: See if promo code exist,
-        let url = SharritURL.devURL + "promo/check/" + promoLabel.text!
-        
-        Alamofire.request(url, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
-            response in
-            switch response.result {
-            case .success(_):
-                if let data = response.result.value {
-                    // If true, get totalCost
-                }
-                break
-            case .failure(_):
-                print("Get Promo Code API failed")
-                break
-            }
-        }
+        getTotalCost()
     }
 
     @IBAction func bookBtnPressed(_ sender: SharritButton) {
