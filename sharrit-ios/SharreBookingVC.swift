@@ -44,6 +44,7 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
     @IBOutlet weak var timeSlotHeight: NSLayoutConstraint!
     
     @IBOutlet weak var promoView: UIView!
+    @IBOutlet weak var promoAppliedLabel: UILabel!
     @IBOutlet weak var promoLabel: UITextField!
     
     @IBOutlet weak var costView: UIView!

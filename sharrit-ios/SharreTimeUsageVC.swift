@@ -33,6 +33,7 @@ class SharreTimeUsageVC: UIViewController {
     @IBOutlet weak var usageLabel: UILabel!
     
     @IBOutlet weak var promoView: UIView!
+    @IBOutlet weak var promoAppliedLabel: UILabel!
     @IBOutlet weak var promoLabel: UITextField!
     
     @IBOutlet weak var costView: UIView!
@@ -44,7 +45,6 @@ class SharreTimeUsageVC: UIViewController {
         
         title = sharreTitle
         depositLabel.text = sharreDeposit
-        usageLabel.text = sharreUsageFee
         
         getAvailableUnit()
         
@@ -69,7 +69,13 @@ class SharreTimeUsageVC: UIViewController {
                     let alert = UIAlertController(title: "Error Occured!", message: "Not enough items at the moment!", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Back", style: .cancel, handler: nil))
                     self.present(alert, animated: true, completion: nil)
+                } else if unitsWanted < 1 {
+                    let alert = UIAlertController(title: "Error Occured!", message: "Item requested must be at least 1.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Back", style: .cancel, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
                 } else {
+                    getTotalCost()
+                    usageLabel.text = "Usage: " + unitsRequire.text! + " x " + sharreUsageFee
                     costView.isHidden = false
                     promoView.isHidden = false
                 }
@@ -81,8 +87,6 @@ class SharreTimeUsageVC: UIViewController {
     }
     
     func getAvailableUnit() {
-        self.unitsAvailable.text = sharreUnit
-        
         let url = SharritURL.devURL + "sharre/avail/time/" + String(describing: sharreID!)
         
         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
@@ -91,7 +95,7 @@ class SharreTimeUsageVC: UIViewController {
             case .success(_):
                 if let data = response.result.value {
                     for (_, subJson) in JSON(data)["content"] {
-                        self.unitsAvailable.text = subJson["qty"].description
+                        self.unitsAvailable.text = String(describing: (Int(self.sharreUnit)! - subJson["qty"].int!))
                     }
                 }
                 break
@@ -102,23 +106,38 @@ class SharreTimeUsageVC: UIViewController {
         }
     }
     
-    @IBAction func enterPromoBtnPressed(_ sender: SharritButton) {
-        // MUST TODO: See if promo code exist
-        let url = SharritURL.devURL + "promo/check/" + promoLabel.text!
+    func getTotalCost() {
+        let url = SharritURL.devURL + "transaction/pricing/" + String(describing: sharreID!)
         
-        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+        var totalCostRequest: [String: Any] = ["qty": unitsRequire.text!, "timeStart": 0, "timeEnd": 0]
+        
+        if !(promoLabel.text?.isEmpty)! {
+            totalCostRequest["promoCode"] = promoLabel.text!
+        }
+        
+        Alamofire.request(url, method: .post, parameters: totalCostRequest, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in
             switch response.result {
             case .success(_):
                 if let data = response.result.value {
-                    
+                    if JSON(data)["status"].int! == -1 {
+                        self.promoAppliedLabel.isHidden = true
+                        let alert = UIAlertController(title: "Error Occured!", message: "Promo Code don't exist", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Back", style: .cancel, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                    } else {
+                        self.promoAppliedLabel.isHidden = false
+                    }
                 }
                 break
             case .failure(_):
-                print("Get Promo Code API failed")
+                print("Get Total Cost Info API failed")
                 break
             }
         }
+    }
+    @IBAction func enterPromoBtnPressed(_ sender: SharritButton) {
+        getTotalCost()
     }
     
     @IBAction func bookBtnPressed(_ sender: SharritButton) {
