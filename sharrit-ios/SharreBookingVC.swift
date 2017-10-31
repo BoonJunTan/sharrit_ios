@@ -43,6 +43,10 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
     @IBOutlet weak var timeSlotView: UIView!
     @IBOutlet weak var timeSlotHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var promoView: UIView!
+    @IBOutlet weak var promoAppliedLabel: UILabel!
+    @IBOutlet weak var promoLabel: UITextField!
+    
     @IBOutlet weak var costView: UIView!
     @IBOutlet weak var deposit: UILabel!
     @IBOutlet weak var usage: UILabel!
@@ -74,6 +78,8 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
         collectionView.allowsMultipleSelection = true
         calendarView.isHidden = true
         timeSlotView.isHidden = true
+        promoAppliedLabel.isHidden = true
+        promoView.isHidden = true
         costView.isHidden = true
     }
 
@@ -111,6 +117,7 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
         if appointmentType == .HrAppointment {
             getAvailableSlot()
         } else {
+            promoView.isHidden = false
             costView.isHidden = false
         }
     }
@@ -398,6 +405,7 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
             usage.text = "Usage: $0"
             total.text = "Total: $" + sharreDeposit
             costView.isHidden = false
+            promoView.isHidden = false
             bookBtn.isEnabled = false
         } else {
             let url = SharritURL.devURL + "transaction/pricing/" + String(describing: sharreID!)
@@ -416,21 +424,40 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
                 timeEnd = timeEndTomorrow!.timeIntervalSince1970
             }
             
-            let filterData: [String: Any] = ["qty": unitRequire.text!, "timeStart": Int64(timeStart), "timeEnd": Int64(timeEnd)]
+            var totalCostRequest: [String: Any] = ["qty": unitRequire.text!, "timeStart": Int64(timeStart), "timeEnd": Int64(timeEnd)]
             
-            Alamofire.request(url, method: .post, parameters: filterData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+            if !(promoLabel.text?.isEmpty)! {
+                totalCostRequest["promoCode"] = promoLabel.text!
+            }
+            
+            Alamofire.request(url, method: .post, parameters: totalCostRequest, encoding: JSONEncoding.default, headers: [:]).responseJSON {
                 response in
                 switch response.result {
                 case .success(_):
                     if let data = response.result.value {
-                        let json = JSON(data)["content"]
-                        self.usage.text = "Usage: $" + json["totalAmount"].description
-                        self.deposit.text = "Deposit: $" + json["totalDeposit"].description
-                        let totalCostDouble = Double(json["totalDeposit"].description)! + Double(json["totalAmount"].description)!
-                        let totalCost = FormatNumber().giveTwoDP(number: NSNumber(value: totalCostDouble))
-                        self.total.text = "Total: $" + totalCost
-                        self.costView.isHidden = false
-                        self.bookBtn.isEnabled = true
+                        if JSON(data)["status"].int! == -1 {
+                            self.promoAppliedLabel.isHidden = true
+                            let alert = UIAlertController(title: "Error Occured!", message: "Promo Code don't exist", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "Back", style: .cancel, handler: nil))
+                            self.present(alert, animated: true, completion: nil)
+                        } else {
+                            let json = JSON(data)["content"]
+                            self.usage.text = "Usage: $" + json["totalAmount"].description
+                            self.deposit.text = "Deposit: $" + json["totalDeposit"].description
+                            let totalCostDouble = Double(json["totalDeposit"].description)! + Double(json["totalAmount"].description)!
+                            let totalCost = FormatNumber().giveTwoDP(number: NSNumber(value: totalCostDouble))
+                            self.total.text = "Total: $" + totalCost
+                            
+                            if !(self.promoLabel.text?.isEmpty)! {
+                                self.promoAppliedLabel.isHidden = false
+                            } else {
+                                self.promoAppliedLabel.isHidden = true
+                            }
+                            
+                            self.costView.isHidden = false
+                            self.promoView.isHidden = false
+                            self.bookBtn.isEnabled = true
+                        }
                     }
                     break
                 case .failure(_):
@@ -439,6 +466,10 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
                 }
             }
         }
+    }
+    
+    @IBAction func enterPromoBtnPressed(_ sender: SharritButton) {
+        getTotalCost()
     }
 
     @IBAction func bookBtnPressed(_ sender: SharritButton) {
@@ -461,9 +492,13 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
             timeEnd = timeEndTomorrow!.timeIntervalSince1970
         }
         
-        let filterData: [String: Any] = ["payerId": appDelegate.user!.userID, "payerType": 0, "amount": usageCost, "deposit": depositCost, "timeStart": Int64(timeStart), "timeEnd": Int64(timeEnd), "qty": unitRequire.text!]
+        var transactionData: [String: Any] = ["payerId": appDelegate.user!.userID, "payerType": 0, "amount": usageCost, "deposit": depositCost, "timeStart": Int64(timeStart), "timeEnd": Int64(timeEnd), "qty": unitRequire.text!]
         
-        Alamofire.request(url, method: .post, parameters: filterData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+        if !(promoLabel.text?.isEmpty)! {
+            transactionData["promo"] = promoLabel.text!
+        }
+        
+        Alamofire.request(url, method: .post, parameters: transactionData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in
             switch response.result {
             case .success(_):

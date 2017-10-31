@@ -16,6 +16,7 @@ class Reputation {
     var review: String?
     var sharreName: String?
     var sharrePhoto: String?
+    var sharreID: Int?
     
     init(reputationID: Int!, userName: String!, rating: Double!) {
         self.reputationID = reputationID

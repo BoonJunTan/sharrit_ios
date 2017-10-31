@@ -60,11 +60,14 @@ class ViewAllReputationVC: UITableViewController {
             case .success(_):
                 if let data = response.result.value {
                     self.reputation.removeAll()
-                    // MUST TODO: Possible to get Profile Name and Picture?
                     for (_, subJson) in JSON(data)["content"] {
                         let currentReputation = Reputation(reputationID: subJson["rating"]["reviewId"].int, userName: "Not Given Yet", rating: subJson["rating"]["ratingValue"].double)
-                        if let reviewExist = subJson["rating"]["review"]["message"].description as? String {
-                            currentReputation.review = reviewExist
+                        if let reviewMessage = subJson["rating"]["review"]["message"].description as? String {
+                            if reviewMessage == "null" {
+                                currentReputation.review = "No Review Available"
+                            } else {
+                                currentReputation.review = reviewMessage
+                            }
                         } else {
                             currentReputation.review = "No Review Given"
                         }

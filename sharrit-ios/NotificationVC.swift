@@ -24,6 +24,7 @@ class NotificationVC: UITableViewController {
         navigationItem.rightBarButtonItem = navBarBubble
         
         tableView.tableFooterView = UIView() // For Hiding away empty cell
+        tableView.allowsSelection = false // Disabling Clicks
     }
     
     override func viewWillAppear(_ animated: Bool) {

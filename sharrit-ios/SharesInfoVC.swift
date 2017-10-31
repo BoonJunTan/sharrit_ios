@@ -70,11 +70,6 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         businessRating.settings.totalStars = 1
         if businessInfo.rating != -1 {
             businessRating.text = String(format: "%.2f", arguments: [businessInfo.rating])
-            for (_, subJson) in JSON(businessInfo.ratingList) {
-                review.append(subJson[
-                    "review"]["message"].description)
-            }
-            tableViewItems.append(review)
         } else {
             businessRating.text = "No Ratings Yet"
         }
@@ -111,10 +106,10 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 1 && reputationList.count == 0 {
-            return 0
-        } else {
+        if section == 0 {
             return tableViewItems[section].count
+        } else {
+            return reputationList.count
         }
     }
     
@@ -208,6 +203,7 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             response in
             switch response.result {
             case .success(_):
+                self.reputationList.removeAll()
                 if let data = response.result.value {
                     // Loop All Sharres
                     for (_, subJson) in JSON(data)["content"]["sharres"] {
@@ -217,8 +213,12 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                             
                             currentRep.userPhoto = ratingJSON["user"]["photos"][0]["fileName"].description
                             
-                            if let review = ratingJSON["rating"]["review"]["message"].description as? String {
-                                currentRep.review = review
+                            if let reviewMessage = subJson["rating"]["review"]["message"].description as? String {
+                                if reviewMessage == "null" {
+                                    currentRep.review = "No Review Available"
+                                } else {
+                                    currentRep.review = reviewMessage
+                                }
                             } else {
                                 currentRep.review = "No Review Available."
                             }

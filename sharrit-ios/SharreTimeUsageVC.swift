@@ -32,6 +32,10 @@ class SharreTimeUsageVC: UIViewController {
     @IBOutlet weak var depositLabel: UILabel!
     @IBOutlet weak var usageLabel: UILabel!
     
+    @IBOutlet weak var promoView: UIView!
+    @IBOutlet weak var promoAppliedLabel: UILabel!
+    @IBOutlet weak var promoLabel: UITextField!
+    
     @IBOutlet weak var costView: UIView!
     
     override func viewDidLoad() {
@@ -41,7 +45,6 @@ class SharreTimeUsageVC: UIViewController {
         
         title = sharreTitle
         depositLabel.text = sharreDeposit
-        usageLabel.text = sharreUsageFee
         
         getAvailableUnit()
         
@@ -49,6 +52,7 @@ class SharreTimeUsageVC: UIViewController {
         unitsRequire.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
         costView.isHidden = true
+        promoView.isHidden = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,21 +65,28 @@ class SharreTimeUsageVC: UIViewController {
             if let units = Int(unitsAvailable.text!), let unitsWanted = Int(textField.text!) {
                 if units < unitsWanted {
                     costView.isHidden = true
+                    promoView.isHidden = true
                     let alert = UIAlertController(title: "Error Occured!", message: "Not enough items at the moment!", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Back", style: .cancel, handler: nil))
                     self.present(alert, animated: true, completion: nil)
+                } else if unitsWanted < 1 {
+                    let alert = UIAlertController(title: "Error Occured!", message: "Item requested must be at least 1.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Back", style: .cancel, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
                 } else {
+                    getTotalCost()
+                    usageLabel.text = "Usage: " + unitsRequire.text! + " x " + sharreUsageFee
                     costView.isHidden = false
+                    promoView.isHidden = false
                 }
             }
         } else {
+            promoView.isHidden = true
             costView.isHidden = true
         }
     }
     
     func getAvailableUnit() {
-        self.unitsAvailable.text = sharreUnit
-        
         let url = SharritURL.devURL + "sharre/avail/time/" + String(describing: sharreID!)
         
         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
@@ -84,7 +95,7 @@ class SharreTimeUsageVC: UIViewController {
             case .success(_):
                 if let data = response.result.value {
                     for (_, subJson) in JSON(data)["content"] {
-                        self.unitsAvailable.text = subJson["qty"].description
+                        self.unitsAvailable.text = String(describing: (Int(self.sharreUnit)! - subJson["qty"].int!))
                     }
                 }
                 break
@@ -95,14 +106,56 @@ class SharreTimeUsageVC: UIViewController {
         }
     }
     
+    func getTotalCost() {
+        let url = SharritURL.devURL + "transaction/pricing/" + String(describing: sharreID!)
+        
+        var totalCostRequest: [String: Any] = ["qty": unitsRequire.text!, "timeStart": 0, "timeEnd": 0]
+        
+        if !(promoLabel.text?.isEmpty)! {
+            totalCostRequest["promoCode"] = promoLabel.text!
+        }
+        
+        Alamofire.request(url, method: .post, parameters: totalCostRequest, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+            response in
+            switch response.result {
+            case .success(_):
+                if let data = response.result.value {
+                    if JSON(data)["status"].int! == -1 {
+                        self.promoAppliedLabel.isHidden = true
+                        let alert = UIAlertController(title: "Error Occured!", message: "Promo Code don't exist", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Back", style: .cancel, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                    } else {
+                        if !(self.promoLabel.text?.isEmpty)! {
+                            self.promoAppliedLabel.isHidden = false
+                        } else {
+                            self.promoAppliedLabel.isHidden = true
+                        }
+                    }
+                }
+                break
+            case .failure(_):
+                print("Get Total Cost Info API failed")
+                break
+            }
+        }
+    }
+    @IBAction func enterPromoBtnPressed(_ sender: SharritButton) {
+        getTotalCost()
+    }
+    
     @IBAction func bookBtnPressed(_ sender: SharritButton) {
         let deposit = depositLabel.text!.replacingOccurrences(of: "Deposit: $", with: "")
         
         let url = SharritURL.devURL + "transaction/" + String(describing: sharreID!)
         
-        let filterData: [String: Any] = ["payerId": appDelegate.user!.userID, "payerType": 0, "amount": 0, "deposit": deposit, "qty": unitsRequire.text!]
+        var transactionData: [String: Any] = ["payerId": appDelegate.user!.userID, "payerType": 0, "amount": 0, "deposit": deposit, "qty": unitsRequire.text!]
         
-        Alamofire.request(url, method: .post, parameters: filterData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+        if !(promoLabel.text?.isEmpty)! {
+            transactionData["promo"] = promoLabel.text!
+        }
+        
+        Alamofire.request(url, method: .post, parameters: transactionData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in
             switch response.result {
             case .success(_):

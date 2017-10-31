@@ -114,14 +114,20 @@ class ViewReputationVC: UIViewController, UITableViewDataSource, UITableViewDele
                 if let data = response.result.value {
                     self.reputation.removeAll()
                     for (_, subJson) in JSON(data)["content"] {
-                        let currentReputation = Reputation(reputationID: subJson["rating"]["reviewId"].int!, userName: subJson["reviewerInfo"]["firstName"].description + " " + subJson["reviewerInfo"]["lastName"].description, rating: Double(subJson["rating"]["ratingValue"].description))
+                        let currentReputation = Reputation(reputationID: subJson["rating"]["ratingId"].int!, userName: subJson["reviewerInfo"]["firstName"].description + " " + subJson["reviewerInfo"]["lastName"].description, rating: Double(subJson["rating"]["ratingValue"].description))
                         
-                        currentReputation.userPhoto = subJson["reviewerInfo"]["photos"]["fileName"].description
+                        currentReputation.userPhoto = subJson["reviewerInfo"]["photos"][0]["fileName"].description
                         currentReputation.sharreName = subJson["sharre"]["name"].description
                         currentReputation.sharrePhoto = subJson["sharre"]["photos"][0]["fileName"].description
                         
+                        currentReputation.sharreID = subJson["sharre"]["sharreId"].int!
+                        
                         if let reviewMessage = subJson["rating"]["review"]["message"].description as? String {
-                            currentReputation.review = reviewMessage
+                            if reviewMessage == "null" {
+                                currentReputation.review = "No Review Available"
+                            } else {
+                                currentReputation.review = reviewMessage
+                            }
                         } else {
                             currentReputation.review = "No Review Available"
                         }
@@ -167,7 +173,7 @@ class ViewReputationVC: UIViewController, UITableViewDataSource, UITableViewDele
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        performSegue(withIdentifier: "viewSharreInfo", sender: reputation[indexPath.item].sharreID)
     }
     
     @IBAction func overallBtnPressed(_ sender: UIButton) {
@@ -189,6 +195,14 @@ class ViewReputationVC: UIViewController, UITableViewDataSource, UITableViewDele
         defaultBtnUI()
         currentBtnSelected(btn: sharrorBtn)
         getAllReputation()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "viewSharreInfo" {
+            if let viewSharreVC = segue.destination as? ViewSharreVC, let sharreID = sender as? Int {
+                viewSharreVC.sharreID = sharreID
+            }
+        }
     }
 
 }
