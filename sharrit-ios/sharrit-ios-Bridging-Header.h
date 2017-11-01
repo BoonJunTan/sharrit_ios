@@ -11,6 +11,5 @@
 
 #import <Stripe/Stripe.h>
 #import <CardIO/CardIO.h>
-#import <SVProgressHUD/SVProgressHUD.h>
 
 #endif /* sharrit_ios_Bridging_Header_h */
