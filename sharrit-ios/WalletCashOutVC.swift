@@ -54,7 +54,7 @@ class WalletCashOutVC: UIViewController {
                         self.bankBranch.text = bankDetails["bankBranch"].description
                         self.bankAccountNumber.text = bankDetails["accountNumber"].description
                         
-                        bankDetails["accountType"].int! == 0 ? (self.bankAccountType.text = "Saving Account") : (self.bankAccountType.text = "Edit Account")
+                        bankDetails["accountType"].int! == 0 ? (self.bankAccountType.text = "Saving Account") : (self.bankAccountType.text = "Current Account")
                         
                         self.proceedBtn.isHidden = false
                     } else {

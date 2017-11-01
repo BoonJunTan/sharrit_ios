@@ -731,7 +731,7 @@
                 <viewControllerPlaceholder storyboardName="Home" referencedIdentifier="viewSharreInfo" id="HXD-Pb-kVd" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b0W-mk-MNm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="276" y="1263"/>
+            <point key="canvasLocation" x="317" y="1263"/>
         </scene>
         <!--Messages-->
         <scene sceneID="rzm-4k-5JL">
@@ -1943,6 +1943,7 @@ Cheers!</string>
                         <segue destination="GBz-SW-M1q" kind="show" identifier="viewRefund" id="VCe-VI-Giv"/>
                         <segue destination="shq-S0-WLW" kind="show" identifier="createRating" id="CM4-eb-9oh"/>
                         <segue destination="Bo3-Rz-tLI" kind="show" identifier="viewRating" id="fEI-Bq-Mi3"/>
+                        <segue destination="HXD-Pb-kVd" kind="show" identifier="viewSharre" id="j5n-jk-Een"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XoR-Ps-bpy" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2563,4 +2564,7 @@ Cheers!</string>
         <image name="profile_pic" width="100" height="100"/>
         <image name="timer" width="50" height="50"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="j5n-jk-Een"/>
+    </inferredMetricsTieBreakers>
 </document>

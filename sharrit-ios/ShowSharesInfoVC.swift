@@ -149,7 +149,7 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                 
                 let reviewAction: UIAlertAction!
                 
-                if self.tableViewItems[indexPath.row].sharrieRatingID != nil {
+                if self.tableViewItems[indexPath.row].ownerRatingID != nil {
                     reviewAction = UIAlertAction(title: "View Review", style: .default) { action -> Void in
                         self.performSegue(withIdentifier: "viewRating", sender: self.tableViewItems[indexPath.row])
                     }
@@ -189,6 +189,12 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                 
             }
             
+            let viewSharreAction = UIAlertAction(title: "View Sharre", style: .default) { action -> Void in
+                self.performSegue(withIdentifier: "viewSharre", sender: self.tableViewItems[indexPath.row].sharreId)
+            }
+            
+            optionMenu.addAction(viewSharreAction)
+            
             if let isWaitingRefund = tableViewItems[indexPath.row].isWaitingRefund {
                 if !isWaitingRefund {
                     let refundAction = UIAlertAction(title: "Request for Refund", style: .default) { action -> Void in
@@ -201,7 +207,7 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
             
             var reviewAction: UIAlertAction!
             
-            if self.tableViewItems[indexPath.row].ownerRatingID != nil {
+            if self.tableViewItems[indexPath.row].sharrieRatingID != nil {
                 reviewAction = UIAlertAction(title: "View Review", style: .default) { action -> Void in
                     self.performSegue(withIdentifier: "viewRating", sender: self.tableViewItems[indexPath.row])
                 }
@@ -427,6 +433,10 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
             if let viewRatingVC = segue.destination as? ViewRatingVC {
                 viewRatingVC.transaction = sender as! Transaction
                 viewRatingVC.userRole = userRole
+            }
+        } else if segue.identifier == "viewSharre" {
+            if let viewSharreVC = segue.destination as? ViewSharreVC {
+                viewSharreVC.sharreID = sender as! Int
             }
         }
     }

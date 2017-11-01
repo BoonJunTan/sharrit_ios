@@ -111,7 +111,7 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
             if rating != -1 {
                 sharesCell.sharreRating.text = String(format: "%.2f", arguments: [sharesCollection[indexPath.item].rating])
             } else {
-                sharesCell.sharreRating.text = "No Ratings Yet"
+                sharesCell.sharreRating.text = "Rating Unavailable"
             }
             
             return sharesCell

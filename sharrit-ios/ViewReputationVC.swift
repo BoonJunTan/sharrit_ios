@@ -114,9 +114,16 @@ class ViewReputationVC: UIViewController, UITableViewDataSource, UITableViewDele
                 if let data = response.result.value {
                     self.reputation.removeAll()
                     for (_, subJson) in JSON(data)["content"] {
-                        let currentReputation = Reputation(reputationID: subJson["rating"]["ratingId"].int!, userName: subJson["reviewerInfo"]["firstName"].description + " " + subJson["reviewerInfo"]["lastName"].description, rating: Double(subJson["rating"]["ratingValue"].description))
+                        var currentReputation: Reputation!
                         
-                        currentReputation.userPhoto = subJson["reviewerInfo"]["photos"][0]["fileName"].description
+                        if subJson["reviewerInfo"]["businessId"] == nil {
+                            currentReputation = Reputation(reputationID: subJson["rating"]["ratingId"].int!, userName: subJson["reviewerInfo"]["firstName"].description + " " + subJson["reviewerInfo"]["lastName"].description, rating: Double(subJson["rating"]["ratingValue"].description))
+                            currentReputation.userPhoto = subJson["reviewerInfo"]["photos"][0]["fileName"].description
+                        } else {
+                            currentReputation = Reputation(reputationID: subJson["rating"]["ratingId"].int!, userName: subJson["reviewerInfo"]["name"].description, rating: Double(subJson["rating"]["ratingValue"].description))
+                            currentReputation.userPhoto = subJson["reviewerInfo"]["logo"]["fileName"].description
+                        }
+                        
                         currentReputation.sharreName = subJson["sharre"]["name"].description
                         currentReputation.sharrePhoto = subJson["sharre"]["photos"][0]["fileName"].description
                         
@@ -124,12 +131,12 @@ class ViewReputationVC: UIViewController, UITableViewDataSource, UITableViewDele
                         
                         if let reviewMessage = subJson["rating"]["review"]["message"].description as? String {
                             if reviewMessage == "null" {
-                                currentReputation.review = "No Review Available"
+                                currentReputation.review = "No review provided."
                             } else {
                                 currentReputation.review = reviewMessage
                             }
                         } else {
-                            currentReputation.review = "No Review Available"
+                            currentReputation.review = "No review provided."
                         }
                         self.reputation.append(currentReputation)
                     }

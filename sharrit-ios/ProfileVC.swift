@@ -331,7 +331,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
                     self.starRating.rating = 1
                     self.starRating.settings.totalStars = 1
                     if JSON(data)["status"] == -6 {
-                        self.starRating.text = "No Rating Yet"
+                        self.starRating.text = "Rating Unavailable"
                     } else {
                         self.starRating.text = String(format: "%.2f", arguments: [Double(JSON(data)["content"].description)!])
                     }

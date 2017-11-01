@@ -84,7 +84,7 @@ class BusinessSharesVC: UIViewController, UICollectionViewDataSource, UICollecti
         if rating != -1 {
             sharesCell.sharesRating.text = String(format: "%.2f", arguments: [rating])
         } else {
-            sharesCell.sharesRating.text = "No Ratings Yet"
+            sharesCell.sharesRating.text = "Rating Unavailable"
         }
         
         return sharesCell

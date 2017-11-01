@@ -64,12 +64,12 @@ class ViewAllReputationVC: UITableViewController {
                         let currentReputation = Reputation(reputationID: subJson["rating"]["reviewId"].int, userName: "Not Given Yet", rating: subJson["rating"]["ratingValue"].double)
                         if let reviewMessage = subJson["rating"]["review"]["message"].description as? String {
                             if reviewMessage == "null" {
-                                currentReputation.review = "No Review Available"
+                                currentReputation.review = "No review provided."
                             } else {
                                 currentReputation.review = reviewMessage
                             }
                         } else {
-                            currentReputation.review = "No Review Given"
+                            currentReputation.review = "No review provided."
                         }
                         currentReputation.userName = subJson["userName"]["firstName"].description + " " + subJson["userName"]["lastName"].description
                         currentReputation.userPhoto = subJson["userName"]["photos"][0]["fileName"].description
