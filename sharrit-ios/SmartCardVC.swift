@@ -50,12 +50,12 @@ class SmartCardVC: UIViewController {
                         self.requestBtn.isHidden = true
                     } else {
                         if self.appDelegate.user?.address == "" {
-                            self.requestStatus.text = "Not Request"
-                            self.requestDate.text = "Not requested yet, please fill in your address under Profile Page first. Cheers!"
+                            self.requestStatus.text = "Not requested yet, please fill in your address under Profile Page first. Cheers!"
+                            self.requestDate.text = "Not requested yet."
                             self.requestBtn.isHidden = true
                         } else {
                             self.requestStatus.text = "Not requested yet."
-                            self.requestDate.text = "Not Yet Requested"
+                            self.requestDate.text = "Not requested yet."
                             self.requestBtn.isHidden = false
                         }
                     }
