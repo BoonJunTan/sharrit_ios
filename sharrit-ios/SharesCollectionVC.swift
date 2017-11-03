@@ -237,21 +237,30 @@ class SharesCollectionVC: UIViewController, UICollectionViewDataSource, UICollec
                 self.sharesCollection = []
                 if let data = response.result.value {
                     for (_, subJson) in JSON(data)["content"] {
-                        let businessId = subJson["business"]["businessId"].int!
-                        let businessName = subJson["business"]["name"].description
-                        let description = subJson["business"]["description"].description
-                        let businessType = subJson["business"]["type"].int!
-                        let logo = subJson["business"]["logo"]["fileName"].description
-                        let banner = subJson["business"]["banner"]["fileName"].description
-                        let comRate = subJson["business"]["comissionRate"].double!
-                        let dateCreated = subJson["business"]["dateCreated"].description
-                        let business = Business(businessId: businessId, businessName: businessName, description: description, businessType: businessType, logoURL: logo, bannerURL: banner, commissionRate: comRate, dateCreated: dateCreated)
+                        var blacklisted = false
+                        for (_, sharrieBlackLists) in subJson["business"]["sharrieBlackLists"] {
+                            if sharrieBlackLists["userId"].int! == appDelegate.user?.userID {
+                              blacklisted = true
+                            }
+                        }
                         
-                        business.requestFormID = subJson["business"]["requestFormId"].int!
-                        business.rating = subJson["rating"]["currentRating"].double!
-                        business.ratingList = subJson["rating"]["allRating"].array!
-                        
-                        self.sharesCollection.append(business)
+                        if !blacklisted {
+                            let businessId = subJson["business"]["businessId"].int!
+                            let businessName = subJson["business"]["name"].description
+                            let description = subJson["business"]["description"].description
+                            let businessType = subJson["business"]["type"].int!
+                            let logo = subJson["business"]["logo"]["fileName"].description
+                            let banner = subJson["business"]["banner"]["fileName"].description
+                            let comRate = subJson["business"]["comissionRate"].double!
+                            let dateCreated = subJson["business"]["dateCreated"].description
+                            let business = Business(businessId: businessId, businessName: businessName, description: description, businessType: businessType, logoURL: logo, bannerURL: banner, commissionRate: comRate, dateCreated: dateCreated)
+                            
+                            business.requestFormID = subJson["business"]["requestFormId"].int!
+                            business.rating = subJson["rating"]["currentRating"].double!
+                            business.ratingList = subJson["rating"]["allRating"].array!
+                            
+                            self.sharesCollection.append(business)
+                        }
                     }
                     self.sharesCollectionView.reloadData()
                 }

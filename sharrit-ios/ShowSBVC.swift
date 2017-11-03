@@ -54,7 +54,7 @@ class ShowSBVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
         
         businessCell.businessTitle.text = businessCollection[indexPath.item].businessName
         
-        businessCell.businessRating.rating = 4.7 // Must TODO: NEED ASK JOE
+        businessCell.businessRating.rating = 4.7
         
         // Get Company Creation Date and Format it
         let dateFormatter = DateFormatter()
@@ -138,12 +138,7 @@ class ShowSBVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
             url = SharritURL.devURL + "sharror/pending/" + String(describing: appDelegate.user!.userID)
         }
         
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer " + appDelegate.user!.accessToken,
-            "Accept": "application/json" // Need this?
-        ]
-        
-        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON {
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in
             switch response.result {
             case .success(_):
@@ -163,6 +158,8 @@ class ShowSBVC: UIViewController, UICollectionViewDataSource, UICollectionViewDe
                         
                         let requestFormID = subJson["requestFormId"].int!
                         if requestFormID != -1 { business.requestFormID = requestFormID }
+                        
+                        // MUST TODO: Need business.Rating also
                         
                         self.businessCollection.append(business)
                     }

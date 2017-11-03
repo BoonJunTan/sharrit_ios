@@ -71,8 +71,8 @@ class ViewAllReputationVC: UITableViewController {
                         } else {
                             currentReputation.review = "No review provided."
                         }
-                        currentReputation.userName = subJson["userName"]["firstName"].description + " " + subJson["userName"]["lastName"].description
-                        currentReputation.userPhoto = subJson["userName"]["photos"][0]["fileName"].description
+                        currentReputation.userName = subJson["reviewerInfo"]["firstName"].description + " " + subJson["reviewerInfo"]["lastName"].description
+                        currentReputation.userPhoto = subJson["reviewerInfo"]["photos"][0]["fileName"].description
                         self.reputation.append(currentReputation)
                     }
                     self.tableView.reloadData()

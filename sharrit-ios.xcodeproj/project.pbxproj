@@ -65,6 +65,7 @@
 		2796C1EF1F8F630A008DA8D1 /* LoadingSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2796C1EE1F8F630A008DA8D1 /* LoadingSpinner.swift */; };
 		2799CDD71F8B6C6800DD4C22 /* RequestRefundVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2799CDD61F8B6C6800DD4C22 /* RequestRefundVC.swift */; };
 		2799CDD91F8B79CD00DD4C22 /* ViewRefundVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2799CDD81F8B79CD00DD4C22 /* ViewRefundVC.swift */; };
+		27A0F9251FAC12CB003EC749 /* ViewOtherProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A0F9241FAC12CB003EC749 /* ViewOtherProfileVC.swift */; };
 		27ABAE811F670D81007F6CDB /* LoginAndSignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27ABAE801F670D81007F6CDB /* LoginAndSignUp.storyboard */; };
 		27B37F931F6EC2E200565AA8 /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B37F921F6EC2E200565AA8 /* EditProfileVC.swift */; };
 		27BFFC281F8275F6009FF404 /* ImageResize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BFFC271F8275F6009FF404 /* ImageResize.swift */; };
@@ -162,6 +163,7 @@
 		2796C1EE1F8F630A008DA8D1 /* LoadingSpinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingSpinner.swift; sourceTree = "<group>"; };
 		2799CDD61F8B6C6800DD4C22 /* RequestRefundVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestRefundVC.swift; sourceTree = "<group>"; };
 		2799CDD81F8B79CD00DD4C22 /* ViewRefundVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRefundVC.swift; sourceTree = "<group>"; };
+		27A0F9241FAC12CB003EC749 /* ViewOtherProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewOtherProfileVC.swift; sourceTree = "<group>"; };
 		27ABAE801F670D81007F6CDB /* LoginAndSignUp.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LoginAndSignUp.storyboard; sourceTree = "<group>"; };
 		27B37F921F6EC2E200565AA8 /* EditProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
 		27BFFC271F8275F6009FF404 /* ImageResize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResize.swift; sourceTree = "<group>"; };
@@ -417,6 +419,7 @@
 				2764FEEA1F98A41D00FA5D55 /* ViewRatingVC.swift */,
 				2764FEE41F987F3900FA5D55 /* ReputationTableViewCell.swift */,
 				2764FEE61F98838200FA5D55 /* ViewReputationVC.swift */,
+				27A0F9241FAC12CB003EC749 /* ViewOtherProfileVC.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -631,7 +634,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-sharrit-ios/Pods-sharrit-ios-resources.sh",
-				"$PODS_CONFIGURATION_BUILD_DIR/ImageSlideshow/ImageSlideshow.bundle",
+				$PODS_CONFIGURATION_BUILD_DIR/ImageSlideshow/ImageSlideshow.bundle,
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -666,6 +669,7 @@
 				274A36891F7024A000FD5E3C /* EditPasswordVC.swift in Sources */,
 				27FCB7DF1F6776A5008E973C /* NotificationVC.swift in Sources */,
 				2764FEE71F98838200FA5D55 /* ViewReputationVC.swift in Sources */,
+				27A0F9251FAC12CB003EC749 /* ViewOtherProfileVC.swift in Sources */,
 				2770E2BE1F83D9FF00199B61 /* Transaction.swift in Sources */,
 				275C050E1F7C014C00E78E06 /* NewSharreVC.swift in Sources */,
 				2713ECEA1F9CBE15004D1D89 /* WalletCashOutVC.swift in Sources */,
