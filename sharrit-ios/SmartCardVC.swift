@@ -49,9 +49,15 @@ class SmartCardVC: UIViewController {
                         self.requestDate.text = FormatDate().formatDateTimeToLocal3(date: JSON(data)["content"][0]["dateCreated"].description)
                         self.requestBtn.isHidden = true
                     } else {
-                        self.requestStatus.text = "Not Yet Requested"
-                        self.requestDate.text = "Not Yet Requested"
-                        self.requestBtn.isHidden = false
+                        if self.appDelegate.user?.address == "" {
+                            self.requestStatus.text = "Not Request"
+                            self.requestDate.text = "Not requested yet, please fill in your address under Profile Page first. Cheers!"
+                            self.requestBtn.isHidden = true
+                        } else {
+                            self.requestStatus.text = "Not requested yet."
+                            self.requestDate.text = "Not Yet Requested"
+                            self.requestBtn.isHidden = false
+                        }
                     }
                 }
                 break

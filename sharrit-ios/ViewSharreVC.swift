@@ -206,7 +206,7 @@ class ViewSharreVC: UIViewController {
     
     // View All SB Reputation
     func viewSBReputation(tapGestureRecognizer: UITapGestureRecognizer) {
-        self.performSegue(withIdentifier: "viewReputation", sender: nil)
+        self.performSegue(withIdentifier: "viewUserReputation", sender: nil)
     }
     
     @IBAction func sharreITBtnPressed(_ sender: SharritButton) {
@@ -320,10 +320,9 @@ class ViewSharreVC: UIViewController {
             if let viewAllReputationVC = segue.destination as? ViewAllReputationVC {
                 viewAllReputationVC.sharreID = sharreID
             }
-        } else if segue.identifier == "viewReputation" {
-            if let viewReputationVC = segue.destination as? ViewReputationVC {
-                viewReputationVC.businessID = ownerID
-                viewReputationVC.reputationOf = .Other
+        } else if segue.identifier == "viewUserReputation" {
+            if let viewOtherProfileVC = segue.destination as? ViewOtherProfileVC {
+                viewOtherProfileVC.userID = ownerID
             }
         }
     }

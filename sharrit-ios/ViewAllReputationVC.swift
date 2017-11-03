@@ -52,7 +52,7 @@ class ViewAllReputationVC: UITableViewController {
     }
     
     func getAllReputation() {
-        let url = SharritURL.devURL + "reputation/owner/" + String(describing: sharreID!)
+        let url = SharritURL.devURL + "reputation/user/" + String(describing: sharreID!)
         
         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in
@@ -71,8 +71,8 @@ class ViewAllReputationVC: UITableViewController {
                         } else {
                             currentReputation.review = "No review provided."
                         }
-                        currentReputation.userName = subJson["reviewerInfo"]["firstName"].description + " " + subJson["reviewerInfo"]["lastName"].description
-                        currentReputation.userPhoto = subJson["reviewerInfo"]["photos"][0]["fileName"].description
+                        currentReputation.userName = subJson["user"]["firstName"].description + " " + subJson["user"]["lastName"].description
+                        currentReputation.userPhoto = subJson["user"]["photos"][0]["fileName"].description
                         self.reputation.append(currentReputation)
                     }
                     self.tableView.reloadData()

@@ -1374,7 +1374,7 @@
                         <segue destination="KGR-tG-gkb" kind="show" identifier="viewAppointment" id="3qS-rm-BM1"/>
                         <segue destination="V0K-Wl-KDX" kind="show" identifier="editSharre" id="DYQ-sK-bk9"/>
                         <segue destination="DcP-TU-OPY" kind="show" identifier="viewAllReputation" id="Hop-mc-H6t"/>
-                        <segue destination="i1u-VY-0zw" kind="show" identifier="viewReputation" id="BaE-O9-8oa"/>
+                        <segue destination="i1u-VY-0zw" kind="show" identifier="viewUserReputation" id="BaE-O9-8oa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iGm-2t-zs6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1831,10 +1831,10 @@
             </objects>
             <point key="canvasLocation" x="7719" y="-123"/>
         </scene>
-        <!--viewReputation-->
+        <!--viewUserProfile-->
         <scene sceneID="KfI-Et-ByL">
             <objects>
-                <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="viewReputation" id="i1u-VY-0zw" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="viewUserProfile" id="i1u-VY-0zw" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JWA-cd-11i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5643" y="-128"/>
@@ -3935,7 +3935,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hFX-un-isb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4713" y="1539"/>
+            <point key="canvasLocation" x="4679" y="1525"/>
         </scene>
     </scenes>
     <resources>
