@@ -60,7 +60,7 @@ class BankDetailVC: UIViewController {
                         self.bankBranch.text = bankDetails["bankBranch"].description
                         self.bankAccount.text = bankDetails["accountNumber"].description
                         
-                        bankDetails["accountType"].int! == 0 ? (self.bankSelectedAccount.text = "Saving Account") : (self.bankSelectedAccount.text = "Edit Account")
+                        bankDetails["accountType"].int! == 0 ? (self.bankSelectedAccount.text = "Saving Account") : (self.bankSelectedAccount.text = "Current Account")
                         
                         self.bankDetailID = bankDetails["bankInformationId"].int!
                     }

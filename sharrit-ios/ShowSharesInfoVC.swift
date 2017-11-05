@@ -67,7 +67,12 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         if tableViewItems[indexPath.row].getSharreServiceType() == .TimeUsage {
             if tableViewItems[indexPath.row].hasStarted! {
-                let timeString = FormatDate().compareTwoDaysInMinute(dateStart: tableViewItems[indexPath.row].timeStart, dateEnd: tableViewItems[indexPath.row].timeEnd)
+                var timeString: String!
+                if tableViewItems[indexPath.row].timeEnd == "0001-01-01T00:00:00" {
+                    timeString = FormatDate().compareDaysCreatedInMinute(dateCreated: tableViewItems[indexPath.row].timeStart)
+                } else {
+                    timeString = FormatDate().compareTwoDaysInMinute(dateStart: tableViewItems[indexPath.row].timeStart, dateEnd: tableViewItems[indexPath.row].timeEnd)
+                }
                 cell.sharesDate.text = "Duration: " + timeString
                 var time = timeString.replacingOccurrences(of: " minutes", with: "")
                 time = time.replacingOccurrences(of: ",", with: "")
@@ -124,14 +129,24 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let optionMenu = UIAlertController(title: nil, message: "What would you like to do?", preferredStyle: .actionSheet)
+        
+        if tableViewItems[indexPath.row].payeeType == 0 || tableViewItems[indexPath.row].payeeType == 1 {
+            let viewUserProfileAction = UIAlertAction(title: "View User Profile", style: .default) { action -> Void in
+                self.performSegue(withIdentifier: "viewUserProfile", sender: self.tableViewItems[indexPath.row].payeeId)
+            }
+            
+            optionMenu.addAction(viewUserProfileAction)
+        }
+        
+        let viewSharreAction = UIAlertAction(title: "View Sharre", style: .default) { action -> Void in
+            self.performSegue(withIdentifier: "viewSharre", sender: self.tableViewItems[indexPath.row].sharreId)
+        }
+        
+        optionMenu.addAction(viewSharreAction)
+        
         if tableViewItems[indexPath.row].hasStarted != nil  && userRole == .Sharror {
             if sharreStatus == .Completed {
-                let optionMenu = UIAlertController(title: nil, message: "What would you like to do?", preferredStyle: .actionSheet)
-                
-                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action -> Void in
-                    
-                }
-                
                 let holdDepositAction = UIAlertAction(title: "Hold Deposit", style: .default) { action -> Void in
                     self.returnDepositForShares(boolean: false, transactionID: self.tableViewItems[indexPath.row].transactionId)
                 }
@@ -149,7 +164,7 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                 
                 let reviewAction: UIAlertAction!
                 
-                if self.tableViewItems[indexPath.row].sharrieRatingID != nil {
+                if self.tableViewItems[indexPath.row].ownerRatingID != nil {
                     reviewAction = UIAlertAction(title: "View Review", style: .default) { action -> Void in
                         self.performSegue(withIdentifier: "viewRating", sender: self.tableViewItems[indexPath.row])
                     }
@@ -162,13 +177,9 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                 optionMenu.addAction(holdDepositAction)
                 optionMenu.addAction(returnDepositAction)
                 optionMenu.addAction(reviewAction)
-                optionMenu.addAction(cancelAction)
-                self.present(optionMenu, animated: true, completion: nil)
             } else {
-                let optionMenu = UIAlertController(title: nil, message: "What would you like to do?", preferredStyle: .actionSheet)
-                
-                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action -> Void in
-                    
+                let viewUserProfileAction = UIAlertAction(title: "View User Profile", style: .default) { action -> Void in
+                    self.performSegue(withIdentifier: "viewUserProfile", sender: self.tableViewItems[indexPath.row].payeeId)
                 }
                 
                 var nextActionTitle: String!
@@ -179,16 +190,8 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                 }
                 
                 optionMenu.addAction(nextAction)
-                optionMenu.addAction(cancelAction)
-                self.present(optionMenu, animated: true, completion: nil)
             }
         } else if userRole == .Sharrie && sharreStatus == .Completed {
-            let optionMenu = UIAlertController(title: nil, message: "What would you like to do?", preferredStyle: .actionSheet)
-            
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action -> Void in
-                
-            }
-            
             if let isWaitingRefund = tableViewItems[indexPath.row].isWaitingRefund {
                 if !isWaitingRefund {
                     let refundAction = UIAlertAction(title: "Request for Refund", style: .default) { action -> Void in
@@ -201,7 +204,7 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
             
             var reviewAction: UIAlertAction!
             
-            if self.tableViewItems[indexPath.row].ownerRatingID != nil {
+            if self.tableViewItems[indexPath.row].sharrieRatingID != nil {
                 reviewAction = UIAlertAction(title: "View Review", style: .default) { action -> Void in
                     self.performSegue(withIdentifier: "viewRating", sender: self.tableViewItems[indexPath.row])
                 }
@@ -212,9 +215,14 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
             }
             
             optionMenu.addAction(reviewAction)
-            optionMenu.addAction(cancelAction)
-            self.present(optionMenu, animated: true, completion: nil)
         }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action -> Void in
+            
+        }
+        
+        optionMenu.addAction(cancelAction)
+        self.present(optionMenu, animated: true, completion: nil)
     }
     
     func startEndShares(boolean: Bool, transactionID: Int) {
@@ -427,6 +435,14 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
             if let viewRatingVC = segue.destination as? ViewRatingVC {
                 viewRatingVC.transaction = sender as! Transaction
                 viewRatingVC.userRole = userRole
+            }
+        } else if segue.identifier == "viewSharre" {
+            if let viewSharreVC = segue.destination as? ViewSharreVC {
+                viewSharreVC.sharreID = sender as! Int
+            }
+        } else if segue.identifier == "viewUserProfile" {
+            if let viewOtherProfileVC = segue.destination as? ViewOtherProfileVC {
+                viewOtherProfileVC.userID = sender as! Int
             }
         }
     }

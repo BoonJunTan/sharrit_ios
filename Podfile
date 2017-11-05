@@ -16,6 +16,5 @@ target 'sharrit-ios' do
   pod 'FSCalendar'
   pod 'Stripe'
   pod 'CardIO'
-  pod 'SVProgressHUD'
 
 end

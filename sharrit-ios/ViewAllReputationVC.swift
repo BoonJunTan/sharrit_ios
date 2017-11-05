@@ -52,7 +52,7 @@ class ViewAllReputationVC: UITableViewController {
     }
     
     func getAllReputation() {
-        let url = SharritURL.devURL + "reputation/owner/" + String(describing: sharreID!)
+        let url = SharritURL.devURL + "reputation/user/" + String(describing: sharreID!)
         
         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in
@@ -64,15 +64,15 @@ class ViewAllReputationVC: UITableViewController {
                         let currentReputation = Reputation(reputationID: subJson["rating"]["reviewId"].int, userName: "Not Given Yet", rating: subJson["rating"]["ratingValue"].double)
                         if let reviewMessage = subJson["rating"]["review"]["message"].description as? String {
                             if reviewMessage == "null" {
-                                currentReputation.review = "No Review Available"
+                                currentReputation.review = "No review provided."
                             } else {
                                 currentReputation.review = reviewMessage
                             }
                         } else {
-                            currentReputation.review = "No Review Given"
+                            currentReputation.review = "No review provided."
                         }
-                        currentReputation.userName = subJson["userName"]["firstName"].description + " " + subJson["userName"]["lastName"].description
-                        currentReputation.userPhoto = subJson["userName"]["photos"][0]["fileName"].description
+                        currentReputation.userName = subJson["user"]["firstName"].description + " " + subJson["user"]["lastName"].description
+                        currentReputation.userPhoto = subJson["user"]["photos"][0]["fileName"].description
                         self.reputation.append(currentReputation)
                     }
                     self.tableView.reloadData()

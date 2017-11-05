@@ -71,7 +71,7 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         if businessInfo.rating != -1 {
             businessRating.text = String(format: "%.2f", arguments: [businessInfo.rating])
         } else {
-            businessRating.text = "No Ratings Yet"
+            businessRating.text = "Rating Unavailable"
         }
     }
     
@@ -215,12 +215,12 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                             
                             if let reviewMessage = subJson["rating"]["review"]["message"].description as? String {
                                 if reviewMessage == "null" {
-                                    currentRep.review = "No Review Available"
+                                    currentRep.review = "No review provided."
                                 } else {
                                     currentRep.review = reviewMessage
                                 }
                             } else {
-                                currentRep.review = "No Review Available."
+                                currentRep.review = "No review provided."
                             }
                             
                             self.reputationList.append(currentRep)

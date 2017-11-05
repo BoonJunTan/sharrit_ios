@@ -42,16 +42,22 @@ class SmartCardVC: UIViewController {
                 if let data = response.result.value {
                     if !JSON(data)["content"].array!.isEmpty {
                         if JSON(data)["content"][0]["status"].int! == 0 {
-                            self.requestStatus.text = "Your request is currently on pending, please check the status later again. Cheers!"
+                            self.requestStatus.text = "Your smartcard request status is currently pending. Cheers!"
                         } else {
-                            self.requestStatus.text = "Your card is mailed, please check your mailbox in 3-5 days time. Cheers!"
+                            self.requestStatus.text = "Your smartcard has been mailed! You should receive it in 3 - 5 working days. Cheers!"
                         }
                         self.requestDate.text = FormatDate().formatDateTimeToLocal3(date: JSON(data)["content"][0]["dateCreated"].description)
                         self.requestBtn.isHidden = true
                     } else {
-                        self.requestStatus.text = "Not Yet Requested"
-                        self.requestDate.text = "Not Yet Requested"
-                        self.requestBtn.isHidden = false
+                        if self.appDelegate.user?.address == "" {
+                            self.requestStatus.text = "Not requested yet, please fill in your address under Profile Page first. Cheers!"
+                            self.requestDate.text = "Not requested yet."
+                            self.requestBtn.isHidden = true
+                        } else {
+                            self.requestStatus.text = "Not requested yet."
+                            self.requestDate.text = "Not requested yet."
+                            self.requestBtn.isHidden = false
+                        }
                     }
                 }
                 break
