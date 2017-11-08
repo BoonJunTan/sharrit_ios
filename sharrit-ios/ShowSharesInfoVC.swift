@@ -40,12 +40,6 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         currentBtnSelected(btn: ongoingBtn)
         sharreStatus = .Ongoing
         
-        let qrIcon = UIBarButtonItem(image: #imageLiteral(resourceName: "qr_code"),
-                                     style: .plain,
-                                     target: self, action: #selector(goToScanQR))
-        
-        self.navigationItem.rightBarButtonItem = qrIcon
-        
         tableView.tableFooterView = UIView() // For Hiding away empty cell
     }
     
@@ -272,10 +266,6 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                 break
             }
         }
-    }
-    
-    func goToScanQR() {
-        performSegue(withIdentifier: "showQR", sender: nil)
     }
     
     func currentBtnSelected(btn: UIButton) {

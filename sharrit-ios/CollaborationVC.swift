@@ -108,8 +108,11 @@ class CollaborationVC: UIViewController, UICollectionViewDataSource, UICollectio
                     let businessName = JSON(data)["content"]["business"]["name"].description
                     let description = JSON(data)["content"]["business"]["description"].description
                     let businessType = JSON(data)["content"]["business"]["type"].int!
-                    let logo = JSON(data)["content"]["business"]["logo"]["fileName"].description //Logo is null
-                    let banner = JSON(data)["content"]["business"]["banner"]["fileName"].description //banner is null
+                    
+                    // MUST TODO: Check with Ronald for logo and banner = null
+                    let logo = JSON(data)["content"]["business"]["logo"]["fileName"].description
+                    let banner = JSON(data)["content"]["business"]["banner"]["fileName"].description
+                    
                     let comRate = JSON(data)["content"]["business"]["comissionRate"].double!
                     let dateCreated = JSON(data)["content"]["business"]["dateCreated"].description
                     let business = Business(businessId: businessId, businessName: businessName, description: description, businessType: businessType, logoURL: logo, bannerURL: banner, commissionRate: comRate, dateCreated: dateCreated)

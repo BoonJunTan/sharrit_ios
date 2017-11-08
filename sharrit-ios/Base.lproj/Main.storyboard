@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,6 +22,7 @@
                     <connections>
                         <segue destination="i2B-Vm-aTM" kind="relationship" relationship="viewControllers" id="6V7-Xb-NWB"/>
                         <segue destination="DIZ-7j-IdM" kind="relationship" relationship="viewControllers" id="rbp-dh-mmd"/>
+                        <segue destination="bvO-hp-8jx" kind="relationship" relationship="viewControllers" id="JrS-1a-XhD"/>
                         <segue destination="Sce-aY-69L" kind="relationship" relationship="viewControllers" id="Hoc-HF-Kkp"/>
                         <segue destination="KpP-dd-lUq" kind="relationship" relationship="viewControllers" id="aQW-zw-RcR"/>
                     </connections>
@@ -53,6 +55,16 @@
             </objects>
             <point key="canvasLocation" x="816" y="-88"/>
         </scene>
+        <!--QrReader-->
+        <scene sceneID="gsq-aR-KsW">
+            <objects>
+                <viewControllerPlaceholder storyboardName="QrReader" id="bvO-hp-8jx" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="ODU-v8-dhH"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hTK-IG-1RW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="817" y="-1"/>
+        </scene>
         <!--Notification-->
         <scene sceneID="47i-MM-GWn">
             <objects>
@@ -63,7 +75,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RiW-4K-pg4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="817" y="82"/>
+            <point key="canvasLocation" x="818" y="86"/>
         </scene>
         <!--Profile-->
         <scene sceneID="YQ9-at-IXS">
