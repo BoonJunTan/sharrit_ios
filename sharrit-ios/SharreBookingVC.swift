@@ -25,6 +25,7 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
     var ownerName: String!
     var ownerID: Int!
     var ownerType: Int!
+    var collaborationList: [JSON]!
     
     @IBOutlet weak var unitRequire: UITextField!
     
@@ -562,6 +563,9 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
                 successfulBookingVC.sharreID = sharreID
                 successfulBookingVC.sharreDescription = sharreDescription
                 successfulBookingVC.sharreImageURL = sharreImageURL
+                if !collaborationList.isEmpty {
+                    successfulBookingVC.collaborationList = collaborationList
+                }
             }
         }
     }

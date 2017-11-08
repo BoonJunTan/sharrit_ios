@@ -40,11 +40,11 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         currentBtnSelected(btn: ongoingBtn)
         sharreStatus = .Ongoing
         
-        let navBarBubble = UIBarButtonItem(image: #imageLiteral(resourceName: "chat"),
-                                           style: .plain ,
-                                           target: self, action: #selector(goToMessages))
+        let qrIcon = UIBarButtonItem(image: #imageLiteral(resourceName: "qr_code"),
+                                     style: .plain,
+                                     target: self, action: #selector(goToScanQR))
         
-        self.navigationItem.rightBarButtonItem = navBarBubble
+        self.navigationItem.rightBarButtonItem = qrIcon
         
         tableView.tableFooterView = UIView() // For Hiding away empty cell
     }
@@ -274,20 +274,8 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         }
     }
     
-    func goToMessages() {
-        let messageSB = UIStoryboard(name: "Messages" , bundle: nil)
-        let messageVC = messageSB.instantiateViewController(withIdentifier: "messages") as! MessagesVC
-        let messageWithNavController = UINavigationController(rootViewController: messageVC)
-        
-        messageWithNavController.modalTransitionStyle = .coverVertical
-        modalPresentationStyle = .fullScreen
-        present(messageWithNavController, animated: true, completion:{
-            if let subviewsCount = self.tabBarController?.view.subviews.count {
-                if subviewsCount > 2 {
-                    self.tabBarController?.view.subviews[2].removeFromSuperview()
-                }
-            }
-        })
+    func goToScanQR() {
+        performSegue(withIdentifier: "showQR", sender: nil)
     }
     
     func currentBtnSelected(btn: UIButton) {

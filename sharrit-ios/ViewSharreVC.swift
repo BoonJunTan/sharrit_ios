@@ -15,6 +15,7 @@ class ViewSharreVC: UIViewController {
     
     // Pass Over Data
     var sharreID: Int!
+    var collaborationList: [JSON]!
     
     @IBOutlet weak var sharreImages: ImageSlideshow!
     @IBOutlet weak var sharreTitle: UILabel!
@@ -335,6 +336,9 @@ class ViewSharreVC: UIViewController {
                 sharreBookingVC.ownerType = ownerType
                 let deposit = sharreDeposit.text!
                 sharreBookingVC.sharreDeposit = deposit.replacingOccurrences(of: "Deposit: $", with: "")
+                if !collaborationList.isEmpty {
+                    sharreBookingVC.collaborationList = collaborationList
+                }
             }
         } else if segue.identifier == "viewTimeUsage" {
             if let sharreTimeUsageVC = segue.destination as? SharreTimeUsageVC {
@@ -349,6 +353,9 @@ class ViewSharreVC: UIViewController {
                 sharreTimeUsageVC.ownerType = ownerType
                 let quantity = sharreQuantity.text!
                 sharreTimeUsageVC.sharreUnit = quantity.replacingOccurrences(of: " units", with: "")
+                if !collaborationList.isEmpty {
+                    sharreTimeUsageVC.collaborationList = collaborationList
+                }
             }
         } else if segue.identifier == "viewAllReputation" {
             if let viewAllReputationVC = segue.destination as? ViewAllReputationVC {

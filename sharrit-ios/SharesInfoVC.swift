@@ -205,6 +205,11 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             case .success(_):
                 self.reputationList.removeAll()
                 if let data = response.result.value {
+                    // Check if Colla exist
+                    if (JSON(data)["content"]["collabAssets"].array?.isEmpty)! {
+                        self.businessInfo.collaborationList = JSON(data)["content"]["collabAssets"].array!
+                    }
+                    
                     // Loop All Sharres
                     for (_, subJson) in JSON(data)["content"]["sharres"] {
                         // Loop All Rating
@@ -290,6 +295,10 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             if let businessSharesVC = segue.destination as? BusinessSharesVC {
                 businessSharesVC.businessID = businessInfo.businessId
                 businessSharesVC.arriveFrom = .SharingBusiness
+                
+                if !(businessInfo.collaborationList?.isEmpty)! {
+                    businessSharesVC.collaborationList = businessInfo.collaborationList!
+                }
             }
         }
     }

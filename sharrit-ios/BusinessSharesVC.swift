@@ -18,10 +18,12 @@ enum ArriveFrom {
 
 class BusinessSharesVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
+    // Pass Over Data
+    var businessID: Int?
+    var collaborationList: [JSON]!
+    
     var sharesCollection: [Shares]! = []
     var arriveFrom = ArriveFrom.SharingBusiness
-    
-    var businessID: Int?
     
     var url: String!
     
@@ -257,6 +259,10 @@ class BusinessSharesVC: UIViewController, UICollectionViewDataSource, UICollecti
         if segue.identifier == "viewSharre" {
             if let viewSharreVC = segue.destination as? ViewSharreVC {
                 viewSharreVC.sharreID = sender as! Int
+                
+                if !collaborationList.isEmpty {
+                    viewSharreVC.collaborationList = collaborationList
+                }
             }
         }
     }
