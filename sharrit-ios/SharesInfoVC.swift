@@ -206,7 +206,7 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 self.reputationList.removeAll()
                 if let data = response.result.value {
                     // Check if Colla exist
-                    if (JSON(data)["content"]["collabAssets"].array?.isEmpty)! {
+                    if (!JSON(data)["content"]["collabAssets"].isEmpty) {
                         self.businessInfo.collaborationList = JSON(data)["content"]["collabAssets"].array!
                     }
                     
@@ -296,7 +296,7 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 businessSharesVC.businessID = businessInfo.businessId
                 businessSharesVC.arriveFrom = .SharingBusiness
                 
-                if !(businessInfo.collaborationList?.isEmpty)! {
+                if businessInfo.collaborationList != nil {
                     businessSharesVC.collaborationList = businessInfo.collaborationList!
                 }
             }

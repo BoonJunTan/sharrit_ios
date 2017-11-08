@@ -25,7 +25,7 @@ class SharreTimeUsageVC: UIViewController {
     var ownerName: String!
     var ownerID: Int!
     var ownerType: Int!
-    var collaborationList: [JSON]!
+    var collaborationList: [JSON]?
     
     @IBOutlet weak var unitsAvailable: UILabel!
     @IBOutlet weak var unitsRequire: UITextField!
@@ -192,7 +192,7 @@ class SharreTimeUsageVC: UIViewController {
                 successfulBookingVC.sharreID = sharreID
                 successfulBookingVC.sharreDescription = sharreDescription
                 successfulBookingVC.sharreImageURL = sharreImageURL
-                if !collaborationList.isEmpty {
+                if collaborationList != nil {
                     successfulBookingVC.collaborationList = collaborationList
                 }
             }

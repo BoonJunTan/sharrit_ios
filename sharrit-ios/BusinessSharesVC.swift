@@ -20,7 +20,7 @@ class BusinessSharesVC: UIViewController, UICollectionViewDataSource, UICollecti
     
     // Pass Over Data
     var businessID: Int?
-    var collaborationList: [JSON]!
+    var collaborationList: [JSON]?
     
     var sharesCollection: [Shares]! = []
     var arriveFrom = ArriveFrom.SharingBusiness
@@ -260,7 +260,7 @@ class BusinessSharesVC: UIViewController, UICollectionViewDataSource, UICollecti
             if let viewSharreVC = segue.destination as? ViewSharreVC {
                 viewSharreVC.sharreID = sender as! Int
                 
-                if !collaborationList.isEmpty {
+                if collaborationList != nil {
                     viewSharreVC.collaborationList = collaborationList
                 }
             }

@@ -19,14 +19,14 @@ class SuccessfulBookingVC: UIViewController {
     var sharreID: Int!
     var sharreDescription: String!
     var sharreImageURL: String!
-    var collaborationList: [JSON]!
+    var collaborationList: [JSON]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
         let when = DispatchTime.now() + 3
         DispatchQueue.main.asyncAfter(deadline: when) {
-            if self.collaborationList.isEmpty {
+            if self.collaborationList == nil {
                 let messageSB = UIStoryboard(name: "Messages" , bundle: nil)
                 let conversationVC = messageSB.instantiateViewController(withIdentifier: "conversation") as! ConversationVC
                 let messageWithNavController = UINavigationController(rootViewController: conversationVC)
@@ -74,6 +74,13 @@ class SuccessfulBookingVC: UIViewController {
         } else if segue.identifier == "showCollaboration" {
             if let collaborationVC = segue.destination as? CollaborationVC {
                 collaborationVC.collaborationList = collaborationList
+                collaborationVC.receiverID = receiverID
+                collaborationVC.receiverName = receiverName
+                collaborationVC.receiverType = receiverType
+                collaborationVC.sharreTitle = sharreTitle
+                collaborationVC.sharreID = sharreID
+                collaborationVC.sharreDescription = sharreDescription
+                collaborationVC.sharreImageURL = sharreImageURL
             }
         }
     }
