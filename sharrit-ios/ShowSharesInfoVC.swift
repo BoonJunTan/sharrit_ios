@@ -358,13 +358,16 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                         let payerId = transactionDetails["payerId"].int!
                         let payerType = transactionDetails["payerType"].int!
                         let amount = transactionDetails["amount"].description
-                        let promoId = transactionDetails["promoId"].int!
                         let timeStart = transactionDetails["timeStart"].description
                         let timeEnd = transactionDetails["timeEnd"].description
                         let status = transactionDetails["status"].int!
                         let qty = transactionDetails["qty"].int!
                         let deposit = transactionDetails["deposit"].description
-                        let transaction = Transaction(transactionId: id, dateCreated: dateCreated, payeeId: payeeId, payeeType: payeeType, payerId: payerId, payerType: payerType, amount: amount, promoId: promoId, timeStart: timeStart, timeEnd: timeEnd, status: status, qty: qty, deposit: deposit)
+                        let transaction = Transaction(transactionId: id, dateCreated: dateCreated, payeeId: payeeId, payeeType: payeeType, payerId: payerId, payerType: payerType, amount: amount, timeStart: timeStart, timeEnd: timeEnd, status: status, qty: qty, deposit: deposit)
+                        
+                        if let promoID = transactionDetails["promoId"].int {
+                            transaction.promoId = promoID
+                        }
                         
                         if let sharreId = transactionDetails["sharreId"].int {
                             transaction.sharreId = sharreId

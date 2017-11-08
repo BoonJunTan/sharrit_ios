@@ -125,57 +125,97 @@ class BusinessSharesVC: UIViewController, UICollectionViewDataSource, UICollecti
     
     // Get Shares for Business
     func getSharesForBusiness() {
-        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+        
+        // Get User Rating first
+        let getUserRatingURL = SharritURL.devURL + "reputation/current/sharrie/" + String(describing: appDelegate.user!.userID)
+        
+        Alamofire.request(getUserRatingURL, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in
             switch response.result {
             case .success(_):
-                self.sharesCollection = []
                 if let data = response.result.value {
-                    for (_, subJson) in JSON(data)["content"] {
-                        if !subJson["sharre"]["isDeleted"].bool! {
-                            let sharreId = subJson["sharre"]["sharreId"].int!
-                            let sharreName = subJson["sharre"]["name"].description
-                            let sharreDescription = subJson["sharre"]["description"].description
-                            let sharreType = subJson["sharre"]["type"].int!
-                            let sharreQty = subJson["sharre"]["qty"].int!
-                            let sharreUnit = subJson["sharre"]["unit"].int!
-                            let sharrePrice = subJson["sharre"]["price"].description
-                            let sharreDeposit = subJson["sharre"]["deposit"].description
-                            let sharreLocation = subJson["sharre"]["name"].description
-                            
-                            var photoArray = [String]()
-                            for (_, photoPath) in subJson["sharre"]["photos"] {
-                                photoArray.append(photoPath["fileName"].description)
+                    var userRating:Double = -1
+                    if JSON(data)["status"] == -6 {
+                        userRating = 3 // No Deposit = Middle Tier
+                    } else {
+                        userRating = JSON(data)["content"].double!
+                    }
+                    
+                    // Based on rating get business sharre and deposit given
+                    Alamofire.request(self.url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+                        response in
+                        switch response.result {
+                        case .success(_):
+                            self.sharesCollection = []
+                            if let data = response.result.value {
+                                for (_, subJson) in JSON(data)["content"] {
+                                    if !subJson["sharre"]["isDeleted"].bool! {
+                                        let sharreId = subJson["sharre"]["sharreId"].int!
+                                        let sharreName = subJson["sharre"]["name"].description
+                                        let sharreDescription = subJson["sharre"]["description"].description
+                                        let sharreType = subJson["sharre"]["type"].int!
+                                        let sharreQty = subJson["sharre"]["qty"].int!
+                                        let sharreUnit = subJson["sharre"]["unit"].int!
+                                        let sharrePrice = subJson["sharre"]["price"].description
+                                        
+                                        var sharreDeposit: String!
+                                        
+                                        if userRating < 1 {
+                                            sharreDeposit = subJson["sharre"]["depositOne"].description
+                                        } else if userRating < 2 {
+                                            sharreDeposit = subJson["sharre"]["depositTwo"].description
+                                        } else if userRating < 3 {
+                                            sharreDeposit = subJson["sharre"]["depositThree"].description
+                                        } else if userRating < 4 {
+                                            sharreDeposit = subJson["sharre"]["depositFour"].description
+                                        } else {
+                                            sharreDeposit = subJson["sharre"]["depositFive"].description
+                                        }
+                                        
+                                        let sharreLocation = subJson["sharre"]["name"].description
+                                        
+                                        var photoArray = [String]()
+                                        for (_, photoPath) in subJson["sharre"]["photos"] {
+                                            photoArray.append(photoPath["fileName"].description)
+                                        }
+                                        
+                                        let sharreDateCreated = subJson["sharre"]["name"].description
+                                        let sharreOwnerType = subJson["sharre"]["ownerType"].int!
+                                        let sharreOwnerId = subJson["sharre"]["ownerId"].int!
+                                        let sharreIsActive = subJson["sharre"]["isActive"].boolValue
+                                        
+                                        let sharre = Shares(sharreId: sharreId, name: sharreName, description: sharreDescription, type: sharreType, qty: sharreQty, unit: sharreUnit, price: sharrePrice, deposit: sharreDeposit, location: sharreLocation, photos: photoArray, dateCreated: sharreDateCreated, ownerType: sharreOwnerType, ownerId: sharreOwnerId, isActive: sharreIsActive)
+                                        
+                                        let sharreActiveStart = subJson["sharre"]["activeStart"].description
+                                        let sharreActiveEnd = subJson["sharre"]["activeEnd"].description
+                                        
+                                        if sharreActiveStart != "00:00:00" && sharreActiveEnd != "00:00:00" {
+                                            sharre.activeStart = sharreActiveStart
+                                            sharre.activeEnd = sharreActiveEnd
+                                        }
+                                        
+                                        sharre.rating = subJson["currentRating"].double!
+                                        
+                                        self.sharesCollection.append(sharre)
+                                    }
+                                }
+                                self.sharesCollectionView.reloadData()
                             }
-                            
-                            let sharreDateCreated = subJson["sharre"]["name"].description
-                            let sharreOwnerType = subJson["sharre"]["ownerType"].int!
-                            let sharreOwnerId = subJson["sharre"]["ownerId"].int!
-                            let sharreIsActive = subJson["sharre"]["isActive"].boolValue
-                            
-                            let sharre = Shares(sharreId: sharreId, name: sharreName, description: sharreDescription, type: sharreType, qty: sharreQty, unit: sharreUnit, price: sharrePrice, deposit: sharreDeposit, location: sharreLocation, photos: photoArray, dateCreated: sharreDateCreated, ownerType: sharreOwnerType, ownerId: sharreOwnerId, isActive: sharreIsActive)
-                            
-                            let sharreActiveStart = subJson["sharre"]["activeStart"].description
-                            let sharreActiveEnd = subJson["sharre"]["activeEnd"].description
-                            
-                            if sharreActiveStart != "00:00:00" && sharreActiveEnd != "00:00:00" {
-                                sharre.activeStart = sharreActiveStart
-                                sharre.activeEnd = sharreActiveEnd
-                            }
-                            
-                            sharre.rating = subJson["currentRating"].double!
-                            
-                            self.sharesCollection.append(sharre)
+                            break
+                        case .failure(_):
+                            print("Retrieve Shares for Business API failed")
+                            break
                         }
                     }
-                    self.sharesCollectionView.reloadData()
+                    
                 }
                 break
             case .failure(_):
-                print("Retrieve Shares for Business API failed")
+                print("Get User Combined Rating API failed")
                 break
             }
         }
+        
     }
     
     // Go To Messages

@@ -56,92 +56,126 @@ class ViewSharreVC: UIViewController {
     }
     
     func getSharesInfo() {
-        let url = SharritURL.devURL + "sharre/" + String(describing: sharreID!)
         
-        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+        // Get User Rating first
+        let getUserRatingURL = SharritURL.devURL + "reputation/current/sharrie/" + String(describing: appDelegate.user!.userID)
+        
+        Alamofire.request(getUserRatingURL, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in
             switch response.result {
             case .success(_):
                 if let data = response.result.value {
-                    var json = JSON(data)
-                    self.sharreTitle.text = json["content"]["name"].string!
-                    self.sharreDate.text = FormatDate().compareDaysCreated(dateCreated: json["content"]["dateCreated"].string!) + " ago by"
-                    
-                    self.ownerID = json["content"]["ownerId"].int!
-                    self.ownerType = json["content"]["ownerType"].int!
-                    self.sharreOwner.text = json["content"]["ownerName"].string!
-                    
-                    if self.ownerType != 2 {
-                        let sharreOwnerLabelGR = UITapGestureRecognizer(target: self, action: #selector(self.viewSBReputation(tapGestureRecognizer:)))
-                        self.sharreOwner.addGestureRecognizer(sharreOwnerLabelGR)
-                        self.sharreOwner.isUserInteractionEnabled = true
+                    var userRating:Double = -1
+                    if JSON(data)["status"] == -6 {
+                        userRating = 3 // No Deposit = Middle Tier
                     } else {
-                        self.sharreOwner.textColor = UIColor.black
+                        userRating = JSON(data)["content"].double!
                     }
                     
-                    var rightBarItem = [UIBarButtonItem]()
-                    let reputationBtn = UIBarButtonItem(image: ImageResize().resizeImageWith(image: #imageLiteral(resourceName: "star-white"), newWidth: 20),
-                                                       style: .plain ,
-                                                       target: self, action: #selector(self.reputationAction))
-                    rightBarItem.append(reputationBtn)
-                    if (self.appDelegate.user!.firstName + " " + self.appDelegate.user!.lastName) == self.sharreOwner.text {
-                        self.chatSharreStackView.isHidden = true
-                        let navBarBubble = UIBarButtonItem(image: ImageResize().resizeImageWith(image: #imageLiteral(resourceName: "edit"), newWidth: 20),
-                                                           style: .plain ,
-                                                           target: self, action: #selector(self.sharreAction))
-                        
-                        rightBarItem.append(navBarBubble)
-                    }
+                    let url = SharritURL.devURL + "sharre/" + String(describing: self.sharreID!)
                     
-                    self.navigationItem.rightBarButtonItems = rightBarItem
-                    
-                    if let activeStatus = json["content"]["isActive"].bool {
-                        self.sharreStatusBool = activeStatus
-                        if activeStatus {
-                            self.sharreStatus.text = "Active"
-                        } else {
-                            self.sharreItBtn.isHidden = true
-                            self.sharreStatus.text = "Not Active"
+                    Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+                        response in
+                        switch response.result {
+                        case .success(_):
+                            if let data = response.result.value {
+                                var json = JSON(data)
+                                self.sharreTitle.text = json["content"]["name"].string!
+                                self.sharreDate.text = FormatDate().compareDaysCreated(dateCreated: json["content"]["dateCreated"].string!) + " ago by"
+                                
+                                self.ownerID = json["content"]["ownerId"].int!
+                                self.ownerType = json["content"]["ownerType"].int!
+                                self.sharreOwner.text = json["content"]["ownerName"].string!
+                                
+                                if self.ownerType != 2 {
+                                    let sharreOwnerLabelGR = UITapGestureRecognizer(target: self, action: #selector(self.viewSBReputation(tapGestureRecognizer:)))
+                                    self.sharreOwner.addGestureRecognizer(sharreOwnerLabelGR)
+                                    self.sharreOwner.isUserInteractionEnabled = true
+                                } else {
+                                    self.sharreOwner.textColor = UIColor.black
+                                }
+                                
+                                var rightBarItem = [UIBarButtonItem]()
+                                let reputationBtn = UIBarButtonItem(image: ImageResize().resizeImageWith(image: #imageLiteral(resourceName: "star-white"), newWidth: 20),
+                                                                    style: .plain ,
+                                                                    target: self, action: #selector(self.reputationAction))
+                                rightBarItem.append(reputationBtn)
+                                if (self.appDelegate.user!.firstName + " " + self.appDelegate.user!.lastName) == self.sharreOwner.text {
+                                    self.chatSharreStackView.isHidden = true
+                                    let navBarBubble = UIBarButtonItem(image: ImageResize().resizeImageWith(image: #imageLiteral(resourceName: "edit"), newWidth: 20),
+                                                                       style: .plain ,
+                                                                       target: self, action: #selector(self.sharreAction))
+                                    
+                                    rightBarItem.append(navBarBubble)
+                                }
+                                
+                                self.navigationItem.rightBarButtonItems = rightBarItem
+                                
+                                if let activeStatus = json["content"]["isActive"].bool {
+                                    self.sharreStatusBool = activeStatus
+                                    if activeStatus {
+                                        self.sharreStatus.text = "Active"
+                                    } else {
+                                        self.sharreItBtn.isHidden = true
+                                        self.sharreStatus.text = "Not Active"
+                                    }
+                                }
+                                
+                                if userRating < 1 {
+                                    self.sharreDeposit.text = "Deposit: $" + json["content"]["depositOne"].description
+                                } else if userRating < 2 {
+                                    self.sharreDeposit.text = "Deposit: $" + json["content"]["depositTwo"].description
+                                } else if userRating < 3 {
+                                    self.sharreDeposit.text = "Deposit: $" + json["content"]["depositThree"].description
+                                } else if userRating < 4 {
+                                    self.sharreDeposit.text = "Deposit: $" + json["content"]["depositFour"].description
+                                } else {
+                                    self.sharreDeposit.text = "Deposit: $" + json["content"]["depositFive"].description
+                                }
+                                
+                                if !json["content"]["photos"].isEmpty {
+                                    let photoURLStringArray = json["content"]["photos"].array
+                                    self.photoArrayURLString = photoURLStringArray![photoURLStringArray!.count-1]["fileName"].description
+                                    self.getAllPhoto(jsonData: json["content"]["photos"], completion: { photoArray in
+                                        self.sharreImages.setImageInputs(Array(photoArray.prefix(4)))
+                                        self.sharreImages.contentScaleMode = .scaleToFill
+                                        self.sharreImages.circular = false
+                                    })
+                                }
+                                
+                                if json["content"]["type"].int! == 0 {
+                                    if json["content"]["unit"].int! == 0 {
+                                        self.sharreType.text = "Appointment Based - 30 mins Interval"
+                                        self.sharreCharging.text = "Pay/hr: $" + String(describing: json["content"]["price"].double!)
+                                        self.sharreTypeData = .HrAppointment
+                                    } else {
+                                        self.sharreCharging.text = "Pay/day: $" + String(describing: json["content"]["price"].double!)
+                                        self.sharreType.text = "Appointment Based - Daily"
+                                        self.sharreTypeData = .DayAppointment
+                                    }
+                                } else {
+                                    self.sharreType.text = "Time-Usage Based"
+                                    self.sharreTypeData = .TimeUsage
+                                }
+                                
+                                self.sharreStartTime.text = "Start Time: " + json["content"]["activeStart"].string!
+                                self.sharreEndTime.text = "End Time: " + json["content"]["activeEnd"].string!
+                                self.sharreQuantity.text = String(describing: json["content"]["qty"].int!) + " units"
+                                self.sharreCategory.text = json["content"]["categoryName"].string!
+                                self.sharreLocation.text = json["content"]["location"].string!
+                                self.sharreDescription.text = json["content"]["description"].string!
+                            }
+                            break
+                        case .failure(_):
+                            print("Retrieve Sharre Info API failed")
+                            break
                         }
                     }
                     
-                    self.sharreDeposit.text = "Deposit: $" + json["content"]["depositIos"].description
-                    
-                    if !json["content"]["photos"].isEmpty {
-                        let photoURLStringArray = json["content"]["photos"].array
-                        self.photoArrayURLString = photoURLStringArray![photoURLStringArray!.count-1]["fileName"].description
-                        self.getAllPhoto(jsonData: json["content"]["photos"], completion: { photoArray in
-                            self.sharreImages.setImageInputs(Array(photoArray.prefix(4)))
-                            self.sharreImages.contentScaleMode = .scaleToFill
-                            self.sharreImages.circular = false
-                        })
-                    }
-                    
-                    if json["content"]["type"].int! == 0 {
-                        if json["content"]["unit"].int! == 0 {
-                            self.sharreType.text = "Appointment Based - 30 mins Interval"
-                            self.sharreCharging.text = "Pay/hr: $" + String(describing: json["content"]["price"].double!)
-                            self.sharreTypeData = .HrAppointment
-                        } else {
-                            self.sharreCharging.text = "Pay/day: $" + String(describing: json["content"]["price"].double!)
-                            self.sharreType.text = "Appointment Based - Daily"
-                            self.sharreTypeData = .DayAppointment
-                        }
-                    } else {
-                        self.sharreType.text = "Time-Usage Based"
-                        self.sharreTypeData = .TimeUsage
-                    }
-                    
-                    self.sharreStartTime.text = "Start Time: " + json["content"]["activeStart"].string!
-                    self.sharreEndTime.text = "End Time: " + json["content"]["activeEnd"].string!
-                    self.sharreQuantity.text = String(describing: json["content"]["qty"].int!) + " units"
-                    self.sharreCategory.text = json["content"]["categoryName"].string!
-                    self.sharreLocation.text = json["content"]["location"].string!
-                    self.sharreDescription.text = json["content"]["description"].string!
                 }
                 break
             case .failure(_):
-                print("Retrieve Sharre Info API failed")
+                print("Get User Combined Rating API failed")
                 break
             }
         }

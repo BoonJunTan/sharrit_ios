@@ -25,17 +25,15 @@ class Transaction {
     
     var transactionId: Int
     var dateCreated: String
-    //var dateUpdated: String
     var payeeId: Int
     var payeeType: Int
     var payerId: Int
     var payerType: Int
     var amount: String
-    var promoId: Int
+    var promoId: Int?
     var timeStart: String
     var timeEnd: String
     var status: Int
-    //var sharre": null,
     var sharreId: Int?
     var qty: Int
     var deposit: String
@@ -49,7 +47,7 @@ class Transaction {
     var ownerRatingID: Int?
     var sharrieRatingID: Int?
     
-    init(transactionId: Int, dateCreated: String, payeeId: Int, payeeType: Int, payerId: Int, payerType: Int, amount: String, promoId: Int, timeStart: String, timeEnd: String, status: Int, qty: Int, deposit: String) {
+    init(transactionId: Int, dateCreated: String, payeeId: Int, payeeType: Int, payerId: Int, payerType: Int, amount: String, timeStart: String, timeEnd: String, status: Int, qty: Int, deposit: String) {
         self.transactionId = transactionId
         self.dateCreated = dateCreated
         self.payeeId = payeeId
@@ -57,7 +55,6 @@ class Transaction {
         self.payerId = payerId
         self.payerType = payerType
         self.amount = amount
-        self.promoId = promoId
         self.timeStart = timeStart
         self.timeEnd = timeEnd
         self.status = status

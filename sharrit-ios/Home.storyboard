@@ -1803,7 +1803,7 @@
                                 <color key="backgroundColor" red="0.2666666667" green="0.69411764710000001" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="Rci-v1-kRQ" firstAttribute="centerX" secondItem="ZqE-if-sIR" secondAttribute="centerX" id="8Uo-z8-pgQ"/>
-                                    <constraint firstItem="Rci-v1-kRQ" firstAttribute="centerY" secondItem="ZqE-if-sIR" secondAttribute="centerY" id="Czh-lg-Xiw"/>
+                                    <constraint firstItem="Rci-v1-kRQ" firstAttribute="centerY" secondItem="ZqE-if-sIR" secondAttribute="centerY" id="NXd-oE-4kK"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -1817,11 +1817,33 @@
                     </view>
                     <connections>
                         <segue destination="mK3-SZ-2Ne" kind="show" identifier="showConversation" id="nbJ-ES-ofw"/>
+                        <segue destination="7vP-cm-VlQ" kind="show" identifier="showCollaboration" id="xEO-5t-upG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vT8-xr-Obu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6976.8000000000002" y="-122.78860569715144"/>
+        </scene>
+        <!--More Deals-->
+        <scene sceneID="EHs-h2-wFl">
+            <objects>
+                <viewController title="More Deals" id="7vP-cm-VlQ" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qup-7I-Pgr"/>
+                        <viewControllerLayoutGuide type="bottom" id="Rpp-3J-dik"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="J8W-nz-N1m">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="mK3-SZ-2Ne" kind="show" id="j8G-7c-oXc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5CJ-Zp-xcq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7882" y="-484"/>
         </scene>
         <!--conversation-->
         <scene sceneID="zvp-AF-vDN">
@@ -1829,7 +1851,7 @@
                 <viewControllerPlaceholder storyboardName="Messages" referencedIdentifier="conversation" id="mK3-SZ-2Ne" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L8f-jz-DNq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7719" y="-123"/>
+            <point key="canvasLocation" x="7881" y="70"/>
         </scene>
         <!--viewUserProfile-->
         <scene sceneID="KfI-Et-ByL">
@@ -4117,6 +4139,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="vcD-lC-BM6"/>
+        <segue reference="j8G-7c-oXc"/>
         <segue reference="KsR-4B-NmF"/>
         <segue reference="EdK-t1-FNT"/>
     </inferredMetricsTieBreakers>
