@@ -23,27 +23,28 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="zMK-cs-ooK" kind="show" id="r0T-U2-u48"/>
+                        <segue destination="zMK-cs-ooK" kind="relationship" relationship="rootViewController" id="CgC-57-8vC"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="plY-Ip-udi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1257" y="19"/>
+            <point key="canvasLocation" x="-1215" y="18"/>
         </scene>
-        <!--ScanQRVC-->
+        <!--Scan-->
         <scene sceneID="q8S-Ty-PEd">
             <objects>
-                <viewController id="zMK-cs-ooK" customClass="ScanQRVC" customModule="sharrit_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Scan" id="zMK-cs-ooK" customClass="ScanQRVC" customModule="sharrit_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="r01-FP-Vun">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="hdq-Om-yCo"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Scan QR" id="NJl-tG-dKR"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bSa-fa-BbF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-215" y="18"/>
+            <point key="canvasLocation" x="-146" y="18"/>
         </scene>
     </scenes>
     <resources>
