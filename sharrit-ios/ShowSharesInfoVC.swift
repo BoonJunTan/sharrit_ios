@@ -63,7 +63,12 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         cell.sharesTitle.text = String(describing: tableViewItems[indexPath.row].transactionId) + ". " + String(describing: tableViewItems[indexPath.row].sharreName!)
         cell.sharesDeposit.text = "Deposit: $" + tableViewItems[indexPath.row].deposit
-        cell.sharesUsage.text = "Usage: $" + tableViewItems[indexPath.row].amount
+        
+        if tableViewItems[indexPath.row].promoId != nil {
+            cell.sharesUsage.text = "Usage: $" + tableViewItems[indexPath.row].amount + " [Promo]"
+        } else {
+            cell.sharesUsage.text = "Usage: $" + tableViewItems[indexPath.row].amount
+        }
         
         if tableViewItems[indexPath.row].getSharreServiceType() == .TimeUsage {
             if tableViewItems[indexPath.row].hasStarted! {
