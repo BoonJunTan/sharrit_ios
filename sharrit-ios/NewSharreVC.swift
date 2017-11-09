@@ -30,6 +30,10 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
     
     @IBOutlet weak var sharreName: UITextField!
     @IBOutlet weak var sharreDeposit: UITextField!
+    @IBOutlet weak var sharreDepositTwo: UITextField!
+    @IBOutlet weak var sharreDepositThree: UITextField!
+    @IBOutlet weak var sharreDepositFour: UITextField!
+    @IBOutlet weak var sharreDepositFive: UITextField!
     
     var scheduleTimeCode = 0
     @IBOutlet weak var sharreScheduleBtn: SharritButton!
@@ -72,6 +76,10 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
         sharreQuantity.keyboardType = .numberPad
         sharreChargingPrice.keyboardType = .decimalPad
         sharreDeposit.keyboardType = .decimalPad
+        sharreDepositTwo.keyboardType = .decimalPad
+        sharreDepositThree.keyboardType = .decimalPad
+        sharreDepositFour.keyboardType = .decimalPad
+        sharreDepositFive.keyboardType = .decimalPad
         
         defaultChargeMethodBtnUI()
         currentBtnSelected(btn: sharreScheduleBtn)
@@ -311,7 +319,7 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
             errorDetected = true
         }
         
-        if (sharreName.text?.isEmpty)! || (sharreDescription.text?.isEmpty)! ||  (sharreQuantity.text?.isEmpty)! || (sharreChargingPrice.text?.isEmpty)! || (sharreDeposit.text?.isEmpty)! || (sharreLocation.text?.isEmpty)! {
+        if (sharreName.text?.isEmpty)! || (sharreDescription.text?.isEmpty)! ||  (sharreQuantity.text?.isEmpty)! || (sharreChargingPrice.text?.isEmpty)! || (sharreDeposit.text?.isEmpty)! || (sharreDepositTwo.text?.isEmpty)! || (sharreDepositThree.text?.isEmpty)! || (sharreDepositFour.text?.isEmpty)! || (sharreDepositFive.text?.isEmpty)! || (sharreLocation.text?.isEmpty)! {
             errorDetected = true
         }
         
@@ -328,7 +336,7 @@ class NewSharreVC: UIViewController, UICollectionViewDataSource, UICollectionVie
             alert.addAction(UIAlertAction(title: "Back", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         } else {
-            var sharreData: [String: Any] = ["name": sharreName.text!, "description": sharreDescription.text!, "type": scheduleTimeCode, "qty": sharreQuantity.text!, "price": sharreChargingPrice.text!, "deposit": sharreDeposit.text!, "location": sharreLocation.text!]
+            var sharreData: [String: Any] = ["name": sharreName.text!, "description": sharreDescription.text!, "type": scheduleTimeCode, "qty": sharreQuantity.text!, "price": sharreChargingPrice.text!, "depositOne": sharreDeposit.text!, "depositTwo": sharreDepositTwo.text!, "depositThree": sharreDepositThree.text!, "depositFour": sharreDepositFour.text!, "depositFive": sharreDepositFive.text!, "location": sharreLocation.text!]
             
             if unitCode != -1 {
                 sharreData["unit"] = unitCode

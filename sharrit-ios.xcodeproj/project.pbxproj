@@ -57,6 +57,7 @@
 		277CAA661F8673CF00F1FF6E /* DateSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277CAA651F8673CF00F1FF6E /* DateSlot.swift */; };
 		277DD7191F72238C005B7752 /* SharesInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277DD7181F72238C005B7752 /* SharesInfoVC.swift */; };
 		277DD71B1F723F3F005B7752 /* SharritURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277DD71A1F723F3F005B7752 /* SharritURL.swift */; };
+		27809F001FB47AAB00C1A24F /* SharreQRTimeUsageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27809EFF1FB47AAB00C1A24F /* SharreQRTimeUsageVC.swift */; };
 		2786DD621F84C20300E4D7D6 /* TimeSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2786DD611F84C20300E4D7D6 /* TimeSlot.swift */; };
 		2786DD641F84C40600E4D7D6 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2786DD631F84C40600E4D7D6 /* Time.swift */; };
 		2791B33B1F8E1D0900AC937D /* FormatNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2791B33A1F8E1D0900AC937D /* FormatNumber.swift */; };
@@ -69,6 +70,8 @@
 		27ABAE811F670D81007F6CDB /* LoginAndSignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27ABAE801F670D81007F6CDB /* LoginAndSignUp.storyboard */; };
 		27B37F931F6EC2E200565AA8 /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B37F921F6EC2E200565AA8 /* EditProfileVC.swift */; };
 		27BFFC281F8275F6009FF404 /* ImageResize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BFFC271F8275F6009FF404 /* ImageResize.swift */; };
+		27C037A71FB34BB800C55890 /* ScanQRVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C037A61FB34BB800C55890 /* ScanQRVC.swift */; };
+		27C037AA1FB3904600C55890 /* QrReader.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27C037A91FB3904600C55890 /* QrReader.storyboard */; };
 		27C0B0401F6BDBC4009E69CA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C0B03F1F6BDBC4009E69CA /* User.swift */; };
 		27C114841F717B5900CD9FB9 /* SharesCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C114831F717B5800CD9FB9 /* SharesCollectionVC.swift */; };
 		27C114861F718C9100CD9FB9 /* TabCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C114851F718C9100CD9FB9 /* TabCollectionViewCell.swift */; };
@@ -81,6 +84,8 @@
 		27DA99521F7D08BE006E415C /* TransactionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DA99511F7D08BE006E415C /* TransactionVC.swift */; };
 		27DA99541F7D175B006E415C /* SharresCreationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DA99531F7D175B006E415C /* SharresCreationVC.swift */; };
 		27DA99571F7D4894006E415C /* SharreBookingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DA99561F7D4894006E415C /* SharreBookingVC.swift */; };
+		27DABD6E1FB2FE9600F2AEC2 /* CollaborationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DABD6D1FB2FE9600F2AEC2 /* CollaborationVC.swift */; };
+		27DABD701FB3022D00F2AEC2 /* CollaborationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DABD6F1FB3022D00F2AEC2 /* CollaborationCollectionViewCell.swift */; };
 		27F256421F6AA1C6006B1697 /* ButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F256411F6AA1C6006B1697 /* ButtonCollectionViewCell.swift */; };
 		27F256441F6ACE8D006B1697 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F256431F6ACE8D006B1697 /* NotificationTableViewCell.swift */; };
 		27FCB7D41F677533008E973C /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27FCB7D31F677533008E973C /* Home.storyboard */; settings = {ASSET_TAGS = ("Succesful!", ); }; };
@@ -155,6 +160,7 @@
 		277CAA651F8673CF00F1FF6E /* DateSlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSlot.swift; sourceTree = "<group>"; };
 		277DD7181F72238C005B7752 /* SharesInfoVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharesInfoVC.swift; sourceTree = "<group>"; };
 		277DD71A1F723F3F005B7752 /* SharritURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharritURL.swift; sourceTree = "<group>"; };
+		27809EFF1FB47AAB00C1A24F /* SharreQRTimeUsageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharreQRTimeUsageVC.swift; sourceTree = "<group>"; };
 		2786DD611F84C20300E4D7D6 /* TimeSlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSlot.swift; sourceTree = "<group>"; };
 		2786DD631F84C40600E4D7D6 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		2791B33A1F8E1D0900AC937D /* FormatNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatNumber.swift; sourceTree = "<group>"; };
@@ -167,6 +173,8 @@
 		27ABAE801F670D81007F6CDB /* LoginAndSignUp.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LoginAndSignUp.storyboard; sourceTree = "<group>"; };
 		27B37F921F6EC2E200565AA8 /* EditProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
 		27BFFC271F8275F6009FF404 /* ImageResize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResize.swift; sourceTree = "<group>"; };
+		27C037A61FB34BB800C55890 /* ScanQRVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQRVC.swift; sourceTree = "<group>"; };
+		27C037A91FB3904600C55890 /* QrReader.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = QrReader.storyboard; sourceTree = "<group>"; };
 		27C0B03F1F6BDBC4009E69CA /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		27C114831F717B5800CD9FB9 /* SharesCollectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharesCollectionVC.swift; sourceTree = "<group>"; };
 		27C114851F718C9100CD9FB9 /* TabCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -179,6 +187,8 @@
 		27DA99511F7D08BE006E415C /* TransactionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionVC.swift; sourceTree = "<group>"; };
 		27DA99531F7D175B006E415C /* SharresCreationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharresCreationVC.swift; sourceTree = "<group>"; };
 		27DA99561F7D4894006E415C /* SharreBookingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharreBookingVC.swift; sourceTree = "<group>"; };
+		27DABD6D1FB2FE9600F2AEC2 /* CollaborationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollaborationVC.swift; sourceTree = "<group>"; };
+		27DABD6F1FB3022D00F2AEC2 /* CollaborationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollaborationCollectionViewCell.swift; sourceTree = "<group>"; };
 		27F256411F6AA1C6006B1697 /* ButtonCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCollectionViewCell.swift; sourceTree = "<group>"; };
 		27F256431F6ACE8D006B1697 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
 		27FCB7D31F677533008E973C /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
@@ -284,6 +294,15 @@
 			name = LoginAndSignUp;
 			sourceTree = "<group>";
 		};
+		27C037A81FB38FDB00C55890 /* QrReader */ = {
+			isa = PBXGroup;
+			children = (
+				27C037A91FB3904600C55890 /* QrReader.storyboard */,
+				27C037A61FB34BB800C55890 /* ScanQRVC.swift */,
+			);
+			name = QrReader;
+			sourceTree = "<group>";
+		};
 		27D018691F7407A800D5B798 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
@@ -310,11 +329,21 @@
 			isa = PBXGroup;
 			children = (
 				27DA99561F7D4894006E415C /* SharreBookingVC.swift */,
+				27809EFF1FB47AAB00C1A24F /* SharreQRTimeUsageVC.swift */,
 				279497C91F7DED8B00522999 /* SharreTimeUsageVC.swift */,
 				279497CB1F7E258F00522999 /* TimeCollectionViewCell.swift */,
 				277CAA631F86324500F1FF6E /* SuccessfulBookingVC.swift */,
 			);
 			name = "Book Sharre";
+			sourceTree = "<group>";
+		};
+		27DABD6C1FB2FE7200F2AEC2 /* Collaboration */ = {
+			isa = PBXGroup;
+			children = (
+				27DABD6D1FB2FE9600F2AEC2 /* CollaborationVC.swift */,
+				27DABD6F1FB3022D00F2AEC2 /* CollaborationCollectionViewCell.swift */,
+			);
+			name = Collaboration;
 			sourceTree = "<group>";
 		};
 		27F6C72E1F7BAB7A00DDB27B /* Shares Information */ = {
@@ -366,6 +395,7 @@
 				27F6C7311F7BABE700DDB27B /* Sharror Form */,
 				27F6C72E1F7BAB7A00DDB27B /* Shares Information */,
 				27DA99551F7D4874006E415C /* Book Sharre */,
+				27DABD6C1FB2FE7200F2AEC2 /* Collaboration */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -465,6 +495,7 @@
 				27FCB7D81F677668008E973C /* Notification */,
 				27FCB7D71F677662008E973C /* Wallet */,
 				27FCB7D21F67750B008E973C /* Home */,
+				27C037A81FB38FDB00C55890 /* QrReader */,
 				27702CD71F69620800A1C652 /* Messages */,
 				27ABAE7F1F670D1F007F6CDB /* LoginAndSignUp */,
 				872D31611F6705520069381A /* AppDelegate.swift */,
@@ -560,6 +591,7 @@
 				273928FC1F8FD943007B0744 /* SharreInfo.xib in Resources */,
 				27FCB7E51F6776EC008E973C /* Wallet.storyboard in Resources */,
 				872D316E1F6705520069381A /* LaunchScreen.storyboard in Resources */,
+				27C037AA1FB3904600C55890 /* QrReader.storyboard in Resources */,
 				27FCB7EA1F678F89008E973C /* SharritButton.xib in Resources */,
 				2751E4EF1F6AE3A700E1B1E2 /* Assets.xcassets in Resources */,
 				27FCB7D41F677533008E973C /* Home.storyboard in Resources */,
@@ -653,6 +685,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				27FCB7DD1F67768C008E973C /* ProfileVC.swift in Sources */,
+				27DABD701FB3022D00F2AEC2 /* CollaborationCollectionViewCell.swift in Sources */,
 				27DA99501F7CF794006E415C /* TransactionTableViewCell.swift in Sources */,
 				2764FEE31F984D1E00FA5D55 /* RatingVC.swift in Sources */,
 				2764C4831F72DE1400DB7199 /* ContactUsVC.swift in Sources */,
@@ -666,8 +699,10 @@
 				27FCB7F21F67DB8F008E973C /* SignUpVC.swift in Sources */,
 				27DA99521F7D08BE006E415C /* TransactionVC.swift in Sources */,
 				27FCB7EC1F678FD1008E973C /* Colours.swift in Sources */,
+				27DABD6E1FB2FE9600F2AEC2 /* CollaborationVC.swift in Sources */,
 				274A36891F7024A000FD5E3C /* EditPasswordVC.swift in Sources */,
 				27FCB7DF1F6776A5008E973C /* NotificationVC.swift in Sources */,
+				27C037A71FB34BB800C55890 /* ScanQRVC.swift in Sources */,
 				2764FEE71F98838200FA5D55 /* ViewReputationVC.swift in Sources */,
 				27A0F9251FAC12CB003EC749 /* ViewOtherProfileVC.swift in Sources */,
 				2770E2BE1F83D9FF00199B61 /* Transaction.swift in Sources */,
@@ -726,6 +761,7 @@
 				2764C47D1F726FDD00DB7199 /* SharrorFormVC.swift in Sources */,
 				2764FEEB1F98A41D00FA5D55 /* ViewRatingVC.swift in Sources */,
 				276D1B8C1F7B9E7000A3EAF3 /* BusinessSharesVC.swift in Sources */,
+				27809F001FB47AAB00C1A24F /* SharreQRTimeUsageVC.swift in Sources */,
 				2713ECEC1F9CC230004D1D89 /* BankDetailVC.swift in Sources */,
 				2764A4BF1F6A73250014CCF3 /* Conversation.swift in Sources */,
 				277DD7191F72238C005B7752 /* SharesInfoVC.swift in Sources */,

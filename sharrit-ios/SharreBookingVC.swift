@@ -25,6 +25,7 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
     var ownerName: String!
     var ownerID: Int!
     var ownerType: Int!
+    var collaborationList: [JSON]?
     
     @IBOutlet weak var unitRequire: UITextField!
     
@@ -50,6 +51,12 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
     @IBOutlet weak var costView: UIView!
     @IBOutlet weak var deposit: UILabel!
     @IBOutlet weak var usage: UILabel!
+    
+    // Usage with Promo
+    let attributeUsageTitle: NSMutableAttributedString = NSMutableAttributedString(string: "Usage: $")
+    var attributeTotalAmount: NSMutableAttributedString?
+    var attributeDiscountAmount: NSMutableAttributedString?
+    
     @IBOutlet weak var total: UILabel!
     @IBOutlet weak var bookBtn: SharritButton!
     
@@ -408,7 +415,7 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
             promoView.isHidden = false
             bookBtn.isEnabled = false
         } else {
-            let url = SharritURL.devURL + "transaction/pricing/" + String(describing: sharreID!)
+            let url = SharritURL.devURL + "transaction/pricing/" + String(describing: sharreID!) + "/" + String(describing: appDelegate.user!.userID)
             
             let timeStart:Double
             let timeEnd:Double
@@ -442,11 +449,30 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
                             self.present(alert, animated: true, completion: nil)
                         } else {
                             let json = JSON(data)["content"]
-                            self.usage.text = "Usage: $" + json["totalAmount"].description
+                            
+                            if (self.promoLabel.text?.isEmpty)! {
+                                self.usage.text = "Usage: $" + json["totalAmount"].description
+                                let totalCostDouble = Double(json["totalDeposit"].description)! + Double(json["totalAmount"].description)!
+                                let totalCost = FormatNumber().giveTwoDP(number: NSNumber(value: totalCostDouble))
+                                self.total.text = "Total: $" + totalCost
+                            } else {
+                                self.attributeTotalAmount = NSMutableAttributedString(string: json["totalAmount"].description + " ")
+                                self.attributeTotalAmount!.addAttribute(NSStrikethroughStyleAttributeName, value: 2, range: NSMakeRange(0, self.attributeTotalAmount!.length))
+                                self.attributeTotalAmount!.addAttribute(NSStrikethroughColorAttributeName, value: UIColor.red, range: NSMakeRange(0, self.attributeTotalAmount!.length))
+                                
+                                self.attributeDiscountAmount = NSMutableAttributedString(string: json["discountAmount"].description)
+                                
+                                let myString:NSMutableAttributedString = self.attributeUsageTitle
+                                myString.append(self.attributeTotalAmount!)
+                                myString.append(self.attributeDiscountAmount!)
+                                
+                                self.usage.attributedText = myString
+                                let totalCostDouble = Double(json["totalDeposit"].description)! + Double(json["discountAmount"].description)!
+                                let totalCost = FormatNumber().giveTwoDP(number: NSNumber(value: totalCostDouble))
+                                self.total.text = "Total: $" + totalCost
+                            }
+                            
                             self.deposit.text = "Deposit: $" + json["totalDeposit"].description
-                            let totalCostDouble = Double(json["totalDeposit"].description)! + Double(json["totalAmount"].description)!
-                            let totalCost = FormatNumber().giveTwoDP(number: NSNumber(value: totalCostDouble))
-                            self.total.text = "Total: $" + totalCost
                             
                             if !(self.promoLabel.text?.isEmpty)! {
                                 self.promoAppliedLabel.isHidden = false
@@ -473,7 +499,6 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
     }
 
     @IBAction func bookBtnPressed(_ sender: SharritButton) {
-        let usageCost = usage.text!.replacingOccurrences(of: "Usage: $", with: "")
         let depositCost = deposit.text!.replacingOccurrences(of: "Deposit: $", with: "")
         
         let url = SharritURL.devURL + "transaction/" + String(describing: sharreID!)
@@ -492,10 +517,14 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
             timeEnd = timeEndTomorrow!.timeIntervalSince1970
         }
         
-        var transactionData: [String: Any] = ["payerId": appDelegate.user!.userID, "payerType": 0, "amount": usageCost, "deposit": depositCost, "timeStart": Int64(timeStart), "timeEnd": Int64(timeEnd), "qty": unitRequire.text!]
+        var transactionData: [String: Any] = ["payerId": appDelegate.user!.userID, "payerType": 0, "deposit": depositCost, "timeStart": Int64(timeStart), "timeEnd": Int64(timeEnd), "qty": unitRequire.text!]
         
         if !(promoLabel.text?.isEmpty)! {
-            transactionData["promo"] = promoLabel.text!
+            transactionData["promoCode"] = promoLabel.text!
+            transactionData["amount"] = String(describing: attributeDiscountAmount!).replacingOccurrences(of: "{\n}", with: "")
+        } else {
+            let usageCost = usage.text!.replacingOccurrences(of: "Usage: $", with: "")
+            transactionData["amount"] = usageCost
         }
         
         Alamofire.request(url, method: .post, parameters: transactionData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
@@ -534,6 +563,9 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
                 successfulBookingVC.sharreID = sharreID
                 successfulBookingVC.sharreDescription = sharreDescription
                 successfulBookingVC.sharreImageURL = sharreImageURL
+                if collaborationList != nil {
+                    successfulBookingVC.collaborationList = collaborationList
+                }
             }
         }
     }

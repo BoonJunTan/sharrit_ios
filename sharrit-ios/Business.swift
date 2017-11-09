@@ -15,19 +15,16 @@ class Business {
     var businessName: String!
     var description: String?
     var businessType: Int?
-    //var tag: String?
-    //var isVerified: Bool!
-    //var isActive: Bool!
     var dateCreated: String
-    //var dateUpdated: String
-    //var category: String?
-    //var categoryId: Int!
     var logoURL: String
     var bannerURL: String
     var requestFormID: Int?
     var commissionRate: Double?
     var rating: Double!
     var ratingList: [JSON]?
+    var collaborationList: [JSON]?
+    var categoryID: Int?
+    var categoryName: String?
     
     init(businessId: Int, businessName: String, description: String, businessType: Int, logoURL: String, bannerURL: String, commissionRate: Double, dateCreated: String) {
         self.businessId = businessId
