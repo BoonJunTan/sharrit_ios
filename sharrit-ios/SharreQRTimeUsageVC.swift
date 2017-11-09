@@ -43,9 +43,8 @@ class SharreQRTimeUsageVC: UIViewController {
         
         title = sharreTitle
         depositLabel.text = sharreDeposit
+        usageLabel.text = "Usage: 1 x " + sharreUsageFee
         
-        costView.isHidden = true
-        promoView.isHidden = true
         promoAppliedLabel.isHidden = true
     }
     
@@ -96,9 +95,9 @@ class SharreQRTimeUsageVC: UIViewController {
     @IBAction func startBtnPressed(_ sender: SharritButton) {
         let deposit = depositLabel.text!.replacingOccurrences(of: "Deposit: $", with: "")
         
-        let url = SharritURL.devURL + "scan/qr/create/" + String(describing: sharreID!)
+        let url = "https://is41031718it02.southeastasia.cloudapp.azure.com/scan/qr/create/" + String(describing: sharreID!)
         
-        var transactionData: [String: Any] = ["payerId": appDelegate.user!.userID, "deposit": deposit, "qty": 1]
+        var transactionData: [String: Any] = ["payerId": appDelegate.user!.userID, "deposit": deposit, "qty": 1, "api_key": "UAZPfHqf"]
         
         if !(promoLabel.text?.isEmpty)! {
             transactionData["promoCode"] = promoLabel.text!
