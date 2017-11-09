@@ -18,6 +18,7 @@ enum SharreStatus {
 
 class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    // Pass Over Data
     var titleString: String!
     var userRole: Role!
     var sharreStatus: SharreStatus!

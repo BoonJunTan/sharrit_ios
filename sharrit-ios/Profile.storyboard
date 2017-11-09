@@ -1945,7 +1945,6 @@ Cheers!</string>
                         <segue destination="Bo3-Rz-tLI" kind="show" identifier="viewRating" id="fEI-Bq-Mi3"/>
                         <segue destination="HXD-Pb-kVd" kind="show" identifier="viewSharre" id="j5n-jk-Een"/>
                         <segue destination="LbM-4D-Km2" kind="show" identifier="viewUserProfile" id="hby-KB-7PI"/>
-                        <segue destination="WLs-g9-xgh" kind="show" identifier="showQR" id="dkJ-Ms-xXF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XoR-Ps-bpy" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2546,24 +2545,6 @@ Cheers!</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RTb-KP-lFb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2116" y="-27"/>
-        </scene>
-        <!--QR Reader-->
-        <scene sceneID="R5Q-nL-6Ni">
-            <objects>
-                <viewController title="QR Reader" id="WLs-g9-xgh" customClass="ScanQRVC" customModule="sharrit_ios" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Ott-uI-xFo"/>
-                        <viewControllerLayoutGuide type="bottom" id="Bfb-qH-fFk"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="b6o-q4-4CG">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="I8G-31-6kJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3014" y="62"/>
         </scene>
         <!--Profile-->
         <scene sceneID="888-aL-hbY">

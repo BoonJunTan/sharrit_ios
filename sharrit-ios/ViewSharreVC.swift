@@ -11,11 +11,17 @@ import Alamofire
 import SwiftyJSON
 import ImageSlideshow
 
+enum ViewSharreFrom {
+    case SharingBusiness
+    case QRCode
+}
+
 class ViewSharreVC: UIViewController {
     
     // Pass Over Data
     var sharreID: Int!
     var collaborationList: [JSON]?
+    var viewSharreFrom: ViewSharreFrom = .SharingBusiness
     
     @IBOutlet weak var sharreImages: ImageSlideshow!
     @IBOutlet weak var sharreTitle: UILabel!
@@ -34,6 +40,7 @@ class ViewSharreVC: UIViewController {
     
     @IBOutlet weak var chatSharreStackView: UIStackView!
     @IBOutlet weak var sharreItBtn: SharritButton!
+    @IBOutlet weak var chatButton: SharritButton!
     
     var ownerID: Int!
     var ownerType: Int!
@@ -122,6 +129,10 @@ class ViewSharreVC: UIViewController {
                                     }
                                 }
                                 
+                                if self.viewSharreFrom == .QRCode {
+                                    self.chatButton.isHidden = true
+                                }
+                                
                                 if userRating < 1 {
                                     self.sharreDeposit.text = "Deposit: $" + json["content"]["depositOne"].description
                                 } else if userRating < 2 {
@@ -200,7 +211,7 @@ class ViewSharreVC: UIViewController {
         }
     }
     
-    // Sharre Actions
+    // Sharre Actions for Owner
     func sharreAction() {
         let optionMenu = UIAlertController(title: nil, message: "What would you like to do?", preferredStyle: .actionSheet)
         

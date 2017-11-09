@@ -1354,6 +1354,7 @@
                     </view>
                     <size key="freeformSize" width="375" height="800"/>
                     <connections>
+                        <outlet property="chatButton" destination="LUE-4p-Lcp" id="bwy-t1-L9o"/>
                         <outlet property="chatSharreStackView" destination="bp7-oP-gSF" id="bis-bY-AYm"/>
                         <outlet property="sharreCategory" destination="ycQ-OW-Fp2" id="Kjn-Cj-b3w"/>
                         <outlet property="sharreCharging" destination="R9w-pn-pXQ" id="YdW-BR-tFI"/>
@@ -1375,6 +1376,7 @@
                         <segue destination="V0K-Wl-KDX" kind="show" identifier="editSharre" id="DYQ-sK-bk9"/>
                         <segue destination="DcP-TU-OPY" kind="show" identifier="viewAllReputation" id="Hop-mc-H6t"/>
                         <segue destination="i1u-VY-0zw" kind="show" identifier="viewUserReputation" id="BaE-O9-8oa"/>
+                        <segue destination="8CW-gK-sQP" kind="show" identifier="viewQRTimeUsage" id="a9c-QF-e4f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iGm-2t-zs6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1750,7 +1752,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gpN-g8-0L4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5806" y="-612"/>
+            <point key="canvasLocation" x="5945" y="-885"/>
         </scene>
         <!--Successful Booking!-->
         <scene sceneID="g12-Jn-9qh">
@@ -1818,11 +1820,12 @@
                     <connections>
                         <segue destination="mK3-SZ-2Ne" kind="show" identifier="showConversation" id="nbJ-ES-ofw"/>
                         <segue destination="7vP-cm-VlQ" kind="show" identifier="showCollaboration" id="xEO-5t-upG"/>
+                        <segue destination="DA0-mS-dkZ" kind="show" identifier="showSharresTransaction" id="1t8-y4-MxC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vT8-xr-Obu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6976.8000000000002" y="-122.78860569715144"/>
+            <point key="canvasLocation" x="7036" y="324"/>
         </scene>
         <!--More Deals-->
         <scene sceneID="EHs-h2-wFl">
@@ -1968,11 +1971,12 @@
                         <outlet property="collaborationCollectionView" destination="tjM-Mn-SG3" id="zTv-0R-gFh"/>
                         <segue destination="mK3-SZ-2Ne" kind="show" identifier="showConversation" id="j8G-7c-oXc"/>
                         <segue destination="7NM-ia-QVX" kind="show" identifier="viewShareInfo" id="4vG-bm-Dok"/>
+                        <segue destination="DA0-mS-dkZ" kind="show" identifier="showSharresTransaction" id="JMz-my-Mh0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5CJ-Zp-xcq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7880.8000000000002" y="-484.40779610194909"/>
+            <point key="canvasLocation" x="8134" y="-489"/>
         </scene>
         <!--conversation-->
         <scene sceneID="zvp-AF-vDN">
@@ -1980,7 +1984,15 @@
                 <viewControllerPlaceholder storyboardName="Messages" referencedIdentifier="conversation" id="mK3-SZ-2Ne" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L8f-jz-DNq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7881" y="70"/>
+            <point key="canvasLocation" x="8134" y="323"/>
+        </scene>
+        <!--sharresTransaction-->
+        <scene sceneID="pGd-Ly-fJk">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="sharresTransaction" id="DA0-mS-dkZ" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bqJ-lq-Rbs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8515" y="453"/>
         </scene>
         <!--viewUserProfile-->
         <scene sceneID="KfI-Et-ByL">
@@ -1988,7 +2000,7 @@
                 <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="viewUserProfile" id="i1u-VY-0zw" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JWA-cd-11i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5643" y="-128"/>
+            <point key="canvasLocation" x="5805" y="-1671"/>
         </scene>
         <!--Sharre Time UsageVC-->
         <scene sceneID="iPn-YG-69M">
@@ -2202,7 +2214,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KDk-RP-p2l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5806" y="324"/>
+            <point key="canvasLocation" x="6041" y="323"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="snv-Ya-COx">
@@ -4242,6 +4254,144 @@
             </objects>
             <point key="canvasLocation" x="4679" y="1525"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="zHH-xF-3ye">
+            <objects>
+                <viewController id="8CW-gK-sQP" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Aqp-P2-er1"/>
+                        <viewControllerLayoutGuide type="bottom" id="hp5-Mq-i8I"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Vuo-hL-P65">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sfm-VC-hiE" userLabel="Cost ">
+                                <rect key="frame" x="15" y="146.5" width="345" height="133.5"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="KNP-UR-PUf">
+                                        <rect key="frame" x="0.0" y="0.0" width="345" height="80"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ZY4-OH-0Ad">
+                                                <rect key="frame" x="0.0" y="0.0" width="345" height="80"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deposit: $0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CME-cD-7eu">
+                                                        <rect key="frame" x="0.0" y="0.0" width="170" height="80"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <color key="textColor" red="0.2666666667" green="0.69411764710000001" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Usage: $0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EpG-8b-t7e">
+                                                        <rect key="frame" x="175" y="0.0" width="170" height="80"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <color key="textColor" red="0.2666666667" green="0.69411764710000001" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MAk-Hb-z4i" customClass="SharritButton" customModule="sharrit_ios" customModuleProvider="target">
+                                        <rect key="frame" x="43.5" y="90" width="258.5" height="33"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="Proceed to Book"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isRounded" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="bookBtnPressed:" destination="8CW-gK-sQP" eventType="touchUpInside" id="gAc-ZH-W7h"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="KNP-UR-PUf" firstAttribute="top" secondItem="Sfm-VC-hiE" secondAttribute="top" id="1a8-E1-w1D"/>
+                                    <constraint firstAttribute="trailing" secondItem="KNP-UR-PUf" secondAttribute="trailing" id="HZg-tW-UE7"/>
+                                    <constraint firstItem="MAk-Hb-z4i" firstAttribute="width" secondItem="Sfm-VC-hiE" secondAttribute="width" multiplier="0.75" id="KGq-ES-D5m"/>
+                                    <constraint firstItem="KNP-UR-PUf" firstAttribute="leading" secondItem="Sfm-VC-hiE" secondAttribute="leading" id="NHp-cp-6wB"/>
+                                    <constraint firstItem="MAk-Hb-z4i" firstAttribute="centerX" secondItem="Sfm-VC-hiE" secondAttribute="centerX" id="dbm-yM-QTG"/>
+                                    <constraint firstItem="MAk-Hb-z4i" firstAttribute="top" secondItem="KNP-UR-PUf" secondAttribute="bottom" constant="10" id="e7g-j2-U1x"/>
+                                    <constraint firstItem="KNP-UR-PUf" firstAttribute="height" secondItem="Sfm-VC-hiE" secondAttribute="height" multiplier="0.6" id="yU1-PM-Scv"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hhe-Ti-L38">
+                                <rect key="frame" x="25" y="50" width="325" height="66.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Promo Code:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RtQ-aG-a8s">
+                                        <rect key="frame" x="0.0" y="6.5" width="104" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <color key="textColor" red="0.2666666667" green="0.69411764710000001" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Applied" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B4X-Mw-Bty">
+                                        <rect key="frame" x="109" y="6.5" width="216" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Promo Code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sX9-lF-oGR">
+                                        <rect key="frame" x="0.0" y="36.5" width="325" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q4G-iJ-FFq" customClass="SharritButton" customModule="sharrit_ios" customModuleProvider="target">
+                                        <rect key="frame" x="262" y="37" width="53" height="30"/>
+                                        <state key="normal" title="  Enter  "/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isRounded" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="enterPromoBtnPressed:" destination="8CW-gK-sQP" eventType="touchUpInside" id="RRe-p2-Y7q"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="B4X-Mw-Bty" secondAttribute="trailing" id="8Jd-Cq-Abw"/>
+                                    <constraint firstItem="B4X-Mw-Bty" firstAttribute="leading" secondItem="RtQ-aG-a8s" secondAttribute="trailing" constant="5" id="FN2-Qi-GHo"/>
+                                    <constraint firstItem="sX9-lF-oGR" firstAttribute="top" secondItem="RtQ-aG-a8s" secondAttribute="bottom" constant="10" id="Jaq-Wp-NIV"/>
+                                    <constraint firstItem="q4G-iJ-FFq" firstAttribute="centerY" secondItem="sX9-lF-oGR" secondAttribute="centerY" id="M3A-vI-Wga"/>
+                                    <constraint firstAttribute="bottom" secondItem="sX9-lF-oGR" secondAttribute="bottom" id="OT4-hD-H4G"/>
+                                    <constraint firstItem="q4G-iJ-FFq" firstAttribute="trailing" secondItem="sX9-lF-oGR" secondAttribute="trailing" constant="-10" id="P92-jr-86f"/>
+                                    <constraint firstAttribute="trailing" secondItem="sX9-lF-oGR" secondAttribute="trailing" id="Swf-w4-0uW"/>
+                                    <constraint firstItem="B4X-Mw-Bty" firstAttribute="centerY" secondItem="RtQ-aG-a8s" secondAttribute="centerY" id="dzf-F2-RiD"/>
+                                    <constraint firstItem="RtQ-aG-a8s" firstAttribute="leading" secondItem="Hhe-Ti-L38" secondAttribute="leading" id="rLw-Zh-TK3"/>
+                                    <constraint firstItem="sX9-lF-oGR" firstAttribute="leading" secondItem="Hhe-Ti-L38" secondAttribute="leading" id="zC1-Ij-hbA"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Hhe-Ti-L38" firstAttribute="top" secondItem="Aqp-P2-er1" secondAttribute="bottom" constant="30" id="LBn-dd-ESS"/>
+                            <constraint firstItem="Hhe-Ti-L38" firstAttribute="leading" secondItem="Vuo-hL-P65" secondAttribute="leading" constant="25" id="Skb-9a-cdb"/>
+                            <constraint firstItem="Sfm-VC-hiE" firstAttribute="leading" secondItem="Vuo-hL-P65" secondAttribute="leading" constant="15" id="ZKc-UX-Uef"/>
+                            <constraint firstItem="Sfm-VC-hiE" firstAttribute="height" secondItem="Vuo-hL-P65" secondAttribute="height" multiplier="0.2" id="Zws-A5-LuC"/>
+                            <constraint firstAttribute="trailing" secondItem="Hhe-Ti-L38" secondAttribute="trailing" constant="25" id="esM-JO-1la"/>
+                            <constraint firstItem="Hhe-Ti-L38" firstAttribute="height" secondItem="Vuo-hL-P65" secondAttribute="height" multiplier="0.1" id="gXR-Oc-PM8"/>
+                            <constraint firstItem="Sfm-VC-hiE" firstAttribute="top" secondItem="Hhe-Ti-L38" secondAttribute="bottom" constant="30" id="xmy-x8-Eae"/>
+                            <constraint firstAttribute="trailing" secondItem="Sfm-VC-hiE" secondAttribute="trailing" constant="15" id="yNl-mv-vaW"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="costView" destination="Sfm-VC-hiE" id="8ky-7i-MvM"/>
+                        <outlet property="depositLabel" destination="CME-cD-7eu" id="l7c-3F-KLp"/>
+                        <outlet property="promoAppliedLabel" destination="B4X-Mw-Bty" id="gkC-2S-rFV"/>
+                        <outlet property="promoLabel" destination="sX9-lF-oGR" id="rrI-zg-bQw"/>
+                        <outlet property="promoView" destination="Hhe-Ti-L38" id="30u-gM-McL"/>
+                        <outlet property="usageLabel" destination="EpG-8b-t7e" id="pa3-Iy-5LJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZBi-XY-ZOU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7036" y="-672"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Sharrit_Logo" width="461" height="611"/>
@@ -4269,6 +4419,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="vcD-lC-BM6"/>
         <segue reference="4vG-bm-Dok"/>
+        <segue reference="1t8-y4-MxC"/>
         <segue reference="j8G-7c-oXc"/>
         <segue reference="KsR-4B-NmF"/>
         <segue reference="EdK-t1-FNT"/>

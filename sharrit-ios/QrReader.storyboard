@@ -159,11 +159,20 @@
                     <connections>
                         <outlet property="cameraView" destination="sKA-5a-gWk" id="pTD-wN-4ac"/>
                         <outlet property="scanningView" destination="oPF-dL-nQx" id="tol-Y1-XI1"/>
+                        <segue destination="7J2-Kx-gkQ" kind="show" identifier="showSharreInfo" id="rk6-8f-dce"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bSa-fa-BbF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-146.40000000000001" y="17.541229385307346"/>
+        </scene>
+        <!--viewSharreInfo-->
+        <scene sceneID="d5k-GG-ahA">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Home" referencedIdentifier="viewSharreInfo" id="7J2-Kx-gkQ" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3lz-ja-CdO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="675" y="17"/>
         </scene>
     </scenes>
     <resources>

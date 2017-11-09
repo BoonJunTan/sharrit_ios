@@ -21,6 +21,7 @@ class CollaborationVC: UIViewController, UICollectionViewDataSource, UICollectio
     var sharreDescription: String!
     var sharreImageURL: String!
     var collaborationList: [JSON]!
+    var viewSharreFrom: ViewSharreFrom = .SharingBusiness
     
     @IBOutlet weak var collaborationCollectionView: UICollectionView!
 
@@ -51,7 +52,7 @@ class CollaborationVC: UIViewController, UICollectionViewDataSource, UICollectio
         
         cell.dealButton.tag = indexPath.row
         cell.dealButton.addTarget(self, action: #selector(goToDeal), for: .touchUpInside)
-        cell.skipAllButton.addTarget(self, action: #selector(goToMessage), for: .touchUpInside)
+        cell.skipAllButton.addTarget(self, action: #selector(skipBtnPressed), for: .touchUpInside)
         
         return cell
     }
@@ -105,11 +106,8 @@ class CollaborationVC: UIViewController, UICollectionViewDataSource, UICollectio
                     let businessName = JSON(data)["content"]["business"]["name"].description
                     let description = JSON(data)["content"]["business"]["description"].description
                     let businessType = JSON(data)["content"]["business"]["type"].int!
-                    
-                    // MUST TODO: Check with Ronald for logo and banner = null
                     let logo = JSON(data)["content"]["business"]["logo"]["fileName"].description
                     let banner = JSON(data)["content"]["business"]["banner"]["fileName"].description
-                    
                     let comRate = JSON(data)["content"]["business"]["comissionRate"].double!
                     let dateCreated = JSON(data)["content"]["business"]["dateCreated"].description
                     let business = Business(businessId: businessId, businessName: businessName, description: description, businessType: businessType, logoURL: logo, bannerURL: banner, commissionRate: comRate, dateCreated: dateCreated)
@@ -135,31 +133,35 @@ class CollaborationVC: UIViewController, UICollectionViewDataSource, UICollectio
         }
     }
     
-    func goToMessage(sender: UIButton?) {
-        let messageSB = UIStoryboard(name: "Messages" , bundle: nil)
-        let conversationVC = messageSB.instantiateViewController(withIdentifier: "conversation") as! ConversationVC
-        let messageWithNavController = UINavigationController(rootViewController: conversationVC)
-        
-        conversationVC.comingFrom = .Sharre
-        conversationVC.senderDisplayName = self.receiverName
-        conversationVC.receiverID = self.receiverID
-        conversationVC.receiverType = self.receiverType
-        let chat = Conversation(conversationPartner: self.receiverName, subjectTitle: self.sharreTitle)
-        chat.sharreID = self.sharreID
-        chat.sharreTitle = self.sharreTitle
-        chat.sharreImageURL = self.sharreImageURL
-        chat.sharreDescription = self.sharreDescription
-        conversationVC.chat = chat
-        
-        messageWithNavController.modalTransitionStyle = .coverVertical
-        self.modalPresentationStyle = .fullScreen
-        self.present(messageWithNavController, animated: true, completion:{
-            if let subviewsCount = self.tabBarController?.view.subviews.count {
-                if subviewsCount > 2 {
-                    self.tabBarController?.view.subviews[2].removeFromSuperview()
+    func skipBtnPressed(sender: UIButton?) {
+        if viewSharreFrom == .SharingBusiness {
+            let messageSB = UIStoryboard(name: "Messages" , bundle: nil)
+            let conversationVC = messageSB.instantiateViewController(withIdentifier: "conversation") as! ConversationVC
+            let messageWithNavController = UINavigationController(rootViewController: conversationVC)
+            
+            conversationVC.comingFrom = .Sharre
+            conversationVC.senderDisplayName = self.receiverName
+            conversationVC.receiverID = self.receiverID
+            conversationVC.receiverType = self.receiverType
+            let chat = Conversation(conversationPartner: self.receiverName, subjectTitle: self.sharreTitle)
+            chat.sharreID = self.sharreID
+            chat.sharreTitle = self.sharreTitle
+            chat.sharreImageURL = self.sharreImageURL
+            chat.sharreDescription = self.sharreDescription
+            conversationVC.chat = chat
+            
+            messageWithNavController.modalTransitionStyle = .coverVertical
+            self.modalPresentationStyle = .fullScreen
+            self.present(messageWithNavController, animated: true, completion:{
+                if let subviewsCount = self.tabBarController?.view.subviews.count {
+                    if subviewsCount > 2 {
+                        self.tabBarController?.view.subviews[2].removeFromSuperview()
+                    }
                 }
-            }
-        })
+            })
+        } else {
+            self.performSegue(withIdentifier: "showSharresTransaction", sender: nil)
+        }
     }
     
     // Prepare for segue
@@ -169,6 +171,11 @@ class CollaborationVC: UIViewController, UICollectionViewDataSource, UICollectio
                 sharesInfoVC.businessInfo = sender as! Business
                 sharesInfoVC.categoryID = (sender as! Business).categoryID
                 sharesInfoVC.categoryName = (sender as! Business).categoryName
+            }
+        } else if segue.identifier == "showSharresTransaction" {
+            if let showSharesInfoVC = segue.destination as? ShowSharesInfoVC {
+                showSharesInfoVC.userRole = .Sharrie
+                showSharesInfoVC.titleString = "Sharres Status OvervieW"
             }
         }
     }

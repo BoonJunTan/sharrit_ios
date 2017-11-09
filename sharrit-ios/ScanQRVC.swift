@@ -8,6 +8,8 @@
 
 import UIKit
 import AVFoundation
+import Alamofire
+import SwiftyJSON
 
 class ScanQRVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
@@ -124,7 +126,7 @@ class ScanQRVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         // Check if the metadataObjects array is not nil and it contains at least one object.
         if metadataObjects == nil || metadataObjects.count == 0 {
             qrCodeFrameView?.frame = CGRect.zero
-            print("No QR code is detected")
+            //print("No QR code is detected")
             return
         }
         
@@ -137,7 +139,36 @@ class ScanQRVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             qrCodeFrameView?.frame = barCodeObject.bounds;
             
             if metadataObj.stringValue != nil {
-                print(metadataObj.stringValue)
+                //print(metadataObj.stringValue)
+                captureSession?.stopRunning()
+                
+                // Public API Key
+                let publicKey: [String: Any] = ["api_key": "UAZPfHqf"]
+                
+                Alamofire.request(metadataObj.stringValue, method: .post, parameters: publicKey, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+                    response in
+                    switch response.result {
+                    case .success(_):
+                        if let data = response.result.value {
+                            let sharreData = JSON(data)["content"]
+                            
+                            var pushData: [Any] = [Any]()
+                            pushData.append(sharreData["sharreId"].int!)
+                            
+                            // Check if Colla exist
+                            if (!sharreData["collabAssets"].isEmpty) {
+                                pushData.append(sharreData["collabAssets"].array!)
+                            }
+                            
+                            self.performSegue(withIdentifier: "showSharreInfo", sender: pushData)
+                        }
+                        
+                        break
+                    case .failure(_):
+                        print("QRCode Retrieve Sharre API failed")
+                        break
+                    }
+                }
             }
         }
     }
@@ -168,14 +199,20 @@ class ScanQRVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         }
     }
     
-    /*
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "showSharreInfo" {
+            if let viewSharreVC = segue.destination as? ViewSharreVC, let pushData = sender as? [Any] {
+                viewSharreVC.viewSharreFrom = .QRCode
+                
+                viewSharreVC.sharreID = pushData[0] as! Int
+                
+                // 2 for collaboration
+                if pushData.count == 2 {
+                    viewSharreVC.collaborationList = pushData[1] as? [JSON]
+                }
+            }
+        }
     }
-    */
 
 }

@@ -20,39 +20,46 @@ class SuccessfulBookingVC: UIViewController {
     var sharreDescription: String!
     var sharreImageURL: String!
     var collaborationList: [JSON]?
+    var viewSharreFrom: ViewSharreFrom = .SharingBusiness
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
         let when = DispatchTime.now() + 3
         DispatchQueue.main.asyncAfter(deadline: when) {
-            if self.collaborationList == nil {
-                let messageSB = UIStoryboard(name: "Messages" , bundle: nil)
-                let conversationVC = messageSB.instantiateViewController(withIdentifier: "conversation") as! ConversationVC
-                let messageWithNavController = UINavigationController(rootViewController: conversationVC)
-                
-                conversationVC.comingFrom = .Sharre
-                conversationVC.senderDisplayName = self.receiverName
-                conversationVC.receiverID = self.receiverID
-                conversationVC.receiverType = self.receiverType
-                let chat = Conversation(conversationPartner: self.receiverName, subjectTitle: self.sharreTitle)
-                chat.sharreID = self.sharreID
-                chat.sharreTitle = self.sharreTitle
-                chat.sharreImageURL = self.sharreImageURL
-                chat.sharreDescription = self.sharreDescription
-                conversationVC.chat = chat
-                
-                messageWithNavController.modalTransitionStyle = .coverVertical
-                self.modalPresentationStyle = .fullScreen
-                self.present(messageWithNavController, animated: true, completion:{
-                    if let subviewsCount = self.tabBarController?.view.subviews.count {
-                        if subviewsCount > 2 {
-                            self.tabBarController?.view.subviews[2].removeFromSuperview()
-                        }
-                    }
-                })
-            } else {
+            if self.collaborationList != nil {
                 self.performSegue(withIdentifier: "showCollaboration", sender: nil)
+            } else {
+                if self.viewSharreFrom == .SharingBusiness {
+                    if self.collaborationList == nil {
+                        let messageSB = UIStoryboard(name: "Messages" , bundle: nil)
+                        let conversationVC = messageSB.instantiateViewController(withIdentifier: "conversation") as! ConversationVC
+                        let messageWithNavController = UINavigationController(rootViewController: conversationVC)
+                        
+                        conversationVC.comingFrom = .Sharre
+                        conversationVC.senderDisplayName = self.receiverName
+                        conversationVC.receiverID = self.receiverID
+                        conversationVC.receiverType = self.receiverType
+                        let chat = Conversation(conversationPartner: self.receiverName, subjectTitle: self.sharreTitle)
+                        chat.sharreID = self.sharreID
+                        chat.sharreTitle = self.sharreTitle
+                        chat.sharreImageURL = self.sharreImageURL
+                        chat.sharreDescription = self.sharreDescription
+                        conversationVC.chat = chat
+                        
+                        messageWithNavController.modalTransitionStyle = .coverVertical
+                        self.modalPresentationStyle = .fullScreen
+                        self.present(messageWithNavController, animated: true, completion:{
+                            if let subviewsCount = self.tabBarController?.view.subviews.count {
+                                if subviewsCount > 2 {
+                                    self.tabBarController?.view.subviews[2].removeFromSuperview()
+                                }
+                            }
+                        })
+                    }
+                } else {
+                    self.performSegue(withIdentifier: "showSharresTransaction", sender: nil)
+                }
             }
         }
     }
@@ -81,6 +88,12 @@ class SuccessfulBookingVC: UIViewController {
                 collaborationVC.sharreID = sharreID
                 collaborationVC.sharreDescription = sharreDescription
                 collaborationVC.sharreImageURL = sharreImageURL
+                collaborationVC.viewSharreFrom = viewSharreFrom
+            }
+        } else if segue.identifier == "showSharresTransaction" {
+            if let showSharesInfoVC = segue.destination as? ShowSharesInfoVC {
+                showSharesInfoVC.userRole = .Sharrie
+                showSharesInfoVC.titleString = "Sharres Status OvervieW"
             }
         }
     }
