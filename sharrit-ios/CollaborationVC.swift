@@ -94,10 +94,7 @@ class CollaborationVC: UIViewController, UICollectionViewDataSource, UICollectio
     }
     
     func goToDeal(sender: UIButton?) {
-        // MUST TODO: Waiting for Ronald to give businessID in collaborationList
-        // Redirect To biz/{biz_id}
-        //let url = SharritURL.devURL + "business/all/" + String(describing: collaborationList[sender!.tag]["bizId"].int!)
-        let url = SharritURL.devURL + "business/all/1"
+        let url = SharritURL.devURL + "business/all/" + String(describing: collaborationList[sender!.tag]["businessId"].int!)
         
         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in

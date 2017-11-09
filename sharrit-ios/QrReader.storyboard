@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rS4-Ti-5GY">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rS4-Ti-5GY">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
         <scene sceneID="aO3-nn-GvW">
             <objects>
-                <navigationController id="rS4-Ti-5GY" sceneMemberID="viewController">
+                <navigationController hidesBottomBarWhenPushed="YES" id="rS4-Ti-5GY" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="qr_code" id="sLT-P0-qam">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
@@ -30,24 +32,144 @@
             </objects>
             <point key="canvasLocation" x="-1215" y="18"/>
         </scene>
-        <!--Scan-->
+        <!--ScanQRVC-->
         <scene sceneID="q8S-Ty-PEd">
             <objects>
-                <viewController title="Scan" id="zMK-cs-ooK" customClass="ScanQRVC" customModule="sharrit_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="zMK-cs-ooK" customClass="ScanQRVC" customModule="sharrit_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="IVm-Yz-z3o"/>
+                        <viewControllerLayoutGuide type="bottom" id="Cyh-dR-crO"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="r01-FP-Vun">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <viewLayoutGuide key="safeArea" id="hdq-Om-yCo"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sKA-5a-gWk">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="18E-PY-unc" userLabel="Top Opague">
+                                <rect key="frame" x="0.0" y="20" width="375" height="201"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lic-jY-nvB" userLabel="Bottom Opague">
+                                <rect key="frame" x="0.0" y="446" width="375" height="221"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l4e-KT-cBl" userLabel="Left Opague">
+                                <rect key="frame" x="0.0" y="221" width="75" height="225"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yRr-Dg-2wk" userLabel="Right Opague">
+                                <rect key="frame" x="300" y="221" width="75" height="225"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oPF-dL-nQx">
+                                <rect key="frame" x="75" y="221" width="225" height="225"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="oPF-dL-nQx" secondAttribute="height" multiplier="1:1" id="HVM-IS-LPL"/>
+                                </constraints>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="cYU-Ga-P10">
+                                <rect key="frame" x="37" y="496" width="300" height="26"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I9a-ys-ZfE">
+                                        <rect key="frame" x="0.0" y="0.0" width="150" height="26"/>
+                                        <state key="normal" title=" Item ID" image="pencil_white"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3bQ-bZ-PTZ">
+                                        <rect key="frame" x="150" y="0.0" width="150" height="26"/>
+                                        <state key="normal" title="Flashlight" image="flashlight_white"/>
+                                        <connections>
+                                            <action selector="flashlightBtnPressed:" destination="zMK-cs-ooK" eventType="touchUpInside" id="5iu-Es-PnE"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please scan the QR code on the item." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LXd-yp-v4s">
+                                <rect key="frame" x="75" y="156" width="225" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="yRb-sa-ywb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="qr_code" translatesAutoresizingMaskIntoConstraints="NO" id="pAg-Bf-sLm">
+                                <rect key="frame" x="159.5" y="90" width="56" height="56"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="pAg-Bf-sLm" secondAttribute="height" multiplier="1:1" id="Hz9-Df-Gq0"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ind-5Y-gAL">
+                                <rect key="frame" x="15" y="35" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="KSV-AL-86z"/>
+                                    <constraint firstAttribute="width" secondItem="ind-5Y-gAL" secondAttribute="height" multiplier="1:1" id="rJS-mo-p67"/>
+                                </constraints>
+                                <state key="normal" image="arrow_left"/>
+                                <connections>
+                                    <action selector="backBtnPressed:" destination="zMK-cs-ooK" eventType="touchUpInside" id="wK9-yM-is3"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="cYU-Ga-P10" firstAttribute="top" secondItem="oPF-dL-nQx" secondAttribute="bottom" constant="50" id="18P-Qv-Btr"/>
+                            <constraint firstItem="l4e-KT-cBl" firstAttribute="leading" secondItem="r01-FP-Vun" secondAttribute="leading" id="1YJ-0q-4pD"/>
+                            <constraint firstItem="cYU-Ga-P10" firstAttribute="width" secondItem="r01-FP-Vun" secondAttribute="width" multiplier="0.8" id="1a9-1B-5gS"/>
+                            <constraint firstItem="oPF-dL-nQx" firstAttribute="top" secondItem="18E-PY-unc" secondAttribute="bottom" id="2oR-8o-SC5"/>
+                            <constraint firstItem="cYU-Ga-P10" firstAttribute="centerX" secondItem="r01-FP-Vun" secondAttribute="centerX" id="8Ba-st-3at"/>
+                            <constraint firstItem="lic-jY-nvB" firstAttribute="leading" secondItem="r01-FP-Vun" secondAttribute="leading" id="8NZ-Ga-VfF"/>
+                            <constraint firstItem="oPF-dL-nQx" firstAttribute="top" secondItem="LXd-yp-v4s" secondAttribute="bottom" constant="15" id="9Ej-6A-zYs"/>
+                            <constraint firstItem="lic-jY-nvB" firstAttribute="top" secondItem="yRr-Dg-2wk" secondAttribute="bottom" id="9hi-Ln-zEE"/>
+                            <constraint firstItem="yRr-Dg-2wk" firstAttribute="top" secondItem="18E-PY-unc" secondAttribute="bottom" id="BYb-Yq-SsZ"/>
+                            <constraint firstItem="Cyh-dR-crO" firstAttribute="top" secondItem="lic-jY-nvB" secondAttribute="bottom" id="Bvd-oa-9H1"/>
+                            <constraint firstItem="sKA-5a-gWk" firstAttribute="top" secondItem="IVm-Yz-z3o" secondAttribute="bottom" id="ItD-QK-Yfk"/>
+                            <constraint firstItem="oPF-dL-nQx" firstAttribute="width" secondItem="r01-FP-Vun" secondAttribute="width" multiplier="0.6" id="KLP-RJ-k1B"/>
+                            <constraint firstItem="pAg-Bf-sLm" firstAttribute="centerX" secondItem="r01-FP-Vun" secondAttribute="centerX" id="O5c-M3-Fnc"/>
+                            <constraint firstItem="oPF-dL-nQx" firstAttribute="centerY" secondItem="r01-FP-Vun" secondAttribute="centerY" id="P2c-JN-UYD"/>
+                            <constraint firstAttribute="trailing" secondItem="yRr-Dg-2wk" secondAttribute="trailing" id="Q93-nt-dqy"/>
+                            <constraint firstAttribute="trailing" secondItem="18E-PY-unc" secondAttribute="trailing" id="R5Y-nQ-xbu"/>
+                            <constraint firstItem="lic-jY-nvB" firstAttribute="top" secondItem="oPF-dL-nQx" secondAttribute="bottom" id="SfF-RV-nL6"/>
+                            <constraint firstItem="sKA-5a-gWk" firstAttribute="leading" secondItem="r01-FP-Vun" secondAttribute="leading" id="Stz-ee-UrI"/>
+                            <constraint firstItem="IVm-Yz-z3o" firstAttribute="bottom" secondItem="18E-PY-unc" secondAttribute="top" id="VMt-Mm-1uv"/>
+                            <constraint firstItem="l4e-KT-cBl" firstAttribute="top" secondItem="18E-PY-unc" secondAttribute="bottom" id="Wcf-UG-cL7"/>
+                            <constraint firstItem="18E-PY-unc" firstAttribute="leading" secondItem="r01-FP-Vun" secondAttribute="leading" id="ZoU-Sq-BO2"/>
+                            <constraint firstItem="pAg-Bf-sLm" firstAttribute="width" secondItem="r01-FP-Vun" secondAttribute="width" multiplier="0.15" id="bKY-Nx-5zT"/>
+                            <constraint firstItem="yRr-Dg-2wk" firstAttribute="leading" secondItem="oPF-dL-nQx" secondAttribute="trailing" id="cXO-T0-c56"/>
+                            <constraint firstItem="ind-5Y-gAL" firstAttribute="top" secondItem="IVm-Yz-z3o" secondAttribute="bottom" constant="15" id="dOL-rY-rj6"/>
+                            <constraint firstItem="lic-jY-nvB" firstAttribute="top" secondItem="l4e-KT-cBl" secondAttribute="bottom" id="dbx-cZ-GkX"/>
+                            <constraint firstItem="Cyh-dR-crO" firstAttribute="top" secondItem="sKA-5a-gWk" secondAttribute="bottom" id="eaf-Oi-arl"/>
+                            <constraint firstItem="LXd-yp-v4s" firstAttribute="centerX" secondItem="r01-FP-Vun" secondAttribute="centerX" id="gWg-YF-Z4Q"/>
+                            <constraint firstItem="oPF-dL-nQx" firstAttribute="leading" secondItem="l4e-KT-cBl" secondAttribute="trailing" id="hNp-2D-g2u"/>
+                            <constraint firstItem="LXd-yp-v4s" firstAttribute="width" secondItem="r01-FP-Vun" secondAttribute="width" multiplier="0.6" id="nBH-zu-Orr"/>
+                            <constraint firstAttribute="trailing" secondItem="sKA-5a-gWk" secondAttribute="trailing" id="oHH-cq-gk2"/>
+                            <constraint firstItem="LXd-yp-v4s" firstAttribute="top" secondItem="pAg-Bf-sLm" secondAttribute="bottom" constant="10" id="pVf-m2-J0h"/>
+                            <constraint firstAttribute="trailing" secondItem="lic-jY-nvB" secondAttribute="trailing" id="vtf-w0-Nfl"/>
+                            <constraint firstItem="ind-5Y-gAL" firstAttribute="leading" secondItem="r01-FP-Vun" secondAttribute="leading" constant="15" id="yeN-JS-UNM"/>
+                            <constraint firstItem="oPF-dL-nQx" firstAttribute="centerX" secondItem="r01-FP-Vun" secondAttribute="centerX" id="zRW-gd-5s7"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Scan QR" id="NJl-tG-dKR"/>
+                    <navigationItem key="navigationItem" id="NJl-tG-dKR"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="cameraView" destination="sKA-5a-gWk" id="pTD-wN-4ac"/>
+                        <outlet property="scanningView" destination="oPF-dL-nQx" id="tol-Y1-XI1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bSa-fa-BbF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-146" y="18"/>
+            <point key="canvasLocation" x="-146.40000000000001" y="17.541229385307346"/>
         </scene>
     </scenes>
     <resources>
+        <image name="arrow_left" width="50" height="50"/>
+        <image name="flashlight_white" width="26" height="26"/>
+        <image name="pencil_white" width="26" height="26"/>
         <image name="qr_code" width="26" height="26"/>
     </resources>
 </document>
