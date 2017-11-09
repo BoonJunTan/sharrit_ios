@@ -4387,6 +4387,7 @@
                         <outlet property="promoLabel" destination="sX9-lF-oGR" id="DnC-7r-PgC"/>
                         <outlet property="promoView" destination="Hhe-Ti-L38" id="J1z-Kp-Hch"/>
                         <outlet property="usageLabel" destination="EpG-8b-t7e" id="Rzf-7B-AOk"/>
+                        <segue destination="Eb0-uP-1px" kind="show" identifier="viewSuccessful" id="lvb-WL-nFu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZBi-XY-ZOU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4422,7 +4423,7 @@
         <segue reference="4vG-bm-Dok"/>
         <segue reference="1t8-y4-MxC"/>
         <segue reference="j8G-7c-oXc"/>
-        <segue reference="KsR-4B-NmF"/>
+        <segue reference="lvb-WL-nFu"/>
         <segue reference="EdK-t1-FNT"/>
     </inferredMetricsTieBreakers>
 </document>
