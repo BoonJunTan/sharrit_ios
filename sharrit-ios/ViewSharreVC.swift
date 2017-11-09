@@ -257,7 +257,11 @@ class ViewSharreVC: UIViewController {
     
     @IBAction func sharreITBtnPressed(_ sender: SharritButton) {
         if sharreTypeData == .TimeUsage {
-            performSegue(withIdentifier: "viewTimeUsage", sender: nil)
+            if viewSharreFrom == .SharingBusiness {
+                performSegue(withIdentifier: "viewTimeUsage", sender: nil)
+            } else {
+                performSegue(withIdentifier: "viewQRTimeUsage", sender: nil)
+            }
         } else {
             performSegue(withIdentifier: "viewAppointment", sender: nil)
         }
@@ -366,6 +370,23 @@ class ViewSharreVC: UIViewController {
                 sharreTimeUsageVC.sharreUnit = quantity.replacingOccurrences(of: " units", with: "")
                 if collaborationList != nil {
                     sharreTimeUsageVC.collaborationList = collaborationList
+                }
+            }
+        } else if segue.identifier == "viewQRTimeUsage" {
+            if let sharreQRTimeUsageVC = segue.destination as? SharreQRTimeUsageVC {
+                sharreQRTimeUsageVC.sharreID = sharreID
+                sharreQRTimeUsageVC.sharreTitle = sharreTitle.text!
+                sharreQRTimeUsageVC.sharreDescription = sharreDescription.text!
+                sharreQRTimeUsageVC.sharreImageURL = photoArrayURLString
+                sharreQRTimeUsageVC.sharreDeposit = sharreDeposit.text!
+                sharreQRTimeUsageVC.sharreUsageFee = sharreCharging.text!
+                sharreQRTimeUsageVC.ownerID = ownerID
+                sharreQRTimeUsageVC.ownerName = sharreOwner.text!
+                sharreQRTimeUsageVC.ownerType = ownerType
+                let quantity = sharreQuantity.text!
+                sharreQRTimeUsageVC.sharreUnit = quantity.replacingOccurrences(of: " units", with: "")
+                if collaborationList != nil {
+                    sharreQRTimeUsageVC.collaborationList = collaborationList
                 }
             }
         } else if segue.identifier == "viewAllReputation" {

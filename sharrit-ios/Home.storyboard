@@ -1376,7 +1376,7 @@
                         <segue destination="V0K-Wl-KDX" kind="show" identifier="editSharre" id="DYQ-sK-bk9"/>
                         <segue destination="DcP-TU-OPY" kind="show" identifier="viewAllReputation" id="Hop-mc-H6t"/>
                         <segue destination="i1u-VY-0zw" kind="show" identifier="viewUserReputation" id="BaE-O9-8oa"/>
-                        <segue destination="8CW-gK-sQP" kind="show" identifier="viewQRTimeUsage" id="a9c-QF-e4f"/>
+                        <segue destination="8CW-gK-sQP" kind="show" identifier="viewQRTimeUsage" id="fY6-oE-S4o"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iGm-2t-zs6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4254,10 +4254,10 @@
             </objects>
             <point key="canvasLocation" x="4679" y="1525"/>
         </scene>
-        <!--View Controller-->
+        <!--SharreQR Time UsageVC-->
         <scene sceneID="zHH-xF-3ye">
             <objects>
-                <viewController id="8CW-gK-sQP" sceneMemberID="viewController">
+                <viewController id="8CW-gK-sQP" customClass="SharreQRTimeUsageVC" customModule="sharrit_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Aqp-P2-er1"/>
                         <viewControllerLayoutGuide type="bottom" id="hp5-Mq-i8I"/>
@@ -4294,7 +4294,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MAk-Hb-z4i" customClass="SharritButton" customModule="sharrit_ios" customModuleProvider="target">
                                         <rect key="frame" x="43.5" y="90" width="258.5" height="33"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <state key="normal" title="Proceed to Book"/>
+                                        <state key="normal" title="Proceed to Start"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isRounded" value="YES"/>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -4302,7 +4302,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="bookBtnPressed:" destination="8CW-gK-sQP" eventType="touchUpInside" id="gAc-ZH-W7h"/>
+                                            <action selector="startBtnPressed:" destination="8CW-gK-sQP" eventType="touchUpInside" id="nlK-6M-Aiy"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -4348,7 +4348,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="enterPromoBtnPressed:" destination="8CW-gK-sQP" eventType="touchUpInside" id="RRe-p2-Y7q"/>
+                                            <action selector="enterPromoBtnPressed:" destination="8CW-gK-sQP" eventType="touchUpInside" id="gL1-my-gE9"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -4380,12 +4380,12 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="costView" destination="Sfm-VC-hiE" id="8ky-7i-MvM"/>
-                        <outlet property="depositLabel" destination="CME-cD-7eu" id="l7c-3F-KLp"/>
-                        <outlet property="promoAppliedLabel" destination="B4X-Mw-Bty" id="gkC-2S-rFV"/>
-                        <outlet property="promoLabel" destination="sX9-lF-oGR" id="rrI-zg-bQw"/>
-                        <outlet property="promoView" destination="Hhe-Ti-L38" id="30u-gM-McL"/>
-                        <outlet property="usageLabel" destination="EpG-8b-t7e" id="pa3-Iy-5LJ"/>
+                        <outlet property="costView" destination="Sfm-VC-hiE" id="jCj-ny-o7q"/>
+                        <outlet property="depositLabel" destination="CME-cD-7eu" id="XqF-5u-KPP"/>
+                        <outlet property="promoAppliedLabel" destination="B4X-Mw-Bty" id="zXq-9r-LLG"/>
+                        <outlet property="promoLabel" destination="sX9-lF-oGR" id="DnC-7r-PgC"/>
+                        <outlet property="promoView" destination="Hhe-Ti-L38" id="J1z-Kp-Hch"/>
+                        <outlet property="usageLabel" destination="EpG-8b-t7e" id="Rzf-7B-AOk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZBi-XY-ZOU" userLabel="First Responder" sceneMemberID="firstResponder"/>
