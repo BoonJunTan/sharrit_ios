@@ -29,7 +29,9 @@ class ScanQRVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         return true
     }
     
-    override func viewDidLayoutSubviews() {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         // Get an instance of the AVCaptureDevice class to initialize a device object and provide the video as the media type parameter.
         let captureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
         
@@ -83,18 +85,14 @@ class ScanQRVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         } catch _ {
             print("error: \(error?.localizedDescription)")
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
         // For full screen
         self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.isNavigationBarHidden = true
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         self.tabBarController?.tabBar.isHidden = false
         self.navigationController?.isNavigationBarHidden = false
     }

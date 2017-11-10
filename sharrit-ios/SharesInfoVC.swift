@@ -11,12 +11,19 @@ import Alamofire
 import SwiftyJSON
 import Cosmos
 
+enum ViewBusinessInfoFrom {
+    case NonCollaboration
+    case Collaboration
+}
+
+// This class suppose to be BusinessInfoVC instead
 class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     // Pass over value
     var businessInfo: Business!
     var categoryID: Int!
     var categoryName: String!
+    var viewBusinessInfoFrom: ViewBusinessInfoFrom = .NonCollaboration
     
     @IBOutlet weak var businessBanner: UIImageView!
     @IBOutlet weak var businessLogo: UIImageView!

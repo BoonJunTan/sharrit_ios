@@ -45,7 +45,7 @@ class CollaborationVC: UIViewController, UICollectionViewDataSource, UICollectio
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collaborationCell", for: indexPath as IndexPath) as! CollaborationCollectionViewCell
         
-        cell.dealNumber.text = "Deal " + String(describing: (indexPath.row + 1)) + " of " + String(describing: collaborationList.count)
+        cell.dealNumber.text = "You may also like..."
         cell.dealTitle.text = collaborationList[indexPath.row]["title"].description
         cell.dealSubTitle.text = collaborationList[indexPath.row]["subtitle"].description
         ImageDownloader().imageFromServerURL(urlString: SharritURL.devPhotoURL + collaborationList[indexPath.row]["fileName"].description, imageView: cell.dealImage)
@@ -171,6 +171,7 @@ class CollaborationVC: UIViewController, UICollectionViewDataSource, UICollectio
                 sharesInfoVC.businessInfo = sender as! Business
                 sharesInfoVC.categoryID = (sender as! Business).categoryID
                 sharesInfoVC.categoryName = (sender as! Business).categoryName
+                sharesInfoVC.viewBusinessInfoFrom = .Collaboration
             }
         } else if segue.identifier == "showSharresTransaction" {
             if let showSharesInfoVC = segue.destination as? ShowSharesInfoVC {
