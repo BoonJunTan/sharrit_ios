@@ -11,7 +11,7 @@ import ImageSlideshow
 import Alamofire
 import SwiftyJSON
 
-class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
     
     var searchBar:UISearchBar!
     @IBOutlet weak var carouselView: ImageSlideshow!
@@ -33,6 +33,7 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     
         searchBar = UISearchBar()
         searchBar.placeholder = setPlaceHolder(placeholder: "Search Sharrit");
+        searchBar.delegate = self
         self.navigationItem.titleView = searchBar
         
         let navBarBubble = UIBarButtonItem(image: #imageLiteral(resourceName: "chat"),
@@ -53,6 +54,11 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // Setup Search Bar
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        performSegue(withIdentifier: "showSearchPage", sender: searchBar.text!)
     }
     
     // Get Banner
@@ -307,6 +313,10 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
                     sharesCollectionVC.allCategoriesImageStr = categoryImage
                     sharesCollectionVC.currentCategoryID = category["categoryID"] as! Int
                 }
+            }
+        } else if segue.identifier == "showSearchPage" {
+            if let searchSharreVC = segue.destination as? SearchSharreVC {
+                searchSharreVC.searchText = sender as? String
             }
         }
     }

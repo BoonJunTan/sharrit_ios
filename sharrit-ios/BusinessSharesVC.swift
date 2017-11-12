@@ -240,24 +240,6 @@ class BusinessSharesVC: UIViewController, UICollectionViewDataSource, UICollecti
         })
     }
     
-    // Setup Search Bar
-    func setPlaceHolder(placeholder: String) -> String {
-        var text = placeholder
-        if text.characters.last! != " " {
-            let maxSize = CGSize(width: UIScreen.main.bounds.size.width - 130, height: 40)
-            let widthText = text.boundingRect( with: maxSize, options: .usesLineFragmentOrigin, attributes:nil, context:nil).size.width
-            let widthSpace = " ".boundingRect( with: maxSize, options: .usesLineFragmentOrigin, attributes:nil, context:nil).size.width
-            let spaces = floor((maxSize.width - widthText) / widthSpace) - 18
-            
-            let newText = text + ((Array(repeating: " ", count: Int(spaces)).joined(separator: "")))
-            
-            if newText != text {
-                return newText
-            }
-        }
-        return placeholder;
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "viewSharre" {
             if let viewSharreVC = segue.destination as? ViewSharreVC {
