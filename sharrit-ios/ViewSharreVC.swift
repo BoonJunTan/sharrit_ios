@@ -64,6 +64,26 @@ class ViewSharreVC: UIViewController {
         getSharesInfo()
     }
     
+    func getSBInfo(businessID: Int) {
+        let url = SharritURL.devURL + "business/all/" + String(describing: businessID)
+        
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+            response in
+            switch response.result {
+            case .success(_):
+                if let data = response.result.value {
+                    // Check if Colla exist
+                    if (!JSON(data)["content"]["collabAssets"].isEmpty) {
+                        self.collaborationList = JSON(data)["content"]["collabAssets"].array!
+                    }
+                }
+            case .failure(_):
+                print("Get SB Info API failed")
+                break
+            }
+        }
+    }
+    
     func getSharesInfo() {
         
         // Get User Rating first
@@ -78,7 +98,9 @@ class ViewSharreVC: UIViewController {
                     if JSON(data)["status"] == -6 {
                         userRating = 3 // No Deposit = Middle Tier
                     } else {
-                        userRating = JSON(data)["content"].double!
+                        if let rating = JSON(data)["content"].description as? Double {
+                            userRating = rating
+                        }
                     }
                     
                     let url = SharritURL.devURL + "sharre/" + String(describing: self.sharreID!)
@@ -89,6 +111,9 @@ class ViewSharreVC: UIViewController {
                         case .success(_):
                             if let data = response.result.value {
                                 var json = JSON(data)
+                                // Get Collaboration List
+                                self.getSBInfo(businessID: json["content"]["businessId"].int!)
+                                
                                 self.sharreTitle.text = json["content"]["name"].string!
                                 self.sharreDate.text = FormatDate().compareDaysCreated(dateCreated: json["content"]["dateCreated"].string!) + " ago by"
                                 

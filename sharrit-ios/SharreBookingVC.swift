@@ -356,16 +356,16 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
         
         let url = SharritURL.devURL + "sharre/avail/schedule/" + String(describing: sharreID!)
         
-        var filterData: [String: Any] = [:]
+        var scheduleData: [String: Any] = [:]
         if appointmentType == .HrAppointment {
             let timestamp = FormatDate().formatDateTimeToLocal(date: dateSelected).timeIntervalSince1970
-            filterData["timeStart"] = Int64(timestamp)
+            scheduleData["timeStart"] = Int64(timestamp)
         } else {
             let timestamp = currentSelectedMonth.timeIntervalSince1970
-            filterData["timeStart"] = Int64(timestamp)
+            scheduleData["timeStart"] = Int64(timestamp)
         }
         
-        Alamofire.request(url, method: .post, parameters: filterData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+        Alamofire.request(url, method: .post, parameters: scheduleData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in
             switch response.result {
             case .success(_):
