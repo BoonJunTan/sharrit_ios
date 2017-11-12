@@ -97,6 +97,8 @@ class CollaborationVC: UIViewController, UICollectionViewDataSource, UICollectio
     func goToDeal(sender: UIButton?) {
         let url = SharritURL.devURL + "business/all/" + String(describing: collaborationList[sender!.tag]["businessId"].int!)
         
+        let collaborationBanner = collaborationList[sender!.tag]["fileName"].description
+        
         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in
             switch response.result {
@@ -123,6 +125,12 @@ class CollaborationVC: UIViewController, UICollectionViewDataSource, UICollectio
                     
                     business.categoryID = JSON(data)["content"]["business"]["category"]["categoryId"].int!
                     business.categoryName = JSON(data)["content"]["business"]["category"]["categoryName"].description
+                    
+                    if (!JSON(data)["content"]["collabAssets"].isEmpty) {
+                        business.collaborationList = JSON(data)["content"]["collabAssets"].array!
+                    }
+                    
+                    business.collaborationFromBanner = collaborationBanner
                     
                     self.performSegue(withIdentifier: "viewShareInfo", sender: business)
                 }
@@ -172,6 +180,7 @@ class CollaborationVC: UIViewController, UICollectionViewDataSource, UICollectio
                 sharesInfoVC.categoryID = (sender as! Business).categoryID
                 sharesInfoVC.categoryName = (sender as! Business).categoryName
                 sharesInfoVC.viewBusinessInfoFrom = .Collaboration
+                sharesInfoVC.bannerFileName = (sender as! Business).collaborationFromBanner!
             }
         } else if segue.identifier == "showSharresTransaction" {
             if let showSharesInfoVC = segue.destination as? ShowSharesInfoVC {

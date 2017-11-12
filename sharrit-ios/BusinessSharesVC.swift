@@ -21,6 +21,7 @@ class BusinessSharesVC: UIViewController, UICollectionViewDataSource, UICollecti
     // Pass Over Data
     var businessID: Int?
     var collaborationList: [JSON]?
+    var collabID: Int?
     
     var sharesCollection: [Shares]! = []
     var arriveFrom = ArriveFrom.SharingBusiness
@@ -140,7 +141,9 @@ class BusinessSharesVC: UIViewController, UICollectionViewDataSource, UICollecti
                     if JSON(data)["status"] == -6 {
                         userRating = 3 // No Deposit = Middle Tier
                     } else {
-                        userRating = JSON(data)["content"].double!
+                        if let rating = JSON(data)["content"].description as? Double {
+                            userRating = rating
+                        }
                     }
                     
                     // Based on rating get business sharre and deposit given
@@ -262,6 +265,10 @@ class BusinessSharesVC: UIViewController, UICollectionViewDataSource, UICollecti
                 
                 if collaborationList != nil {
                     viewSharreVC.collaborationList = collaborationList
+                }
+                
+                if collabID != nil {
+                    viewSharreVC.collabID = collabID
                 }
             }
         }

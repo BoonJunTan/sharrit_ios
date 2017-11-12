@@ -23,7 +23,11 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     var businessInfo: Business!
     var categoryID: Int!
     var categoryName: String!
+    
+    // Pass over value for Collaboration
     var viewBusinessInfoFrom: ViewBusinessInfoFrom = .NonCollaboration
+    var bannerFileName: String?
+    var collabID: Int?
     
     @IBOutlet weak var businessBanner: UIImageView!
     @IBOutlet weak var businessLogo: UIImageView!
@@ -79,6 +83,10 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             businessRating.text = String(format: "%.2f", arguments: [businessInfo.rating])
         } else {
             businessRating.text = "Rating Unavailable"
+        }
+        
+        if viewBusinessInfoFrom == .Collaboration {
+            callBusinessClick()
         }
     }
     
@@ -247,6 +255,26 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         }
     }
     
+    // Update Click for Collaboration
+    func callBusinessClick() {
+        let url = SharritURL.devURL + "collaboration/click/banner/mobile/" + bannerFileName! + "/" + String(describing: self.appDelegate.user!.userID)
+        
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+            response in
+            switch response.result {
+            case .success(_):
+                if let data = response.result.value {
+                    if JSON(data)["content"] != nil {
+                        self.collabID = JSON(data)["content"].int!
+                    }
+                }
+            case .failure(_):
+                print("Get SB Info API failed")
+                break
+            }
+        }
+    }
+    
     // Quit Business
     func quitBusiness() {
         let alert = UIAlertController(title: "Quiting Business...", message: "Are you sure about this?", preferredStyle: .alert)
@@ -305,6 +333,10 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 
                 if businessInfo.collaborationList != nil {
                     businessSharesVC.collaborationList = businessInfo.collaborationList!
+                }
+                
+                if collabID != nil {
+                    businessSharesVC.collabID = collabID
                 }
             }
         }

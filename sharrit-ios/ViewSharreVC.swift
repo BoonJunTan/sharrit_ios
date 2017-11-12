@@ -21,6 +21,7 @@ class ViewSharreVC: UIViewController {
     // Pass Over Data
     var sharreID: Int!
     var collaborationList: [JSON]?
+    var collabID: Int?
     var viewSharreFrom: ViewSharreFrom = .SharingBusiness
     
     @IBOutlet weak var sharreImages: ImageSlideshow!
@@ -354,6 +355,9 @@ class ViewSharreVC: UIViewController {
                 if collaborationList != nil {
                     sharreBookingVC.collaborationList = collaborationList
                 }
+                if collabID != nil {
+                    sharreBookingVC.collabID = collabID
+                }
             }
         } else if segue.identifier == "viewTimeUsage" {
             if let sharreTimeUsageVC = segue.destination as? SharreTimeUsageVC {
@@ -370,6 +374,9 @@ class ViewSharreVC: UIViewController {
                 sharreTimeUsageVC.sharreUnit = quantity.replacingOccurrences(of: " units", with: "")
                 if collaborationList != nil {
                     sharreTimeUsageVC.collaborationList = collaborationList
+                }
+                if collabID != nil {
+                    sharreTimeUsageVC.collabID = collabID
                 }
             }
         } else if segue.identifier == "viewQRTimeUsage" {

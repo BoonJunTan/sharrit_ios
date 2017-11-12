@@ -26,6 +26,7 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
     var ownerID: Int!
     var ownerType: Int!
     var collaborationList: [JSON]?
+    var collabID: Int?
     
     @IBOutlet weak var unitRequire: UITextField!
     
@@ -525,6 +526,10 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
         } else {
             let usageCost = usage.text!.replacingOccurrences(of: "Usage: $", with: "")
             transactionData["amount"] = usageCost
+        }
+        
+        if collabID != nil {
+            transactionData["collabId"] = collabID
         }
         
         Alamofire.request(url, method: .post, parameters: transactionData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
