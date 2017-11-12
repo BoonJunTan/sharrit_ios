@@ -15,6 +15,8 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     
     var searchBar:UISearchBar!
     @IBOutlet weak var carouselView: ImageSlideshow!
+    var photoArraySource = [ImageSource]()
+    var photoArrayURLString: String!
     
     @IBOutlet weak var categoryCollectionView: UICollectionView!
     var categoryImage: [String] = []
@@ -38,21 +40,70 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
                                            target: self, action: #selector(goToMessages))
         
         self.navigationItem.rightBarButtonItem = navBarBubble
-        
-        carouselView.setImageInputs([ImageSource(image: #imageLiteral(resourceName: "carousel1")), ImageSource(image: #imageLiteral(resourceName: "carousel2")), ImageSource(image: #imageLiteral(resourceName: "carousel3"))])
-        carouselView.contentScaleMode = .scaleToFill
-        carouselView.slideshowInterval = 5
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         checkIfUserLoggedIn()
+        
+        getBannerForCarousel()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // Get Banner
+    func getBannerForCarousel() {
+        let url = SharritURL.devURL + "msbanner/"
+        
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+            response in
+            switch response.result {
+            case .success(_):
+                if let data = response.result.value {
+                    if let data = response.result.value {
+                        var json = JSON(data)
+                        
+                        if !json["content"]["photos"].isEmpty {
+                            let photoURLStringArray = json["content"]["photos"].array
+                            self.photoArrayURLString = photoURLStringArray![photoURLStringArray!.count-1]["fileName"].description
+                            self.getAllPhoto(jsonData: json["content"]["photos"], completion: { photoArray in
+                                self.carouselView.setImageInputs(Array(photoArray.prefix(4)))
+                                self.carouselView.contentScaleMode = .scaleToFill
+                                self.carouselView.circular = false
+                                self.carouselView.slideshowInterval = 5
+                            })
+                        }
+                    }
+                }
+                break
+            case .failure(_):
+                print("Retrieve categories API failed")
+                break
+            }
+        }
+    }
+    
+    // Get All Banner Photo From JSON
+    func getAllPhoto(jsonData: JSON, completion: @escaping ([ImageSource]) -> ()) {
+        photoArraySource = [ImageSource]()
+        
+        let myGroup = DispatchGroup()
+        
+        for (_, photoPath) in jsonData.reversed() {
+            myGroup.enter()
+            ImageDownloader().imageFromServerURL(urlString: SharritURL.devPhotoURL +  photoPath["fileName"].description, completion: { (image) in
+                self.photoArraySource.append(ImageSource(image: ImageResize().resizeImageWith(image: image, newWidth: 200)))
+                myGroup.leave()
+            })
+        }
+        
+        myGroup.notify(queue: .main) {
+            completion(self.photoArraySource)
+        }
     }
     
     // Get All Category Details

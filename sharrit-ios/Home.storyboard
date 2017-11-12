@@ -1827,10 +1827,10 @@
             </objects>
             <point key="canvasLocation" x="7036" y="324"/>
         </scene>
-        <!--More Deals-->
+        <!--CollaborationVC-->
         <scene sceneID="EHs-h2-wFl">
             <objects>
-                <viewController title="More Deals" id="7vP-cm-VlQ" customClass="CollaborationVC" customModule="sharrit_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="7vP-cm-VlQ" customClass="CollaborationVC" customModule="sharrit_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qup-7I-Pgr"/>
                         <viewControllerLayoutGuide type="bottom" id="Rpp-3J-dik"/>
@@ -2000,7 +2000,7 @@
                 <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="viewUserProfile" id="i1u-VY-0zw" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JWA-cd-11i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5805" y="-1671"/>
+            <point key="canvasLocation" x="5747" y="-1624"/>
         </scene>
         <!--Sharre Time UsageVC-->
         <scene sceneID="iPn-YG-69M">
@@ -4421,7 +4421,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="vcD-lC-BM6"/>
         <segue reference="4vG-bm-Dok"/>
-        <segue reference="1t8-y4-MxC"/>
+        <segue reference="JMz-my-Mh0"/>
         <segue reference="j8G-7c-oXc"/>
         <segue reference="lvb-WL-nFu"/>
         <segue reference="EdK-t1-FNT"/>

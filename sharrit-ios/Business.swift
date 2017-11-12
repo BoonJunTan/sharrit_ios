@@ -23,6 +23,7 @@ class Business {
     var rating: Double!
     var ratingList: [JSON]?
     var collaborationList: [JSON]?
+    var collaborationFromBanner: String?
     var categoryID: Int?
     var categoryName: String?
     

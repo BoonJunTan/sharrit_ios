@@ -26,6 +26,7 @@ class SharreTimeUsageVC: UIViewController {
     var ownerID: Int!
     var ownerType: Int!
     var collaborationList: [JSON]?
+    var collabID: Int?
     
     @IBOutlet weak var unitsAvailable: UILabel!
     @IBOutlet weak var unitsRequire: UITextField!
@@ -124,7 +125,7 @@ class SharreTimeUsageVC: UIViewController {
                 if let data = response.result.value {
                     if JSON(data)["status"].int! == -1 {
                         self.promoAppliedLabel.isHidden = true
-                        let alert = UIAlertController(title: "Error Occured!", message: "Promo Code don't exist", preferredStyle: .alert)
+                        let alert = UIAlertController(title: "Error Occured!", message: "Promo Code is invalid", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "Back", style: .cancel, handler: nil))
                         self.present(alert, animated: true, completion: nil)
                     } else {
@@ -156,6 +157,10 @@ class SharreTimeUsageVC: UIViewController {
         
         if !(promoLabel.text?.isEmpty)! {
             transactionData["promo"] = promoLabel.text!
+        }
+        
+        if collabID != nil {
+            transactionData["collabId"] = collabID
         }
         
         Alamofire.request(url, method: .post, parameters: transactionData, encoding: JSONEncoding.default, headers: [:]).responseJSON {

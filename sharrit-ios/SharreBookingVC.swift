@@ -26,6 +26,7 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
     var ownerID: Int!
     var ownerType: Int!
     var collaborationList: [JSON]?
+    var collabID: Int?
     
     @IBOutlet weak var unitRequire: UITextField!
     
@@ -444,7 +445,7 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
                     if let data = response.result.value {
                         if JSON(data)["status"].int! == -1 {
                             self.promoAppliedLabel.isHidden = true
-                            let alert = UIAlertController(title: "Error Occured!", message: "Promo Code don't exist", preferredStyle: .alert)
+                            let alert = UIAlertController(title: "Error Occured!", message: "Promo Code is invalid", preferredStyle: .alert)
                             alert.addAction(UIAlertAction(title: "Back", style: .cancel, handler: nil))
                             self.present(alert, animated: true, completion: nil)
                         } else {
@@ -525,6 +526,10 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
         } else {
             let usageCost = usage.text!.replacingOccurrences(of: "Usage: $", with: "")
             transactionData["amount"] = usageCost
+        }
+        
+        if collabID != nil {
+            transactionData["collabId"] = collabID
         }
         
         Alamofire.request(url, method: .post, parameters: transactionData, encoding: JSONEncoding.default, headers: [:]).responseJSON {
