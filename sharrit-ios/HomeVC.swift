@@ -378,7 +378,6 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
                 sharesInfoVC.businessInfo = sender as! Business
                 sharesInfoVC.categoryID = (sender as! Business).categoryID
                 sharesInfoVC.categoryName = (sender as! Business).categoryName
-                sharesInfoVC.viewBusinessInfoFrom = .Collaboration
             }
         }
     }
