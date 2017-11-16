@@ -125,6 +125,7 @@
                         <outlet property="categoryCollectionView" destination="DA6-aK-SxZ" id="F7O-oE-lOp"/>
                         <segue destination="whb-Nr-vIo" kind="show" identifier="viewSharesCollection" id="1x2-3u-PWD"/>
                         <segue destination="XjS-5x-6yq" kind="show" identifier="showSearchPage" id="qA8-sH-7Oc"/>
+                        <segue destination="7NM-ia-QVX" kind="show" identifier="showBusiness" id="PMu-mO-H8v"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uab-04-23U" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -752,7 +753,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OZf-rQ-LUi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="623" y="0.0"/>
+            <point key="canvasLocation" x="652" y="555"/>
         </scene>
         <!--Contact BusinessVC-->
         <scene sceneID="Phb-ye-9e1">
@@ -1985,7 +1986,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="pMH-kN-7xR"/>
                                                     </constraints>
-                                                    <state key="normal" title="View Deal"/>
+                                                    <state key="normal" title="View Business"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <integer key="value" value="5"/>
@@ -3673,7 +3674,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FEz-vg-JXs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1581.5999999999999" y="-0.44977511244377816"/>
+            <point key="canvasLocation" x="1604" y="18"/>
         </scene>
         <!--Sharror FormVC-->
         <scene sceneID="Vto-jY-h53">
@@ -4531,7 +4532,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="vcD-lC-BM6"/>
-        <segue reference="4vG-bm-Dok"/>
+        <segue reference="PMu-mO-H8v"/>
         <segue reference="JMz-my-Mh0"/>
         <segue reference="j8G-7c-oXc"/>
         <segue reference="lvb-WL-nFu"/>

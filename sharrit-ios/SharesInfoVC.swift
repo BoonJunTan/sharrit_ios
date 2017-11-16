@@ -212,7 +212,7 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     func getSBInfo() {
-        let url = SharritURL.devURL + "business/all/" + String(describing: businessInfo.businessId!)
+        let url = SharritURL.devURL + "business/all/ios/" + String(describing: businessInfo.businessId!)
         
         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in

@@ -16,7 +16,7 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     var searchBar:UISearchBar!
     @IBOutlet weak var carouselView: ImageSlideshow!
     var photoArraySource = [ImageSource]()
-    var photoArrayURLString: String!
+    var photoList = [String]()
     
     @IBOutlet weak var categoryCollectionView: UICollectionView!
     var categoryImage: [String] = []
@@ -26,6 +26,8 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     
     // For notification
     var notificationTimerRunning = false
+    
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,27 +65,29 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     
     // Get Banner
     func getBannerForCarousel() {
-        let url = SharritURL.devURL + "msbanner/"
+        let url = SharritURL.devURL + "msbanner/active"
         
         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in
             switch response.result {
             case .success(_):
                 if let data = response.result.value {
-                    if let data = response.result.value {
-                        var json = JSON(data)
-                        
-                        if !json["content"]["photos"].isEmpty {
-                            let photoURLStringArray = json["content"]["photos"].array
-                            self.photoArrayURLString = photoURLStringArray![photoURLStringArray!.count-1]["fileName"].description
-                            self.getAllPhoto(jsonData: json["content"]["photos"], completion: { photoArray in
-                                self.carouselView.setImageInputs(Array(photoArray.prefix(photoArray.count)))
-                                self.carouselView.contentScaleMode = .scaleToFill
-                                self.carouselView.circular = false
-                                self.carouselView.slideshowInterval = 5
-                            })
-                        }
+                    var json = JSON(data)
+                    self.photoList = []
+                    
+                    let tap = UITapGestureRecognizer(target: self, action: #selector(self.bannerClick))
+                    self.carouselView.addGestureRecognizer(tap)
+                    
+                    for (_, photoDetail) in json["content"] {
+                        self.photoList.append(photoDetail["fileName"].description)
                     }
+                    
+                    self.getAllPhoto(photoFiles: self.photoList, completion: { photoArray in
+                        self.carouselView.setImageInputs(Array(photoArray.prefix(photoArray.count)))
+                        self.carouselView.contentScaleMode = .scaleToFill
+                        self.carouselView.circular = false
+                        self.carouselView.slideshowInterval = 5
+                    })
                 }
                 break
             case .failure(_):
@@ -94,14 +98,14 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     }
     
     // Get All Banner Photo From JSON
-    func getAllPhoto(jsonData: JSON, completion: @escaping ([ImageSource]) -> ()) {
+    func getAllPhoto(photoFiles: [String], completion: @escaping ([ImageSource]) -> ()) {
         photoArraySource = [ImageSource]()
         
         let myGroup = DispatchGroup()
         
-        for (_, photoPath) in jsonData.reversed() {
+        for photo in photoFiles {
             myGroup.enter()
-            ImageDownloader().imageFromServerURL(urlString: SharritURL.devPhotoURL +  photoPath["fileName"].description, completion: { (image) in
+            ImageDownloader().imageFromServerURL(urlString: SharritURL.devPhotoURL +  photo, completion: { (image) in
                 self.photoArraySource.append(ImageSource(image: ImageResize().resizeImageWith(image: image, newWidth: self.carouselView.layer.frame.width)))
                 myGroup.leave()
             })
@@ -112,18 +116,71 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         }
     }
     
+    func bannerClick(sender: UITapGestureRecognizer? = nil) {
+        let url = SharritURL.devURL + "msbanner/tracking/mobile/" + photoList[carouselView.currentPage] + "/" + String(describing: appDelegate.user!.userID)
+        
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+            response in
+            switch response.result {
+            case .success(_):
+                if let data = response.result.value {
+                    if JSON(data)["content"]["bizId"].int != nil {
+                        let getBusinessurl = SharritURL.devURL + "business/all/ios/" + String(describing: JSON(data)["content"]["bizId"].int!)
+                        
+                        Alamofire.request(getBusinessurl, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+                            response in
+                            switch response.result {
+                            case .success(_):
+                                if let data = response.result.value {
+                                    let businessId = JSON(data)["content"]["business"]["businessId"].int!
+                                    let businessName = JSON(data)["content"]["business"]["name"].description
+                                    let description = JSON(data)["content"]["business"]["description"].description
+                                    let businessType = JSON(data)["content"]["business"]["type"].int!
+                                    let logo = JSON(data)["content"]["business"]["logo"]["fileName"].description
+                                    let banner = JSON(data)["content"]["business"]["banner"]["fileName"].description
+                                    let comRate = JSON(data)["content"]["business"]["comissionRate"].double!
+                                    let dateCreated = JSON(data)["content"]["business"]["dateCreated"].description
+                                    let business = Business(businessId: businessId, businessName: businessName, description: description, businessType: businessType, logoURL: logo, bannerURL: banner, commissionRate: comRate, dateCreated: dateCreated)
+                                    
+                                    business.requestFormID = JSON(data)["content"]["business"]["requestFormId"].int!
+                                    business.rating = JSON(data)["content"]["currentRating"].double!
+                                    
+                                    for (_, subJson) in JSON(data)["content"]["sharres"] {
+                                        for (_, rating) in subJson["allRating"] {
+                                            business.ratingList?.append(rating)
+                                        }
+                                    }
+                                    
+                                    business.categoryID = JSON(data)["content"]["business"]["category"]["categoryId"].int!
+                                    business.categoryName = JSON(data)["content"]["business"]["category"]["categoryName"].description
+                                    
+                                    if (!JSON(data)["content"]["collabAssets"].isEmpty) {
+                                        business.collaborationList = JSON(data)["content"]["collabAssets"].array!
+                                    }
+                                    
+                                    self.performSegue(withIdentifier: "showBusiness", sender: business)
+                                }
+                                break
+                            case .failure(_):
+                                print("Get SB Info API failed")
+                                break
+                            }
+                        }
+                    }
+                }
+                break
+            case .failure(_):
+                print("Retrieve Business ID for MSBanner Click API failed")
+                break
+            }
+        }
+    }
+    
     // Get All Category Details
     func getCategoryDetails() {
         let url = SharritURL.devURL + "category/"
         
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer " + appDelegate.user!.accessToken,
-            "Accept": "application/json" // Need this?
-        ]
-        
-        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON {
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in
             switch response.result {
             case .success(_):
@@ -209,7 +266,6 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
                 userAccount.address = address
             }
             
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
             appDelegate.user = userAccount
             
             grabLatestNotificationCount()
@@ -242,7 +298,6 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     
     // Notification
     func grabLatestNotificationCount() {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let url = SharritURL.devURL + "notification/user/count/" + String(describing: appDelegate.user!.userID)
         
         var newNotificationNumber = 0
@@ -252,7 +307,7 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
             case .success(_):
                 if let data = response.result.value {
                     newNotificationNumber = data as! Int
-                    if let tabController = appDelegate.window?.rootViewController as? UITabBarController {
+                    if let tabController = self.appDelegate.window?.rootViewController as? UITabBarController {
                         let tabItem = tabController.tabBar.items![3]
                         newNotificationNumber == 0 ? (tabItem.badgeValue = nil) : (tabItem.badgeValue = String(describing: newNotificationNumber))
                     }
@@ -317,6 +372,13 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         } else if segue.identifier == "showSearchPage" {
             if let searchSharreVC = segue.destination as? SearchSharreVC {
                 searchSharreVC.searchText = sender as? String
+            }
+        } else if segue.identifier == "showBusiness" {
+            if let sharesInfoVC = segue.destination as? SharesInfoVC {
+                sharesInfoVC.businessInfo = sender as! Business
+                sharesInfoVC.categoryID = (sender as! Business).categoryID
+                sharesInfoVC.categoryName = (sender as! Business).categoryName
+                sharesInfoVC.viewBusinessInfoFrom = .Collaboration
             }
         }
     }

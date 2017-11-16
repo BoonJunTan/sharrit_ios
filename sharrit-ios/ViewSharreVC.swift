@@ -65,7 +65,7 @@ class ViewSharreVC: UIViewController {
     }
     
     func getSBInfo(businessID: Int) {
-        let url = SharritURL.devURL + "business/all/" + String(describing: businessID)
+        let url = SharritURL.devURL + "business/all/ios/" + String(describing: businessID)
         
         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in

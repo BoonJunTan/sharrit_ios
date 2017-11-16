@@ -95,7 +95,7 @@ class CollaborationVC: UIViewController, UICollectionViewDataSource, UICollectio
     }
     
     func goToDeal(sender: UIButton?) {
-        let url = SharritURL.devURL + "business/all/" + String(describing: collaborationList[sender!.tag]["businessId"].int!)
+        let url = SharritURL.devURL + "business/all/ios/" + String(describing: collaborationList[sender!.tag]["businessId"].int!)
         
         let collaborationBanner = collaborationList[sender!.tag]["fileName"].description
         
