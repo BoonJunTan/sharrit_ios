@@ -557,10 +557,13 @@
 				TargetAttributes = {
 					872D315D1F6705520069381A = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 6KV86JR89E;
+						DevelopmentTeam = BB2YLDW858;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+							com.apple.Maps.iOS = {
 								enabled = 0;
 							};
 						};
@@ -910,11 +913,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6KV86JR89E;
+				DEVELOPMENT_TEAM = BB2YLDW858;
 				INFOPLIST_FILE = "sharrit-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "sharrit.sharrit-ios";
+				PRODUCT_BUNDLE_IDENTIFIER = "sharrit.sharrit-ios3";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "sharrit-ios/sharrit-ios-Bridging-Header.h";
@@ -930,11 +933,11 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6KV86JR89E;
+				DEVELOPMENT_TEAM = BB2YLDW858;
 				INFOPLIST_FILE = "sharrit-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "sharrit.sharrit-ios";
+				PRODUCT_BUNDLE_IDENTIFIER = "sharrit.sharrit-ios3";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "sharrit-ios/sharrit-ios-Bridging-Header.h";

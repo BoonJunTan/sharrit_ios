@@ -77,7 +77,7 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
                             let photoURLStringArray = json["content"]["photos"].array
                             self.photoArrayURLString = photoURLStringArray![photoURLStringArray!.count-1]["fileName"].description
                             self.getAllPhoto(jsonData: json["content"]["photos"], completion: { photoArray in
-                                self.carouselView.setImageInputs(Array(photoArray.prefix(4)))
+                                self.carouselView.setImageInputs(Array(photoArray.prefix(photoArray.count)))
                                 self.carouselView.contentScaleMode = .scaleToFill
                                 self.carouselView.circular = false
                                 self.carouselView.slideshowInterval = 5
@@ -102,7 +102,7 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         for (_, photoPath) in jsonData.reversed() {
             myGroup.enter()
             ImageDownloader().imageFromServerURL(urlString: SharritURL.devPhotoURL +  photoPath["fileName"].description, completion: { (image) in
-                self.photoArraySource.append(ImageSource(image: ImageResize().resizeImageWith(image: image, newWidth: 200)))
+                self.photoArraySource.append(ImageSource(image: ImageResize().resizeImageWith(image: image, newWidth: self.carouselView.layer.frame.width)))
                 myGroup.leave()
             })
         }
