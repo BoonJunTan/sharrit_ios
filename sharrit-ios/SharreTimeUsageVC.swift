@@ -110,9 +110,9 @@ class SharreTimeUsageVC: UIViewController {
     }
     
     func getTotalCost() {
-        let url = SharritURL.devURL + "transaction/pricing/" + String(describing: sharreID!)
+        let url = SharritURL.devURL + "transaction/pricing/" + String(describing: sharreID!) + "/" + String(describing: appDelegate.user!.userID)
         
-        var totalCostRequest: [String: Any] = ["qty": unitsRequire.text!, "timeStart": 0, "timeEnd": 0]
+        var totalCostRequest: [String: Any] = ["qty": unitsRequire.text!, "timeStart": "0", "timeEnd": "0"]
         
         if !(promoLabel.text?.isEmpty)! {
             totalCostRequest["promoCode"] = promoLabel.text!

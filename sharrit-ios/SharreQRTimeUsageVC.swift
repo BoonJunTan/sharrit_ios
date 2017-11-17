@@ -54,7 +54,7 @@ class SharreQRTimeUsageVC: UIViewController {
     }
 
     func getTotalCost() {
-        let url = SharritURL.devURL + "transaction/pricing/" + String(describing: sharreID!)
+        let url = SharritURL.devURL + "transaction/pricing/" + String(describing: sharreID!) + "/" + String(describing: appDelegate.user!.userID)
         
         var totalCostRequest: [String: Any] = ["qty": 1, "timeStart": 0, "timeEnd": 0]
         
