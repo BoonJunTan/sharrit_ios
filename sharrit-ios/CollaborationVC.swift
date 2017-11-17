@@ -46,8 +46,19 @@ class CollaborationVC: UIViewController, UICollectionViewDataSource, UICollectio
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collaborationCell", for: indexPath as IndexPath) as! CollaborationCollectionViewCell
         
         cell.dealNumber.text = "You may also like..."
-        cell.dealTitle.text = collaborationList[indexPath.row]["title"].description
-        cell.dealSubTitle.text = collaborationList[indexPath.row]["subtitle"].description
+        
+        if var dealTitle = collaborationList[indexPath.row]["title"].description as? String {
+            cell.dealTitle.text = dealTitle
+        } else {
+            cell.dealTitle.text = "No Title"
+        }
+        
+        if var dealSubTitle = collaborationList[indexPath.row]["subtitle"] as? String {
+            cell.dealSubTitle.text = dealSubTitle
+        } else {
+            cell.dealSubTitle.text = "No Title"
+        }
+        
         ImageDownloader().imageFromServerURL(urlString: SharritURL.devPhotoURL + collaborationList[indexPath.row]["fileName"].description, imageView: cell.dealImage)
         
         cell.dealButton.tag = indexPath.row

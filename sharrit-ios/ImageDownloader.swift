@@ -17,7 +17,7 @@ struct ImageDownloader {
             }
             DispatchQueue.main.async(execute: { () -> Void in
                 if let image = UIImage(data: data!) {
-                    imageView.image = ImageResize().resizeImageWith(image: image, newWidth: 200)
+                    imageView.image = ImageResize().resizeImageWith(image: image, newWidth: imageView.layer.frame.width)
                 } else {
                     imageView.image = #imageLiteral(resourceName: "empty")
                 }

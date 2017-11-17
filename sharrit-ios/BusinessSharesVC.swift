@@ -141,7 +141,7 @@ class BusinessSharesVC: UIViewController, UICollectionViewDataSource, UICollecti
                     if JSON(data)["status"] == -6 {
                         userRating = 3 // No Deposit = Middle Tier
                     } else {
-                        if let rating = JSON(data)["content"].description as? Double {
+                        if let rating = Double(JSON(data)["content"].description) as? Double {
                             userRating = rating
                         }
                     }
