@@ -446,7 +446,9 @@ class SharreBookingVC: UIViewController, FSCalendarDataSource, FSCalendarDelegat
                         if JSON(data)["status"].int! == -1 {
                             self.promoAppliedLabel.isHidden = true
                             let alert = UIAlertController(title: "Error Occured!", message: "Promo Code is invalid", preferredStyle: .alert)
-                            alert.addAction(UIAlertAction(title: "Back", style: .cancel, handler: nil))
+                            alert.addAction(UIAlertAction(title: "Back", style: .cancel, handler: { (_) in
+                                self.promoLabel.text = ""
+                            }))
                             self.present(alert, animated: true, completion: nil)
                         } else {
                             let json = JSON(data)["content"]

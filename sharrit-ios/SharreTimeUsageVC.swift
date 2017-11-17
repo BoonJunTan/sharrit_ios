@@ -70,7 +70,9 @@ class SharreTimeUsageVC: UIViewController {
                     costView.isHidden = true
                     promoView.isHidden = true
                     let alert = UIAlertController(title: "Error Occured!", message: "Not enough items at the moment!", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Back", style: .cancel, handler: nil))
+                    alert.addAction(UIAlertAction(title: "Back", style: .cancel, handler: { (_) in
+                        self.promoLabel.text = ""
+                    }))
                     self.present(alert, animated: true, completion: nil)
                 } else if unitsWanted < 1 {
                     let alert = UIAlertController(title: "Error Occured!", message: "Item requested must be at least 1.", preferredStyle: .alert)

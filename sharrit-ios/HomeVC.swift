@@ -75,12 +75,12 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
                     var json = JSON(data)
                     self.photoList = []
                     
-                    let tap = UITapGestureRecognizer(target: self, action: #selector(self.bannerClick))
-                    self.carouselView.addGestureRecognizer(tap)
-                    
                     for (_, photoDetail) in json["content"] {
                         self.photoList.append(photoDetail["fileName"].description)
                     }
+                    
+                    let tap = UITapGestureRecognizer(target: self, action: #selector(self.bannerClick))
+                    self.carouselView.addGestureRecognizer(tap)
                     
                     self.getAllPhoto(photoFiles: self.photoList, completion: { photoArray in
                         self.carouselView.setImageInputs(Array(photoArray.prefix(photoArray.count)))
@@ -100,13 +100,17 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     // Get All Banner Photo From JSON
     func getAllPhoto(photoFiles: [String], completion: @escaping ([ImageSource]) -> ()) {
         photoArraySource = [ImageSource]()
+        photoList = []
         
         let myGroup = DispatchGroup()
         
         for photo in photoFiles {
             myGroup.enter()
             ImageDownloader().imageFromServerURL(urlString: SharritURL.devPhotoURL +  photo, completion: { (image) in
-                self.photoArraySource.append(ImageSource(image: ImageResize().resizeImageWith(image: image, newWidth: self.carouselView.layer.frame.width)))
+                DispatchQueue.main.async(execute: {
+                    self.photoArraySource.append(ImageSource(image: ImageResize().resizeImageWith(image: image, newWidth: self.carouselView.layer.frame.width)))
+                    self.photoList.append(photo)
+                })
                 myGroup.leave()
             })
         }
@@ -118,6 +122,8 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
     
     func bannerClick(sender: UITapGestureRecognizer? = nil) {
         let url = SharritURL.devURL + "msbanner/tracking/mobile/" + photoList[carouselView.currentPage] + "/" + String(describing: appDelegate.user!.userID)
+        
+        print(photoList[carouselView.currentPage])
         
         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in
