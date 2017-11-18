@@ -81,7 +81,7 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                     let calculatePrice = onGoingPrice / 60.0 * Double(time)!
                     cell.sharesUsage.text = "Usage: " + String(format: "%.2f", calculatePrice) + "+++"
                 } else {
-                    cell.sharesUsage.text = "Usage: " + tableViewItems[indexPath.row].amount
+                    cell.sharesUsage.text = "Usage: " + tableViewItems[indexPath.row].amount + " [Promo]"
                 }
             } else {
                 cell.sharesDate.text = "Duration: Not Started Yet"

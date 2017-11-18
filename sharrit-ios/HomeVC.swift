@@ -107,10 +107,8 @@ class HomeVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
         for photo in photoFiles {
             myGroup.enter()
             ImageDownloader().imageFromServerURL(urlString: SharritURL.devPhotoURL +  photo, completion: { (image) in
-                DispatchQueue.main.async(execute: {
-                    self.photoArraySource.append(ImageSource(image: ImageResize().resizeImageWith(image: image, newWidth: self.carouselView.layer.frame.width)))
-                    self.photoList.append(photo)
-                })
+                self.photoArraySource.append(ImageSource(image: ImageResize().resizeImageWith(image: image, newWidth: self.carouselView.layer.frame.width)))
+                self.photoList.append(photo)
                 myGroup.leave()
             })
         }
