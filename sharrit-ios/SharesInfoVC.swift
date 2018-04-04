@@ -11,12 +11,23 @@ import Alamofire
 import SwiftyJSON
 import Cosmos
 
+enum ViewBusinessInfoFrom {
+    case NonCollaboration
+    case Collaboration
+}
+
+// This class suppose to be BusinessInfoVC instead
 class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     // Pass over value
     var businessInfo: Business!
     var categoryID: Int!
     var categoryName: String!
+    
+    // Pass over value for Collaboration
+    var viewBusinessInfoFrom: ViewBusinessInfoFrom = .NonCollaboration
+    var bannerFileName: String?
+    var collabID: Int?
     
     @IBOutlet weak var businessBanner: UIImageView!
     @IBOutlet weak var businessLogo: UIImageView!
@@ -72,6 +83,10 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             businessRating.text = String(format: "%.2f", arguments: [businessInfo.rating])
         } else {
             businessRating.text = "Rating Unavailable"
+        }
+        
+        if viewBusinessInfoFrom == .Collaboration {
+            callBusinessClick()
         }
     }
     
@@ -197,7 +212,7 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     func getSBInfo() {
-        let url = SharritURL.devURL + "business/all/" + String(describing: businessInfo.businessId!)
+        let url = SharritURL.devURL + "business/all/ios/" + String(describing: businessInfo.businessId!)
         
         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
             response in
@@ -205,6 +220,11 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             case .success(_):
                 self.reputationList.removeAll()
                 if let data = response.result.value {
+                    // Check if Colla exist
+                    if (!JSON(data)["content"]["collabAssets"].isEmpty) {
+                        self.businessInfo.collaborationList = JSON(data)["content"]["collabAssets"].array!
+                    }
+                    
                     // Loop All Sharres
                     for (_, subJson) in JSON(data)["content"]["sharres"] {
                         // Loop All Rating
@@ -227,6 +247,26 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                         }
                     }
                     self.tableView.reloadData()
+                }
+            case .failure(_):
+                print("Get SB Info API failed")
+                break
+            }
+        }
+    }
+    
+    // Update Click for Collaboration
+    func callBusinessClick() {
+        let url = SharritURL.devURL + "collaboration/click/banner/mobile/" + bannerFileName! + "/" + String(describing: self.appDelegate.user!.userID)
+        
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: [:]).responseJSON {
+            response in
+            switch response.result {
+            case .success(_):
+                if let data = response.result.value {
+                    if JSON(data)["content"] != nil {
+                        self.collabID = JSON(data)["content"].int!
+                    }
                 }
             case .failure(_):
                 print("Get SB Info API failed")
@@ -290,6 +330,14 @@ class SharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             if let businessSharesVC = segue.destination as? BusinessSharesVC {
                 businessSharesVC.businessID = businessInfo.businessId
                 businessSharesVC.arriveFrom = .SharingBusiness
+                
+                if businessInfo.collaborationList != nil {
+                    businessSharesVC.collaborationList = businessInfo.collaborationList!
+                }
+                
+                if collabID != nil {
+                    businessSharesVC.collabID = collabID
+                }
             }
         }
     }

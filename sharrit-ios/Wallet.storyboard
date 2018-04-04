@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="D7u-dH-MAl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="D7u-dH-MAl">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -211,13 +211,13 @@
                                             </constraints>
                                         </imageView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="24Y-3c-bR5">
-                                            <rect key="frame" x="60" y="4" width="240" height="71.5"/>
+                                            <rect key="frame" x="60" y="4" width="305" height="71.5"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gNZ-xv-3X4">
-                                                    <rect key="frame" x="0.0" y="0.0" width="240" height="20.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="305" height="20.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bRT-wP-fRc">
-                                                            <rect key="frame" x="0.0" y="1" width="240" height="18"/>
+                                                            <rect key="frame" x="0.0" y="1" width="305" height="18"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -231,10 +231,10 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FkF-4L-tZv">
-                                                    <rect key="frame" x="0.0" y="25.5" width="240" height="20.5"/>
+                                                    <rect key="frame" x="0.0" y="25.5" width="305" height="20.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Za-Vv-gsP">
-                                                            <rect key="frame" x="0.0" y="0.5" width="240" height="18"/>
+                                                            <rect key="frame" x="0.0" y="0.5" width="305" height="18"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -248,13 +248,13 @@
                                                     </constraints>
                                                 </view>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="CcQ-jw-O21">
-                                                    <rect key="frame" x="0.0" y="51" width="240" height="20.5"/>
+                                                    <rect key="frame" x="0.0" y="51" width="305" height="20.5"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rbU-Wd-bLi">
-                                                            <rect key="frame" x="0.0" y="0.0" width="117.5" height="20.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="150" height="20.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i1q-O3-CNx">
-                                                                    <rect key="frame" x="0.0" y="1.5" width="117.5" height="17"/>
+                                                                    <rect key="frame" x="0.0" y="1.5" width="150" height="17"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -268,10 +268,10 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pqy-A7-Qwz">
-                                                            <rect key="frame" x="122.5" y="0.0" width="117.5" height="20.5"/>
+                                                            <rect key="frame" x="155" y="0.0" width="150" height="20.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fVu-7w-gMR">
-                                                                    <rect key="frame" x="0.0" y="1.5" width="117.5" height="17"/>
+                                                                    <rect key="frame" x="0.0" y="1.5" width="150" height="17"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -316,7 +316,7 @@
                                         <constraint firstItem="efh-tI-CnK" firstAttribute="centerY" secondItem="L2z-vJ-zmU" secondAttribute="centerY" id="JJw-4U-NCI"/>
                                         <constraint firstItem="y8J-c4-Zqr" firstAttribute="leading" secondItem="L2z-vJ-zmU" secondAttribute="leading" constant="10" id="KMq-s2-Zji"/>
                                         <constraint firstItem="24Y-3c-bR5" firstAttribute="height" secondItem="L2z-vJ-zmU" secondAttribute="height" multiplier="0.9" id="PpR-LT-UYN"/>
-                                        <constraint firstAttribute="trailing" secondItem="24Y-3c-bR5" secondAttribute="trailing" constant="75" id="UEA-Ge-Abf"/>
+                                        <constraint firstAttribute="trailing" secondItem="24Y-3c-bR5" secondAttribute="trailing" constant="10" id="UEA-Ge-Abf"/>
                                         <constraint firstItem="y8J-c4-Zqr" firstAttribute="centerY" secondItem="L2z-vJ-zmU" secondAttribute="centerY" id="Vxw-CN-V3h"/>
                                         <constraint firstItem="24Y-3c-bR5" firstAttribute="centerY" secondItem="L2z-vJ-zmU" secondAttribute="centerY" id="ZKW-4U-8ix"/>
                                     </constraints>

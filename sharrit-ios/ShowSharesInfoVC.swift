@@ -18,6 +18,7 @@ enum SharreStatus {
 
 class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    // Pass Over Data
     var titleString: String!
     var userRole: Role!
     var sharreStatus: SharreStatus!
@@ -40,12 +41,6 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         currentBtnSelected(btn: ongoingBtn)
         sharreStatus = .Ongoing
         
-        let navBarBubble = UIBarButtonItem(image: #imageLiteral(resourceName: "chat"),
-                                           style: .plain ,
-                                           target: self, action: #selector(goToMessages))
-        
-        self.navigationItem.rightBarButtonItem = navBarBubble
-        
         tableView.tableFooterView = UIView() // For Hiding away empty cell
     }
     
@@ -63,7 +58,12 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         cell.sharesTitle.text = String(describing: tableViewItems[indexPath.row].transactionId) + ". " + String(describing: tableViewItems[indexPath.row].sharreName!)
         cell.sharesDeposit.text = "Deposit: $" + tableViewItems[indexPath.row].deposit
-        cell.sharesUsage.text = "Usage: $" + tableViewItems[indexPath.row].amount
+        
+        if tableViewItems[indexPath.row].promoId != nil {
+            cell.sharesUsage.text = "Usage: $" + tableViewItems[indexPath.row].amount + " [Promo]"
+        } else {
+            cell.sharesUsage.text = "Usage: $" + tableViewItems[indexPath.row].amount
+        }
         
         if tableViewItems[indexPath.row].getSharreServiceType() == .TimeUsage {
             if tableViewItems[indexPath.row].hasStarted! {
@@ -81,7 +81,7 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                     let calculatePrice = onGoingPrice / 60.0 * Double(time)!
                     cell.sharesUsage.text = "Usage: " + String(format: "%.2f", calculatePrice) + "+++"
                 } else {
-                    cell.sharesUsage.text = "Usage: " + tableViewItems[indexPath.row].amount
+                    cell.sharesUsage.text = "Usage: " + tableViewItems[indexPath.row].amount + " [Promo]"
                 }
             } else {
                 cell.sharesDate.text = "Duration: Not Started Yet"
@@ -269,22 +269,6 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         }
     }
     
-    func goToMessages() {
-        let messageSB = UIStoryboard(name: "Messages" , bundle: nil)
-        let messageVC = messageSB.instantiateViewController(withIdentifier: "messages") as! MessagesVC
-        let messageWithNavController = UINavigationController(rootViewController: messageVC)
-        
-        messageWithNavController.modalTransitionStyle = .coverVertical
-        modalPresentationStyle = .fullScreen
-        present(messageWithNavController, animated: true, completion:{
-            if let subviewsCount = self.tabBarController?.view.subviews.count {
-                if subviewsCount > 2 {
-                    self.tabBarController?.view.subviews[2].removeFromSuperview()
-                }
-            }
-        })
-    }
-    
     func currentBtnSelected(btn: UIButton) {
         btn.backgroundColor = Colours.Blue.sharritBlue
         btn.setTitleColor(UIColor.white, for: .normal)
@@ -358,13 +342,16 @@ class ShowSharesInfoVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                         let payerId = transactionDetails["payerId"].int!
                         let payerType = transactionDetails["payerType"].int!
                         let amount = transactionDetails["amount"].description
-                        let promoId = transactionDetails["promoId"].int!
                         let timeStart = transactionDetails["timeStart"].description
                         let timeEnd = transactionDetails["timeEnd"].description
                         let status = transactionDetails["status"].int!
                         let qty = transactionDetails["qty"].int!
                         let deposit = transactionDetails["deposit"].description
-                        let transaction = Transaction(transactionId: id, dateCreated: dateCreated, payeeId: payeeId, payeeType: payeeType, payerId: payerId, payerType: payerType, amount: amount, promoId: promoId, timeStart: timeStart, timeEnd: timeEnd, status: status, qty: qty, deposit: deposit)
+                        let transaction = Transaction(transactionId: id, dateCreated: dateCreated, payeeId: payeeId, payeeType: payeeType, payerId: payerId, payerType: payerType, amount: amount, timeStart: timeStart, timeEnd: timeEnd, status: status, qty: qty, deposit: deposit)
+                        
+                        if let promoID = transactionDetails["promoId"].int {
+                            transaction.promoId = promoID
+                        }
                         
                         if let sharreId = transactionDetails["sharreId"].int {
                             transaction.sharreId = sharreId

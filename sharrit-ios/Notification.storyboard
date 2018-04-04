@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="sIL-3K-chP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="sIL-3K-chP">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -49,16 +49,16 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile2" translatesAutoresizingMaskIntoConstraints="NO" id="Jj1-1z-QNb">
-                                            <rect key="frame" x="18" y="20" width="39.5" height="39.5"/>
+                                            <rect key="frame" x="26" y="20" width="39.5" height="39.5"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="Jj1-1z-QNb" secondAttribute="height" multiplier="1:1" id="HT3-6t-XI6"/>
                                             </constraints>
                                         </imageView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="C3h-pq-kj1">
-                                            <rect key="frame" x="67.5" y="13" width="247.5" height="53.5"/>
+                                            <rect key="frame" x="75.5" y="16" width="231.5" height="48"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6hZ-jL-Svs">
-                                                    <rect key="frame" x="0.0" y="0.0" width="247.5" height="20.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="231.5" height="18"/>
                                                     <attributedString key="attributedText">
                                                         <fragment content="Kelly Lim Kai Xin ">
                                                             <attributes>
@@ -76,16 +76,16 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Udv-3v-LPg">
-                                                    <rect key="frame" x="0.0" y="25.5" width="247.5" height="28"/>
+                                                    <rect key="frame" x="0.0" y="23" width="231.5" height="25"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timer" translatesAutoresizingMaskIntoConstraints="NO" id="6GD-Cl-s7I">
-                                                            <rect key="frame" x="0.0" y="0.0" width="28" height="28"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="6GD-Cl-s7I" secondAttribute="height" multiplier="1:1" id="4dm-h7-ep6"/>
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1d" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DLr-rW-4FW">
-                                                            <rect key="frame" x="33" y="5" width="16" height="18"/>
+                                                            <rect key="frame" x="30" y="3.5" width="16" height="18"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -105,7 +105,7 @@
                                             </constraints>
                                         </stackView>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="happy" translatesAutoresizingMaskIntoConstraints="NO" id="enU-RY-c4m">
-                                            <rect key="frame" x="325" y="24" width="32" height="31.5"/>
+                                            <rect key="frame" x="317" y="24" width="32" height="31.5"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="enU-RY-c4m" secondAttribute="height" multiplier="1:1" id="Wrx-WA-ndY"/>
                                             </constraints>

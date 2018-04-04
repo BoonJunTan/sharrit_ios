@@ -19,7 +19,13 @@ struct FormatDate {
         let todayDate = dateFormatter.date(from: currentDateString)
         
         let dateFormatter2 = DateFormatter()
-        dateFormatter2.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
+        
+        if dateCreated.contains(".") {
+            dateFormatter2.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
+        } else {
+            dateFormatter2.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        }
+        
         let endDate = dateFormatter2.date(from: dateCreated)
         
         let formatter = DateComponentsFormatter()
